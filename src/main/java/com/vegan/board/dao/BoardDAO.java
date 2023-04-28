@@ -1,5 +1,5 @@
 package com.vegan.board.dao;
 
-public class BoardDAO {
+public interface BoardDAO {
 
 }

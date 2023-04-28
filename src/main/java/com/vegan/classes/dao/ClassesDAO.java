@@ -1,5 +1,5 @@
 package com.vegan.classes.dao;
 
-public class ClassesDAO {
+public interface ClassesDAO {
 
 }

@@ -1,5 +1,10 @@
 package com.vegan.member.dao;
 
-public class MemberDAO {
+import java.util.HashMap;
 
+import com.vegan.member.dto.MemberDTO;
+public interface MemberDAO {
+
+	int join(HashMap<String, String> params);
+	
 }
