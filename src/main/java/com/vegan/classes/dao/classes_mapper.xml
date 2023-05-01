@@ -3,4 +3,17 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
 <mapper namespace="com.vegan.classes.dao.ClassesDAO">
+
+	<select id="list" resultType="com.vegan.classes.dto.ClassesDTO">
+		SELECT 
+			cl_id,user_id,cl_subject,cl_period,cl_deadline,cl_teacher,cl_date,cl_ing_chk,cl_status,cl_adress,cl_content
+		FROM class ORDER BY cl_id DESC
+	</select>
+
+	<insert id="write" parameterType="com.vegan.classes.dto.ClassesDTO">
+		insert into class(user_id,cl_subject,cl_period,cl_deadline,cl_teacher,cl_date,cl_ing_chk,cl_adress,cl_content,cl_status,cl_del_chk)
+			VALUES(#{user_id},#{cl_subject},#{cl_period},#{cl_deadline},#{cl_teacher},#{cl_date},#{cl_ing_chk},#{cl_adress},#{cl_content},0,0)
+	</insert>
+
+
 </mapper>

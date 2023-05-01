@@ -20,11 +20,10 @@ public class MemberController {
 	 
 	 @Autowired MemberService service;
 	 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String main(Model model) {
-			return "login";
-	}
-	 
+		/*
+		 * @RequestMapping(value = "/", method = RequestMethod.GET) public String
+		 * main(Model model) { return "login"; }
+		 */
 	@RequestMapping(value = "/join.go", method = RequestMethod.GET)
 	public String joinForm(Model model) {
 		return "joinForm";
