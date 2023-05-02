@@ -33,7 +33,7 @@ public class RecipeService {
 	@Autowired RecipeDAO recipeDAO;
 	
 	public Map<String, Object> write(MultipartHttpServletRequest request) {	
-		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> result = new HashMap<String, Object>();
         Gson gson = new Gson();
         FileUpload fileUpload = new FileUpload();
         
@@ -59,7 +59,7 @@ public class RecipeService {
                 
         
         List<MultipartFile> multipartFiles = request.getFiles("thumbnailImages");
-        List<FileBean> fileBean = new ArrayList<>();
+        List<FileBean> fileBean = new ArrayList<FileBean>();
         
         if ( !multipartFiles.isEmpty() ) {
         	for(int i = 0; i<multipartFiles.size(); i++) {

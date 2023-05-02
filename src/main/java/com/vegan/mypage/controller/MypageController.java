@@ -39,7 +39,7 @@ public class MypageController {
 		return page;
 	}
 	
-	@RequestMapping(value = "/detail.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/profileDetail.do", method = RequestMethod.POST)
 	public String detail(@RequestParam String id, Model model) {
 		
 		MypageDTO dto = service.detail(id);
@@ -51,7 +51,7 @@ public class MypageController {
 		return "userdetail";
 	}
 	
-	@RequestMapping(value = "/update.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/profileUpdate.do", method = RequestMethod.POST)
 	public String update( Model model, @RequestParam HashMap<String,String> params, HttpSession session) {
 		logger.info("update param:"+params);
 		if (session.getAttribute("loginId")!= null) {
@@ -61,9 +61,10 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value ="/passwardChk.do", method = RequestMethod.POST)
-	public String pwChk(@RequestParam String pw) {
+	public String pwChk(@RequestParam String pw, Model model) {
 		String page = "pwcheck";
-		if (service.pwChk(pw) != null) {
+		String pwchk = service.pwChk(pw);
+		if (pwchk != null) {
 			page = "pwCheck";
 		}
 		

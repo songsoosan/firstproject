@@ -20,5 +20,11 @@
 		,user_name = #{name},user_email=#{email},user_phone=#{phone}
 			WHERE user_id = #{id}
 	</update>
+	
+	<select id="pwChk" resultType="String">
+		SELECT user_id FROM user 
+			WHERE user_pw=#{param1}
+	</select>
+	
 
 </mapper>

@@ -12,6 +12,8 @@ public interface MypageDAO {
 
 	int update(HashMap<String, String> params);
 
+	String pwChk();
+
 	
 
 }

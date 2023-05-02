@@ -32,10 +32,11 @@ public class MypageService {
 		logger.info("update row:"+row);
 		
 	}
-	public Object pwChk(String pw) {
-		// TODO Auto-generated method stub
-		return null;
+	public String pwChk(String pw) {
+		
+		return dao.pwChk();
 	}
+	
 
 	
 	
