@@ -14,7 +14,6 @@ public class MagazineDTO {
 	private int photo_id;
 	private String photo_name;
 	
-	
 
 	
 	public int getPhoto_id() {
