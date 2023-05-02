@@ -30,6 +30,12 @@
 					<input type="button" value="회원가입" onclick="location.href='join.go'"/>
 				</th>
 			</tr>
+			<tr>
+				<th colspan = "2">
+					<input type="button" value = "아이디 찾기" onclick="location.href='findID.go'"/>
+					<input type="button" value="비밀번호 찾기" onclick="location.href='findPW.go'"/>
+				</th>
+			</tr>
 		</table>
 	</form>
 </body>
