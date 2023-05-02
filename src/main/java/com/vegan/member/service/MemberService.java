@@ -18,6 +18,7 @@ public class MemberService {
 	
 	public String join(HashMap<String, String> params) {
 		String msg = "회원 가입에 실패 했습니다.";
+		System.out.println(params.get("user_name"));
 		if(dao.join(params) == 1){
 			msg = "회원가입에 성공 했습니다.";
 		}

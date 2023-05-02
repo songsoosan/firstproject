@@ -1,5 +1,5 @@
 package com.vegan.utils.dto;
 
-public interface UtilsDTO {
+public class UtilsDTO {
 
 }

@@ -1,5 +1,5 @@
 package com.vegan.main.dto;
 
-public interface MainDTO {
-
+public class MainDTO {
+		
 }
