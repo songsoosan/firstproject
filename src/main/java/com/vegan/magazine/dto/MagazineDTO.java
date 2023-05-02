@@ -71,7 +71,9 @@ public class MagazineDTO {
 	public void setBoard_views(int board_views) {
 		this.board_views = board_views;
 	}
+
+}
+
 	
 	
 
-}
