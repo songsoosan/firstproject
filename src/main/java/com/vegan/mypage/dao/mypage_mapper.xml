@@ -3,4 +3,22 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
 <mapper namespace="com.vegan.mypage.dao.MypageDAO">
+
+
+	<select id="profile" resultType="com.vegan.mypage.dto.MypageDTO">
+		SELECT user_id,user_name,user_email,user_phone FROM user
+			WHERE user_id=#{param1}
+	</select>
+	
+	<select id="detail" resultType="com.vegan.mypage.dto.MypageDTO">
+		SELECT user_id,user_pw,user_name,user_email,user_phone FROM user 
+			WHERE user_id=#{param1}
+	</select>
+	
+	<update id="update" parameterType="hashmap">
+		UPDATE user SET user_pw = #{pw}
+		,user_name = #{name},user_email=#{email},user_phone=#{phone}
+			WHERE user_id = #{id}
+	</update>
+
 </mapper>

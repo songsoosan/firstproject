@@ -4,7 +4,7 @@
 >
 <mapper namespace="com.vegan.member.dao.MemberDAO">
 		<insert id ="join" parameterType="hashmap">
-			INSERT INTO user(user_id, user_pw, user_name,  user_phone, user_sex, user_email)
+			INSERT INTO user(user_id,user_pw,user_name,user_phone,user_sex,user_email)
 				VALUES(#{user_id},#{user_pw},#{user_name},#{user_phone},#{user_sex},#{user_email})
 		</insert>
 </mapper>
