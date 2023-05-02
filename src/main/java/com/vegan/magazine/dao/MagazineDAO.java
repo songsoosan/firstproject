@@ -12,9 +12,9 @@ public interface MagazineDAO {
 
 	void fileWrite(int board_id, String ori_photo_name, String photo_name);
 
-	void board_views(String board_id);
+	void board_views(int board_id);
 
-	MagazineDTO detail(String board_id);
+	MagazineDTO detail(int board_id);
 
 	String findFile(String board_id);
 

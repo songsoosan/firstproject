@@ -82,7 +82,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		
 	}
 
-	public MagazineDTO detail(String board_id, String flag) {
+	public MagazineDTO detail(int board_id, String flag) {
 		if(flag.equals("detail")) {
 			dao.board_views(board_id);
 		}

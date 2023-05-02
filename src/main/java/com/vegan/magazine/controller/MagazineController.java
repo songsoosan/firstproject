@@ -3,6 +3,8 @@ package com.vegan.magazine.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
 	
 	
 	@RequestMapping(value="/magazineDetail.do")
-	public String detail(Model model, @RequestParam String board_id) {
+	public String detail(HttpSession session, Model model, @RequestParam int board_id) {
 		logger.info("magazineDetail : "+board_id);
 		String page = "redirect:/magazine.do";		
 		MagazineDTO dto = service.detail(board_id,"detail");
