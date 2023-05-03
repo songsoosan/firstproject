@@ -19,10 +19,7 @@ public class MainController {
 	 
 	 @Autowired MemberService service;
 	 
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String main(Model model) {
-			return "main";
-	}
+	
 	
 	@RequestMapping(value = "/recipe.go", method = RequestMethod.GET)
 	public String recipe(Model model) {

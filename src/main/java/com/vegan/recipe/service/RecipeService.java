@@ -33,7 +33,7 @@ public class RecipeService {
 	@Autowired RecipeDAO recipeDAO;
 	
 	public Map<String, Object> write(MultipartHttpServletRequest request) {	
-		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> result = new HashMap<String, Object>();
         Gson gson = new Gson();
         FileUpload fileUpload = new FileUpload();
         
@@ -47,6 +47,7 @@ public class RecipeService {
         receipeDTO.setRec_title("1234125");
 
         
+
 //        MultipartFile multipartFile = request.getFile("mainThumbnailImage");
 //        if(!multipartFile.isEmpty()) {
 //        	//레시피 글등록
@@ -56,10 +57,13 @@ public class RecipeService {
 //        	fileSave(receipeDTO.getCat_id(), idx, multipartFile);	
 //        	
 //        }
+
+
+
                 
         
         List<MultipartFile> multipartFiles = request.getFiles("thumbnailImages");
-        List<FileBean> fileBean = new ArrayList<>();
+        List<FileBean> fileBean = new ArrayList<FileBean>();
         
         if ( !multipartFiles.isEmpty() ) {
         	for(int i = 0; i<multipartFiles.size(); i++) {

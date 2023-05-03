@@ -26,6 +26,25 @@ public class MemberController {
 	public String main(Model model) {
 			return "login";
 	}
+	
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	public String login( Model model, @RequestParam String id,@RequestParam String pw, HttpSession session) {
+		String page = "login";
+		
+		logger.info("id :{}/pw:{}",id,pw);
+		String loginId = service.login(id,pw);
+		logger.info("loginId:"+loginId);
+		
+		if (loginId != null) {
+			page = "main";
+			session.setAttribute("loginId", loginId);
+		}else {
+			model.addAttribute("msg","아이디 또는 비밀번호를 확인 하세요");	
+		}
+		
+		return page;
+
+	}
 	 
 	@RequestMapping(value = "/join.go", method = RequestMethod.GET)
 	public String joinForm(Model model) {
