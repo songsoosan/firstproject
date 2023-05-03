@@ -12,6 +12,11 @@ table,th,td{
 	padding : 5px 10px;
 
 }
+textarea{
+		width : 100%;
+		height:150px;
+		resize:none;
+	}
 #login{
 	margin-bottom:20px;
 }
@@ -41,41 +46,59 @@ table,th,td{
 	 -->
 	<table>
 		<tr>
-			<td rowspan="4">사진</td>
+			<td rowspan="4">
+				<c:if test="${dto.newFileName eq null}">
+					<form action="profilePhoto.do" method="post" enctype="multipart/form-data">
+						<input type="file" name="photo"/>
+						<button>등록</button>
+					</form>	
+				</c:if>
+				<c:if test="${dto.newFileName ne null }">
+					<img src="/photo/${dto.newFileName}"/>
+				</c:if>					
+			</td>
 			<td>${user.user_id }</td>
 		</tr>
 		<tr>
-			<td>사진</td>
 			<td>${user.user_name }</td>
 		</tr>
 		<tr>
-			<td>사진</td>
 			<td>${user.user_email }</td>
 		</tr>
 		<tr>
-			<td>사진</td>
 			<td>${user.user_phone }</td>
 		</tr>
 		<tr>
+			<td colspan="2">비건단계</td>
+		</tr>
+		<form action="profileUpdate.do" method="post">
+			<tr>
+				<td><textarea name=introduction>${user.introduction}</textarea></td>
+				<td><input type="submit" value="확인"></td>
+			</tr>
+		</form>
+		<tr>
 			<td colspan="2"><a>내가 작성한 레시피</a></td>
-			<td></td>
 		</tr>
 		<tr>
 			<td colspan="2"><a>즐려찾기한 레시피</a></td>
-			<td></td>
 		</tr>
 		<tr>
 			<td colspan="2"><a>구매한 클래스</a></td>
 		</tr>
 		<tr>
 			<th colspan = "2">
-				<input type="button" value="상세보기" onclick="location.href='detail.do'"/>
+				<input type="button" value="상세보기" onclick="location.href='passwardChk.go'"/>
 			</th>
 		</tr>
-		
 	</table>
 		
 
 </body>
-<script></script>
+<script>
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
+	}
+</script>
 </html>

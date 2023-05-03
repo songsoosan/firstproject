@@ -39,8 +39,8 @@
 			<tr>
 				<th>GENDER</th>
 				<td>
-					<input type="radio" name="user_sex" value="남"/>남자 &nbsp;&nbsp;&nbsp;
-					<input type="radio" name="user_sex" value="여"/>여자
+					<input type="radio" name="user_sex" value="male"/>남자 &nbsp;&nbsp;&nbsp;
+					<input type="radio" name="user_sex" value="female"/>여자
 				</td>
 			</tr>			
 			<tr>

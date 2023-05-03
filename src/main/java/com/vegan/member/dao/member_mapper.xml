@@ -4,7 +4,18 @@
 >
 <mapper namespace="com.vegan.member.dao.MemberDAO">
 		<insert id ="join" parameterType="hashmap">
-			INSERT INTO user(user_id,user_pw,user_name,user_phone,user_sex,user_email)
-				VALUES(#{user_id},#{user_pw},#{user_name},#{user_phone},#{user_sex},#{user_email})
+			INSERT INTO user(user_id,user_pw,user_name,user_phone,user_sex,user_email,user_admin_chk,user_secc_chk)
+				VALUES(#{user_id},#{user_pw},#{user_name},#{user_phone},#{user_sex},#{user_email},false,false)
 		</insert>
+		<insert id ="creatProfile" parameterType="String">
+			INSERT INTO profile(user_id)
+				VALUES(#{user_id})
+		</insert>
+		
+		
+		<select id="login" resultType="String">
+		SELECT user_id FROM user 
+			WHERE user_id=#{param1} AND user_pw=#{param2} AND user_secc_chk = false
+		</select>
+		
 </mapper>

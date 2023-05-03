@@ -55,9 +55,9 @@
 	<div>
 		<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
 		<input type ="text" placeholder="검색"/>
-		<a href="/vegan">
+		<a href="profile.do">
 			<img src="resources/img/user.png" alt="유저" width="70px" height="70px"/>
-		</a>
+		</a> 
 		<a href="write.go">
 			<img src="resources/img/write.png" alt="글쓰기" width="70px" height="70px"/>
 		</a>

@@ -8,8 +8,21 @@ public class MypageDTO {
 	private String user_sex;
 	private int user_phone;
 	private String user_email;
+	private String introduction;
+	private String photo_name; 
 	
-	
+	public String getPhoto_name() {
+		return photo_name;
+	}
+	public void setPhoto_name(String photo_name) {
+		this.photo_name = photo_name;
+	}
+	public String getIntroduction() {
+		return introduction;
+	}
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
 	public String getUser_id() {
 		return user_id;
 	}

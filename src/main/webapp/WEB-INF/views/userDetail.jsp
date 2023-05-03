@@ -15,7 +15,7 @@ table,th,td{
 </style>
 </head>
 <body>
-	<form action="update.do" method="post">
+	<form action="userUpdate.do" method="post">
 		<table>
 			<tr>
 				<th>ID</th>
@@ -51,6 +51,7 @@ table,th,td{
 			<tr>
 				<th colspan="2">
 					<input type="submit" value="수정"/>
+					<input type="button" value="탈퇴" onclick="location.href='delUser.do?idx=${detail.user_id}'"/>
 				</th>
 			</tr>
 		</table>
