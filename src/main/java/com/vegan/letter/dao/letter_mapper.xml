@@ -3,4 +3,17 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
 <mapper namespace="com.vegan.letter.dao.LetterDAO">
+
+	<select id="list" 
+		resultType="com.vegan.letter.dto.LetterDTO">
+		SELECT send_user_id,letter_tItle,letter_date FROM letter WHERE recive_user_id = #{param1}
+	</select>
+	
+	<insert id="letterSend" parameterType="hashmap">
+      INSERT INTO letter(
+         send_user_id,recive_user_id,letter_tItle,letter_content,letter_date,letter_del_chk,letter_chk
+      )VALUES(
+         #{id},#{receiver},#{subject},#{content},#{date},false,false
+      )
+   </insert>
 </mapper>
