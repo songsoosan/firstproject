@@ -15,23 +15,25 @@
 				<th>아이디</th>
 				<th>이름</th>
 				<th>전화번호</th>
-				<th>클래스 참여 번호</th>
-				<th>삭제</th>
+				<th>이메일</th>
+				<th>관리자 여부</th>
+				<th>탈퇴 여부</th>
 			</tr>
 		</thead>		
 		<tbody>
-			<c:if test="${appList eq null}">
+			<c:if test="${list eq null}">
 				<tr>
-					<th colspan="5">등록된 글이 없습니다.</th>
+					<th colspan="6">등록된 글이 없습니다.</th>
 				</tr>
 			</c:if>
-			<c:forEach items="${appList}" var="join">
+			<c:forEach items="${list}" var="user">
 				<tr>
-					<td>${join.user_id}</td>
-					<td>${join.user_name}</td>
-					<td>${join.user_phone}</td>
-					<td>${join.cl_part_id}</td>
-					<td></td>
+					<td>${user.user_id}</td>
+					<td>${user.user_name}</td>
+					<td>${user.user_phone}</td>
+					<td>${user.user_email}</td>
+					<td>${user.user_admin_chk}</td>
+					<td>${user.user_secc_chk}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

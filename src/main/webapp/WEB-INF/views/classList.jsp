@@ -10,7 +10,7 @@
 </head>
 <body>
 ${msg}
-<input type="button" onclick="location.href='./class.write'" value="클래스 리스트"/>
+<input type="button" onclick="location.href='./class.write'" value="클래스 등록"/>
 	<table>
 		<thead>
 			<tr>
@@ -35,7 +35,7 @@ ${msg}
 			</c:if>
 			<c:forEach items="${list}" var="classes">
 				<tr>
-					<td>${classes.cl_id}</td>
+					<td><a href="class.detail.do?cl_id=${classes.cl_id}">${classes.cl_id}</a></td>
 					<td>${classes.user_id}</td>
 					<td>${classes.cl_subject}</td>
 					<td>${classes.cl_period}</td>

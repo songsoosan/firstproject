@@ -14,6 +14,13 @@ public class ClassesDTO {
 	private String cl_adress;
 	private String cl_content;
 	private boolean cl_del_chk;
+	private String user_adress;
+	
+	private String user_name;
+	private String user_phone;
+	private String user_email;
+	private long cl_part_id;
+	
 	
 	public int getCl_id() {
 		return cl_id;
@@ -86,6 +93,36 @@ public class ClassesDTO {
 	}
 	public void setCl_del_chk(boolean cl_del_chk) {
 		this.cl_del_chk = cl_del_chk;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	public String getUser_phone() {
+		return user_phone;
+	}
+	public void setUser_phone(String user_phone) {
+		this.user_phone = user_phone;
+	}
+	public String getUser_email() {
+		return user_email;
+	}
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
+	public String getUser_adress() {
+		return user_adress;
+	}
+	public void setUser_adress(String user_adress) {
+		this.user_adress = user_adress;
+	}
+	public long getCl_part_id() {
+		return cl_part_id;
+	}
+	public void setCl_part_id(long cl_part_id) {
+		this.cl_part_id = cl_part_id;
 	}
 
 

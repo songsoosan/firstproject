@@ -2,6 +2,7 @@ package com.vegan.classes.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,50 @@ public class ClassesService {
 	public ArrayList<ClassesDTO> list() {
 		
 		return dao.list();
+	}
+
+	public ClassesDTO detail(String cl_id) {
+		
+		return dao.detail(cl_id);
+	}
+
+	public String appWrite(String cl_id) {
+		
+		return dao.appWrite(cl_id);
+	}
+
+	public ClassesDTO appWrite2() {
+		
+		return dao.appWrite2();
+	}
+
+	public String appWrite3(HashMap<String, String> params) {
+		ClassesDTO dto = new ClassesDTO();
+		
+		Random random = new Random();
+        int number = random.nextInt(100000000); // 8자리의 숫자 생성
+        int cl_part_id = Math.abs(number); // 생성된 숫자 출력
+        logger.info(Long.toString(cl_part_id));
+
+		
+		dto.setCl_part_id(cl_part_id);
+		dto.setCl_id(Integer.parseInt(params.get("cl_id")));
+		dto.setUser_id(params.get("user_id"));
+		dto.setUser_adress(params.get("user_adress"));
+		dto.setUser_name(params.get("user_name"));
+		dto.setUser_phone(params.get("user_phone"));
+		
+		int row = dao.appWrite5(dto);		
+		logger.info("update row : "+row);
+		String page = "redirect:/class.go";
+		
+		return page;
+	}
+
+	public ArrayList<ClassesDTO> appList(String cl_id) {
+		
+		
+		return dao.appList(cl_id);
 	}
 
 }

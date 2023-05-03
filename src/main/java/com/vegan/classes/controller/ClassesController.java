@@ -16,6 +16,7 @@ import com.vegan.classes.dto.ClassesDTO;
 import com.vegan.classes.service.ClassesService;
 
 
+
 @Controller
 public class ClassesController {
 	
@@ -58,6 +59,53 @@ public class ClassesController {
 		
 		return service.write(params);
 	}
+	
+	@RequestMapping(value="/class.detail.do")
+	public String detail(Model model, @RequestParam String cl_id) {
+		logger.info("detail : "+cl_id);
+		String page = "redirect:/class.go";		
+		 ClassesDTO dto = service.detail(cl_id);
+		 
+		if(dto != null) {
+			page = "classDetail";
+			model.addAttribute("dto", dto);
+		}				
+		return page;
+	}
+	
+	
+	@RequestMapping(value="/class.appWrite.go")
+	public String appWriteForm(Model model, @RequestParam String cl_id) {
+		logger.info("클래스 신청 페이지 이동");
+		String cl_subject = service.appWrite(cl_id);
+		model.addAttribute("cl_id",cl_id);
+		model.addAttribute("cl_subject", cl_subject);
+		ClassesDTO dto = service.appWrite2();
+		model.addAttribute("dto", dto);
+		
+		return "classAppWrite";
+	}
+
+	@RequestMapping(value="/class.appWrite.do",method = RequestMethod.POST)
+	public String appWrite(Model model, @RequestParam HashMap<String, String> params) {
+		logger.info("클래스 신청 저장");
+		
+		
+		return service.appWrite3(params);
+	}
+	
+	@RequestMapping(value="/class.appList.do")
+	public String appList(Model model,@RequestParam String cl_id) {
+		logger.info("클래스 신청 리스트");
+		
+		logger.info("list call");
+		ArrayList<ClassesDTO> appList = service.appList(cl_id);		
+		logger.info("list cnt : "+appList.size());
+		model.addAttribute("appList", appList);
+		
+		return "classAppList";
+	}
 
 
 }
+ 
