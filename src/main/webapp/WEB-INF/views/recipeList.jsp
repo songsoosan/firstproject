@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+레시피 리스트 페이지
 </body>
 </html>

@@ -26,7 +26,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/recipe.go", method = RequestMethod.GET)
 	public String recipe(Model model) {
-			return "recipe";
+			return "recipeList";
 	}
 	
 	@RequestMapping(value = "/ranking.go", method = RequestMethod.GET)
@@ -51,7 +51,7 @@ public class MainController {
 	}
 	@RequestMapping(value = "/write.go", method = RequestMethod.GET)
 	public String write(Model model) {
-		return "write";
+		return "recipeWrite";
 	}
 	@RequestMapping(value = "/letter.go", method = RequestMethod.GET)
 	public String letter(Model model) {
