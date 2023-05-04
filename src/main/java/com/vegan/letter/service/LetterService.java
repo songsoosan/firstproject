@@ -24,6 +24,9 @@ public class LetterService {
 	   }
 
 	public HashMap<String, Object> detail(String detailId) {
+		
+		dao.read(detailId);
+		
 		return dao.detail(detailId);
 	}
 

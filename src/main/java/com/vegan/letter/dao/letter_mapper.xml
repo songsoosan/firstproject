@@ -6,12 +6,12 @@
 
 	<select id="recieveList" 
 		resultType="com.vegan.letter.dto.LetterDTO">
-		SELECT letter_id, send_user_id,letter_tItle,letter_date FROM letter WHERE recive_user_id = #{param1}
+		SELECT letter_id, send_user_id,letter_tItle,letter_date,letter_chk FROM letter WHERE recive_user_id = #{param1}
 	</select>
 	
 	<select id="sendList" 
 		resultType="com.vegan.letter.dto.LetterDTO">
-		SELECT letter_id,recive_user_id, letter_tItle,letter_date FROM letter WHERE send_user_id = #{param1}
+		SELECT letter_id,recive_user_id, letter_tItle,letter_date,letter_chk FROM letter WHERE send_user_id = #{param1}
 	</select>
 	
 	<insert id="letterSend" parameterType="hashmap">
@@ -27,6 +27,11 @@
 	</delete>
    
    	<select id="detail" resultType="hashmap">
-		SELECT * FROM letter WHERE letter_id = #{letter_id}
+		SELECT * FROM letter WHERE letter_id = #{param1}
 	</select>
+	
+	<update id="read">
+		UPDATE letter SET letter_chk = true
+			WHERE letter_id = #{param1}
+	</update> 
 </mapper>

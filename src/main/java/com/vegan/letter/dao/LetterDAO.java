@@ -18,4 +18,6 @@ public interface LetterDAO {
 	ArrayList<LetterDTO> sendList(String loginId);
 
 	int delete(String id);
+
+	void read(String detailId);
 }

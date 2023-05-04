@@ -49,7 +49,7 @@ input[type="text"]{
 		</tr>
 		<tr>
 			<th colspan="2">
-				<button onclick="location.href='./list.go'">돌아가기</button>
+				<button onclick="location.href='recieveletter.go'">돌아가기</button>
 			</th>
 		</tr>
 	</table>

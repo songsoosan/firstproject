@@ -32,6 +32,7 @@
 	<table>
 		<thead>
 			<tr>
+				<th>읽음</th>
 				<th>보낸사람</th>
 				<th>제목</th>
 				<th>보낸시간</th>
@@ -73,6 +74,11 @@ function listDraw(list){
 	var content = '';
 	list.forEach(function(item,index){
 		content += '<tr>';
+		if (item.letter_chk == 1) {
+			content+='<td>'+'읽음'+'</td>';
+		}else{
+			content+='<td>'+'안읽음'+'</td>';
+		}
 		content+='<td>'+item.send_user_id+'</td>';
 		content+='<td><a href="detail.go?id='+item.letter_id+'">'+item.letter_tItle+'</a></td>';
 		content+='<td>'+item.letter_date+'</td>';	
