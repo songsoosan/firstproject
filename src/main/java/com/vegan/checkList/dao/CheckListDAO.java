@@ -1,5 +1,26 @@
 package com.vegan.checkList.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.vegan.checkList.dto.CheckListDTO;
+
 public interface CheckListDAO {
+
+	ArrayList<CheckListDTO> list();
+
+	int write(CheckListDTO dto);
+
+	int update(HashMap<String, Object> params);
+
+
+	
+
+	
+
+	
+
+	
+
 
 }

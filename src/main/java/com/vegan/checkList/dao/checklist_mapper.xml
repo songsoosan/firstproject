@@ -2,5 +2,19 @@
 <!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
-<mapper namespace="com.vegan.CheckList.dao.CheckListDAO">
+<mapper namespace="com.vegan.checkList.dao.CheckListDAO">
+
+	<select id="list" resultType="com.vegan.checkList.dto.CheckListDTO">
+		SELECT question_number, question_detail
+			FROM question_list 
+	</select>
+	
+	<insert id="write" parameterType="hashmap">
+		INSERT INTO question_list(question_number, question_detail)
+			VALUES(#{question_number},#{question_detail})
+	</insert>
+	
+		<!--  <select id ="detail" parameterType ="String" resultType="com.vegan.checkList.dto.CheckListDTO">
+			SELECT * FROM question_list WHERE question_number = #{question_number}
+		</select>-->
 </mapper>
