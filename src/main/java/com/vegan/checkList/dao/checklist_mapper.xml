@@ -14,7 +14,7 @@
 			VALUES(#{question_number},#{question_detail})
 	</insert>
 	
-		<!--  <select id ="detail" parameterType ="String" resultType="com.vegan.checkList.dto.CheckListDTO">
-			SELECT * FROM question_list WHERE question_number = #{question_number}
-		</select>-->
+	
+	
+	
 </mapper>

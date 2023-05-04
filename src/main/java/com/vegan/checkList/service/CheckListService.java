@@ -43,7 +43,7 @@ public class CheckListService {
 
 	public String update(HashMap<String, Object> params) {
 		int row = dao.update(params);
-		return null;
+		return "redirect:/survey.do";
 	}
 
 
