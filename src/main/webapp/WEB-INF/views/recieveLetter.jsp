@@ -10,32 +10,32 @@
 		border : 1px solid black;
 		border-collapse: collapse;
 		padding : 5px 10px;
+		text-align: center;
 	}
-	button{
-		margin: 5px;
-			
+	#ne{
+		margin:5px;
+		float: right;
 	}
 	table{
 		width: 100%;
 	}
+
 	
 
 </style>
 </head>
 <body>
 <h3>쪽지</h3>
+				<button onclick = "location.href='recieveletter.go'">받은 쪽지함</button>
+				<button onclick = "location.href='sendletter.go'">보낸 쪽지함</button>
+				<button onclick = "location.href='letterWrite.go'" id = "ne">새 쪽지</button>
 	<table>
 		<thead>
-			<tr>
-				<td>받은 쪽지함</td>
-				<td>보낸 쪽지함</td>
-				<td colspan = 2><button onclick = "location.href='letterWrite.go'">새 쪽지</button></td>
-			</tr>
 			<tr>
 				<th>보낸사람</th>
 				<th>제목</th>
 				<th>보낸시간</th>
-				<th><input type="checkbox" id="all"/></th>
+				<th><input type="checkbox" id="all"/><button onclick="del()" id = "del">삭제</button></th>
 			</tr>
 		</thead>
 		<tbody id="list">
@@ -44,11 +44,13 @@
 	</table>
 </body>
 <script>
+
+
 list();
 function list(){
 	$.ajax({
 		type:'get',
-		url:'recievList.ajax',
+		url:'recieveList.ajax',
 		data:{},
 		dataType:'json',
 		success:function(data){
@@ -72,16 +74,14 @@ function listDraw(list){
 	list.forEach(function(item,index){
 		content += '<tr>';
 		content+='<td>'+item.send_user_id+'</td>';
-		content+='<td>'+item.letter_tItle+'</td>';
+		content+='<td><a href="detail.go?id='+item.letter_id+'">'+item.letter_tItle+'</a></td>';
 		content+='<td>'+item.letter_date+'</td>';	
-		content += '<td><input type="checkbox" value="'+item.id+'"/></td>';
+		content += '<td><input type="checkbox" value="'+item.letter_id+'"/></td>';
 		content += '</tr>';
 	});
 	$('#list').empty();
 	$('#list').append(content);
 }
-
-
 
 
 $('#all').click(function(e){	
@@ -93,5 +93,38 @@ $('#all').click(function(e){
 		$chk.prop('checked',false);
 	}	
 });
+
+function del(){
+	
+	var checkArr = [];
+	
+	$('input[type="checkbox"]:checked').each(function(idx,item){		
+		if($(this).val()!='on'){
+			
+			checkArr.push($(this).val());
+		}	
+	});
+	
+	console.log(checkArr);
+		
+	$.ajax({
+		type:'get',
+		url:'delete.ajax',
+		data:{'delList':checkArr},
+		dataType:'json',
+		success:function(data){
+			console.log(data);
+			if(data.success){
+				alert(data.msg);
+				list();
+			}
+		},
+		error:function(e){
+			console.log(e);
+		}		
+	});
+	
+}
+
 </script>
 </html>
