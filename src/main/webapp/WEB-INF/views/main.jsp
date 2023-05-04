@@ -61,7 +61,7 @@
 		<a href="write.go">
 			<img src="resources/img/write.png" alt="글쓰기" width="70px" height="70px"/>
 		</a>
-		<a href="letter.go">
+		<a href="recieveletter.go">
 			<img src="resources/img/letter.png" alt="쪽지" width="70px" height="70px"/>
 		</a>
 	</div>

@@ -39,16 +39,33 @@ public class LetterController {
 		return page;
 	}
 	
-	@RequestMapping(value = "/recievList.ajax")
+	@RequestMapping(value = "/recieveList.ajax")
 	@ResponseBody
-	public HashMap<String, Object> listCall(HttpSession session){
+	public HashMap<String, Object> recieveList(HttpSession session){
 		String loginId = (String) session.getAttribute("loginId");
 		boolean login = false;
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		if(session.getAttribute("loginId")!= null) {
 			login = true;
-			ArrayList<LetterDTO> list = service.list(loginId);
+			ArrayList<LetterDTO> list = service.recieveList(loginId);
+			map.put("list", list);
+		}
+		
+		map.put("login", login);
+		
+		return map;
+	}
+	@RequestMapping(value = "/sendList.ajax")
+	@ResponseBody
+	public HashMap<String, Object> sendList(HttpSession session){
+		String loginId = (String) session.getAttribute("loginId");
+		boolean login = false;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		if(session.getAttribute("loginId")!= null) {
+			login = true;
+			ArrayList<LetterDTO> list = service.sendList(loginId);
 			map.put("list", list);
 		}
 		
@@ -77,5 +94,47 @@ public class LetterController {
 	   public String letterWrite(){
 	      return "letterWriteForm";
 	   }
-
+	   
+		@RequestMapping(value="/delete.ajax")
+		@ResponseBody
+		public HashMap<String, Object> delete(
+				@RequestParam(value="delList[]") ArrayList<String> delList){
+			logger.info("delList : "+delList);
+			return service.delete(delList);
+		}
+	   
+		@RequestMapping(value="/detail.go")
+		public String detail(@RequestParam int id, HttpSession session) {
+			logger.info("detail id : "+ id);
+			session.setAttribute("detailId", id);
+			return "letterDetail";
+		}
+		
+		@RequestMapping(value="/detail.ajax")
+		@ResponseBody
+		public HashMap<String, Object> detail(HttpSession session){
+			String detailId = String.valueOf(session.getAttribute("detailId"));
+			
+			logger.info("상세보기 할 아이디 : "+detailId);
+			
+			HashMap<String, Object> map = service.detail(detailId);
+			logger.info("result : "+map);
+			if(map != null && map.size()>0) {
+				session.removeAttribute("detailId");
+			}
+					
+			return map;
+		}
+		@RequestMapping(value="/recieveletter.go")
+		public String recieveletter() {
+	
+			return "recieveLetter";
+		}
+		@RequestMapping(value="/sendletter.go")
+		public String sendletter() {
+	
+			return "sendLetter";
+		}
+		
+		
 }
