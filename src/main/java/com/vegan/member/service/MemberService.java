@@ -16,17 +16,28 @@ public class MemberService {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public String join(HashMap<String, String> params) {
-		String id = params.get("user_id");
-		String msg = "회원 가입에 실패 했습니다.";
-		if(dao.join(params) == 1){
-			msg = "회원가입에 성공 했습니다.";
-			dao.creatProfile(id);
+	public HashMap<String, Object> overlayid(String user_id) {
+			
+			HashMap<String, Object> map = new HashMap<>();
+			// 같은 아이디가 있는가? 있으면 1 없으면 0	
+			map.put("overlayid", dao.overlayid(user_id));		
+			return map;
 		}
+	
+	public HashMap<String, Object> join(HashMap<String, String> params) {
 		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("success", dao.join(params));		
+		String user_id = params.get("user_id");
+		dao.creatProfile(user_id);
 		
-		return msg;
+		return map;
 	}
+	
+	
+		
+		
+		
 
 	public String login(String id, String pw) {
 		

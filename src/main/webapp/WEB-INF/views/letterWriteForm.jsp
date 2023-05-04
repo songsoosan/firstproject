@@ -46,8 +46,8 @@
             </tr>
             <tr>
                <th colspan="2">
-                  <button onclick="letterSend()">확인</button>
-                  <button onclick="location.href='letter'">돌아가기</button>
+                  <button onclick="letterSend()" >확인</button>
+                  <button onclick="location.href='recieveletter.go'">돌아가기</button>
                </th>
             </tr>
          </table>
@@ -93,7 +93,7 @@ function letterSend(){
                console.log(data);
                if(data.success == 1){
                   alert('쪽지전송이 완료 되었습니다.');
-                  location.href = '/';
+                  location.href = 'recieveletter.go';
                }else{
                   alert('쪽지전송에 실패 했습니다.\r\n 다시 시도해 주세요!');
                } 
