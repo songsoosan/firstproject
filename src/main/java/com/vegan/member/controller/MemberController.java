@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vegan.member.service.MemberService;
 
@@ -46,20 +47,28 @@ public class MemberController {
 
 	}
 	 
-	@RequestMapping(value = "/join.go", method = RequestMethod.GET)
-	public String joinForm(Model model) {
-		return "joinForm";
-	}
+	@RequestMapping(value="/join.go")
+	   public String joinForm() {
+	      return "joinForm";      
+	   }
+	   
+	   @RequestMapping(value="/overlayid.ajax")
+	   @ResponseBody
+	   public HashMap<String, Object> overlay(@RequestParam String user_id){
+		   logger.info("overlayid : "+user_id);				   
+	      return service.overlayid(user_id);      
+	   }
+	   
+	   @RequestMapping(value="/join.ajax")
+	   @ResponseBody
+	   public HashMap<String, Object> join(@RequestParam HashMap<String, String> params){
+		   logger.info("params: {}"+params);
+		return service.join(params);		   
+	   }
 	
-	@RequestMapping(value = "/join.do", method = RequestMethod.POST)
-	public String join(Model model, @RequestParam HashMap<String, String> params) {
-		logger.info("join param : " + params);
-		
-		String msg = service.join(params);
-		model.addAttribute("msg", msg);
-		
-		return "login";
-	}
+	
+	
+	
 	@RequestMapping(value = "/findID.go", method = RequestMethod.GET)
 	public String findID(Model model) {
 			return "findID";

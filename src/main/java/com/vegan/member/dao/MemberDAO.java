@@ -5,11 +5,13 @@ import java.util.HashMap;
 import com.vegan.member.dto.MemberDTO;
 public interface MemberDAO {
 
+	int overlayid(String user_id);
+
 	int join(HashMap<String, String> params);
 
 	String login(String id, String pw);
 
-	void creatProfile(String id);
+	void creatProfile(String user_id);
 
 	
 	

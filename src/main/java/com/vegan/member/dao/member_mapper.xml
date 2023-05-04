@@ -3,14 +3,23 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
 <mapper namespace="com.vegan.member.dao.MemberDAO">
+
+
+		<select id="overlayid" resultType="int">
+		SELECT COUNT(user_id) FROM user
+			WHERE user_id = #{param1}
+		</select>
+		
+		
 		<insert id ="join" parameterType="hashmap">
 			INSERT INTO user(user_id,user_pw,user_name,user_phone,user_sex,user_email,user_admin_chk,user_secc_chk)
 				VALUES(#{user_id},#{user_pw},#{user_name},#{user_phone},#{user_sex},#{user_email},false,false)
 		</insert>
+		
 		<insert id ="creatProfile" parameterType="String">
 			INSERT INTO profile(user_id)
 				VALUES(#{user_id})
-		</insert>
+		</insert> 
 		
 		
 		<select id="login" resultType="String">
