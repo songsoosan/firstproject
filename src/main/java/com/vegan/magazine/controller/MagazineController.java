@@ -1,6 +1,7 @@
 package com.vegan.magazine.controller;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -13,10 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.vegan.magazine.dto.MagazineDTO;
 import com.vegan.magazine.service.MagazineService;
+
 
 
 @Controller
@@ -25,7 +28,8 @@ public class MagazineController {
 Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired MagazineService service;
-
+	
+	/*
 	@RequestMapping(value = "/magazine")
 	public String list(Model model) {
 		logger.info("list call");
@@ -33,6 +37,19 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		logger.info("list cnt : "+list.size());
 		model.addAttribute("list", list);
 		return "magazineList";
+	}
+	*/
+	
+	@RequestMapping(value="/magazine")
+	public String main() {
+		return "magazineList";
+	}
+	
+	@RequestMapping(value="/magazine.ajax", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object>list(
+			@RequestParam String page,	@RequestParam String cnt){
+		return service.list(Integer.parseInt(page), Integer.parseInt(cnt));
 	}
 	
 	@RequestMapping(value="/magazineWrite.go")
@@ -43,21 +60,21 @@ Logger logger = LoggerFactory.getLogger(getClass());
 	
 	
 	@RequestMapping(value="/magazineWrite.do", method = RequestMethod.POST)
-	public String write(MultipartFile photo, 
+	public String write(MultipartFile photo, MultipartFile[] uploadphoto, 
 			@RequestParam HashMap<String, String> params) {
 		logger.info("params : "+params);
 		return service.write(photo, params);
 	}
 	
 	
-	@RequestMapping(value="/magazineDetail.do")
-	public String detail(HttpSession session, Model model, @RequestParam int board_id) {
+	@RequestMapping(value="/magazineDetail.do", method = RequestMethod.GET)
+	public String detail(HttpSession session ,Model model, @RequestParam String board_id) {
 		logger.info("magazineDetail : "+board_id);
 		String page = "redirect:/magazine.do";		
 		MagazineDTO dto = service.detail(board_id,"detail");
 		if(dto != null) {
 			page = "magazineDetail";
-			model.addAttribute("dto", dto.getBoard_id());
+			model.addAttribute("dto", dto);
 		}				
 		return page;
 	}
@@ -66,6 +83,25 @@ Logger logger = LoggerFactory.getLogger(getClass());
 	public String delete(@RequestParam String board_id) {
 		service.delete(board_id);
 		return "redirect:/magazine";
+	}
+	
+	@RequestMapping(value="/magazineUpdate.go")
+	public String updateForm(Model model, @RequestParam String board_id) {
+		logger.info("detail : "+board_id);
+		String page = "redirect:/magazine.do";		
+		MagazineDTO dto = service.detail(board_id,"detail");
+		if(dto != null) {
+			page = "magazineUpdateForm";
+			model.addAttribute("dto", dto);
+		}				
+		return page;
+	}
+	
+	@RequestMapping(value="/magazineUpdate.do", method = RequestMethod.POST)
+	public String update(MultipartFile photo, 
+			@RequestParam HashMap<String, String> params) {
+		logger.info("params : "+params);
+		return service.update(photo, params);
 	}
 	
 }

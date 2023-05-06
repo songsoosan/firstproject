@@ -5,17 +5,27 @@ import java.sql.Date;
 public class MagazineDTO {
 
 	private int board_id;
-	private String categoryID;
-	private String userID;
+	private String user_id;
 	private String board_title;
 	private String board_content;
 	private Date board_date;
 	private int board_views;
 	private int photo_id;
 	private String photo_name;
-	
+	private String cat_id;
 
-	
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public String getCat_id() {
+		return cat_id;
+	}
+	public void setCat_id(String cat_id) {
+		this.cat_id = cat_id;
+	}
 	public int getPhoto_id() {
 		return photo_id;
 	}
@@ -28,24 +38,13 @@ public class MagazineDTO {
 	public void setPhoto_name(String photo_name) {
 		this.photo_name = photo_name;
 	}
-	public String getCategoryID() {
-		return categoryID;
-	}
-	public void setCategoryID(String categoryID) {
-		this.categoryID = categoryID;
-	}
 	public int getBoard_id() {
 		return board_id;
 	}
 	public void setBoard_id(int board_id) {
 		this.board_id = board_id;
 	}
-	public String getUserID() {
-		return userID;
-	}
-	public void setUserID(String userID) {
-		this.userID = userID;
-	}
+	
 	public String getBoard_title() {
 		return board_title;
 	}

@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<link rel="stylesheet" href="resources/css/commons.css">
+<link rel="stylesheet" href="resources/css/commons.css" type="text/css">
 <style>
 table{
 	width: 100%;
@@ -34,13 +34,14 @@ textarea{
 </head>
 <body>
 		<table>
+			<c:forEach items="dto">
 			<tr>
 				<th>제목</th>
 				<td>${dto.board_title}</td>
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td>${dto.userID}</td>
+				<td>${dto.user_id}</td>
 			</tr>
 			<tr>
 				<th>작성일</th>
@@ -52,17 +53,31 @@ textarea{
 			</tr>
 			<c:if test="${dto.photo_name ne null}">
 			<tr>
-				<th>사진</th>
+				<th>대표사진</th>
 				<td><img width="500" src="/photo/${dto.photo_name}"/></td>
 			</tr>
 			</c:if>
 			<tr>
+				<th>링크</th>
+				<td><a href="https://www.naver.com" target="_blank">링크 3</a></td>
+			</tr>
+			<tr>
 				<th colspan="2">
-					<input type="button" onclick="location.href='./magazine'" value="리스트"/>
-					<input type="button" onclick="location.href='./update.go?idx=${dto.idx}'" value="수정"/>
+					<input type="button" onclick="location.href='./magazine.do'" value="리스트"/>
+					<input type="button" onclick="location.href='./magazineUpdate.go?board_id=${dto.board_id}'" value="수정"/>
+					<input type="button" onclick="location.href='./magazineDelete.do?board_id=${dto.board_id}'" value="삭제"/>
 				</th>
 			</tr>
-		</table>	
+			</c:forEach>
+		</table>
+		
+		
+		<!-- 댓글 시작 -->
+	
+		<!--  댓글 끝 -->
 </body>
-<script></script>
+<script>
+
+
+</script>
 </html>

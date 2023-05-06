@@ -1,23 +1,37 @@
 package com.vegan.magazine.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.vegan.magazine.dto.MagazineDTO;
 
 public interface MagazineDAO {
 	
-	ArrayList<MagazineDTO> list();
+	//ArrayList<MagazineDTO> list();
 
 	int write(MagazineDTO dto);
 
-	void fileWrite(int board_id, String ori_photo_name, String photo_name);
-
-	void board_views(int board_id);
-
-	MagazineDTO detail(int board_id);
+	MagazineDTO detail(String board_id);
 
 	String findFile(String board_id);
 
 	int delete(String board_id);
+
+	void fileWrite(@Param("cat_id")String cat_id, @Param("board_id") int board_id,  @Param("ori_photo_name")String ori_photo_name, @Param("photo_name")String photo_name);
+
+	int update(HashMap<String, String> params);
+
+	void up_views(String board_id);
+	
+	
+	
+
+	int totalCount();
+
+	ArrayList<MagazineDTO> list(int cnt, int offset);
+
+	
 
 }
