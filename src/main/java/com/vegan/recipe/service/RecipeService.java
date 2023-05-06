@@ -33,33 +33,37 @@ public class RecipeService {
 	@Autowired RecipeDAO recipeDAO;
 	
 	public Map<String, Object> write(MultipartHttpServletRequest request) {	
-		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> result = new HashMap<String, Object>();
         Gson gson = new Gson();
         FileUpload fileUpload = new FileUpload();
         
         JSONObject jsonObject = JsonUtil.requestToJsonObj(request);
         RecipeDTO receipeDTO = gson.fromJson(jsonObject.toString(), RecipeDTO.class);
         
-        receipeDTO.setCat_id("recipe");
+        receipeDTO.setCat_id("re");
         receipeDTO.setRec_blind_chk(1);
-        receipeDTO.setUser_id("aaaa");
+        receipeDTO.setUser_id("admin");
         receipeDTO.setStep_id(1);
         receipeDTO.setRec_title("1234125");
 
         
-        MultipartFile multipartFile = request.getFile("mainThumbnailImage");
-        if(!multipartFile.isEmpty()) {
-        	//레시피 글등록
-        	int row = recipeDAO.write(receipeDTO);
-    		int idx = 0;
-        	//메인사진등록
-        	fileSave(receipeDTO.getCat_id(), idx, multipartFile);	
-        	
-        }
+
+//        MultipartFile multipartFile = request.getFile("mainThumbnailImage");
+//        if(!multipartFile.isEmpty()) {
+//        	//레시피 글등록
+//        	int row = recipeDAO.write(receipeDTO);
+//    		int idx = 0;
+//        	//메인사진등록
+//        	fileSave(receipeDTO.getCat_id(), idx, multipartFile);	
+//        	
+//        }
+
+
+
                 
         
         List<MultipartFile> multipartFiles = request.getFiles("thumbnailImages");
-        List<FileBean> fileBean = new ArrayList<>();
+        List<FileBean> fileBean = new ArrayList<FileBean>();
         
         if ( !multipartFiles.isEmpty() ) {
         	for(int i = 0; i<multipartFiles.size(); i++) {

@@ -4,8 +4,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src = "https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <style>
+table,th,td{
+	border : 1px solid black;
+	border-collapse : collapse;
+	padding : 5px 10px;
+
+}
+textarea{
+		width : 100%;
+		height:150px;
+		resize:none;
+	}
+#login{
+	margin-bottom:20px;
+}
 	div {
 	   margin:0 auto; 
 	   text-align:center;
@@ -14,10 +28,7 @@
 	table {
 		width: 100%;
 		border: 1px solid black;
-	}
-	th, td {
-		border: 1px solid black;
-		padding: 10px;
+		border-collapse: collapse;
 	}
 	.ul {
 		list-style-type: none;
@@ -45,13 +56,9 @@
 		vertical-align: middle;
 		display:inline-block;
 	}
-	
-
 </style>
-
 </head>
 <body>
-	
 	<div>
 		<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
 		<input type ="text" placeholder="검색"/>
@@ -76,28 +83,61 @@
 			<li class="li"><a href="event.go">이벤트</a></li>
 		</ul>
 	</div>
-	
-	<div class ="divImages">
-		<ul class="ul">
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-		</ul>
-	</div>
-	
-	<div>
-		<ul class="ul">
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-		</ul>
-	</div>
+	<table>
+		<tr>
+			<td rowspan="4">
+				<c:if test="${dto.newFileName eq null}">
+					<form action="profilePhoto.do" method="post" enctype="multipart/form-data">
+						<input type="file" name="photo"/>
+						<button>등록</button>
+					</form>	
+				</c:if>
+				<c:if test="${dto.newFileName ne null }">
+					<img src="/photo/${dto.newFileName}"/>
+				</c:if>					
+			</td>
+			<td>${user.user_id }</td>
+		</tr>
+		<tr>
+			<td>${user.user_name }</td>
+		</tr>
+		<tr>
+			<td>${user.user_email }</td>
+		</tr>
+		<tr>
+			<td>${user.user_phone }</td>
+		</tr>
+		<tr>
+			<td colspan="2">비건단계</td>
+		</tr>
+		<form action="profileUpdate.do" method="post">
+			<tr>
+				<td><textarea name=introduction>${user.introduction}</textarea></td>
+				<td><input type="submit" value="확인"></td>
+			</tr>
+		</form>
+		<tr>
+			<td colspan="2"><a>내가 작성한 레시피</a></td>
+		</tr>
+		<tr>
+			<td colspan="2"><a>즐려찾기한 레시피</a></td>
+		</tr>
+		<tr>
+			<td colspan="2"><a>구매한 클래스</a></td>
+		</tr>
+		<tr>
+			<th colspan = "2">
+				<input type="button" value="상세보기" onclick="location.href='passwardChk.go'"/>
+			</th>
+		</tr>
+	</table>
+		
 
-
-    </body>
-
+</body>
 <script>
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
+	}
 </script>
 </html>

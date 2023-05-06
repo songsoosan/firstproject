@@ -14,7 +14,7 @@ function RecipeWrite() {
 		$(".main")
 			.on("click", "#addButton", function(){
 				var html = '<div class="group">'
-								+'내용<input type = "textarea" class="rec_content">'
+								+'내용<input type = "text" class="rec_content">'
 								+'<input type = "file" name="thumbnailFile">'
 								+'<button id="addImgButton">사진추가</button>'
 								+'</div>';
