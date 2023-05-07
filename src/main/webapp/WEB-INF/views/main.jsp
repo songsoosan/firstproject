@@ -35,6 +35,7 @@
 	}
 	.menu{
 	margin-top: 30px;
+	border-bottom: 1px solid #ccc;
 	}
 	.divImages{
 	margin-top: 100px;
@@ -45,6 +46,10 @@
 		vertical-align: middle;
 		display:inline-block;
 	}
+	.logout-button {
+ 		float: right;
+	}
+	
 	
 
 </style>
@@ -53,7 +58,9 @@
 <body>
 	
 	<div>
-		<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
+		<a href="main.go">
+			<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
+		</a>
 		<input type ="text" placeholder="검색"/>
 		<a href="profile.do">
 			<img src="resources/img/user.png" alt="유저" width="70px" height="70px"/>
@@ -65,6 +72,7 @@
 			<img src="resources/img/letter.png" alt="쪽지" width="70px" height="70px"/>
 		</a>
 	</div>
+	<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
 
 	<div class ="menu">
 		<ul class="ul">

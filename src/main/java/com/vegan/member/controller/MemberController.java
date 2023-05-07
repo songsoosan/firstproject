@@ -24,8 +24,12 @@ public class MemberController {
 	 @Autowired MemberService service;
 	 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String main(Model model) {
+	public String login(Model model) {
 			return "login";
+	}
+	@RequestMapping(value = "/main.go", method = RequestMethod.GET)
+	public String main(Model model) {
+			return "main";
 	}
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
@@ -41,6 +45,23 @@ public class MemberController {
 			session.setAttribute("loginId", loginId);
 		}else {
 			model.addAttribute("msg","아이디 또는 비밀번호를 확인 하세요");	
+		}
+		
+		return page;
+
+	}
+	
+	@RequestMapping(value = "/logout.do")
+	public String login(HttpSession session,Model model) {
+		String page = "";
+		session.removeAttribute("loginId");
+		if ((String) session.getAttribute("loginId") == null) {
+			
+			page = "login";
+			model.addAttribute("msg","로그아웃 되었습니다.");
+		}else {
+			page = "main";
+			model.addAttribute("msg","다시 시도해주세요!");	
 		}
 		
 		return page;
