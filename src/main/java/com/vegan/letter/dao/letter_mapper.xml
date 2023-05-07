@@ -6,12 +6,20 @@
 
 	<select id="recieveList" 
 		resultType="com.vegan.letter.dto.LetterDTO">
-		SELECT letter_id, send_user_id,letter_tItle,letter_date,letter_chk FROM letter WHERE recive_user_id = #{param1}
+		SELECT letter_id, send_user_id,letter_tItle,letter_date,letter_chk 
+			FROM letter WHERE recive_user_id = #{param1}
+				LIMIT #{param2} OFFSET #{param3}
+	</select>
+	
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(letter_id) FROM letter
 	</select>
 	
 	<select id="sendList" 
 		resultType="com.vegan.letter.dto.LetterDTO">
-		SELECT letter_id,recive_user_id, letter_tItle,letter_date,letter_chk FROM letter WHERE send_user_id = #{param1}
+		SELECT letter_id,recive_user_id, letter_tItle,letter_date,letter_chk 
+			FROM letter WHERE send_user_id = #{param1}
+				LIMIT #{param2} OFFSET #{param3}
 	</select>
 	
 	<insert id="letterSend" parameterType="hashmap">
