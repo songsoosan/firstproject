@@ -87,4 +87,15 @@ public class ClassesService {
 		return dao.appList(cl_id);
 	}
 
+	public String update(HashMap<String, String> params) {
+		
+		int cl_id = Integer.parseInt(params.get("cl_id"));		
+		int row = dao.update(params);
+		
+		String page = row>0 ? "redirect:/class.detail.do?cl_id="+cl_id : "redirect:/class.go";
+		logger.info("update => "+page);
+		
+		return page;
+	}
+
 }

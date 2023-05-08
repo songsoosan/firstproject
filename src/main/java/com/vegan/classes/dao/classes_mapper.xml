@@ -22,6 +22,19 @@
 				from class where cl_id = #{cl_id}
 	</select>
 	
+	<update id="update" parameterType="hashmap">
+		UPDATE class SET user_id = #{user_id}
+			,cl_subject = #{cl_subject}
+			,cl_period = #{cl_period}
+			,cl_deadline = #{cl_deadline}
+			,cl_teacher = #{cl_teacher}
+			,cl_date = #{cl_date}
+			,cl_ing_chk = #{cl_ing_chk}
+			,cl_adress = #{cl_adress}
+			,cl_content = #{cl_content}
+		WHERE cl_id = #{cl_id}
+	</update>
+	
 	<select id="appWrite" 
 		resultType="String">
 		select 
@@ -53,6 +66,8 @@
 			cl_part_id,cl_id,user_id,user_name,user_phone,user_adress
 			from class_join where cl_id = #{cl_id} ORDER BY cl_id DESC
 	</select>
+	
+
 	
 
 

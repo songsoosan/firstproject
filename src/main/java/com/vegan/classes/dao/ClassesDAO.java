@@ -24,6 +24,8 @@ public interface ClassesDAO {
 
 	ArrayList<ClassesDTO> appList(String cl_id);
 
+	int update(HashMap<String, String> params);
+
 	
 
 }

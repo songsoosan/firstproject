@@ -11,9 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.vegan.classes.dto.ClassesDTO;
 import com.vegan.classes.service.ClassesService;
+
 
 
 
@@ -104,6 +106,25 @@ public class ClassesController {
 		model.addAttribute("appList", appList);
 		
 		return "classAppList";
+	}
+	
+	@RequestMapping(value="/class.update.go")
+	public String updateForm(Model model, @RequestParam String cl_id) {
+		logger.info("update : "+cl_id);
+		String page = "redirect:/list.do";		
+		ClassesDTO dto = service.detail(cl_id);
+		if(dto != null) {
+			page = "classUpdate";
+			model.addAttribute("dto", dto);
+		}				
+		return page;
+	}
+	
+	@RequestMapping(value="/class.update.do", method = RequestMethod.POST)
+	public String update(
+			@RequestParam HashMap<String, String> params) {
+		logger.info("params : "+params);
+		return service.update(params);
 	}
 
 
