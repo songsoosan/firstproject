@@ -5,6 +5,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
+		<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 <style>
    #id{
       width: 69%;
@@ -15,11 +18,13 @@
       resize:none;
    }
    table,th,td{
-   border : 1px solid black;
-   border-collapse : collapse;
-   padding : 5px 10px;
+  	 border : 1px solid black;
+   	border-collapse : collapse;
+   	padding : 5px 10px;
+	}
 
-}
+
+
 </style>
 </head>
 <body>
@@ -41,13 +46,17 @@
             <tr>
                <th>내용</th>
                <td>
-                  <textarea id="content"></textarea>
+                  <div class="form-floating">
+  					<textarea class="form-control" placeholder="Leave a comment here" id="content" style="height: 100px"></textarea>				 
+				</div>
                </td>
             </tr>
             <tr>
                <th colspan="2">
-                  <button onclick="letterSend()" >확인</button>
-                  <button onclick="location.href='recieveletter.go'">돌아가기</button>
+               	<div class="col text-center">
+                  <button type="button" class="btn btn-success" onclick="letterSend()">확인</button>
+                  <button type="button" class="btn btn-success" onclick="location.href='recieveletter.go'">돌아가기</button>
+               </div>
                </th>
             </tr>
          </table>

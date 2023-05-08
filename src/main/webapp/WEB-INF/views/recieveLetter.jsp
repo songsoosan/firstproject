@@ -4,8 +4,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
+		<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 <style>
+	#paging{
+				text-align: center;
+	}
 	div {
 	   margin:0 auto; 
 	   text-align:center;
@@ -59,13 +65,23 @@
 		<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
 		<input type ="text" placeholder="검색"/>
 		<a href="profile.do">
-			<img src="resources/img/user.png" alt="유저" width="70px" height="70px"/>
-		</a> 
-		<a href="write.go">
-			<img src="resources/img/write.png" alt="글쓰기" width="70px" height="70px"/>
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+  			<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+  			<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+			</svg>
 		</a>
+		&nbsp;&nbsp;&nbsp; 
+		<a href="write.go">
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+  			<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+  			<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+			</svg>
+		</a>
+		&nbsp;&nbsp;&nbsp;
 		<a href="recieveletter.go">
-			<img src="resources/img/letter.png" alt="쪽지" width="70px" height="70px"/>
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chat-left-dots-fill" viewBox="0 0 16 16">
+  			<path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+			</svg>
 		</a>
 	</div>
 
@@ -79,10 +95,18 @@
 			<li class="li"><a href="event.go">이벤트</a></li>
 		</ul>
 	</div>
+	
 <h3>쪽지</h3>
-				<button onclick = "location.href='recieveletter.go'">받은 쪽지함</button>
-				<button onclick = "location.href='sendletter.go'">보낸 쪽지함</button>
-				<button onclick = "location.href='letterWrite.go'" id = "ne">새 쪽지</button>
+				<button type="button" class="btn btn-primary", onclick = "location.href='recieveletter.go'">받은 쪽지함</button>
+				<button type="button" class="btn btn-primary", onclick = "location.href='sendletter.go'">보낸 쪽지함</button>
+						쪽지 갯수 : 
+				<select id="pagePerNum">
+					<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+				</select>
+				<button type="button" class="btn btn-info" onclick = "location.href='letterWrite.go'" id = "ne">새 쪽지</button>
 	<table>
 		<thead>
 			<tr>
@@ -90,23 +114,42 @@
 				<th>보낸사람</th>
 				<th>제목</th>
 				<th>보낸시간</th>
-				<th><input type="checkbox" id="all"/><button onclick="del()" id = "del">삭제</button></th>
+				<th><input type="checkbox" id="all"/><button type="button" class="btn btn-danger" onclick="del()" id = "del">삭제</button></th>
 			</tr>
 		</thead>
 		<tbody id="list">
 
 		</tbody>
+		<tr>
+			<td colspan="6" id="paging">	
+				<!-- 	플러그인 사용	(twbsPagination)	-->
+				<div class="container">									
+					<nav aria-label="Page navigation" style="text-align:center">
+						<ul class="pagination" id="pagination"></ul>
+					</nav>					
+				</div>
+			</td>
+		</tr>
+		
 	</table>
 </body>
 <script>
+var showPage = 1;
+list(showPage);
 
+$('#pagePerNum').change(function(){
+	list(showPage);
+	$('#pagination').twbsPagination('destroy');
+});
 
-list();
-function list(){
+function list(page){
 	$.ajax({
 		type:'get',
 		url:'recieveList.ajax',
-		data:{},
+		data:{		
+			'page':page,
+			'cnt':$('#pagePerNum').val()
+		},
 		dataType:'json',
 		success:function(data){
 			//console.log(data);
@@ -115,6 +158,19 @@ function list(){
 				location.href='./login';
 			}else{
 				listDraw(data.list);
+				
+				$('#pagination').twbsPagination({
+					startPage:data.currPage,	//시작페이지
+					totalPages:data.pages,//총 페이지 수
+					visiblePages:5, //보여줄 페이지 [1][2][3][4][5]
+					onPageClick:function(event,page){// 페이지 클릭시 동작되는 함수(콜백)
+						console.log(page, showPage);
+						if(page != showPage){
+							showPage = page;	
+							list(page);							
+						}				
+					}
+				});	
 			}
 		},
 		error:function(e){
