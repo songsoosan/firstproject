@@ -20,20 +20,65 @@
 		    </div>
 		  </div>
 		  <label for="staticReason" class="col-sm-2 col-form-label">신고 사유</label>
-		  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+		  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id = "reason">
   			<option selected>사유를 선택해 주세요</option>
   			<option value="1">부적절한 내용	</option>
 			<option value="2">비방</option>
 			<option value="3">광고</option>
 			<option value="4">기타</option>
 		</select>			
-		<input class="form-control form-control-lg" type="text" placeholder="사유를 입력해 주세요" aria-label=".form-control-lg example">
-		
+			<div class="form-floating">
+  				<textarea class="form-control" placeholder="내용을 입력해 주세요" id="content" style="height: 100px"></textarea>				 
+			</div>
 		<div class="col text-center">
 			<button type="button" class="btn btn-success" onclick="reportSend()">확인</button>
 		</div>
 </body>
 <script>
 
+$('#staticReport').val();
+
+function reportSend(){
+
+    var $staticReport = $('#staticReport');
+    var $reason = $('#reason');
+    var $content = $('#content');
+ 
+ 	if($reason.val()==''){
+       alert('사유를 선택해 주세요!');
+       $receiver.focus();
+    }else if($content.val() == ''){
+       alert('내용을 입력해 주세요!');
+       $content.focus();
+    }else{
+
+    	
+       var param = {};
+       param.staticReport = $staticReport.val();
+       param.receiver = $reason.val();
+       param.content = $content.val();
+       console.log(param);
+       
+       $.ajax({
+          type:'post',
+          url:'reportSend.ajax',
+          data:param,
+          dataType:'json',
+          success:function(data){
+             console.log(data);
+             if(data.success == 1){
+                alert('신고 접수가 완료 되었습니다.');
+                location.href = 'recieveletter.go';
+             }else{
+                alert('신고 접수가 실패 했습니다.\r\n 다시 시도해 주세요!');
+             } 
+          },
+          error:function(e){
+             console.log(e);
+             alert('신고 접수가 실패 했습니다.\r\n 다시 시도해 주세요!');
+          }
+       });
+    }
+}
 </script>
 </html>

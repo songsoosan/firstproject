@@ -26,7 +26,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String main(Model model) {
-			return "login";
+			return "main";
 	}
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)

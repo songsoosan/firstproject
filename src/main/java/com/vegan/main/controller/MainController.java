@@ -50,9 +50,6 @@ public class MainController {
 	public String write(Model model) {
 		return "recipeWrite";
 	}
-	@RequestMapping(value = "/letter.go", method = RequestMethod.GET)
-	public String letter(Model model) {
-		return "letter";
-	}
+
 	
 }
