@@ -6,18 +6,48 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
-	table, th, td{
-		border : 1px solid black;
+	div {
+	   margin:0 auto; 
+	   text-align:center;
+	}
+
+	table {
+		width: 100%;
+		border: 1px solid black;
 		border-collapse: collapse;
-		padding : 5px 10px;
+	}
+	th, td {
+		border: 1px solid black;
+		padding: 10px;
+	}
+	.ul {
+		list-style-type: none;
 		text-align: center;
+		display:inline-block;
+		width: 100%;
+	}
+	.li {
+		float: left;
+		width: 16%;
+	}
+	.li > a {
+		text-decoration-line: none;
+		font-size: 25px;
+	}
+	.menu{
+	margin-top: 30px;
+	}
+	.divImages{
+	margin-top: 100px;
+	}
+	.img{
+		width: 20%;
+		height: 30%;
+		vertical-align: middle;
+		display:inline-block;
 	}
 	#ne{
-		margin:5px;
 		float: right;
-	}
-	table{
-		width: 100%;
 	}
 
 	
@@ -87,6 +117,7 @@ textarea{
 
 </head>
 <body>
+
 	
 	<div>
 		<a href="main.go">
@@ -103,7 +134,9 @@ textarea{
 			<img src="resources/img/letter.png" alt="쪽지" width="70px" height="70px"/>
 		</a>
 	</div>
+
 	<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
+
 
 	<div class ="menu">
 		<ul class="ul">

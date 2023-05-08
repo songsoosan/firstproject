@@ -33,6 +33,10 @@ textarea{
 	th, td {
 		border: 1px solid black;
 		padding: 10px;
+		width: 100%;
+		border: 1px solid black;
+		border-collapse: collapse;
+
 	}
 	.ul {
 		list-style-type: none;
@@ -65,12 +69,11 @@ textarea{
  		float: right;
 	}
 	
-	
-
 </style>
 
 </head>
 <body>
+
 	
 	<div>
 		<a href="main.go">
@@ -88,7 +91,6 @@ textarea{
 		</a>
 	</div>
 	<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
-
 	<div class ="menu">
 		<ul class="ul">
 			<li class="li"><a href="recipe.go">레시피</a></li>
