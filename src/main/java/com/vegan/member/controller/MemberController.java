@@ -43,7 +43,7 @@ public class MemberController {
 			return "login";
 	}
 	
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/login.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public String login( Model model, @RequestParam String id,@RequestParam String pw, HttpSession session) {
 		String page = "login";
 		
