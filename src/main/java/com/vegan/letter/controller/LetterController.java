@@ -41,37 +41,17 @@ public class LetterController {
 	
 	@RequestMapping(value = "/recieveList.ajax")
 	@ResponseBody
-	public HashMap<String, Object> recieveList(HttpSession session){
+	public HashMap<String, Object> recieveList(HttpSession session
+			, @RequestParam String page,	@RequestParam String cnt){
 		String loginId = (String) session.getAttribute("loginId");
-		boolean login = false;
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		if(session.getAttribute("loginId")!= null) {
-			login = true;
-			ArrayList<LetterDTO> list = service.recieveList(loginId);
-			map.put("list", list);
-		}
-		
-		map.put("login", login);
-		
-		return map;
+		return service.recieveList(loginId ,Integer.parseInt(page), Integer.parseInt(cnt));
 	}
 	@RequestMapping(value = "/sendList.ajax")
 	@ResponseBody
-	public HashMap<String, Object> sendList(HttpSession session){
+	public HashMap<String, Object> sendList(HttpSession session
+			, @RequestParam String page,	@RequestParam String cnt){
 		String loginId = (String) session.getAttribute("loginId");
-		boolean login = false;
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		if(session.getAttribute("loginId")!= null) {
-			login = true;
-			ArrayList<LetterDTO> list = service.sendList(loginId);
-			map.put("list", list);
-		}
-		
-		map.put("login", login);
-		
-		return map;
+		return service.sendList(loginId ,Integer.parseInt(page), Integer.parseInt(cnt));
 	}
 	
 	   @RequestMapping(value="/letterSend.ajax" )
