@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src = "https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
 	div {
 	   margin:0 auto; 
@@ -12,8 +12,9 @@
 	}
 
 	table {
-		width: 100%;
+		width: 60%;
 		border: 1px solid black;
+		margin: 0 auto;
 	}
 	th, td {
 		border: 1px solid black;
@@ -81,12 +82,8 @@
 			</svg>
 		</a>
 	</div>
-	<c:if test="${loginChk eq null}">
-		<button class="logout-button" onclick="location.href='/login.go'">로그인</button>	
-	</c:if>
-	<c:if test="${loginChk ne null}">
-		<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
-	</c:if>	
+	<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
+
 	<div class ="menu">
 		<ul class="ul">
 			<li class="li"><a href="recipe.go">레시피</a></li>
@@ -97,33 +94,48 @@
 			<li class="li"><a href="event.go">이벤트</a></li>
 		</ul>
 	</div>
-	
-	<div class ="divImages">
-		<ul class="ul">
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-		</ul>
-	</div>
-	
-	<div>
-		<ul class="ul">
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-		</ul>
-	</div>
-
-
-    </body>
-
+	<form action="changePW.do" method = "post">
+		<table>
+			<tr>
+				<th colspan="2">새로운 비밀번호를 입력해주세요.</th>
+			</tr>
+			<tr>
+				<th>새비밀번호</th>
+				<td><input type="password" id="userPW" name="newPW"/></td>
+			</tr>
+			<tr>
+				<th>비밀번호 확인</th>
+				<td>
+					<input type="password" id ="confirm"/></br>
+					<span id="pwmsg"></span>
+				</td>
+			</tr>
+			<tr>
+				<th colspan = "2">
+					<input type="submit" value = "입력"/>
+				</th>
+			</tr>
+		</table>
+	</form>
+</body>
 <script>
-
-var msg = "${msg}";
-if(msg != ""){
-	alert(msg);
-}
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
+	}
+	
+	
+	
+	$('#confirm').on('keyup',function(e){	
+		if($('#userPW').val() == $(this).val()){
+			$('#pwmsg').css({'font-size': '10px','color': 'darkgreen'});
+			$('#pwmsg').html('비밀번호가 일치 합니다.');
+			pweq = true;
+		}else{
+			$('#pwmsg').css({'font-size':'10px','color': 'red'});
+			$('#pwmsg').html('비밀번호가 일치 하지 않습니다');
+		}	
+		
+	});
 </script>
 </html>

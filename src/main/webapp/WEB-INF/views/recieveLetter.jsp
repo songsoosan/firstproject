@@ -12,46 +12,6 @@
 	#paging{
 				text-align: center;
 	}
-	div {
-	   margin:0 auto; 
-	   text-align:center;
-	}
-
-	table {
-		width: 100%;
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
-	th, td {
-		border: 1px solid black;
-		padding: 10px;
-	}
-	.ul {
-		list-style-type: none;
-		text-align: center;
-		display:inline-block;
-		width: 100%;
-	}
-	.li {
-		float: left;
-		width: 16%;
-	}
-	.li > a {
-		text-decoration-line: none;
-		font-size: 25px;
-	}
-	.menu{
-	margin-top: 30px;
-	}
-	.divImages{
-	margin-top: 100px;
-	}
-	.img{
-		width: 20%;
-		height: 30%;
-		vertical-align: middle;
-		display:inline-block;
-	}
 	#ne{
 		float: right;
 	}
@@ -225,7 +185,7 @@ function list(page){
 			//console.log(data);
 			if(!data.login){
 				alert('로그인이 필요한 서비스 입니다.');
-				location.href='./login';
+				location.href='login.go';
 			}else{
 				listDraw(data.list);
 				

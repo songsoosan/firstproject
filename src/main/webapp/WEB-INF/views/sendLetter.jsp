@@ -12,49 +12,10 @@
 	#paging{
 				text-align: center;
 	}
-	div {
-	   margin:0 auto; 
-	   text-align:center;
-	}
-
-	table {
-		width: 100%;
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
-	th, td {
-		border: 1px solid black;
-		padding: 10px;
-	}
-	.ul {
-		list-style-type: none;
-		text-align: center;
-		display:inline-block;
-		width: 100%;
-	}
-	.li {
-		float: left;
-		width: 16%;
-	}
-	.li > a {
-		text-decoration-line: none;
-		font-size: 25px;
-	}
-	.menu{
-	margin-top: 30px;
-	}
-	.divImages{
-	margin-top: 100px;
-	}
-	.img{
-		width: 20%;
-		height: 30%;
-		vertical-align: middle;
-		display:inline-block;
-	}
 	#ne{
 		float: right;
 	}
+
 	
 
 table,th,td{
@@ -122,6 +83,8 @@ textarea{
 
 </head>
 <body>
+
+	
 	<div>
 		<a href="main.go">
 			<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
@@ -146,6 +109,20 @@ textarea{
   			<path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
 			</svg>
 		</a>
+	</div>
+
+	<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
+
+
+	<div class ="menu">
+		<ul class="ul">
+			<li class="li"><a href="recipe.go">레시피</a></li>
+			<li class="li"><a href="ranking.go">랭킹</a></li>
+			<li class="li"><a href="classes.go">클래스</a></li>
+			<li class="li"><a href="magazine.go">매거진</a></li>
+			<li class="li"><a href="board.go">게시판</a></li>
+			<li class="li"><a href="event.go">이벤트</a></li>
+		</ul>
 	</div>
 <h3>보낸 쪽지</h3>
 				<button type="button" class="btn btn-primary", onclick = "location.href='recieveletter.go'">받은 쪽지함</button>

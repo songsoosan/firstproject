@@ -111,10 +111,10 @@ textarea{
 				<th>ID</th>
 				<td><input type="text" name="id" value="${detail.user_id}" readonly/></td>
 			</tr>
-			<tr>
+<%-- 			<tr>
 				<th>PW</th>
 				<td><input type="text" name="pw"  value="${detail.user_pw}"/></td>
-			</tr>
+			</tr> --%>
 			<tr>
 				<th>NAME</th>
 				<td><input type="text" name="name" value="${detail.user_name}"/></td>
@@ -137,6 +137,9 @@ textarea{
 			<tr>
 				<th>phone</th>
 				<td><input type="text" name="phone" value="${detail.user_phone}"/></td>
+			</tr>
+			<tr>
+				<th colspan="2"><input type="button" value="비밀번호변경" onclick="location.href='passwardChk.go'"/></th>
 			</tr>
 			<tr>
 				<th colspan="2">

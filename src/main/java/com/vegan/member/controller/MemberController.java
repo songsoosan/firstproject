@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,13 +24,22 @@ public class MemberController {
 	 
 	 @Autowired MemberService service;
 	 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String login(Model model) {
-			return "login";
-	}
-	@RequestMapping(value = "/main.go", method = RequestMethod.GET)
-	public String main(Model model) {
+		/*
+		 * @RequestMapping(value = "/", method = RequestMethod.GET) public String
+		 * login(Model model) { return "main"; }
+		 */
+	@RequestMapping(value = {"/","/main.go"}, method = RequestMethod.GET)
+	public String main(Model model, HttpSession session) {
+		String loginId = (String) session.getAttribute("loginId");
+		
+		model.addAttribute("loginChk",loginId);
+		
+		
 			return "main";
+	}
+	@RequestMapping(value = "/login.go", method = RequestMethod.GET)
+	public String loginGo(Model model) {
+			return "login";
 	}
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
@@ -41,7 +51,7 @@ public class MemberController {
 		logger.info("loginId:"+loginId);
 		
 		if (loginId != null) {
-			page = "main";
+			page = "redirect:/main.go";
 			session.setAttribute("loginId", loginId);
 		}else {
 			model.addAttribute("msg","아이디 또는 비밀번호를 확인 하세요");	
@@ -57,7 +67,7 @@ public class MemberController {
 		session.removeAttribute("loginId");
 		if ((String) session.getAttribute("loginId") == null) {
 			
-			page = "login";
+			page = "main";
 			model.addAttribute("msg","로그아웃 되었습니다.");
 		}else {
 			page = "main";

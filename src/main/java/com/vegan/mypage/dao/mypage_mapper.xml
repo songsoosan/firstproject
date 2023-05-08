@@ -16,9 +16,13 @@
 	</select>
 	
 	<update id="update" parameterType="hashmap">
-		UPDATE user SET user_pw = #{pw}
-		,user_name = #{name},user_email=#{email},user_phone=#{phone}
+		UPDATE user SET user_name = #{name},user_email=#{email},user_phone=#{phone}
 			WHERE user_id = #{id}
+	</update>
+	
+	<update id="changePW" parameterType="String">
+		UPDATE user SET user_pw = #{param2}
+			WHERE user_id = #{param1}
 	</update>
 	
 	
