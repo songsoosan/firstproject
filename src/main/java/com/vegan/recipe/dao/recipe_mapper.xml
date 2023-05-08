@@ -3,4 +3,20 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
 <mapper namespace="com.vegan.recipe.dao.RecipeDAO">
+
+	<insert 
+		useGeneratedKeys="true"
+		keyColumn="idx"
+		keyProperty="idx"
+		id="write" parameterType="com.vegan.recipe.dto.RecipeDTO">
+		INSERT INTO recipe(user_id, step_id, rec_title, rec_video, rec_view, rec_creatdate, rec_modify, rec_del_chk, rec_blind_chk, cat_id)
+			VALUES(#{user_id}, #{step_id}, #{rec_title}, #{rec_video}, #{rec_view}, now(), #{rec_modify}, #{rec_del_chk}, #{rec_blind_chk}, #{cat_id})
+	</insert>
+	
+	<insert id="fileWrite">
+		INSERT INTO photo(cat_id, ori_photo_name, photo_name, identify_number)
+			VALUES(#{cat_id},#{ori_photo_name},#{photo_name}, #{idx})
+	</insert>
 </mapper>
+
+                 

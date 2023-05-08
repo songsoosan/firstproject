@@ -46,4 +46,10 @@ public class AdminDTO {
 		this.user_secc_chk = user_secc_chk;
 	}
 
+	
+	
+	
+	
+	
+	
 }

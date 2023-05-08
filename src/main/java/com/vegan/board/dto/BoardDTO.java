@@ -1,5 +1,5 @@
 package com.vegan.board.dto;
 
-public interface BoardDTO {
+public class BoardDTO {
 
 }

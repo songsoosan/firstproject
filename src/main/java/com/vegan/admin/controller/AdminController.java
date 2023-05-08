@@ -22,6 +22,7 @@ public class AdminController {
 	
 	@Autowired AdminService service;
 
+
 	@RequestMapping(value="/admin.go", method = RequestMethod.GET)
 	public String AdminPage(Model model) {
 
@@ -55,4 +56,5 @@ public class AdminController {
 
 		return "adminLetterList";
 	}
+
 }

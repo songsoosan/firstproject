@@ -22,6 +22,7 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="contentType" value="text/html; charset=UTF-8"/>
 	</beans:bean>
 	
 	<context:component-scan base-package="com.vegan" />
@@ -29,7 +30,7 @@
 	<!-- datasource -->
 	<beans:bean name="datasource" class="org.apache.commons.dbcp.BasicDataSource">
 		<beans:property name="driverClassName" value= "org.mariadb.jdbc.Driver"/>
-		<beans:property name="url" value= "jdbc:mariadb://localhost:3306/vegan"/>
+		<beans:property name="url" value= "jdbc:mariadb://localhost:3306/vegan?useUnicode=true;characterEncoding=utf8;"/>
 		<beans:property name="username" value= "web_user"/>
 		<beans:property name="password" value= "pass"/>
 	</beans:bean>
@@ -42,25 +43,17 @@
 		<!-- 쿼리문이 있을 장소 -->
 		<beans:property name="mapperLocations" >
 			<beans:list>
-				<beans:value>classpath:com/vegan/admin/dao/*.xml</beans:value>
-				<beans:value>classpath:com/vegan/board/dao/*.xml</beans:value>
-				<beans:value>classpath:com/vegan/checkList/dao/*.xml</beans:value>
-				<beans:value>classpath:com/vegan/classes/dao/*.xml</beans:value>
-				<beans:value>classpath:com/vegan/event/dao/*.xml</beans:value>
-				<beans:value>classpath:com/vegan/letter/dao/*.xml</beans:value>
-				<beans:value>classpath:com/vegan/main/dao/*.xml</beans:value>
-				<beans:value>classpath:com/vegan/member/dao/*.xml</beans:value>
-				<beans:value>classpath:com/vegan/mypage/dao/*.xml</beans:value>
-				<beans:value>classpath:com/vegan/ranking/dao/*.xml</beans:value>
-				<beans:value>classpath:com/vegan/recipe/dao/*.xml</beans:value>
-				<beans:value>classpath:com/vegan/report/dao/*.xml</beans:value>
-				<beans:value>classpath:com/vegan/utils/dao/*.xml</beans:value>
-				<beans:value>classpath:com/vegan/magazine/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/**/dao/*.xml</beans:value>
 				
 			</beans:list>
 		</beans:property>
 	</beans:bean>
 	
+
+	
+	<beans:bean id="uploadTempDir" class="org.springframework.core.io.FileSystemResource">
+	        <beans:constructor-arg value="c:/temp/"/>
+	</beans:bean>
 	
 	<!-- matbatis area -->
 	<mybatis-spring:scan base-package="com.vegan.**.dao"/>
