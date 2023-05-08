@@ -38,10 +38,7 @@ public class MainController {
 	public String ranking(Model model) {
 			return "ranking";
 	}
-	@RequestMapping(value = "/classes.go", method = RequestMethod.GET)
-	public String classes(Model model) {
-			return "classes";
-	}
+
 	@RequestMapping(value = "/magazine.go", method = RequestMethod.GET)
 	public String magazine(Model model) {
 			return "magazine";
