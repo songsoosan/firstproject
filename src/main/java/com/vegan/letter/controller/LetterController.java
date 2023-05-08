@@ -41,8 +41,7 @@ public class LetterController {
 	
 	@RequestMapping(value = "/recieveList.ajax")
 	@ResponseBody
-	public HashMap<String, Object> recieveList(HttpSession session
-			, @RequestParam String page,	@RequestParam String cnt){
+	public HashMap<String, Object> recieveList(HttpSession session, @RequestParam String page,	@RequestParam String cnt){
 		String loginId = (String) session.getAttribute("loginId");
 		return service.recieveList(loginId ,Integer.parseInt(page), Integer.parseInt(cnt));
 	}
@@ -94,10 +93,11 @@ public class LetterController {
 		@ResponseBody
 		public HashMap<String, Object> detail(HttpSession session){
 			String detailId = String.valueOf(session.getAttribute("detailId"));
-			
+			String loginId = (String) session.getAttribute("loginId");
 			logger.info("상세보기 할 아이디 : "+detailId);
+			logger.info("로그인된 아이디 : "+loginId);
 			
-			HashMap<String, Object> map = service.detail(detailId);
+			HashMap<String, Object> map = service.detail(detailId,loginId);
 			logger.info("result : "+map);
 			if(map != null && map.size()>0) {
 				session.removeAttribute("detailId");

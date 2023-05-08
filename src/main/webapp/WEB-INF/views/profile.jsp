@@ -26,9 +26,17 @@ textarea{
 	}
 
 	table {
+		width: 60%;
+		border: 1px solid black;
+		margin: 0 auto;
+	}
+	th, td {
+		border: 1px solid black;
+		padding: 10px;
 		width: 100%;
 		border: 1px solid black;
 		border-collapse: collapse;
+
 	}
 	.ul {
 		list-style-type: none;
@@ -46,6 +54,7 @@ textarea{
 	}
 	.menu{
 	margin-top: 30px;
+	border-bottom: 1px solid #ccc;
 	}
 	.divImages{
 	margin-top: 100px;
@@ -56,11 +65,20 @@ textarea{
 		vertical-align: middle;
 		display:inline-block;
 	}
+	.logout-button {
+ 		float: right;
+	}
+	
 </style>
+
 </head>
 <body>
+
+	
 	<div>
-		<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
+		<a href="main.go">
+			<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
+		</a>
 		<input type ="text" placeholder="검색"/>
 		<a href="profile.do">
 			<img src="resources/img/user.png" alt="유저" width="70px" height="70px"/>
@@ -72,7 +90,7 @@ textarea{
 			<img src="resources/img/letter.png" alt="쪽지" width="70px" height="70px"/>
 		</a>
 	</div>
-
+	<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
 	<div class ="menu">
 		<ul class="ul">
 			<li class="li"><a href="recipe.go">레시피</a></li>
@@ -127,7 +145,7 @@ textarea{
 		</tr>
 		<tr>
 			<th colspan = "2">
-				<input type="button" value="상세보기" onclick="location.href='passwardChk.go'"/>
+				<input type="button" value="개인정보" onclick="location.href='profileDetail.do'"/>
 			</th>
 		</tr>
 	</table>

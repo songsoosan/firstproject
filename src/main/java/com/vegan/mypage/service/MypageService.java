@@ -71,6 +71,10 @@ public class MypageService {
 		
 		return dao.profilePhoto(oriFileName,newFileName,loginId); 
 	}
+	public int changePW(String loginId, String newPW) {
+		
+		return dao.changePW(loginId,newPW);
+	}
 	
 
 	

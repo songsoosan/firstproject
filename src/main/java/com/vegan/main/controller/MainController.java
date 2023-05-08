@@ -1,5 +1,7 @@
 package com.vegan.main.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vegan.member.service.MemberService;
 
@@ -19,11 +22,16 @@ public class MainController {
 	 
 	 @Autowired MemberService service;
 	 
-	
+//	@RequestMapping(value = "/login.do", method= RequestMethod.POST)
+//	public String main(Model model, HttpSession session) {
+//		String page = "login";
+//		
+//			return "main";
+//	}
 	
 	@RequestMapping(value = "/recipe.go", method = RequestMethod.GET)
 	public String recipe(Model model) {
-			return "recipeList";
+			return "recipe";
 	}
 	
 	@RequestMapping(value = "/ranking.go", method = RequestMethod.GET)
@@ -38,17 +46,14 @@ public class MainController {
 	public String magazine(Model model) {
 			return "magazine";
 	}
-	@RequestMapping(value = "/board.go", method = RequestMethod.GET)
-	public String board(Model model) {
-			return "board";
-	}
+
 	@RequestMapping(value = "/event.go", method = RequestMethod.GET)
 	public String event(Model model) {
 		return "event";
 	}
 	@RequestMapping(value = "/write.go", method = RequestMethod.GET)
 	public String write(Model model) {
-		return "recipeWrite";
+		return "write";
 	}
 
 	

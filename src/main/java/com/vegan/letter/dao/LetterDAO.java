@@ -19,7 +19,7 @@ public interface LetterDAO {
 
 	int delete(String id);
 
-	void read(String detailId);
+	void read(String detailId, String loginId);
 
 	int totalCount();
 }

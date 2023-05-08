@@ -3,4 +3,51 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
 <mapper namespace="com.vegan.board.dao.BoardDAO">
+
+   <select id = "list" resultType="com.vegan.board.dto.BoardDTO">
+      SELECT 
+         *
+      FROM board 
+      <where>
+         <if test='searchText != ""'>
+            AND (board_title like CONCAT('%',#{searchText},'%') or user_id like CONCAT('%',#{searchText},'%'))
+         </if>
+      </where>
+      ORDER BY board_id DESC LIMIT #{cnt} OFFSET #{offset} 
+   </select>
+   
+   <select id="totalCount" resultType="int">
+      SELECT COUNT(board_id) FROM board 
+      <where>
+         <if test='searchText != ""'>
+            AND (board_title like CONCAT('%',#{searchText},'%') or user_id like CONCAT('%',#{searchText},'%'))
+         </if>
+      </where>
+   </select>
+   
+   
+   <insert id="write" parameterType="com.vegan.board.dto.BoardDTO"
+      useGeneratedKeys="true"  
+      keyColumn="idx" 
+      keyProperty="board_id"> <!-- 서비스에 idx= 하고 넣어준다 / 리턴해줄 idx -->
+         INSERT INTO board(board_title, user_id, board_content, cat_id)
+            VALUES(#{board_title},#{user_id},#{board_content}, #{cat_id})
+   </insert>
+   
+   <insert id ="fileWrite" >
+      INSERT INTO photo(ori_photo_name, photo_name, identify_number, cat_id)
+         VALUES(#{ori_photo_name},#{photo_name},#{board_id}, #{cat_id})
+   </insert>
+
+   <update id="upHit">
+      UPDATE board SET board_views = board_views+1
+         WHERE board_id = #{param1}
+   </update>
+   
+   <select id="detail" resultType="com.vegan.board.dto.BoardDTO">
+      SELECT b.board_id, b.board_title, b.user_id, b.board_views, b.board_date, b.board_content, 
+      b.cat_id, p.photo_id, p.photo_name
+      FROM board b left JOIN photo p ON b.board_id = p.identify_number
+      WHERE b.board_id = #{param1}
+   </select>
 </mapper>

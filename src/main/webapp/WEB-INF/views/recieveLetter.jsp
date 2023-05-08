@@ -12,15 +12,35 @@
 	#paging{
 				text-align: center;
 	}
+	#ne{
+		float: right;
+	}
+
+	
+
+table,th,td{
+	border : 1px solid black;
+	border-collapse : collapse;
+	padding : 5px 10px;
+
+}
+textarea{
+		width : 100%;
+		height:150px;
+		resize:none;
+	}
+#login{
+	margin-bottom:20px;
+}
 	div {
 	   margin:0 auto; 
 	   text-align:center;
 	}
 
 	table {
-		width: 100%;
+		width: 60%;
 		border: 1px solid black;
-		border-collapse: collapse;
+		margin: 0 auto;
 	}
 	th, td {
 		border: 1px solid black;
@@ -42,6 +62,7 @@
 	}
 	.menu{
 	margin-top: 30px;
+	border-bottom: 1px solid #ccc;
 	}
 	.divImages{
 	margin-top: 100px;
@@ -52,17 +73,22 @@
 		vertical-align: middle;
 		display:inline-block;
 	}
-	#ne{
-		float: right;
+	.logout-button {
+ 		float: right;
 	}
-
+	
 	
 
 </style>
+
 </head>
 <body>
+
+	
 	<div>
-		<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
+		<a href="main.go">
+			<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
+		</a>
 		<input type ="text" placeholder="검색"/>
 		<a href="profile.do">
 			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -85,6 +111,9 @@
 		</a>
 	</div>
 
+	<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
+
+
 	<div class ="menu">
 		<ul class="ul">
 			<li class="li"><a href="recipe.go">레시피</a></li>
@@ -95,8 +124,8 @@
 			<li class="li"><a href="event.go">이벤트</a></li>
 		</ul>
 	</div>
-	
-<h3>쪽지</h3>
+
+<h3>받은 쪽지</h3>
 				<button type="button" class="btn btn-primary", onclick = "location.href='recieveletter.go'">받은 쪽지함</button>
 				<button type="button" class="btn btn-primary", onclick = "location.href='sendletter.go'">보낸 쪽지함</button>
 						쪽지 갯수 : 
@@ -107,6 +136,7 @@
 					<option value="20">20</option>
 				</select>
 				<button type="button" class="btn btn-info" onclick = "location.href='letterWrite.go'" id = "ne">새 쪽지</button>
+
 	<table>
 		<thead>
 			<tr>
@@ -155,7 +185,7 @@ function list(page){
 			//console.log(data);
 			if(!data.login){
 				alert('로그인이 필요한 서비스 입니다.');
-				location.href='./login';
+				location.href='login.go';
 			}else{
 				listDraw(data.list);
 				

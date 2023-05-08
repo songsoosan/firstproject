@@ -40,6 +40,6 @@
 	
 	<update id="read">
 		UPDATE letter SET letter_chk = true
-			WHERE letter_id = #{param1}
+			WHERE letter_id = #{param1} AND recive_user_id = #{param2}
 	</update> 
 </mapper>
