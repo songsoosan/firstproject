@@ -26,11 +26,6 @@ public class ClassesController {
 	
 	@Autowired ClassesService service;
 	
-	@RequestMapping(value="/", method = RequestMethod.GET)
-	public String test(Model model) {
-		logger.info("test");
-		return "classTestMain";
-	}
 	
 	@RequestMapping(value="/class.go", method = RequestMethod.GET)
 	public String ClassList(Model model) {
