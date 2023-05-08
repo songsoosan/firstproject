@@ -4,7 +4,7 @@
 >
 <mapper namespace="com.vegan.classes.dao.ClassesDAO">
 
-	<select id="list" resultType="com.vegan.classes.dto.ClassesDTO">
+<!-- 	<select id="list" resultType="com.vegan.classes.dto.ClassesDTO">
 		SELECT 
 			cl_id,user_id,cl_subject,cl_period,cl_deadline,cl_teacher,cl_date,cl_ing_chk,cl_status,cl_adress,cl_content
 		FROM class ORDER BY cl_id DESC
@@ -66,7 +66,7 @@
 			cl_part_id,cl_id,user_id,user_name,user_phone,user_adress
 			from class_join where cl_id = #{cl_id} ORDER BY cl_id DESC
 	</select>
-	
+	 -->
 
 	
 
