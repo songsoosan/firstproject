@@ -83,6 +83,18 @@
 			</svg>
 		</a>
 	</div>
+	
+	<div class ="menu">
+		<ul class="ul">
+			<li class="li"><a href="recipe.go">레시피</a></li>
+			<li class="li"><a href="ranking.go">랭킹</a></li>
+			<li class="li"><a href="classes.go">클래스</a></li>
+			<li class="li"><a href="magazine.go">매거진</a></li>
+			<li class="li"><a href="board.go">게시판</a></li>
+			<li class="li"><a href="event.go">이벤트</a></li>
+		</ul>
+	</div>
+	
 <h3>쪽지</h3>
 				<button type="button" class="btn btn-primary", onclick = "location.href='recieveletter.go'">받은 쪽지함</button>
 				<button type="button" class="btn btn-primary", onclick = "location.href='sendletter.go'">보낸 쪽지함</button>
