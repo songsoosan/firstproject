@@ -115,11 +115,6 @@ public class LetterController {
 	
 			return "sendLetter";
 		}
-		@RequestMapping(value="/reportWrite.go")
-		public String reportWrite() {
-	
-			return "reportWrite";
-		}
 		
 		
 }
