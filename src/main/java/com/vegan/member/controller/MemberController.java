@@ -23,6 +23,7 @@ public class MemberController {
 	 
 	 @Autowired MemberService service;
 	 
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String main(Model model) {
 			return "login";
