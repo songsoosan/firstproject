@@ -53,32 +53,32 @@ public class ClassesService {
 		return dao.appWrite(cl_id);
 	}
 
-	public ClassesDTO appWrite2() {
+	public ClassesDTO user(String loginId) {
 		
-		return dao.appWrite2();
+		return dao.user(loginId);
 	}
 
-	public String appWrite3(HashMap<String, String> params) {
-		ClassesDTO dto = new ClassesDTO();
+	public int classApp(ClassesDTO dto) {
 		
-		Random random = new Random();
-        int number = random.nextInt(100000000); // 8자리의 숫자 생성
-        int cl_part_id = Math.abs(number); // 생성된 숫자 출력
-        logger.info(Long.toString(cl_part_id));
-
 		
-		dto.setCl_part_id(cl_part_id);
-		dto.setCl_id(Integer.parseInt(params.get("cl_id")));
-		dto.setUser_id(params.get("user_id"));
-		dto.setUser_adress(params.get("user_adress"));
-		dto.setUser_name(params.get("user_name"));
-		dto.setUser_phone(params.get("user_phone"));
+		/*
+		 * Random random = new Random(); int number = random.nextInt(100000000); // 8자리의
+		 * 숫자 생성 String cl_part_id = String.valueOf(Math.abs(number)); // 생성된 숫자 출력
+		 * logger.info("참여호"+cl_part_id);
+		 * 
+		 * 
+		 * dto.setCl_part_id(cl_part_id);
+		 * dto.setCl_id(Integer.parseInt(params.get("cl_id")));
+		 * dto.setUser_id(params.get("user_id"));
+		 * dto.setUser_adress(params.get("user_adress"));
+		 * dto.setUser_name(params.get("user_name"));
+		 * dto.setUser_phone(params.get("user_phone"));
+		 * 
+		 * int row = dao.appWrite5(dto); logger.info("update row : "+row); String page =
+		 * "redirect:/class.go";
+		 */
 		
-		int row = dao.appWrite5(dto);		
-		logger.info("update row : "+row);
-		String page = "redirect:/class.go";
-		
-		return page;
+		return dao.classApp(dto);
 	}
 
 	public ArrayList<ClassesDTO> appList(String cl_id) {
@@ -96,6 +96,11 @@ public class ClassesService {
 		logger.info("update => "+page);
 		
 		return page;
+	}
+
+	public byte adminChk(String loginId) {
+		
+		return dao.adminChk(loginId);
 	}
 
 }

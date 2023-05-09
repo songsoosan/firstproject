@@ -9,8 +9,10 @@
 <style></style>
 </head>
 <body>
-${msg}
-<input type="button" onclick="location.href='./class.write'" value="클래스 등록"/>
+<%-- ${msg} --%>
+	<c:if test="${adminChk ne null}">
+		<input type="button" onclick="location.href='./classwrite.do'" value="클래스 등록"/>
+	</c:if>
 	<table>
 		<thead>
 			<tr>
@@ -52,6 +54,9 @@ ${msg}
 	</table>
 </body>
 <script>
-
+var msg = "${msg}";
+if(msg != ""){
+	alert(msg);
+}
 </script>
 </html>

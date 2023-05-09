@@ -9,6 +9,12 @@
 			cl_id,user_id,cl_subject,cl_period,cl_deadline,cl_teacher,cl_date,cl_ing_chk,cl_status,cl_adress,cl_content
 		FROM class ORDER BY cl_id DESC
 	</select>
+	
+	<select id="adminChk"  resultType="java.lang.Byte">
+		SELECT 
+			user_admin_chk
+		FROM user Where user_id = #{param1}
+	</select>
 
 	<insert id="write" parameterType="com.vegan.classes.dto.ClassesDTO">
 		insert into class(user_id,cl_subject,cl_period,cl_deadline,cl_teacher,cl_date,cl_ing_chk,cl_adress,cl_content,cl_status,cl_del_chk)
@@ -42,11 +48,11 @@
 				from class where cl_id = #{cl_id}
 	</select>
 	
-	<select id="appWrite2" 
+	<select id="user" 
 		resultType="com.vegan.classes.dto.ClassesDTO">
 		select 
 			user_id,user_name,user_phone,user_email
-			from user where user_id = 'example'
+			from user where user_id = #{parama1}
 	</select>
 	
 	<select id="appWrite4" 
@@ -56,7 +62,7 @@
 			from class where cl_subject = #{cl_subject}
 	</select>
 	
-	<insert id="appWrite5" parameterType="com.vegan.classes.dto.ClassesDTO">
+	<insert id="classApp" parameterType="com.vegan.classes.dto.ClassesDTO">
 		insert into class_join(cl_part_id,cl_id,user_id,user_adress,user_name,user_phone)
 			VALUES(#{cl_part_id},#{cl_id},#{user_id},#{user_adress},#{user_name},#{user_phone})
 	</insert>
