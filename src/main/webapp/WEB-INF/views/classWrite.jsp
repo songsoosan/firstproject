@@ -45,11 +45,13 @@ ${msg}
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td><input type="text" id="postcode" name="postcode" placeholder="우편번호">
-				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="address" name="address" placeholder="주소"><br>
-				<input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소">
-				<input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목"></td>
+					<td>
+						<input type="text" id="postcode" placeholder="우편번호">
+						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+						<input type="text" id="address" placeholder="주소"><br>
+						<input type="text" id="detailAddress" placeholder="상세주소"><br>
+						<input type="text" id="extraAddress" placeholder="참고항목">
+					</td>
 			</tr>
 			<tr>
 				<th>내용</th>

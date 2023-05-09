@@ -25,7 +25,6 @@
 
 
 
-<<<<<<< HEAD
 }
 table,th,td{
 	border : 1px solid black;
@@ -87,9 +86,6 @@ textarea{
 	}
 	
 	
-
-=======
->>>>>>> origin/master
 </style>
 
 </head>
