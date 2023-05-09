@@ -6,19 +6,19 @@
 
 	<select id="list" resultType="com.vegan.classes.dto.ClassesDTO">
 		SELECT 
-			cl_id,user_id,cl_subject,cl_period,cl_deadline,cl_teacher,cl_date,cl_ing_chk,cl_status,cl_adress,cl_content
+			cl_id,user_id,cl_subject,cl_period,cl_deadlinePeriod,cl_deadline,cl_teacher,cl_date,cl_ing_chk,cl_status,cl_content
 		FROM class ORDER BY cl_id DESC
 	</select>
 
 	<insert id="write" parameterType="com.vegan.classes.dto.ClassesDTO">
-		insert into class(user_id,cl_subject,cl_period,cl_deadline,cl_teacher,cl_date,cl_ing_chk,cl_adress,cl_content,cl_status,cl_del_chk)
-			VALUES(#{user_id},#{cl_subject},#{cl_period},#{cl_deadline},#{cl_teacher},#{cl_date},#{cl_ing_chk},#{cl_adress},#{cl_content},0,0)
+		insert into class(user_id,cl_subject,cl_period,cl_deadlinePeriod,cl_deadline,cl_teacher,cl_date,cl_ing_chk,postcode,address,detailAddress,extraAddress,cl_content,cl_status,cl_del_chk)
+			VALUES(#{user_id},#{cl_subject},#{cl_period},#{cl_deadlinePeriod},#{cl_deadline},#{cl_teacher},#{cl_date},#{cl_ing_chk},#{postcode},#{address},#{detailAddress},#{extraAddress},#{cl_content},0,0)
 	</insert>
 	
 	<select id="detail" 
 		resultType="com.vegan.classes.dto.ClassesDTO">
 		select 
-			user_id,cl_id,cl_subject,cl_period,cl_deadline,cl_teacher,cl_date,cl_ing_chk,cl_status,cl_adress,cl_content
+			user_id,cl_id,cl_subject,cl_period,cl_deadlinePeriod,cl_deadline,cl_teacher,cl_date,cl_ing_chk,cl_status,postcode,address,detailAddress,extraAddress,cl_content
 				from class where cl_id = #{cl_id}
 	</select>
 	
@@ -26,11 +26,15 @@
 		UPDATE class SET user_id = #{user_id}
 			,cl_subject = #{cl_subject}
 			,cl_period = #{cl_period}
+			,cl_deadlinePeriod = #{cl_deadlinePeriod}
 			,cl_deadline = #{cl_deadline}
 			,cl_teacher = #{cl_teacher}
 			,cl_date = #{cl_date}
 			,cl_ing_chk = #{cl_ing_chk}
-			,cl_adress = #{cl_adress}
+			,postcode = #{postcode}
+			,address = #{address}
+			,detailAddress = #{detailAddress}
+			,extraAddress = #{extraAddress}
 			,cl_content = #{cl_content}
 		WHERE cl_id = #{cl_id}
 	</update>

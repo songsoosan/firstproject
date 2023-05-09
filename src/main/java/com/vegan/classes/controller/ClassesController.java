@@ -59,6 +59,7 @@ public class ClassesController {
 	@RequestMapping(value="/class.write.do", method = RequestMethod.POST)
 	public String ClassWrite(Model model, @RequestParam HashMap<String, String> params) {
 		String msg = "클래스 등록 테스트";
+		logger.info("a"+params);
 		model.addAttribute("msg", msg);
 		
 		return service.write(params);

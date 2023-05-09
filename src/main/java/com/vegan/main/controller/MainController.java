@@ -48,9 +48,9 @@ public class MainController {
 	public String event(Model model) {
 		return "event";
 	}
-	@RequestMapping(value = "/write.go", method = RequestMethod.GET)
+	@RequestMapping(value = "/recipeWrite.go", method = RequestMethod.GET)
 	public String write(Model model) {
-		return "write";
+		return "recipeWrite";
 	}
 
 	
