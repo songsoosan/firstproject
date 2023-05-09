@@ -9,12 +9,7 @@
 <style></style>
 </head>
 <body>
-<<<<<<< HEAD
-<%-- ${msg} --%>
-	<c:if test="${adminChk ne null}">
-		<input type="button" onclick="location.href='./classwrite.do'" value="클래스 등록"/>
-	</c:if>
-=======
+
 	<div>
 		<a href="main.go">
 			<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
@@ -51,9 +46,9 @@
 			<li class="li"><a href="admin.go">관리자(test)</a></li>
 		</ul>
 	</div>
-${msg}
-<input type="button" onclick="location.href='./class.write'" value="클래스 등록"/>
->>>>>>> origin/master
+	<c:if test="${adminChk ne null}">
+		<input type="button" onclick="location.href='classWrite.go'" value="클래스 등록"/>
+	</c:if>
 	<table>
 		<thead>
 			<tr>

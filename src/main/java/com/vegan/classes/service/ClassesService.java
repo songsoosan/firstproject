@@ -37,7 +37,7 @@ public class ClassesService {
 	
 		int row = dao.write(dto);		
 		logger.info("update row : "+row);
-		String page = "redirect:/class.go";
+		String page = "redirect:/classList.go";
 		
 		return page;
 	}

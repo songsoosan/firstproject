@@ -28,7 +28,7 @@ ${msg}
 			</tr>
 			<tr>
 				<th>마감 인원</th>
-				<td>${dto.cl_deadline}<input type="button" onclick="location.href='class.appList.do?cl_id=${dto.cl_id}'" value="신청 리스트"/></td>
+				<td>${dto.cl_deadline}<c:if test="${adminChk ne null}"><input type="button" onclick="location.href='class.appList.do?cl_id=${dto.cl_id}'" value="신청 리스트"/></c:if></td>	
 			</tr>
 			<tr>
 				<th>강사 소개</th>

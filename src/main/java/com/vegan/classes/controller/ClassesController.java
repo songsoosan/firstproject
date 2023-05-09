@@ -56,7 +56,7 @@ public class ClassesController {
 		return "classList";
 	}
 	
-	@RequestMapping(value="/classWrite.do", method = RequestMethod.GET)
+	@RequestMapping(value="/classWrite.go")
 	public String ClassWriteForm(Model model) {
 		String msg = "클래스 등록 테스트";
 		model.addAttribute("msg", msg);
@@ -65,7 +65,7 @@ public class ClassesController {
 		return "classWrite";
 	}
 	
-	@RequestMapping(value="/class.write.do", method = RequestMethod.POST)
+	@RequestMapping(value="/classWrite.do", method = RequestMethod.POST)
 	public String ClassWrite(Model model, @RequestParam HashMap<String, String> params,HttpSession session) {
 		String msg = "클래스 등록 테스트";
 		logger.info("a"+params);
