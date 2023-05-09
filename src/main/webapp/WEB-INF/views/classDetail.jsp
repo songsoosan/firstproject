@@ -10,6 +10,9 @@
 </head>
 <body>
 ${msg}
+			<c:if test="${adminChk ne null}">
+				<input type="button" onclick="location.href='./class.update.go?cl_id=${dto.cl_id}'" value="수정"/>
+			</c:if>
 	<table>
 			<tr>
 				<th>아이디</th>
@@ -25,7 +28,7 @@ ${msg}
 			</tr>
 			<tr>
 				<th>마감 인원</th>
-				<td>${dto.cl_deadline}<input type="button" onclick="location.href='class.appList.do?cl_id=${dto.cl_id}'" value="신청 리스트"/></td>
+				<td>${dto.cl_deadline}<c:if test="${adminChk ne null}"><input type="button" onclick="location.href='class.appList.do?cl_id=${dto.cl_id}'" value="신청 리스트"/></c:if></td>	
 			</tr>
 			<tr>
 				<th>강사 소개</th>
@@ -55,14 +58,12 @@ ${msg}
 				<td>${dto.cl_content}</td>
 			</tr>
 			<tr>
-				<th>수정하기</th>
-				<td><input type="button" onclick="location.href='./class.update.go?cl_id=${dto.cl_id}'" value="수정"/></td>
-			</tr>
-			<tr>
 				<th>클래스 신청하기</th>
 				<td><input type="button" onclick="location.href='./class.appWrite.go?cl_id=${dto.cl_id}'" value="신청"/></td>
 			</tr>
 			</table>
+			
+			
 
 </body>
 <script>

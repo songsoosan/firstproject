@@ -104,14 +104,18 @@ textarea{
 	<table>
 		<tr>
 			<td rowspan="4">
-				<c:if test="${dto.newFileName eq null}">
+				<c:if test="${user.photo_name eq null}">
 					<form action="profilePhoto.do" method="post" enctype="multipart/form-data">
 						<input type="file" name="photo"/>
 						<button>등록</button>
 					</form>	
 				</c:if>
-				<c:if test="${dto.newFileName ne null }">
-					<img src="/photo/${dto.newFileName}"/>
+				<c:if test="${user.photo_name ne null }">
+					<img width="300" src="/photo/${user.photo_name}"/>			
+					<form action="profilePhoto.do" method="post" enctype="multipart/form-data">
+						<input type="file" name="photo"/>
+						<button>등록</button>
+					</form>
 				</c:if>					
 			</td>
 			<td>${user.user_id }</td>

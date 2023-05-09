@@ -10,7 +10,7 @@
 </head>
 <body>
 ${msg}
-	<form action="class.write.do" method="post">
+	<form action="classWrite.do" method="post">
 		<table>
 			<tr>
 				<th>아이디</th>
@@ -59,7 +59,7 @@ ${msg}
 			</tr>
 			<tr>
 				<th colspan="2">
-					<input type="button" onclick="location.href='./class.go'" value="리스트"/>
+					<input type="button" onclick="location.href='./classList.go'" value="리스트"/>
 					<button>저장</button>
 				</th>
 			</tr>

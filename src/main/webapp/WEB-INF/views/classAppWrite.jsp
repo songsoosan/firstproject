@@ -6,7 +6,17 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <link rel="stylesheet" href="resources/css/commons.css" type="text/css">
-<style></style>
+<style>
+	table {
+		width: 60%;
+		border: 1px solid black;
+		margin: 0 auto;
+	}
+	th, td {
+		border: 1px solid black;
+		padding: 10px;
+	}
+</style>
 </head>
 <body>
 <form action="class.appWrite.do" method="post">
@@ -18,23 +28,27 @@
 		<td colspan="2"><input type="hidden" name="cl_id" value="${cl_id}" readonly/></td>
 	</tr>
 	<tr>
-		<td colspan="2"><input type="hidden" name="user_id" value="${dto.user_id}" readonly/></td>
+		<td colspan="2"><input type="hidden" name="user_id" value="${user.user_id}" readonly/></td>
 	</tr>
 	<tr>
 		<th>클래스명</th>
-		<td><input type="text" name="cl_subject" value="${cl_subject}" readonly/></td>
+		<td>${cl_subject}</td>
+	</tr>
+	<tr>
+		<th>아이디</th>
+		<td>${user.user_id}님</td>
 	</tr>
 	<tr>
 		<th>이름</th>
-		<td><input type="text" name="user_name" value="${dto.user_name}" readonly/></td>
+		<td><input type="text" name="user_name" value="${user.user_name}" /></td>
 	</tr>
 	<tr>
 		<th>이메일</th>
-		<td><input type="text" name="user_email" value="${dto.user_email}" readonly/></td>
+		<td><input type="text" name="user_email" value="${user.user_email}" /></td>
 	</tr>
 	<tr>
 		<th>휴대폰</th>
-		<td><input type="text" name="user_phone" value="${dto.user_phone}" readonly/></td>
+		<td><input type="text" name="user_phone" value="${user.user_phone}" /></td>
 	</tr>
 	<tr>
 		<th>주소</th>

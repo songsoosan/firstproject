@@ -91,7 +91,7 @@
 		<ul class="ul">
 			<li class="li"><a href="recipe.go">레시피</a></li>
 			<li class="li"><a href="ranking.go">랭킹</a></li>
-			<li class="li"><a href="class.go">클래스</a></li>
+			<li class="li"><a href="classList.go">클래스</a></li>
 			<li class="li"><a href="magazine.go">매거진</a></li>
 			<li class="li"><a href="board.go">게시판</a></li>
 			<li class="li"><a href="event.go">이벤트</a></li>

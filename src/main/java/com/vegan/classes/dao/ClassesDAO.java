@@ -20,11 +20,15 @@ public interface ClassesDAO {
 
 	String appWrite4(String string);
 	
-	int appWrite5(ClassesDTO dto);
+	int classApp(ClassesDTO dto);
 
 	ArrayList<ClassesDTO> appList(String cl_id);
 
 	int update(HashMap<String, String> params);
+
+	byte adminChk(String loginId);
+
+	ClassesDTO user(String loginId);
 
 	
 

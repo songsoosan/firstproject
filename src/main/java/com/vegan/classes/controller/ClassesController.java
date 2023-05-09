@@ -2,6 +2,9 @@ package com.vegan.classes.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,11 +37,17 @@ public class ClassesController {
 	}
 
 	
-	@RequestMapping(value="/class.go", method = RequestMethod.GET)
-	public String ClassList(Model model) {
-		String msg = "클래스 리스트 테스트";
-		model.addAttribute("msg", msg);
-		
+	@RequestMapping(value="/classList.go", method = RequestMethod.GET)
+	public String ClassList(Model model, HttpSession session) {
+
+		if (session.getAttribute("loginId") != null) {
+			String loginId = String.valueOf(session.getAttribute("loginId"));
+			int admin = (int)service.adminChk(loginId);
+			logger.info("admin"+admin);
+			if (admin == 1) {
+				model.addAttribute("adminChk",admin);
+			}
+		}
 		logger.info("list call");
 		ArrayList<ClassesDTO> list = service.list();		
 		logger.info("list cnt : "+list.size());
@@ -47,7 +56,7 @@ public class ClassesController {
 		return "classList";
 	}
 	
-	@RequestMapping(value="/class.write", method = RequestMethod.GET)
+	@RequestMapping(value="/classWrite.go")
 	public String ClassWriteForm(Model model) {
 		String msg = "클래스 등록 테스트";
 		model.addAttribute("msg", msg);
@@ -56,8 +65,8 @@ public class ClassesController {
 		return "classWrite";
 	}
 	
-	@RequestMapping(value="/class.write.do", method = RequestMethod.POST)
-	public String ClassWrite(Model model, @RequestParam HashMap<String, String> params) {
+	@RequestMapping(value="/classWrite.do", method = RequestMethod.POST)
+	public String ClassWrite(Model model, @RequestParam HashMap<String, String> params,HttpSession session) {
 		String msg = "클래스 등록 테스트";
 		logger.info("a"+params);
 		model.addAttribute("msg", msg);
@@ -66,9 +75,19 @@ public class ClassesController {
 	}
 	
 	@RequestMapping(value="/class.detail.do")
-	public String detail(Model model, @RequestParam String cl_id) {
+	public String detail(Model model, @RequestParam String cl_id, HttpSession session) {
 		logger.info("detail : "+cl_id);
-		String page = "redirect:/class.go";		
+		String page = "redirect:/class.go";	
+		if (session.getAttribute("loginId") != null) {
+			String loginId = String.valueOf(session.getAttribute("loginId"));
+			int admin = (int)service.adminChk(loginId);
+			logger.info("admin"+admin);
+			if (admin == 1) {
+				model.addAttribute("adminChk",admin);
+			}
+		}
+		
+		
 		 ClassesDTO dto = service.detail(cl_id);
 		 
 		if(dto != null) {
@@ -80,23 +99,43 @@ public class ClassesController {
 	
 	
 	@RequestMapping(value="/class.appWrite.go")
-	public String appWriteForm(Model model, @RequestParam String cl_id) {
+	public String appWriteForm(Model model, @RequestParam String cl_id, HttpSession session) {
 		logger.info("클래스 신청 페이지 이동");
+		String loginId =String.valueOf(session.getAttribute("loginId")) ;
 		String cl_subject = service.appWrite(cl_id);
 		model.addAttribute("cl_id",cl_id);
 		model.addAttribute("cl_subject", cl_subject);
-		ClassesDTO dto = service.appWrite2();
-		model.addAttribute("dto", dto);
+		ClassesDTO dto = service.user(loginId);
+		model.addAttribute("user", dto);
 		
 		return "classAppWrite";
 	}
 
 	@RequestMapping(value="/class.appWrite.do",method = RequestMethod.POST)
-	public String appWrite(Model model, @RequestParam HashMap<String, String> params) {
+	public String appWrite(Model model, @RequestParam HashMap<String, String> params, HttpSession session) {
 		logger.info("클래스 신청 저장");
+		ClassesDTO dto = new ClassesDTO();
 		
+		Random random = new Random();
+        int number = random.nextInt(100000000); // 8자리의 숫자 생성
+        String cl_part_id = String.valueOf(Math.abs(number)); // 생성된 숫자 출력
+        logger.info("참여번호"+cl_part_id);
+
 		
-		return service.appWrite3(params);
+		dto.setCl_part_id(cl_part_id);
+		dto.setCl_id(Integer.parseInt(params.get("cl_id")));
+		dto.setUser_id(params.get("user_id"));
+		dto.setUser_adress(params.get("user_adress"));
+		dto.setUser_name(params.get("user_name"));
+		dto.setUser_phone(params.get("user_phone"));
+		int row = service.classApp(dto);
+		
+		if (row ==1) {
+			model.addAttribute("dto", dto);
+			model.addAttribute("msg","클래스 신청이 접수되었습니다.");
+		}
+		
+		return "classPartNumber";
 	}
 	
 	@RequestMapping(value="/class.appList.do")
@@ -129,6 +168,7 @@ public class ClassesController {
 		logger.info("params : "+params);
 		return service.update(params);
 	}
+
 
 
 }

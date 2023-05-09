@@ -19,11 +19,10 @@ public class ClassesDTO {
 	private String cl_content;
 	private boolean cl_del_chk;
 	private String user_adress;
-	
 	private String user_name;
 	private String user_phone;
 	private String user_email;
-	private long cl_part_id;
+	private String cl_part_id;
 	
 	
 	public int getCl_id() {
@@ -147,10 +146,10 @@ public class ClassesDTO {
 	public void setUser_adress(String user_adress) {
 		this.user_adress = user_adress;
 	}
-	public long getCl_part_id() {
+	public String getCl_part_id() {
 		return cl_part_id;
 	}
-	public void setCl_part_id(long cl_part_id) {
+	public void setCl_part_id(String cl_part_id) {
 		this.cl_part_id = cl_part_id;
 	}
 

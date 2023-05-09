@@ -5,52 +5,54 @@
 <mapper namespace="com.vegan.mypage.dao.MypageDAO">
    
 
-   <select id="profile" resultType="com.vegan.mypage.dto.MypageDTO">
-      SELECT u.user_id, u.user_name, u.user_email, u.user_phone, p.introduction, IFNULL(ph.photo_name, 'default_photo.jpg') AS photo_name, IFNULL(ph.photo_id, 0) AS photo_id 
-      FROM user u
-      JOIN profile p ON u.user_id = p.user_id
-      LEFT JOIN photo ph ON p.user_id = ph.identify_number AND ph.photo_id = (SELECT MAX(photo_id) FROM photo WHERE identify_number = u.user_id)
-      WHERE u.user_id = #{param1}
 
-   </select>
+	<select id="profile" resultType="com.vegan.mypage.dto.MypageDTO">
+		SELECT u.user_id, u.user_name, u.user_email, u.user_phone, p.introduction, IFNULL(ph.photo_name, 'default_photo.jpg') AS photo_name, IFNULL(ph.photo_id, 0) AS photo_id 
+		FROM user u
+		JOIN profile p ON u.user_id = p.user_id
+		LEFT JOIN photo ph ON p.user_id = ph.identify_number AND ph.photo_id = (SELECT MAX(photo_id) FROM photo WHERE identify_number = u.user_id)
+		WHERE u.user_id = #{param1}
 
-   <select id="profileDetail" resultType="com.vegan.mypage.dto.MypageDTO">
-      SELECT user_id,user_pw,user_name,user_email,user_phone FROM user 
-         WHERE user_id=#{param1} 
-   </select>
-   
-   <update id="update" parameterType="hashmap">
-      UPDATE user SET user_name = #{name},user_email=#{email},user_phone=#{phone}
-         WHERE user_id = #{id}
-   </update>
-   
-   <update id="changePW" parameterType="String">
-      UPDATE user SET user_pw = #{param2}
-         WHERE user_id = #{param1}
-   </update>
-   
-   
-   <select id="pwChk" resultType="integer">
-      SELECT Count(user_id )FROM user 
-         WHERE user_id=#{param1} AND user_pw=#{param2}
-   </select>
-   
-   <update id="del" parameterType="String">
-      UPDATE user SET user_secc_chk = "1"
-         WHERE user_id = #{idx}
-   </update>
-   
-   <insert id ="proUpdate" parameterType="String">
-         INSERT INTO profile(user_id,introduction) VALUES(#{param1},#{param2})
-         ON DUPLICATE KEY UPDATE introduction = #{param2}
-   </insert>
-      
-   <insert id="profilePhoto">
-      INSERT INTO photo(cat_id,ori_photo_name, photo_name,identify_number) 
-         VALUES('profliePhoto',#{param1},#{param2},#{param3})
-         ON DUPLICATE KEY UPDATE photo_name = #{param2}
-   </insert>   
-   
-   
+	</select>
+
+	<select id="profileDetail" resultType="com.vegan.mypage.dto.MypageDTO">
+		SELECT user_id,user_pw,user_name,user_email,user_phone FROM user 
+			WHERE user_id=#{param1} 
+	</select>
+	
+	<update id="update" parameterType="hashmap">
+		UPDATE user SET user_name = #{name},user_email=#{email},user_phone=#{phone}
+			WHERE user_id = #{id}
+	</update>
+	
+	<update id="changePW" parameterType="String">
+		UPDATE user SET user_pw = #{param2}
+			WHERE user_id = #{param1}
+	</update>
+	
+	
+	<select id="pwChk" resultType="integer">
+		SELECT Count(user_id )FROM user 
+			WHERE user_id=#{param1} AND user_pw=#{param2}
+	</select>
+	
+	<update id="del" parameterType="String">
+		UPDATE user SET user_secc_chk = "1"
+			WHERE user_id = #{idx}
+	</update>
+	
+	<insert id ="proUpdate" parameterType="String">
+			INSERT INTO profile(user_id,introduction) VALUES(#{param1},#{param2})
+			ON DUPLICATE KEY UPDATE introduction = #{param2}
+	</insert>
+		
+	<insert id="profilePhoto">
+		INSERT INTO photo(category_id,ori_photo_name, photo_name,identify_number) 
+			VALUES('profliePhoto',#{param1},#{param2},#{param3})
+			ON DUPLICATE KEY UPDATE photo_name = #{param2}
+	</insert>	
+	
+	
+
 
 </mapper>
