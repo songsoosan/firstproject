@@ -14,7 +14,35 @@
 			VALUES(#{question_number},#{question_detail})
 	</insert>
 	
+	<update id="update" parameterType="hashmap">
+		 UPDATE question_list SET question_detail = #{question_detail}
+ 		 WHERE question_number = #{question_number}
+	</update>
+	
+	<insert id="resultsave" parameterType="hashmap">
+    	INSERT INTO question_result (user_id, total_score, create_date)
+    	VALUES (#{user_id}, #{total_score}, NOW())
+	</insert>
+	
+	<select id="result" resultType="com.vegan.checkList.dto.CheckListDTO">
+		SELECT user_id, total_score
+			FROM question_result
+		WHERE user_id = #{user_id}
+	</select> 
 	
 	
+	<!--  <select id="result" parameterType="hashmap" resultType="com.vegan.checkList.dto.CheckListDTO">
+    	SELECT user_id, SUM(
+        	CASE #{score}
+            	WHEN '1' THEN 1
+            	WHEN '2' THEN 2
+            	WHEN '3' THEN 3
+            	WHEN '4' THEN 4
+            	WHEN '5' THEN 5
+       		END
+    	) AS total_score
+    		FROM question_result
+    	GROUP BY user_id
+	</select> -->
 	
 </mapper>

@@ -17,7 +17,7 @@
     <h3>비건 설문조사</h3>
     <button onclick="location.href='surveyWrite.go'">등록</button>
     <button onclick="location.href='surveyUpdate.go'">수정</button>
-    <form action="result.do" method="post">
+    <form action="result.go" method="post">
         <table>
             <thead>
                 <tr>
@@ -27,6 +27,7 @@
                 </tr>
             </thead>
             <tbody>
+				<tr></tr>
                 <c:forEach items="${list}" var="question">
                     <tr>
                         <td>${question.question_number}</td>
@@ -34,7 +35,7 @@
                         <td class="radio">
                             <div><input type="radio" name="${question.question_number}" value="1"/>매우 그렇지 않다.</div>
                             <div><input type="radio" name="${question.question_number}" value="2"/>그렇지 않다.</div>
-                            <div><input type="radio" name="${question.question_number}" value="3"/>보통이다.</div>
+                            <div><input type="radio" name="${question.question_number}" value="3" checked="checked"/>보통이다.</div>
                             <div><input type="radio" name="${question.question_number}" value="4"/>그렇다.</div>
                             <div><input type="radio" name="${question.question_number}" value="5"/>매우 그렇다.</div>
                         </td>

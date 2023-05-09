@@ -12,7 +12,7 @@ public class CheckListDTO {
 	private int question_score;
 	private int exam_number;
 	private String user_id;
-	private Date total_score;
+	private int total_score;
 	
 	
 	public String getQuestion_detail() {
@@ -57,10 +57,10 @@ public class CheckListDTO {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public Date getTotal_score() {
+	public int getTotal_score() {
 		return total_score;
 	}
-	public void setTotal_score(Date total_score) {
+	public void setTotal_score(int total_score) {
 		this.total_score = total_score;
 	}
 	

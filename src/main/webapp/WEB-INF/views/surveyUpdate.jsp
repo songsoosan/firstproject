@@ -14,14 +14,13 @@
 </style>
 </head>
 <body>
-    <h3>비건 설문조사</h3>
-    <form action="update.do" method="post">
+    <h3>비건 설문조사 항목 수정</h3>
+    <form action="surveyUpdate.do" method="post">
         <table>
             <thead>
                 <tr>
                     <th>질문 번호</th>
                     <th>질문 내용</th>
-                    <th>선택지</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,8 +31,9 @@
                     </tr>
                 </c:forEach>
                 <tr>
-                    <th colspan="3">
-                        <input type="submit" value="제출">
+                    <th colspan="2">
+                        <input type="submit" value="수정하기">
+                        <input type="button" onclick="location.href='./survey.do'" value="뒤로가기"/>
                     </th>
                 </tr>
             </tbody>
