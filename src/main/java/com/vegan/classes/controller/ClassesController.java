@@ -32,16 +32,7 @@ public class ClassesController {
 	
 	@RequestMapping(value="/classList.go", method = RequestMethod.GET)
 	public String ClassList(Model model, HttpSession session) {
-		/*
-		 * String msg = "클래스 리스트 테스트"; model.addAttribute("msg", msg);
-		 */
-		/*
-		 * if (session.getAttribute("msg")!= null) { model.addAttribute("msg",
-		 * session.getAttribute("msg"));
-		 * 
-		 * session.removeAttribute("msg"); }
-		 */
-		
+
 		if (session.getAttribute("loginId") != null) {
 			String loginId = String.valueOf(session.getAttribute("loginId"));
 			int admin = (int)service.adminChk(loginId);

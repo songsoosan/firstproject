@@ -60,23 +60,7 @@ public class ClassesService {
 
 	public int classApp(ClassesDTO dto) {
 		
-		
-		/*
-		 * Random random = new Random(); int number = random.nextInt(100000000); // 8자리의
-		 * 숫자 생성 String cl_part_id = String.valueOf(Math.abs(number)); // 생성된 숫자 출력
-		 * logger.info("참여호"+cl_part_id);
-		 * 
-		 * 
-		 * dto.setCl_part_id(cl_part_id);
-		 * dto.setCl_id(Integer.parseInt(params.get("cl_id")));
-		 * dto.setUser_id(params.get("user_id"));
-		 * dto.setUser_adress(params.get("user_adress"));
-		 * dto.setUser_name(params.get("user_name"));
-		 * dto.setUser_phone(params.get("user_phone"));
-		 * 
-		 * int row = dao.appWrite5(dto); logger.info("update row : "+row); String page =
-		 * "redirect:/class.go";
-		 */
+	
 		
 		return dao.classApp(dto);
 	}
