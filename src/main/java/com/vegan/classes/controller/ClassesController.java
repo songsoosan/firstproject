@@ -29,6 +29,13 @@ public class ClassesController {
 	
 	@Autowired ClassesService service;
 	
+
+	@RequestMapping(value="/class", method = RequestMethod.GET)
+	public String test(Model model) {
+		logger.info("test");
+		return "classTestMain";
+	}
+
 	
 	@RequestMapping(value="/classList.go", method = RequestMethod.GET)
 	public String ClassList(Model model, HttpSession session) {
@@ -61,6 +68,7 @@ public class ClassesController {
 	@RequestMapping(value="/class.write.do", method = RequestMethod.POST)
 	public String ClassWrite(Model model, @RequestParam HashMap<String, String> params,HttpSession session) {
 		String msg = "클래스 등록 테스트";
+		logger.info("a"+params);
 		model.addAttribute("msg", msg);
 		
 		return service.write(params);

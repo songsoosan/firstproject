@@ -48,7 +48,10 @@ ${msg}
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td>${dto.cl_adress}</td>
+					<td>${dto.postcode}
+					${dto.address}
+					${dto.detailAddress}
+					${dto.extraAddress}</td>
 			</tr>
 			<tr>
 				<th>수업소개</th>

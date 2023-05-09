@@ -62,11 +62,11 @@
 		</beans:property>
 	</beans:bean>
 	
-	<!--  
-	<beans:bean id="uploadTempDir" class="org.springframework.core.io.FileSystemResource">
+
+<!-- 	<beans:bean id="uploadTempDir" class="org.springframework.core.io.FileSystemResource">
 	        <beans:constructor-arg value="c:/temp/"/>
-	</beans:bean>
-	-->
+	</beans:bean> -->
+
 	
 	<!-- matbatis area -->
 	<mybatis-spring:scan base-package="com.vegan.**.dao"/>

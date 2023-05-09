@@ -3,7 +3,8 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
 <mapper namespace="com.vegan.mypage.dao.MypageDAO">
-	
+   
+
 
 	<select id="profile" resultType="com.vegan.mypage.dto.MypageDTO">
 		SELECT u.user_id, u.user_name, u.user_email, u.user_phone, p.introduction, IFNULL(ph.photo_name, 'default_photo.jpg') AS photo_name, IFNULL(ph.photo_id, 0) AS photo_id 
@@ -52,5 +53,6 @@
 	</insert>	
 	
 	
+
 
 </mapper>

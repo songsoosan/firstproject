@@ -6,12 +6,16 @@ public class ClassesDTO {
 	private String user_id;
 	private String cl_subject;
 	private String cl_period;
+	private String cl_deadlinePeriod;
 	private String cl_deadline;
 	private String cl_teacher;
 	private String cl_date;
 	private boolean cl_ing_chk;
 	private boolean cl_status;
-	private String cl_adress;
+	private String postcode;
+	private String address;
+	private String detailAddress;
+	private String extraAddress;
 	private String cl_content;
 	private boolean cl_del_chk;
 	private String user_adress;
@@ -45,6 +49,13 @@ public class ClassesDTO {
 	public void setCl_period(String cl_period) {
 		this.cl_period = cl_period;
 	}
+	
+	public String getCl_deadlinePeriod() {
+		return cl_deadlinePeriod;
+	}
+	public void setCl_deadlinePeriod(String cl_deadlinePeriod) {
+		this.cl_deadlinePeriod = cl_deadlinePeriod;
+	}
 	public String getCl_deadline() {
 		return cl_deadline;
 	}
@@ -75,11 +86,29 @@ public class ClassesDTO {
 	public void setCl_status(boolean cl_status) {
 		this.cl_status = cl_status;
 	}
-	public String getCl_adress() {
-		return cl_adress;
+	public String getPostcode() {
+		return postcode;
 	}
-	public void setCl_adress(String cl_adress) {
-		this.cl_adress = cl_adress;
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getDetailAddress() {
+		return detailAddress;
+	}
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
+	}
+	public String getExtraAddress() {
+		return extraAddress;
+	}
+	public void setExtraAddress(String extraAddress) {
+		this.extraAddress = extraAddress;
 	}
 	public String getCl_content() {
 		return cl_content;
