@@ -58,7 +58,7 @@ public class ClassesController {
 	
 	@RequestMapping(value="/classWrite.go")
 	public String ClassWriteForm(Model model) {
-		String msg = "클래스 등록 테스트";
+		String msg = "";
 		model.addAttribute("msg", msg);
 		
 		

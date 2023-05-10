@@ -85,11 +85,6 @@ textarea{
  		float: right;
 	}
 	
-	
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 </style>
 
 </head>
