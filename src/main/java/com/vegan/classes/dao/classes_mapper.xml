@@ -5,9 +5,15 @@
 <mapper namespace="com.vegan.classes.dao.ClassesDAO">
 
 	<select id="list" resultType="com.vegan.classes.dto.ClassesDTO">
-		SELECT 
-			cl_id,user_id,cl_subject,cl_period,cl_deadlinePeriod,cl_deadline,cl_teacher,cl_date,cl_ing_chk,cl_status,cl_content
-		FROM class ORDER BY cl_id DESC
+		SELECT
+    c.cl_id, c.cl_subject, c.cl_period, c.cl_deadlinePeriod, c.cl_status,
+    IFNULL(p.photo_name, 'default_photo.jpg') AS photo_name
+FROM
+    class c
+LEFT JOIN
+    photo p ON p.identify_number = c.cl_id AND p.cat_id = 'cl'
+ORDER BY
+    c.cl_id DESC;
 	</select>
 	
 	<select id="adminChk"  resultType="java.lang.Byte">

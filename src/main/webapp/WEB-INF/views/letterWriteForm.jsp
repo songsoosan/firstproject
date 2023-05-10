@@ -85,6 +85,7 @@ textarea{
  		float: right;
 	}
 	
+<<<<<<< HEAD
 	
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -95,6 +96,8 @@ textarea{
 =======
 
 >>>>>>> origin/master
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 </style>
 

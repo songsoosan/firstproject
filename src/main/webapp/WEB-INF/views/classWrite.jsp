@@ -4,74 +4,85 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<link rel="stylesheet" href="resources/css/commons.css" type="text/css">
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>	
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style></style>
 </head>
 <body>
 ${msg}
-	<form action="classWrite.do" method="post" enctype="multipart/form-data">
-		<table>
-			<tr>
-				<th>아이디</th>
-				<td><input type="text" name="user_id"/></td>
-			</tr>
-			<tr>
-				<th>제목</th>
-				<td><input type="text" name="cl_subject"/></td>
-			</tr>
-			<tr>
-				<th>사진</th>
-				<td>
-					<input type = "file" name = "photo"/>
-				</td>
-			</tr>
-			<tr>
-				<th>모집기간</th>
-				<td>모집 시작일<input type="date" name="cl_period"/>모집 마감일<input type="date" name="cl_deadlinePeriod"/></td>
-			</tr>
-			<tr>
-				<th>모집인원</th>
-				<td><input type="text" name="cl_deadline"/></td>
-			</tr>
-			<tr>
-				<th>강사이름</th>
-				<td><input type="text" name="cl_teacher"/></td>
-			</tr>
-			<tr>
-				<th>강좌날짜</th>
-				<td><input type="date" name="cl_date"/></td>
-			</tr>
-			<tr>
-				<th>재료여부</th>
-				<td>
-					<input type="radio" name="cl_ing_chk" value="1" checked> 있음
-					<input type="radio" name="cl_ing_chk" value="0"> 없음
-			</td>
-			</tr>
-			<tr>
-				<th>주소</th>
-					<td>
-						<input type="text" id="postcode" name="postcode" placeholder="우편번호">
-						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-						<input type="text" id="address" name="address" placeholder="주소"><br>
-						<input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소"><br>
-						<input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목">
-					</td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td><textarea name="cl_content"></textarea></td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<input type="button" onclick="location.href='./classList.go'" value="리스트"/>
-					<button>저장</button>
-				</th>
-			</tr>
-		</table>	
-	</form>
-</body>
+	<div class="container">
+        <h1>클래스 등록</h1>
+        <form action="classWrite.do" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="user_id">아이디</label>
+                <input type="text" class="form-control" id="user_id" name="user_id">
+            </div>
+            <div class="form-group">
+                <label for="cl_subject">제목</label>
+                <input type="text" class="form-control" id="cl_subject" name="cl_subject">
+            </div>
+            <div class="form-group">
+                <label for="photo">사진</label>
+                <input type="file" class="form-control-file" id="photo" name="photo">
+            </div>
+            <div class="form-group">
+                <label>모집기간</label>
+                <div class="row">
+                    <div class="col">
+                        <input type="date" class="form-control" name="cl_period" placeholder="모집 시작일">
+                    </div>
+                    <div class="col">
+                        <input type="date" class="form-control" name="cl_deadlinePeriod" placeholder="모집 마감일">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cl_deadline">모집인원</label>
+                <input type="text" class="form-control" id="cl_deadline" name="cl_deadline">
+            </div>
+            <div class="form-group">
+                <label for="cl_teacher">강사이름</label>
+                <input type="text" class="form-control" id="cl_teacher" name="cl_teacher">
+            </div>
+            <div class="form-group">
+                <label for="cl_date">강좌날짜</label>
+                <input type="date" class="form-control" id="cl_date" name="cl_date">
+            </div>
+            <div class="form-group">
+                <label>재료여부</label>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="cl_ing_chk" value="1" checked>
+                    <label class="form-check-label">있음</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="cl_ing_chk" value="0">
+                    <label class="form-check-label">없음</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>주소</label>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" id="postcode" name="postcode" placeholder="우편번호">
+					</div>
+					<div class="col">
+					<button type="button" class="btn btn-primary" onclick="execDaumPostcode()">우편번호 찾기</button>
+					</div>
+					</div>
+					<input type="text" class="form-control" id="address" name="address" placeholder="주소">
+					<input type="text" class="form-control" id="detailAddress" name="detailAddress" placeholder="상세주소">
+					<input type="text" class="form-control" id="extraAddress" name="extraAddress" placeholder="참고항목">
+					</div>
+					<div class="form-group">
+					<label for="cl_content">내용</label>
+					<textarea class="form-control" id="cl_content" name="cl_content"></textarea>
+					</div>
+					<div class="form-group">
+					<input type="button" class="btn btn-secondary" onclick="location.href='./classList.go'" value="리스트">
+					<button type="submit" class="btn btn-primary">저장</button>
+					</div>
+					</form>
+					</div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function execDaumPostcode() {
