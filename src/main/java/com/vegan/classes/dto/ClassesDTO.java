@@ -23,8 +23,23 @@ public class ClassesDTO {
 	private String user_phone;
 	private String user_email;
 	private String cl_part_id;
+	private String photo_name;
+	private int idx;
 	
 	
+
+	public int getIdx() {
+		return idx;
+	}
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
+	public String getPhoto_name() {
+		return photo_name;
+	}
+	public void setPhoto_name(String photo_name) {
+		this.photo_name = photo_name;
+	}
 	public int getCl_id() {
 		return cl_id;
 	}
