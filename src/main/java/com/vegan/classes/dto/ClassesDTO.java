@@ -24,13 +24,32 @@ public class ClassesDTO {
 	private String user_email;
 	private String cl_part_id;
 	private int join_count;
+	private String photo_name;
+	private int idx;
 	
 	
+
 	public int getJoin_count() {
 		return join_count;
 	}
 	public void setJoin_count(int join_count) {
 		this.join_count = join_count;
+	}
+
+	
+
+	public int getIdx() {
+		return idx;
+	}
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
+	public String getPhoto_name() {
+		return photo_name;
+	}
+	public void setPhoto_name(String photo_name) {
+		this.photo_name = photo_name;
+
 	}
 	public int getCl_id() {
 		return cl_id;

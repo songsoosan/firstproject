@@ -112,9 +112,15 @@ ${msg}
 				<th>제목</th>
 				<td>${dto.cl_subject}</td>
 			</tr>
+			<c:if test="${dto.photo_name ne null}">
+				<tr>
+					<th>사진</th>
+					<td><img width = "300" src="/photo/${dto.photo_name}"/></td>
+				</tr>
+			</c:if>
 			<tr>
 				<th>모집기간</th>
-				<td>${dto.cl_period}</td>
+				<td>${dto.cl_period}~${dto.cl_deadlinePeriod}</td>
 			</tr>
 			<tr>
 				<th>마감 인원</th>

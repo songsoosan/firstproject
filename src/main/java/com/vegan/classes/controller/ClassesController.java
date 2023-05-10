@@ -66,12 +66,12 @@ public class ClassesController {
 	}
 	
 	@RequestMapping(value="/classWrite.do", method = RequestMethod.POST)
-	public String ClassWrite(Model model, @RequestParam HashMap<String, String> params,HttpSession session) {
-		String msg = "클래스 등록 테스트";
+	public String ClassWrite(MultipartFile photo, Model model, @RequestParam HashMap<String, String> params,HttpSession session) {
+		String msg = "클래스 등록";
 		logger.info("a"+params);
 		model.addAttribute("msg", msg);
 		
-		return service.write(params);
+		return service.write(photo, params);
 	}
 	
 	@RequestMapping(value="/classDetail.do")
@@ -127,7 +127,10 @@ public class ClassesController {
 		dto.setCl_part_id(cl_part_id);
 		dto.setCl_id(Integer.parseInt(params.get("cl_id")));
 		dto.setUser_id(params.get("user_id"));
-		dto.setUser_adress(params.get("user_adress"));
+		dto.setPostcode(params.get("postcode"));
+		dto.setAddress(params.get("address"));
+		dto.setDetailAddress(params.get("detailAddress"));
+		dto.setExtraAddress(params.get("extraAddress"));
 		dto.setUser_name(params.get("user_name"));
 		dto.setUser_phone(params.get("user_phone"));
 		int row = service.classApp(dto);

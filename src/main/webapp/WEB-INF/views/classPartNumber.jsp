@@ -6,6 +6,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
+<<<<<<< HEAD
 	div {
 	   margin:0 auto; 
 	   text-align:center;
@@ -49,8 +50,6 @@
 	.logout-button {
  		float: right;
 	}
-	
-	
 
 </style>
 
@@ -101,8 +100,9 @@
 	
 	<h3>${dto.user_name }님 해당 클래스의 접수가 완료되었습니다.</h3>
 	<h2>회원님의 해당 클래스 참여번호는 ${dto.cl_part_id }입니다!</h2>
+
 	<button onclick="location.href='classDetail.do?cl_id=${dto.cl_id}'">확인</button>
-	
+
 </body>
 <script>
 	var msg = "${msg}";

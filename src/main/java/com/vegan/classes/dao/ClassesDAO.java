@@ -30,6 +30,8 @@ public interface ClassesDAO {
 
 	ClassesDTO user(String loginId);
 
+	void fileWrite(int idx, String ori_photo_name, String photo_name);
+
 	
 
 }
