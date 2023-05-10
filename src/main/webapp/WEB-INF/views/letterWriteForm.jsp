@@ -88,8 +88,6 @@ textarea{
 	
 	
 
-=======
->>>>>>> origin/master
 </style>
 
 </head>
@@ -110,7 +108,12 @@ textarea{
 			<img src="resources/img/letter.png" alt="쪽지" width="70px" height="70px"/>
 		</a>
 	</div>
-	<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
+	<c:if test="${sessionScope.loginId eq null}">
+		<button class="logout-button" onclick="location.href='/login.go'">로그인</button>	
+	</c:if>
+	<c:if test="${sessionScope.loginId ne null}">
+		<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
+	</c:if>	
 
 	<div class ="menu">
 		<ul class="ul">

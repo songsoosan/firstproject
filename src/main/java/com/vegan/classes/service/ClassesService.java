@@ -25,7 +25,7 @@ public class ClassesService {
 		dto.setCl_subject(params.get("cl_subject"));
 		dto.setCl_period(params.get("cl_period"));
 		dto.setCl_deadlinePeriod(params.get("cl_deadlinePeriod"));
-		dto.setCl_deadline(params.get("cl_deadline"));
+		dto.setCl_deadline(Integer.valueOf(params.get("cl_deadline")));
 		dto.setCl_teacher(params.get("cl_teacher"));
 		dto.setCl_date(params.get("cl_date"));
 		dto.setCl_ing_chk(Boolean.valueOf(params.get("cl_ing_chk")));

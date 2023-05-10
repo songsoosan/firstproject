@@ -21,12 +21,14 @@
 			VALUES(#{user_id},#{cl_subject},#{cl_period},#{cl_deadlinePeriod},#{cl_deadline},#{cl_teacher},#{cl_date},#{cl_ing_chk},#{postcode},#{address},#{detailAddress},#{extraAddress},#{cl_content},0,0)
 	</insert>
 	
-	<select id="detail" 
-		resultType="com.vegan.classes.dto.ClassesDTO">
-		select 
-			user_id,cl_id,cl_subject,cl_period,cl_deadlinePeriod,cl_deadline,cl_teacher,cl_date,cl_ing_chk,cl_status,postcode,address,detailAddress,extraAddress,cl_content
-				from class where cl_id = #{cl_id}
+	<select id="detail" resultType="com.vegan.classes.dto.ClassesDTO">
+    select 
+        user_id,cl_id,cl_subject,cl_period,cl_deadlinePeriod,cl_deadline,cl_teacher,cl_date,cl_ing_chk,cl_status,postcode,address,detailAddress,extraAddress,cl_content,
+        (select count(*) from class_join where cl_id = #{cl_id}) as join_count
+  		  from class c
+    where cl_id = #{cl_id}
 	</select>
+
 	
 	<update id="update" parameterType="hashmap">
 		UPDATE class SET user_id = #{user_id}

@@ -6,10 +6,57 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <link rel="stylesheet" href="resources/css/commons.css" type="text/css">
-<style></style>
+<style>	
+div {
+	   margin:0 auto; 
+	   text-align:center;
+	}
+
+	table {
+		width: 100%;
+		border: 1px solid black;
+	}
+	th, td {
+		border: 1px solid black;
+		padding: 10px;
+	}
+	.ul {
+		list-style-type: none;
+		text-align: center;
+		display:inline-block;
+		width: 100%;
+	}
+	.li {
+		float: left;
+		width: 16%;
+	}
+	.li > a {
+		text-decoration-line: none;
+		font-size: 25px;
+	}
+	.menu{
+	margin-top: 30px;
+	border-bottom: 1px solid #ccc;
+	}
+	.divImages{
+	margin-top: 100px;
+	}
+	.img{
+		width: 20%;
+		height: 30%;
+		vertical-align: middle;
+		display:inline-block;
+	}
+	.logout-button {
+ 		float: right;
+	}
+	
+	
+
+</style>
+
 </head>
 <body>
-
 	<div>
 		<a href="main.go">
 			<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
@@ -35,17 +82,24 @@
 			</svg>
 		</a>
 	</div>
-		<div class ="menu">
+		<c:if test="${sessionScope.loginId eq null}">
+		<button class="logout-button" onclick="location.href='/login.go'">로그인</button>	
+	</c:if>
+	<c:if test="${sessionScope.loginId ne null}">
+		<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
+	</c:if>	
+	<div class ="menu">
 		<ul class="ul">
 			<li class="li"><a href="recipe.go">레시피</a></li>
 			<li class="li"><a href="ranking.go">랭킹</a></li>
-			<li class="li"><a href="class.go">클래스</a></li>
+			<li class="li"><a href="classList.go">클래스</a></li>
 			<li class="li"><a href="magazine.go">매거진</a></li>
 			<li class="li"><a href="board.go">게시판</a></li>
 			<li class="li"><a href="event.go">이벤트</a></li>
 			<li class="li"><a href="admin.go">관리자(test)</a></li>
 		</ul>
 	</div>
+	
 	<c:if test="${adminChk ne null}">
 		<input type="button" onclick="location.href='classWrite.go'" value="클래스 등록"/>
 	</c:if>
@@ -72,7 +126,7 @@
 			</c:if>
 			<c:forEach items="${list}" var="classes">
 				<tr>
-					<td><a href="class.detail.do?cl_id=${classes.cl_id}">${classes.cl_id}</a></td>
+					<td><a href="classDetail.do?cl_id=${classes.cl_id}">${classes.cl_id}</a></td>
 					<td>${classes.user_id}</td>
 					<td>${classes.cl_subject}</td>
 					<td>${classes.cl_period}~
