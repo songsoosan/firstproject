@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.vegan.classes.dto.ClassesDTO;
 import com.vegan.mypage.dao.MypageDAO;
 import com.vegan.mypage.dto.MypageDTO;
 
@@ -74,6 +76,10 @@ public class MypageService {
 	public int changePW(String loginId, String newPW) {
 		
 		return dao.changePW(loginId,newPW);
+	}
+	public ArrayList<ClassesDTO> mclist(String loginId) {
+		
+		return dao.mclist(loginId);
 	}
 	
 

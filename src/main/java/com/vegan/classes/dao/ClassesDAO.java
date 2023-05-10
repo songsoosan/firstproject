@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.vegan.classes.dto.ClassesDTO;
+import com.vegan.mypage.dto.MypageDTO;
 
 public interface ClassesDAO {
 
@@ -31,6 +32,8 @@ public interface ClassesDAO {
 	ClassesDTO user(String loginId);
 
 	void fileWrite(int idx, String ori_photo_name, String photo_name);
+
+	MypageDTO profile2(String user_id);
 
 	
 

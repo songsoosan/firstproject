@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.vegan.classes.dao.ClassesDAO;
 import com.vegan.classes.dto.ClassesDTO;
+import com.vegan.mypage.dto.MypageDTO;
 
 @Service
 public class ClassesService {
@@ -86,6 +87,11 @@ public class ClassesService {
 		
 		return dao.detail(cl_id);
 	}
+	
+	public MypageDTO profile2(String user_id) {
+		
+		return dao.profile2(user_id);
+	}
 
 	public String appWrite(String cl_id) {
 		
@@ -115,7 +121,7 @@ public class ClassesService {
 		int cl_id = Integer.parseInt(params.get("cl_id"));		
 		int row = dao.update(params);
 		
-		String page = row>0 ? "redirect:/class.detail.do?cl_id="+cl_id : "redirect:/class.go";
+		String page = row>0 ? "redirect:/class.detail.do?cl_id="+cl_id : "redirect:/classList.go";
 		logger.info("update => "+page);
 		
 		return page;

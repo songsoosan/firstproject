@@ -6,7 +6,8 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <link rel="stylesheet" href="resources/css/commons.css" type="text/css">
-<style>	div {
+<style>	
+div {
 	   margin:0 auto; 
 	   text-align:center;
 	}
@@ -81,7 +82,7 @@
 			</svg>
 		</a>
 	</div>
-	<c:if test="${sessionScope.loginId eq null}">
+		<c:if test="${sessionScope.loginId eq null}">
 		<button class="logout-button" onclick="location.href='/login.go'">로그인</button>	
 	</c:if>
 	<c:if test="${sessionScope.loginId ne null}">
@@ -98,74 +99,38 @@
 			<li class="li"><a href="admin.go">관리자(test)</a></li>
 		</ul>
 	</div>
-
-			<c:if test="${adminChk ne null}">
-				<input type="button" onclick="location.href='./class.update.go?cl_id=${dto.cl_id}'" value="수정"/>
-			</c:if>
+	
 	<table>
-			<tr>
-				<th>아이디</th>
-				<td>${dto.user_id}</td>
-			</tr>
+		<thead>
 			<tr>
 				<th>제목</th>
-				<td>${dto.cl_subject}</td>
+				<th>모집기간</th>
+				<th>마감인원</th>
+				<th>강사소개</th>
+				<th>수업날짜</th>
+				<th>참여번호</th>
 			</tr>
-			<c:if test="${dto.photo_name ne null}">
+		</thead>		
+		<tbody>
+		<span>${classes.cl_id}</span>
+			<c:if test="${list eq null}">
 				<tr>
-					<th>사진</th>
-					<td><img width = "300" src="/photo/${dto.photo_name}"/></td>
+					<th colspan="11">구매한 클래스가 존재하지 않습니다.</th>
 				</tr>
 			</c:if>
-			<tr>
-				<th>모집기간</th>
-				<td>${dto.cl_period}~${dto.cl_deadlinePeriod}</td>
-			</tr>
-			<tr>
-				<th>마감 인원</th>
-				<td>${dto.cl_deadline}<c:if test="${adminChk ne null}"><input type="button" onclick="location.href='class.appList.do?cl_id=${dto.cl_id}'" value="신청 리스트"/></c:if></td>	
-			</tr>
-			<tr>
-				<th>강사 소개</th>
-				<td><a href="profile2.do?user_id=${dto.cl_teacher}&cl_id=${dto.cl_id}">${dto.cl_teacher}</a></td>
-			</tr>
-			<tr>
-				<th>수업 날짜</th>
-				<td>${dto.cl_date}</td>
-			</tr>
-			<tr>
-				<th>재료 제공 여부</th>
-				<td>${dto.cl_ing_chk}</td>
-			</tr>
-			<tr>
-				<th>클래스 상태</th>
-				<td>${dto.cl_status}</td>
-			</tr>
-			<tr>
-				<th>주소</th>
-					<td>${dto.postcode}
-					${dto.address}
-					${dto.detailAddress}
-					${dto.extraAddress}</td>
-			</tr>
-			<tr>
-				<th>수업소개</th>
-				<td>${dto.cl_content}</td>
-			</tr>
-			<tr>
-				<c:if test="${dto.cl_deadline <= dto.join_count}">
-					<th>클래스 신청하기</th>
-					<td>마감</td>
-				</c:if>
-				<c:if test="${dto.cl_deadline > dto.join_count}">
-				<th>클래스 신청하기</th>
-				<td><input type="button" onclick="location.href='./class.appWrite.go?cl_id=${dto.cl_id}'" value="신청"/></td>
-				</c:if>
-			</tr>
-			</table>
-			
-			
-
+			<c:forEach items="${list}" var="classes">
+				<tr>
+					<td><a href="classDetail.do?cl_id=${classes.cl_id}">${classes.cl_subject}</a></td>
+					<td>${classes.cl_period}~
+							${classes.cl_deadlinePeriod}</td>
+					<td>${classes.cl_deadline}</td>
+					<td>${classes.cl_teacher}</td>
+					<td>${classes.cl_date}</td>
+					<td>${classes.cl_part_id}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </body>
 <script>
 var msg = "${msg}";

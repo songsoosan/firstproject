@@ -158,7 +158,7 @@ div {
 	</tr>
 	<tr>
 		<th colspan="2">
-			<input type="button" onclick="location.href='redirect:/class.go'" value="리스트"/>
+			<input type="button" onclick="location.href='redirect:/classList.go'" value="리스트"/>
 			<button>저장</button>
 		</th>
 	</tr>
