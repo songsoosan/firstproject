@@ -74,10 +74,12 @@ public class ClassesController {
 		return service.write(photo, params);
 	}
 	
-	@RequestMapping(value="/class.detail.do")
+	@RequestMapping(value="/classDetail.do")
 	public String detail(Model model, @RequestParam String cl_id, HttpSession session) {
 		logger.info("detail : "+cl_id);
-		String page = "redirect:/class.go";	
+		String page = "redirect:/classList.go";
+		
+		
 		if (session.getAttribute("loginId") != null) {
 			String loginId = String.valueOf(session.getAttribute("loginId"));
 			int admin = (int)service.adminChk(loginId);
@@ -111,7 +113,7 @@ public class ClassesController {
 		return "classAppWrite";
 	}
 
-	@RequestMapping(value="/class.appWrite.do",method = RequestMethod.POST)
+	@RequestMapping(value="/classAppWrite.do",method = RequestMethod.POST)
 	public String appWrite(Model model, @RequestParam HashMap<String, String> params, HttpSession session) {
 		logger.info("클래스 신청 저장");
 		ClassesDTO dto = new ClassesDTO();

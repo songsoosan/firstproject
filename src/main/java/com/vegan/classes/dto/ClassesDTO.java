@@ -7,7 +7,7 @@ public class ClassesDTO {
 	private String cl_subject;
 	private String cl_period;
 	private String cl_deadlinePeriod;
-	private String cl_deadline;
+	private int cl_deadline;
 	private String cl_teacher;
 	private String cl_date;
 	private boolean cl_ing_chk;
@@ -23,6 +23,7 @@ public class ClassesDTO {
 	private String user_phone;
 	private String user_email;
 	private String cl_part_id;
+<<<<<<< HEAD
 	private String photo_name;
 	private int idx;
 	
@@ -39,6 +40,16 @@ public class ClassesDTO {
 	}
 	public void setPhoto_name(String photo_name) {
 		this.photo_name = photo_name;
+=======
+	private int join_count;
+	
+	
+	public int getJoin_count() {
+		return join_count;
+	}
+	public void setJoin_count(int join_count) {
+		this.join_count = join_count;
+>>>>>>> origin/master
 	}
 	public int getCl_id() {
 		return cl_id;
@@ -71,10 +82,10 @@ public class ClassesDTO {
 	public void setCl_deadlinePeriod(String cl_deadlinePeriod) {
 		this.cl_deadlinePeriod = cl_deadlinePeriod;
 	}
-	public String getCl_deadline() {
+	public int getCl_deadline() {
 		return cl_deadline;
 	}
-	public void setCl_deadline(String cl_deadline) {
+	public void setCl_deadline(int cl_deadline) {
 		this.cl_deadline = cl_deadline;
 	}
 	public String getCl_teacher() {

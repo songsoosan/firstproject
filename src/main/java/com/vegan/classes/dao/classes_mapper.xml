@@ -37,7 +37,9 @@
 		JOIN photo p ON p.identify_number = c.cl_id
 		WHERE c.cl_id = #{param1}
 		LIMIT 1;
+
 	</select>
+
 	
 	<update id="update" parameterType="hashmap">
 		UPDATE class SET user_id = #{user_id}
