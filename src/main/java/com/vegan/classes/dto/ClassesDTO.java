@@ -23,9 +23,10 @@ public class ClassesDTO {
 	private String user_phone;
 	private String user_email;
 	private String cl_part_id;
-<<<<<<< HEAD
+
 	private String photo_name;
 	private int idx;
+	private int join_count;
 	
 	
 
@@ -40,16 +41,13 @@ public class ClassesDTO {
 	}
 	public void setPhoto_name(String photo_name) {
 		this.photo_name = photo_name;
-=======
-	private int join_count;
-	
-	
+	}
 	public int getJoin_count() {
 		return join_count;
 	}
 	public void setJoin_count(int join_count) {
 		this.join_count = join_count;
->>>>>>> origin/master
+
 	}
 	public int getCl_id() {
 		return cl_id;

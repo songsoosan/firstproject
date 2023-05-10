@@ -9,7 +9,7 @@ public class MypageDTO {
 	private int user_phone;
 	private String user_email;
 	private String introduction;
-	private String photo_name; 
+	private String photo_name;
 	
 	public String getPhoto_name() {
 		return photo_name;
