@@ -21,6 +21,13 @@ div {
 		padding: 10px;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	tr.colored:nth-child(odd){
+  background-color: yellowgreen;
+}
+=======
+>>>>>>> origin/master
 	.ul {
 		list-style-type: none;
 		text-align: center;
@@ -54,11 +61,15 @@ div {
 	
 	
 
+<<<<<<< HEAD
 =======
 	tr.colored:nth-child(odd){
   background-color: yellowgreen;
 }
 >>>>>>> 40969de6214ea27ed13f2b8c51d8281dceb9c137
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
 </style>
 
 </head>

@@ -23,9 +23,9 @@ public class ClassesDTO {
 	private String user_phone;
 	private String user_email;
 	private String cl_part_id;
-	private int join_count;
 	private String photo_name;
 	private int idx;
+	private int join_count;
 	
 	
 
