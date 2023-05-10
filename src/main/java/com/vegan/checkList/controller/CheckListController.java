@@ -68,26 +68,12 @@ public class CheckListController {
 	    Map<String, String> result = new HashMap<>();
 	    result.put("user_id_value", params.get("user_id"));
 	    result.put("total_score_value", params.get("total_score"));
+	    result.put("grade", params.get("grade"));
 	    logger.info("result 값 : "+result);
 	    logger.info("컨트롤러 파람의 값 : "+params.toString());
 	    model.addAttribute("result", result);
 	    return "surveyResult";
 	}
-	
-//	@RequestMapping(value = "/result.go", method = RequestMethod.POST)
-//	public String resultsave(Model model, HttpSession session, @RequestParam HashMap<String, String> params) {
-//	    String user_id = (String) session.getAttribute("loginId");
-//	    logger.info("얻어온 아이디 : "+user_id);
-//	    logger.info("파람의 값 : "+params);
-//	    params.put("user_id", user_id); // "user_id" 키 추가
-//	    logger.info("유저 아이디 추가한 파람 : "+params);
-//	    service.resultsave(params); // "user_id" 키가 추가된 params 전달
-//	    ArrayList<CheckListDTO> result = service.getresult(params);
-//	    logger.info("result 값 : "+result);
-//	    logger.info("컨트롤러 파람의 값 : "+params.toString());
-//	    model.addAttribute("result", result);
-//	    return "surveyResult";
-//	}
 	
 }
 	 

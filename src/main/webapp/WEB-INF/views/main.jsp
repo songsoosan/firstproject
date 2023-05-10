@@ -51,7 +51,7 @@
 
 </head>
 <body>
-			<a href="surveyWrite.go">설문조사등록</a>
+			<a href="survey.do">설문조사</a>
 	<div>
 		<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
 		<input type ="text" placeholder="검색"/>
