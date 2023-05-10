@@ -14,13 +14,9 @@ public interface CheckListDAO {
 	int update(HashMap<String, Object> params);
 
 	// ArrayList<CheckListDTO> resultsave(HashMap<String, Object> params);
-
-	ArrayList<CheckListDTO> result(HashMap<String, Object> params);
-
-	void resultsave(HashMap<String, Object> params);
+	void resultsave(HashMap<String, String> params);
 	
-    CheckListDTO result(String user_id);
-
+	ArrayList<CheckListDTO> getresult(HashMap<String, String> params);
 
 	
 

@@ -46,37 +46,39 @@ public class CheckListService {
 		return "redirect:/survey.do";
 	}
 
-	public void resultsave(HashMap<String, Object> params) {
-		String user_id = ""; // 값을 초기화
-		if(params.containsKey("user_id")) {
-			user_id = (String)params.get("user_id"); // 유저아이디를 파람에 저장
-			// 오브젝트 타입이라 스트링으로 캐스팅
-		}
-		logger.info("유저 아이디 확인 : "+user_id);
-		int total_score = 0;
-		for (Object value : params.values()) {
-			
-		}
-		
-//		for (Object value : params.values()) {
-//		    if (value instanceof Integer) {
-//		        total_score += (Integer) value;
-//		    }
-//		}
+	public void resultsave(HashMap<String, String> params) {
+	    String user_id = params.get("user_id");
+	    logger.info("유저 아이디 확인 : " + user_id);
+	    logger.info("서비스 파람 확인 : " + params);
 
-	    logger.info("총 점수 : "+total_score);
-	    params.put("user_id", user_id);
-	    params.put("total_score", total_score);
+	    int total_score = 0;
+	    for (String key : params.keySet()) {
+	        Object value = params.get(key);
+	        if (value instanceof Integer) {
+	            total_score += (Integer) value;
+	        } else if (value instanceof String) {
+	            if (key.equals("user_id") || key.equals("total_score")) {
+	                continue;
+	            }
+	            try {
+	                total_score += Integer.parseInt((String) value);
+	            } catch (NumberFormatException e) {
+	                // 숫자로 변환할 수 없는 경우 기본값인 0으로 설정합니다.
+	                total_score += 0;
+	            }
+	        }
+	    }
+
+	    logger.info("총 점수 : " + total_score);
+	    params.put("total_score", String.valueOf(total_score));
 	    logger.info("파람의 값 : "+params.toString());
+
 	    dao.resultsave(params);
 	}
-	
-	
-	public ArrayList<CheckListDTO> result(HashMap<String, Object> params) {
-		return dao.result(params);
+
+	public ArrayList<CheckListDTO> getresult(HashMap<String, String> params) {
+	    return dao.getresult(params);
 	}
-	
-	// int question_count = 0;
 	
 	
 //    String user_id = "";

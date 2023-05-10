@@ -21,14 +21,14 @@
 	
 	<insert id="resultsave" parameterType="hashmap">
     	INSERT INTO question_result (user_id, total_score, create_date)
-    	VALUES (#{user_id}, #{total_score}, NOW())
+    	VALUES (#{user_id,jdbcType=VARCHAR}, #{total_score,jdbcType=INTEGER}, NOW())
 	</insert>
 	
-	<select id="result" resultType="com.vegan.checkList.dto.CheckListDTO">
-		SELECT user_id, total_score
-			FROM question_result
-		WHERE user_id = #{user_id}
-	</select> 
+	<select id="getresult" resultType="com.vegan.checkList.dto.CheckListDTO">
+    	SELECT user_id, total_score
+    	FROM question_result
+    	WHERE user_id = #{user_id}
+	</select>
 	
 	
 	<!--  <select id="result" parameterType="hashmap" resultType="com.vegan.checkList.dto.CheckListDTO">

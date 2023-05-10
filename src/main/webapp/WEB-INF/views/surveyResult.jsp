@@ -14,7 +14,8 @@
 	<h5>보통이다. 3점</h5>
 	<h5>그렇다. 4점</h5>
 	<h5>매우 그렇다. 5점</h5>
-    
+    <h5>사용자 ${result.user_id_value} 님의 점수는 ${result.total_score_value}점 입니다.</h5>
+    <button onclick="location.href='login.do'">메인</button>
 </body>
 <script></script>
 </html>
