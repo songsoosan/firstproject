@@ -11,6 +11,10 @@
 		border-collapse: collapse;
 		padding: 5px 10px;
 	}
+	table{
+	margin: 0 auto;
+	}
+	
 </style>
 </head>
 <body>
@@ -26,6 +30,7 @@
 			<tr>
 				<th colspan = "2">
 					<input type="submit" value = "check"/>
+					<button type="button" onclick="location='profile.do'">돌아가기</button>
 				</th>
 			</tr>
 		</table>

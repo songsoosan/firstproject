@@ -20,6 +20,8 @@ public interface MypageDAO {
 
 	int profilePhoto(String oriFileName, String newFileName, String loginId);
 
+	int changePW(String loginId, String newPW);
+
 	
 
 	
