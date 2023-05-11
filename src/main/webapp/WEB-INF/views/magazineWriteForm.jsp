@@ -1,16 +1,11 @@
-<<<<<<< HEAD
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-=======
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
->>>>>>> origin/master
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<<<<<<< HEAD
+
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <link rel="stylesheet" href="resources/css/commons.css" type="text/css">
 <style>
@@ -41,7 +36,6 @@ textarea{
 </head>
 <body>
 	<form action="magazineWrite.do" method="post" enctype="multipart/form-data">
-=======
 <style>
 	table{
 		width: 100%
@@ -67,7 +61,6 @@ textarea{
 </head>
 <body>
 	<form action="wirte.do" method="post" enctype="multipart/form-data">
->>>>>>> origin/master
 		<table>
 			<tr>
 				<th>제목</th>
@@ -82,7 +75,6 @@ textarea{
 				<td><textarea name="board_content"></textarea></td>
 			</tr>
 			<tr>
-<<<<<<< HEAD
 				<th>대표사진</th>
 				<td>
 					<input type="file" name="photo"/>
@@ -102,19 +94,4 @@ textarea{
 	</form>
 </body>
 <script></script>
-=======
-				<th>사진</th>
-				<td><input type="file" name="board_photo"/></td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<input type = "button" onclick="location.href='./boardList.do'" value="리스트"/>
-					<button>저장</button>
-				</th>
-			</tr>
-		</table>
-	
-	</form>
-</body>
->>>>>>> origin/master
 </html>
