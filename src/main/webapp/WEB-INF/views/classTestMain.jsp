@@ -9,7 +9,7 @@
 <style></style>
 </head>
 <body>
-<input type="button" onclick="location.href='./class.go'" value="클래스 리스트"/>
+<input type="button" onclick="location.href='./classList.go'" value="클래스 리스트"/>
 <input type="button" onclick="location.href='./admin.go'" value="관리자 페이지"/>
 </body>
 <script>

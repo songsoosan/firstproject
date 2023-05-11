@@ -3,6 +3,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
 <mapper namespace="com.vegan.magazine.dao.MagazineDAO">
+
    <!--  
     <select id="list" resultType="com.vegan.magazine.dto.MagazineDTO">
        SELECT 
@@ -17,29 +18,44 @@
       LIMIT #{param1} OFFSET #{param2}
     </select>
     
-    <select id="magacommentlist" resultType="com.vegan.magazine.dto.MagazineDTO">
+      <select id="magacommentlist" resultType="com.vegan.magazine.dto.MagazineDTO">
        SELECT 
          *
       FROM comment WHERE identify_id = #{param1} AND cat_id = 'mc' ORDER BY identify_id DESC
-      
-    </select>
+      </select>
+   
+    <select id="magacommentlist2" resultType="com.vegan.magazine.dto.MagazineDTO">
+       SELECT 
+         *
+      FROM comment WHERE identify_id = #{param1} AND comment_id = #{param2} AND cat_id = 'mc'
+       ORDER BY identify_id DESC
+      </select>
     
-    <!--  
-    <insert id="commwrite">
-      INSERT INTO comment(user_id, comment_content, cat_id, identify_number)
-         VALUES(#{user_id},#{comment_content}, 'mc', '#{board_id}')
-   </insert>
-   -->
    
    
-   <insert 
+    <insert 
       id="commwrite" parameterType="String">
       INSERT INTO comment(identify_id, comment_content,user_id, cat_id)
          VALUES(#{param1},#{param2},#{param3},'mc')
-   </insert>
+      </insert>
+      
+
+   <delete id="commdelete">
+   DELETE FROM comment WHERE identify_id = #{param1}  
+      AND comment_id = #{param2} AND user_id = #{param3}
+   </delete>
    
+   <update id="commupdate" >
+      UPDATE comment SET comment_content = #{param2}
+      WHERE comment_id = #{param1} AND user_id = #{param3}
+   </update>
       
-      
+   <update id="update" parameterType="hashmap">
+      UPDATE board SET board_title = #{board_title}
+         ,user_id = #{user_id}
+         ,board_content = #{board_content}
+      WHERE board_id = #{board_id}
+   </update>
       
     <select id="totalCount" resultType="int">
       SELECT COUNT(board_id) FROM board
@@ -90,11 +106,5 @@
          WHERE identify_number = #{board_id}
    </select>
    
-   <update id="update" parameterType="hashmap">
-      UPDATE board SET board_title = #{board_title}
-         ,user_id = #{user_id}
-         ,board_content = #{board_content}
-      WHERE board_id = #{board_id}
-   </update>
-   
+
 </mapper>

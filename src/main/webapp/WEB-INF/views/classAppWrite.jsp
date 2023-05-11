@@ -20,11 +20,8 @@ div {
 		border: 1px solid black;
 		padding: 10px;
 	}
-<<<<<<< HEAD
-	tr.colored:nth-child(odd){
-  background-color: yellowgreen;
-}
-=======
+
+
 	.ul {
 		list-style-type: none;
 		text-align: center;
@@ -56,9 +53,11 @@ div {
  		float: right;
 	}
 	
-	
 
->>>>>>> origin/master
+	tr.colored:nth-child(odd){
+  background-color: yellowgreen;
+}
+
 </style>
 
 </head>
@@ -147,7 +146,7 @@ div {
 	</tr>
 	<tr>
 		<th colspan="2">
-			<input type="button" onclick="location.href='redirect:/class.go'" value="리스트"/>
+			<input type="button" onclick="location.href='redirect:/classList.go'" value="리스트"/>
 			<button>저장</button>
 		</th>
 	</tr>

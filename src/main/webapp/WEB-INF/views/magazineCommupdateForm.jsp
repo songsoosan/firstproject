@@ -5,7 +5,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-
 <style>
 table{
 	width: 100%;
@@ -29,7 +28,7 @@ textarea{
 	width: 100%;
 	height: 150px;
 	resize: none;
-
+}
 </style>
 </head>
 <body>
@@ -89,17 +88,17 @@ textarea{
 		</c:forEach>
 		
 		<!-- 댓글 작성 -->
-	    <form method="post" action="commentWrite.do">
-	    	<input type="hidden" name="board_id" value="${dto.board_id}">
-	    	<input type="text" name="comment_id" value="${eventcommentlist2.comment_id}">
+	    <form method="get" action="commentupdate.do">
+			<input type="text" name="board_id" value="${dto.board_id}">
+	    	<input type="text" name="comment_id" value="${magacommentlist2.comment_id}">
 				<table>	
 						<tr>
 							<th>내용</th>
-							<td><textarea name="comment_content"></textarea></td>
+							<td><textarea name="comment_content">${magacommentlist2.comment_content}</textarea></td>
 						</tr>
 						<tr>
 							<th colspan="2">
-								<button type="submit">등록</button>
+								<button type="submit">수정</button>
 							</th>
 						</tr>
 	    		</table>
@@ -107,13 +106,8 @@ textarea{
 		<!--  댓글 끝 -->
 		
 </body>
-<c:if test="${not empty message}">
 <script>
 
-alert("${message}");
 
 </script>
-</c:if>
-
-
 </html>
