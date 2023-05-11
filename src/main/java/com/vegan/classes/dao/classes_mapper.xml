@@ -119,7 +119,6 @@
       JOIN profile p ON u.user_id = p.user_id
       LEFT JOIN photo ph ON p.user_id = ph.identify_number AND ph.photo_id = (SELECT MAX(photo_id) FROM photo WHERE identify_number = u.user_id)
       WHERE u.user_id = #{param1}
-
    </select>
    
    <update id="update" parameterType="hashmap">

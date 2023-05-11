@@ -5,31 +5,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<<<<<<< HEAD
-<style>
-table{
-	width: 100%;
-}
-
-table, th, td{
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding : 5px 10px;	
-}
-
-button{
-	margin: 5px;
-}
-
-input[type="text"]{
-	width: 100%;
-}
-
-textarea{
-	width: 100%;
-	height: 150px;
-	resize: none;
-=======
 <link rel="stylesheet" href="resources/css/commons.css" type="text/css">
 <style>
 table{
@@ -218,5 +193,5 @@ alert("${message}");
 
 
 </script>
->>>>>>> origin/master
+
 </html>
