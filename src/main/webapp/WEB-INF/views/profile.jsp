@@ -149,7 +149,7 @@ textarea{
 		</tr>
 		<tr>
 			<th colspan = "2">
-				<input type="button" value="개인정보" onclick="location.href='myCassList.do'"/>
+				<input type="button" value="개인정보" onclick="location.href='profileDetail.do'"/>
 			</th>
 		</tr>
 	</table>
