@@ -229,7 +229,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
 	
 	
 	public int commupdate(String comment_id, String comment_content, String loginId) {
-		// TODO Auto-generated method stub
+		
 		return dao.commupdate(comment_id,comment_content, loginId);
 	}
 	
