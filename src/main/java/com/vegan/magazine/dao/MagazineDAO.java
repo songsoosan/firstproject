@@ -1,9 +1,11 @@
 package com.vegan.magazine.dao;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Param;
+
 
 import com.vegan.magazine.dto.MagazineDTO;
 
@@ -31,6 +33,36 @@ public interface MagazineDAO {
 	int totalCount();
 
 	ArrayList<MagazineDTO> list(int cnt, int offset);
+
+	ArrayList<MagazineDTO> magacommentlist(String board_id);
+
+
+
+
+
+
+	 //void commwrite(MagazineDTO dto, String board_id, HashMap<String, String> params);
+
+	 int commwrite(String board_id, String comment_content, String loginId);
+
+
+	int commdelete(String board_id, String comment_id, String loginId);
+
+
+	MagazineDTO magacommentlist2(String board_id, String comment_id, String comment_content);
+
+	//int commupdate(String board_id, String comment_id, String comment_content);
+
+	//int commupdate(HashMap<String, String> params);
+
+	int commupdate(String comment_id, String comment_content, String loginId);
+
+
+
+
+
+
+	
 
 	
 

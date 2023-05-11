@@ -36,7 +36,7 @@ public class MainController {
 	}
 	@RequestMapping(value = "/magazine.go", method = RequestMethod.GET)
 	public String magazine(Model model) {
-			return "magazine";
+			return "magazineList";
 	}
 	@RequestMapping(value = "/board.go", method = RequestMethod.GET)
 	public String board(Model model) {
@@ -44,7 +44,7 @@ public class MainController {
 	}
 	@RequestMapping(value = "/event.go", method = RequestMethod.GET)
 	public String event(Model model) {
-		return "event";
+		return "eventList";
 	}
 	@RequestMapping(value = "/write.go", method = RequestMethod.GET)
 	public String write(Model model) {

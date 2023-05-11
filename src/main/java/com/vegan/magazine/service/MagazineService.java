@@ -2,6 +2,7 @@ package com.vegan.magazine.service;
 
 import java.io.File;
 
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,6 +10,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.jdbc.Null;
 import org.slf4j.Logger;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.vegan.magazine.dao.MagazineDAO;
+
 import com.vegan.magazine.dto.MagazineDTO;
 
 
@@ -35,6 +39,34 @@ Logger logger = LoggerFactory.getLogger(getClass());
 	}
 	*/
 
+	public HashMap<String, Object> list(int page, int cnt) {
+		logger.info(page+" 페이지 보여줘");
+		logger.info("한 페이지에 "+cnt+" 개씩 보여줄거야");
+		HashMap<String, Object> map = new HashMap<String, Object>();		
+		
+		// 1page = offset : 0
+		// 2page = offset : 5
+		// 3page = offset : 10
+		int offset = (page-1)*cnt;
+		
+		// 만들 수 있는 총 페이지 수 
+		// 전체 게시물 / 페이지당 보여줄 수
+		int total = dao.totalCount();
+		int range = total%cnt == 0 ? total/cnt : (total/cnt)+1;
+		logger.info("전체 게시물 수 : "+total);
+		logger.info("총 페이지 수 : "+range);
+		
+		page = page > range ? range : page;
+		
+		map.put("currPage", page);
+		map.put("pages", range);
+		
+		ArrayList<MagazineDTO> list = dao.list(cnt, offset);
+		map.put("list", list);
+		return map;
+	}
+	
+	
 	public String write(MultipartFile photo, HashMap<String, String> params) {
 		
 		String page = "redirect:/magazine";
@@ -45,7 +77,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		MagazineDTO dto = new MagazineDTO();
 		//receipeDTO.setCat_id("recipe");
 		// dto.setCat_id("mpd");
-		dto.setCat_id("mp");
+		dto.setCat_id("m");
 		dto.setBoard_title(params.get("board_title"));
 		dto.setUser_id(params.get("user_id"));
 		dto.setBoard_content(params.get("board_content"));
@@ -99,6 +131,8 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		if(flag.equals("detail")) {
 			dao.up_views(board_id);
 		}
+		
+		
 		return dao.detail(board_id);
 	}
 	
@@ -139,31 +173,73 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		return page;
 	}
 
-	public HashMap<String, Object> list(int page, int cnt) {
-		logger.info(page+" 페이지 보여줘");
-		logger.info("한 페이지에 "+cnt+" 개씩 보여줄거야");
-		HashMap<String, Object> map = new HashMap<String, Object>();		
 
-		// 1page = offset : 0
-		// 2page = offset : 5
-		// 3page = offset : 10
-		int offset = (page-1)*cnt;
+	 public ArrayList<MagazineDTO> magacommentlist2(String board_id) {
+	      ArrayList<MagazineDTO> magacommentlist = dao.magacommentlist(board_id);
+	      return magacommentlist;
+	   }
+
+
+
+	 public int commwrite(String board_id, String comment_content, String loginId) {
+	      
+	      
+	     // MagazineDTO dto = new MagazineDTO();
+	      
+		 //dto.setCat_id("mc");
+		 //dto.setUser_id(params.get("user_id"));
+		 //dto.setComment_content(params.get("comment_content"));
+
+	      /*
+	       * int idx = dto.getBoard_id(); String cat_id = dto.getCat_id();
+	       * logger.info("방금 insert 한 comment 보드 아이디 : "+idx);
+	       * dao.commwrite(dto,board_id,params);
+	       */
+	      
+	      return dao.commwrite(board_id,comment_content,loginId);
+	   }
+
+
+	
+
+
+	public void commdelete(String board_id, String comment_id, String loginId) {
+		int row = dao.commdelete(board_id,comment_id,loginId);
+		logger.info("delete comm data : "+row);
 		
-		// 만들 수 있는 총 페이지 수 
-		// 전체 게시물 / 페이지당 보여줄 수
-		int total = dao.totalCount();
-		int range = total%cnt == 0 ? total/cnt : (total/cnt)+1;
-		logger.info("전체 게시물 수 : "+total);
-		logger.info("총 페이지 수 : "+range);
-		
-		page = page > range ? range : page;
-		
-		map.put("currPage", page);
-		map.put("pages", range);
-				
-		ArrayList<MagazineDTO> list = dao.list(cnt, offset);
-		map.put("list", list);
-		return map;
 	}
+
+
+	
+	
+	public MagazineDTO magacommentlist(String board_id, String comment_id, String comment_content) {
+		return dao.magacommentlist2(board_id, comment_id, comment_content);
+	}
+	
+
+	//public String commupdate(HashMap<String, String> params) {
+		
+	      //int row = dao.commupdate(params);
+	      
+	     // logger.info("update row :"+row);
+		
+		//return "redirect:/magazineDetail.do?board_id="+params.get("board_id");
+	//}
+
+	
+	
+	public int commupdate(String comment_id, String comment_content, String loginId) {
+		// TODO Auto-generated method stub
+		return dao.commupdate(comment_id,comment_content, loginId);
+	}
+	
+	
+	
+	
+
+
+
+
+
 
 }

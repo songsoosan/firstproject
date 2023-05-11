@@ -88,17 +88,17 @@ textarea{
 		</c:forEach>
 		
 		<!-- 댓글 작성 -->
-	    <form method="post" action="magacommentWrite.do">
-	    	<input type="hidden" name="board_id" value="${dto.board_id}">
-	    	<input type="text" name="comment_id" value="${eventcommentlist2.comment_id}">
+	    <form method="get" action="magacommentupdate.do">
+			<input type="text" name="board_id" value="${dto.board_id}">
+	    	<input type="text" name="comment_id" value="${magacommentlist2.comment_id}">
 				<table>	
 						<tr>
 							<th>내용</th>
-							<td><textarea name="comment_content"></textarea></td>
+							<td><textarea name="comment_content">${magacommentlist2.comment_content}</textarea></td>
 						</tr>
 						<tr>
 							<th colspan="2">
-								<button type="submit">등록</button>
+								<button type="submit">수정</button>
 							</th>
 						</tr>
 	    		</table>
@@ -106,11 +106,8 @@ textarea{
 		<!--  댓글 끝 -->
 		
 </body>
-<c:if test="${not empty message}">
 <script>
 
-alert("${message}");
 
 </script>
-</c:if>
 </html>
