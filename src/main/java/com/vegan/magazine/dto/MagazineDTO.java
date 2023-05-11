@@ -3,6 +3,7 @@ package com.vegan.magazine.dto;
 import java.sql.Date;
 
 public class MagazineDTO {
+
    
    // board dto
    private int board_id;
@@ -102,3 +103,4 @@ public class MagazineDTO {
 
    
    
+

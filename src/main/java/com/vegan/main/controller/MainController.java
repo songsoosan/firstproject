@@ -41,12 +41,12 @@ public class MainController {
 
 	@RequestMapping(value = "/magazine.go", method = RequestMethod.GET)
 	public String magazine(Model model) {
-			return "magazine";
+			return "magazineList";
 	}
 
 	@RequestMapping(value = "/event.go", method = RequestMethod.GET)
 	public String event(Model model) {
-		return "event";
+		return "eventList";
 	}
 	@RequestMapping(value = "/recipeWrite.go", method = RequestMethod.GET)
 	public String write(Model model) {

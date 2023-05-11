@@ -1,4 +1,6 @@
+
 	package com.vegan.classes.service;
+
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,10 +22,10 @@ import com.vegan.mypage.dto.MypageDTO;
 
 @Service
 public class ClassesService {
-	
-	@Autowired ClassesDAO dao;
-	
-	Logger logger = LoggerFactory.getLogger(getClass());
+   
+   @Autowired ClassesDAO dao;
+   
+   Logger logger = LoggerFactory.getLogger(getClass());
 
 	public String write(MultipartFile photo, HashMap<String, String> params) {
 		ClassesDTO dto = new ClassesDTO();
@@ -93,10 +95,11 @@ public class ClassesService {
 		return dao.profile2(user_id);
 	}
 
-	public String appWrite(String cl_id) {
-		
-		return dao.appWrite(cl_id);
-	}
+   public String appWrite(String cl_id) {
+      
+      return dao.appWrite(cl_id);
+   }
+
 
 	public ClassesDTO user(String loginId) {
 		
@@ -110,11 +113,13 @@ public class ClassesService {
 		return dao.classApp(dto);
 	}
 
-	public ArrayList<ClassesDTO> appList(String cl_id) {
-		
-		
-		return dao.appList(cl_id);
-	}
+
+   public ArrayList<ClassesDTO> appList(String cl_id) {
+      
+      
+      return dao.appList(cl_id);
+   }
+
 
 	public String update(HashMap<String, String> params) {
 		
@@ -133,3 +138,4 @@ public class ClassesService {
 	}
 
 }
+
