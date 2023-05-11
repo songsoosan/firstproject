@@ -79,7 +79,7 @@ public class ClassesService {
 	}
 
 	public ArrayList<ClassesDTO> list() {
-		
+	
 		return dao.list();
 	}
 

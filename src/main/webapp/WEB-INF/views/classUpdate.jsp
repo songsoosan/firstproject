@@ -4,77 +4,93 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<link rel="stylesheet" href="resources/css/commons.css" type="text/css">
+	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 <style></style>
 </head>
 <body>
 ${msg}
-	<form action="class.update.do" method="post">
-	<input type="hidden" name="cl_id" value="${dto.cl_id}"/>
-		<table>
-			<tr>
-				<th>아이디</th>
-				<td><input type="text" name="user_id" value="${dto.user_id}"/></td>
-			</tr>
-			<tr>
-				<th>제목</th>
-				<td><input type="text" name="cl_subject" value="${dto.cl_subject}"/></td>
-			</tr>
-			<tr>
-				<th>모집기간</th>
-				<td>모집 시작일<input type="date" name="cl_period"/>모집 마감일<input type="date" name="cl_deadlinePeriod"/></td>
-			</tr>
-			<tr>
-				<th>모집인원</th>
-				<td><input type="text" name="cl_deadline"/></td>
-			</tr>
-			<tr>
-				<th>강사이름</th>
-				<td><input type="text" name="cl_teacher" value="${dto.cl_teacher}"/></td>
-			</tr>
-			<tr>
-				<th>강좌날짜</th>
-				<td><input type="date" name="cl_date" value="${dto.cl_date}"/></td>
-			</tr>
-			<tr>
-				<th>재료여부</th>
-				<td>
-					<c:set var="clContent" value="${dto.cl_ing_chk}" />
-					<c:choose>
-					<c:when test="${clContent eq '0'}">
-					<input type="radio" name="cl_ing_chk" value="1" > 있음
-					<input type="radio" name="cl_ing_chk" value="0" checked> 없음
-					</c:when>
-					<c:otherwise>
-					<input type="radio" name="cl_ing_chk" value="1" checked> 있음
-					<input type="radio" name="cl_ing_chk" value="0" > 없음
-					</c:otherwise>
-					</c:choose>
-			</td>
-			</tr>
-			<tr>
-				<th>주소</th>
-					<td>
-						<input type="text" id="postcode" placeholder="우편번호">
-						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-						<input type="text" id="address" placeholder="주소"><br>
-						<input type="text" id="detailAddress" placeholder="상세주소"><br>
-						<input type="text" id="extraAddress" placeholder="참고항목">
-					</td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td><textarea name="cl_content" >${dto.cl_content}</textarea></td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<input type="button" onclick="location.href='./classList.go'" value="리스트"/>
-					<button id="save">저장</button>
-				</th>
-			</tr>
-		</table>	
-	</form>
+	<div class="container">
+        <form action="class.update.do" method="post">
+            <input type="hidden" name="cl_id" value="${dto.cl_id}">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>아이디</label>
+                        <input type="text" class="form-control" name="user_id" value="${dto.user_id}">
+                    </div>
+                    <div class="form-group">
+                        <label>제목</label>
+                        <input type="text" class="form-control" name="cl_subject" value="${dto.cl_subject}">
+                    </div>
+                    <div class="form-group">
+                        <label>사진</label>
+                        <div>
+                            <c:if test="${dto.photo_name eq null}">
+                                <input type="file" class="form-control-file" name="photo">
+                            </c:if>
+                            <c:if test="${dto.photo_name ne null}">
+                                <img src="/photo/${dto.photo_name}" class="img-fluid">
+                            </c:if>
+                            <input type="file" class="form-control-file" id="photo" name="photo">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>모집기간</label>
+                        <div>모집 시작일<input type="date" name="cl_period">모집 마감일<input type="date" name="cl_deadlinePeriod"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>모집인원</label>
+                        <input type="text" class="form-control" name="cl_deadline">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>강사이름</label>
+                        <input type="text" class="form-control" name="cl_teacher" value="${dto.cl_teacher}">
+                    </div>
+                    <div class="form-group">
+                        <label>강좌날짜</label>
+                        <input type="date" class="form-control" name="cl_date" value="${dto.cl_date}">
+                    </div>
+                    <div class="form-group">
+                        <label>재료여부</label>
+                        <div>
+                            <c:set var="clContent" value="${dto.cl_ing_chk}" />
+                            <c:choose>
+                                <c:when test="${clContent eq '0'}">
+                                    <input type="radio" name="cl_ing_chk" value="1"> 있음
+                                    <input type="radio" name="cl_ing_chk" value="0" checked> 없음
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="radio" name="cl_ing_chk" value="1" checked> 있음
+                                    <input type="radio" name="cl_ing_chk" value="0"> 없음
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>주소</label>
+                        <input type="text" id="postcode" class="form-control" placeholder="우편번호">                    
+                        <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+                        <input type="text" id="address" class="form-control" placeholder="주소"><br>
+                        <input type="text" id="detailAddress" class="form-control" placeholder="상세주소"><br>
+                        <input type="text" id="extraAddress" class="form-control" placeholder="참고항목">
+                    </div>
+                    <div class="form-group">
+                        <label>내용</label>
+                        <textarea class="form-control" name="cl_content">${dto.cl_content}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">저장</button>
+                <a href="./classList.go" class="btn btn-secondary">리스트</a>
+            </div>
+        </form>
+    </div>
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
