@@ -3,6 +3,8 @@ package com.vegan.magazine.service;
 import java.io.File;
 
 
+
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,6 +30,7 @@ import com.vegan.magazine.dto.MagazineDTO;
 
 @Service
 public class MagazineService {
+
 	
 Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -233,7 +236,4 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		return dao.commupdate(comment_id,comment_content, loginId);
 	}
 	
-
-
-
 }

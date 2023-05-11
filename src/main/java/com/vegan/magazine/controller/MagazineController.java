@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vegan.magazine.dto.MagazineDTO;
 import com.vegan.magazine.service.MagazineService;
@@ -228,4 +229,5 @@ Logger logger = LoggerFactory.getLogger(getClass());
 	
 	
 }
+
 

@@ -4,6 +4,7 @@
 >
 <mapper namespace="com.vegan.magazine.dao.MagazineDAO">
 
+
 	<!--  
 	 <select id="list" resultType="com.vegan.magazine.dto.MagazineDTO">
 	    SELECT 
