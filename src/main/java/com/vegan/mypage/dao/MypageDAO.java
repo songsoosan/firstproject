@@ -1,7 +1,9 @@
 package com.vegan.mypage.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.vegan.classes.dto.ClassesDTO;
 import com.vegan.mypage.dto.MypageDTO;
 
 public interface MypageDAO {
@@ -21,6 +23,8 @@ public interface MypageDAO {
 	int profilePhoto(String oriFileName, String newFileName, String loginId);
 
 	int changePW(String loginId, String newPW);
+
+	ArrayList<ClassesDTO> mclist(String loginId);
 
 	
 

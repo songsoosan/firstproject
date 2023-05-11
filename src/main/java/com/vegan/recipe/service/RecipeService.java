@@ -31,7 +31,13 @@ public class RecipeService {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired RecipeDAO recipeDAO;
-	
+	public HashMap<String, Object> save(MultipartFile photo, HashMap<String, String> params, String loginId) {
+		RecipeDTO dto = new RecipeDTO();
+		dto.setRec_title(params.get("subject"));
+//		dto.setContents(params.get("content"));
+		
+		return null;
+	}
 	public Map<String, Object> write(MultipartHttpServletRequest request) {	
 		Map<String, Object> result = new HashMap<String, Object>();
         Gson gson = new Gson();
@@ -105,5 +111,6 @@ public class RecipeService {
 		}
 		
 	}
+
 
 }

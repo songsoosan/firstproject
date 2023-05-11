@@ -1,5 +1,6 @@
 package com.vegan.mypage.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.vegan.classes.dto.ClassesDTO;
 import com.vegan.mypage.dto.MypageDTO;
 import com.vegan.mypage.service.MypageService;
 
@@ -155,5 +157,25 @@ public class MypageController {
 			return "redirect:/profileDetail.do";
 		}
 	 
+	 
+	 @RequestMapping(value="/myClassList.do")
+		public String ClassList(Model model, HttpSession session) {
+			String page = "";
+			if (session.getAttribute("loginId") != null) {
+				page ="myClassList";
+				String loginId = String.valueOf(session.getAttribute("loginId"));
+				logger.info("myClasslist call");
+				ArrayList<ClassesDTO> list = service.mclist(loginId);		
+				logger.info("list cnt : "+list.size());
+				System.out.println("list cnt "+list.size());
+				model.addAttribute("list", list);
+				
+				
+			}else {
+				page = "main";
+				model.addAttribute("msg","로그인을 해주세요");
+			}
+			return page;
+		}
 	 
 }

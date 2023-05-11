@@ -17,7 +17,12 @@
 		margin: 5px;
 			
 	}
-
+	table{
+	margin: 0 auto;
+	}
+	h3{
+	
+	}
 	
 </style>
 </head>

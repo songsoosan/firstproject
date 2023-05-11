@@ -4,48 +4,114 @@
 >
 <mapper namespace="com.vegan.classes.dao.ClassesDAO">
 
-   <select id="list" resultType="com.vegan.classes.dto.ClassesDTO">
-            SELECT
-          c.cl_id, c.cl_subject, c.cl_period, c.cl_deadlinePeriod, c.cl_status,
-          IFNULL(p.photo_name, 'default_photo.jpg') AS photo_name
-      FROM
-          class c
-      LEFT JOIN
-          photo p ON p.identify_number = c.cl_id AND p.cat_id = 'cl'
-      ORDER BY
-          c.cl_id DESC;
-   </select>
-   
-   <select id="adminChk"  resultType="java.lang.Byte">
-      SELECT 
-         user_admin_chk
-      FROM user Where user_id = #{param1}
-   </select>
 
-   <insert
-      useGeneratedKeys = "true"
-      keyColumn = "idx"
-      keyProperty = "idx"
-       id="write" parameterType="com.vegan.classes.dto.ClassesDTO">
-      insert into class(user_id,cl_subject,cl_period,cl_deadlinePeriod,cl_deadline,cl_teacher,cl_date,cl_ing_chk,postcode,address,detailAddress,extraAddress,cl_content,cl_status,cl_del_chk)
-         VALUES(#{user_id},#{cl_subject},#{cl_period},#{cl_deadlinePeriod},#{cl_deadline},#{cl_teacher},#{cl_date},#{cl_ing_chk},#{postcode},#{address},#{detailAddress},#{extraAddress},#{cl_content},0,0)
-   </insert>
-   
-   <insert id="fileWrite">
-      INSERT INTO photo(identify_number, ori_photo_name, photo_name,cat_id)
-         VALUES(#{param1},#{param2},#{param3},'cl')
-   </insert>
-   
-   <select id="detail" 
-      resultType="com.vegan.classes.dto.ClassesDTO">
-      SELECT c.user_id, c.cl_id, c.cl_subject, c.cl_period, c.cl_deadlinePeriod, c.cl_deadline, c.cl_teacher, c.cl_date, c.cl_ing_chk, c.cl_status, c.postcode, c.address, c.detailAddress, c.extraAddress, c.cl_content, p.photo_name
-      ,(select count(*) from class_join where cl_id = #{cl_id}) as join_count
-      FROM class c
-      JOIN photo p ON p.identify_number = c.cl_id
-      WHERE c.cl_id = #{param1}
-      LIMIT 1;
+	<select id="list" resultType="com.vegan.classes.dto.ClassesDTO">
+				SELECT
+		    c.cl_id, c.cl_subject, c.cl_period, c.cl_deadlinePeriod, c.cl_status,
+		    IFNULL(p.photo_name, 'default_photo.jpg') AS photo_name
+		FROM
+		    class c
+		LEFT JOIN
+		    photo p ON p.identify_number = c.cl_id AND p.cat_id = 'cl'
+		ORDER BY
+		    c.cl_id DESC;
+	</select>
+	
+	<select id="adminChk"  resultType="java.lang.Byte">
+		SELECT 
+			user_admin_chk
+		FROM user Where user_id = #{param1}
+	</select>
 
-   </select>
+	<insert
+		useGeneratedKeys = "true"
+		keyColumn = "idx"
+		keyProperty = "idx"
+		 id="write" parameterType="com.vegan.classes.dto.ClassesDTO">
+		insert into class(user_id,cl_subject,cl_period,cl_deadlinePeriod,cl_deadline,cl_teacher,cl_date,cl_ing_chk,postcode,address,detailAddress,extraAddress,cl_content,cl_status,cl_del_chk)
+			VALUES(#{user_id},#{cl_subject},#{cl_period},#{cl_deadlinePeriod},#{cl_deadline},#{cl_teacher},#{cl_date},#{cl_ing_chk},#{postcode},#{address},#{detailAddress},#{extraAddress},#{cl_content},0,0)
+	</insert>
+	
+	<insert id="fileWrite">
+		INSERT INTO photo(identify_number, ori_photo_name, photo_name,cat_id)
+			VALUES(#{param1},#{param2},#{param3},'cl')
+	</insert>
+	
+	<select id="detail" 
+		resultType="com.vegan.classes.dto.ClassesDTO">
+		SELECT c.user_id, c.cl_id, c.cl_subject, c.cl_period, c.cl_deadlinePeriod, c.cl_deadline, c.cl_teacher, c.cl_date, c.cl_ing_chk, c.cl_status, c.postcode, c.address, c.detailAddress, c.extraAddress, c.cl_content, p.photo_name
+		,(select count(*) from class_join where cl_id = #{cl_id}) as join_count
+		FROM class c
+		JOIN photo p ON p.identify_number = c.cl_id
+		WHERE c.cl_id = #{param1}
+		LIMIT 1;
+
+	</select>
+
+	<select id="profile2" resultType="com.vegan.mypage.dto.MypageDTO">
+		SELECT u.user_id, u.user_name, u.user_email, u.user_phone, p.introduction, IFNULL(ph.photo_name, 'default_photo.jpg') AS photo_name, IFNULL(ph.photo_id, 0) AS photo_id 
+		FROM user u
+		JOIN profile p ON u.user_id = p.user_id
+		LEFT JOIN photo ph ON p.user_id = ph.identify_number AND ph.photo_id = (SELECT MAX(photo_id) FROM photo WHERE identify_number = u.user_id)
+		WHERE u.user_id = #{param1}
+
+	</select>
+	
+	<update id="update" parameterType="hashmap">
+    UPDATE class
+    SET user_id = #{user_id},
+        cl_subject = #{cl_subject},
+        cl_period = #{cl_period},
+        cl_deadlinePeriod = #{cl_deadlinePeriod},
+        cl_deadline = #{cl_deadline},
+        cl_teacher = #{cl_teacher},
+        cl_date = #{cl_date},
+        cl_ing_chk = #{cl_ing_chk},
+        postcode = #{postcode},
+        address = #{address},
+        detailAddress = #{detailAddress},
+        extraAddress = #{extraAddress},
+        cl_content = #{cl_content}
+</update>
+	
+	<select id="appWrite" 
+		resultType="String">
+		select 
+			cl_subject
+				from class where cl_id = #{cl_id}
+	</select>
+	
+	<select id="user" 
+		resultType="com.vegan.classes.dto.ClassesDTO">
+		select 
+			user_id,user_name,user_phone,user_email
+			from user where user_id = #{parama1}
+	</select>
+	
+	<select id="appWrite4" 
+		resultType="String">
+		select 
+			cl_id
+			from class where cl_subject = #{cl_subject}
+	</select>
+	
+	<insert id="classApp" parameterType="com.vegan.classes.dto.ClassesDTO">
+		INSERT IGNORE INTO class_join (cl_part_id, cl_id, user_id, postcode, address, detailAddress, extraAddress, user_name, user_phone)
+			SELECT #{cl_part_id}, #{cl_id}, #{user_id}, #{postcode}, #{address}, #{detailAddress}, #{extraAddress}, #{user_name}, #{user_phone}
+			FROM class_join
+			WHERE NOT EXISTS (
+		  SELECT 1 FROM class_join WHERE cl_id = #{cl_id} AND user_id = #{user_id}
+		);
+
+	</insert>
+	
+	<select id="appList" resultType="com.vegan.classes.dto.ClassesDTO">
+		SELECT 
+			cl_part_id,cl_id,user_id,postcode,address,detailAddress,extraAddress,user_name,user_phone
+			from class_join where cl_id = #{cl_id} ORDER BY cl_id DESC
+	</select>
+	
+
 
    <select id="profile2" resultType="com.vegan.mypage.dto.MypageDTO">
       SELECT u.user_id, u.user_name, u.user_email, u.user_phone, p.introduction, IFNULL(ph.photo_name, 'default_photo.jpg') AS photo_name, IFNULL(ph.photo_id, 0) AS photo_id 

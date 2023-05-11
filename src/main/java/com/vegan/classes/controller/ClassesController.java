@@ -25,6 +25,7 @@ import com.vegan.mypage.dto.MypageDTO;
 
 @Controller
 public class ClassesController {
+
    
    private static final Logger logger = LoggerFactory.getLogger(ClassesController.class);
    
@@ -207,6 +208,9 @@ public class ClassesController {
       logger.info("params : "+params);
       return service.update(params);
    }
+
+
+
 
 
 

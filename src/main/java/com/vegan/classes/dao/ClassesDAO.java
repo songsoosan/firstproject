@@ -19,15 +19,20 @@ public interface ClassesDAO {
    ClassesDTO appWrite2();
 
 
-   String appWrite4(String string);
-   
-   int classApp(ClassesDTO dto);
+
+	String appWrite4(String string);
+	
+	int classApp(ClassesDTO dto);
+
 
    ArrayList<ClassesDTO> appList(String cl_id);
 
    int update(HashMap<String, String> params);
 
-   byte adminChk(String loginId);
+
+	byte adminChk(String loginId);
+
+
 
    ClassesDTO user(String loginId);
 
