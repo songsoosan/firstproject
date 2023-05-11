@@ -84,7 +84,12 @@ public class MypageController {
 			logger.info("detail:"+dto);
 			model.addAttribute("detail",dto);
 		
-		
+			String msg =(String) session.getAttribute("msg");
+			if (msg != null) {
+				model.addAttribute("msg",msg);
+				//쓰고난 세션은 반드시 바로 삭제해 줘야 한다.
+				session.removeAttribute("msg");
+			}
 		return "userDetail";
 	}
 	@RequestMapping(value = "/userUpdate.do")
@@ -112,7 +117,7 @@ public class MypageController {
 		int pwchk = service.pwChk(loginId,pwChk);
 
 		if (pwchk == 1) {
-			page = "redirect:/profileDetail.do";
+			page = "changePW";
 		}else {
 			page = "pwCheck";
 			model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
@@ -135,5 +140,20 @@ public class MypageController {
 		 
 			return "login";
 		}
+	 
+	 @RequestMapping(value = "/changePW.do")
+		public String newPW( Model model, HttpSession session,@RequestParam String newPW ) {
+		 //logger.info("del idx:"+idx);
+		 String loginId = (String) session.getAttribute("loginId");
+		 if (session.getAttribute("loginId") != null) {
+			 if (service.changePW(loginId,newPW)==1) {
+				String msg="비밀번호가 변경되었습니다.";
+				 session.setAttribute("msg", msg);
+			}
+		 }
+		 
+			return "redirect:/profileDetail.do";
+		}
+	 
 	 
 }

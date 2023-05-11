@@ -14,6 +14,10 @@ public class CheckListDTO {
 	private String user_id;
 	private int total_score;
 	
+	private boolean list_check;
+	private String step;
+	private boolean user_admin_chk;
+	
 	
 	public String getQuestion_detail() {
 		return question_detail;
@@ -63,7 +67,25 @@ public class CheckListDTO {
 	public void setTotal_score(int total_score) {
 		this.total_score = total_score;
 	}
-	
+	public boolean isList_check() {
+        return list_check;
+    }
+    public void setList_check(boolean list_check) {
+        this.list_check = list_check;
+    }
+	public String getStep() {
+		return step;
+	}
+	public void setStep(String step) {
+		this.step = step;
+	}
+	public boolean isUser_admin_chk() {
+		return user_admin_chk;
+	}
+	public void setUser_admin_chk(boolean user_admin_chk) {
+		this.user_admin_chk = user_admin_chk;
+	}
+
 	
 	
 	

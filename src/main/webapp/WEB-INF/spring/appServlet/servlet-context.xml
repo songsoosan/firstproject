@@ -43,17 +43,30 @@
 		<!-- 쿼리문이 있을 장소 -->
 		<beans:property name="mapperLocations" >
 			<beans:list>
-				<beans:value>classpath:com/vegan/**/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/admin/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/board/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/checkList/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/classes/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/event/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/letter/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/main/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/member/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/mypage/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/ranking/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/recipe/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/report/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/utils/dao/*.xml</beans:value>
+				<beans:value>classpath:com/vegan/magazine/dao/*.xml</beans:value>
 				
 			</beans:list>
 		</beans:property>
 	</beans:bean>
 	
 
-	
-	<beans:bean id="uploadTempDir" class="org.springframework.core.io.FileSystemResource">
+<!-- 	<beans:bean id="uploadTempDir" class="org.springframework.core.io.FileSystemResource">
 	        <beans:constructor-arg value="c:/temp/"/>
-	</beans:bean>
+	</beans:bean> -->
+
 	
 	<!-- matbatis area -->
 	<mybatis-spring:scan base-package="com.vegan.**.dao"/>

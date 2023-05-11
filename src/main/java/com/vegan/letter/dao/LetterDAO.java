@@ -13,11 +13,13 @@ public interface LetterDAO {
 
 	HashMap<String, Object> detail(String detailId);
 
-	ArrayList<LetterDTO> recieveList(String loginId);
+	ArrayList<LetterDTO> recieveList(String loginId, int cnt, int offset);
 
-	ArrayList<LetterDTO> sendList(String loginId);
+	ArrayList<LetterDTO> sendList(String loginId, int cnt, int offset);
 
 	int delete(String id);
 
-	void read(String detailId);
+	void read(String detailId, String loginId);
+
+	int totalCount();
 }

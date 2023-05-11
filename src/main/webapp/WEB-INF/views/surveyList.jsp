@@ -15,8 +15,11 @@
 </head>
 <body>
     <h3>비건 설문조사</h3>
-    <button onclick="location.href='surveyWrite.go'">등록</button>
-    <button onclick="location.href='surveyUpdate.go'">수정</button>
+    <c:if test="${admincheck}">
+    	<button onclick="location.href='surveyWrite.go'">등록</button>
+    	<button onclick="location.href='surveyUpdate.go'">수정</button>
+	</c:if>
+	<button onclick="location.href='main.go'">메인</button>
     <form action="result.go" method="post">
         <table>
             <thead>
@@ -43,7 +46,7 @@
                 </c:forEach>
                 <tr>
                     <th colspan="3">
-                        <input type="submit" value="제출">
+                     	<input type="submit" value="제출">
                     </th>
                 </tr>
             </tbody>

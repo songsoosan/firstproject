@@ -18,6 +18,14 @@ public interface CheckListDAO {
 	
 	ArrayList<CheckListDTO> getresult(HashMap<String, String> params);
 
+	boolean resultCheck(String user_id);
+
+	void updateStep(CheckListDTO result);
+
+	boolean admincheck(String user_id);
+
+	int delete(int questionnumber);
+
 	
 
 	

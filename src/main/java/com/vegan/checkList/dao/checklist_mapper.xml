@@ -20,8 +20,8 @@
 	</update>
 	
 	<insert id="resultsave" parameterType="hashmap">
-    	INSERT INTO question_result (user_id, total_score, create_date)
-    	VALUES (#{user_id,jdbcType=VARCHAR}, #{total_score,jdbcType=INTEGER}, NOW())
+    	INSERT INTO question_result (user_id, total_score, create_date, list_check, step)
+    	VALUES (#{user_id,jdbcType=VARCHAR}, #{total_score,jdbcType=INTEGER}, NOW(), 1, #{step,jdbcType=VARCHAR})
 	</insert>
 	
 	<select id="getresult" resultType="com.vegan.checkList.dto.CheckListDTO">
@@ -30,19 +30,22 @@
     	WHERE user_id = #{user_id}
 	</select>
 	
+	<select id="resultCheck" parameterType="string" resultType="Boolean">
+		 SELECT COUNT(*) FROM question_result WHERE user_id = #{user_id}
+	</select>
 	
-	<!--  <select id="result" parameterType="hashmap" resultType="com.vegan.checkList.dto.CheckListDTO">
-    	SELECT user_id, SUM(
-        	CASE #{score}
-            	WHEN '1' THEN 1
-            	WHEN '2' THEN 2
-            	WHEN '3' THEN 3
-            	WHEN '4' THEN 4
-            	WHEN '5' THEN 5
-       		END
-    	) AS total_score
-    		FROM question_result
-    	GROUP BY user_id
-	</select> -->
+	<update id="updateStep" parameterType="com.vegan.checkList.dto.CheckListDTO">
+    	UPDATE question_result
+   		SET step = #{step}
+    	WHERE user_id = #{user_id}
+	</update>
+	
+	<select id="admincheck" parameterType="string" resultType="boolean">
+    	SELECT user_admin_chk FROM user WHERE user_id = #{user_id}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		DELETE from question_list WHERE question_number = #{questionNumber}
+	</delete>
 	
 </mapper>

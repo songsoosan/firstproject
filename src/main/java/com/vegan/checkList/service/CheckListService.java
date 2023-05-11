@@ -2,6 +2,9 @@ package com.vegan.checkList.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,10 +49,10 @@ public class CheckListService {
 		return "redirect:/survey.do";
 	}
 
-	public void resultsave(HashMap<String, String> params) {
+	public void resultsave(HttpSession session, HashMap<String, String> params) {
 	    String user_id = params.get("user_id");
 	    logger.info("유저 아이디 확인 : " + user_id);
-	    logger.info("서비스 파람 확인 : " + params);
+	    // logger.info("서비스 파람 확인 : " + params);
 
 	    int total_score = 0;
 	    for (String key : params.keySet()) {
@@ -69,35 +72,87 @@ public class CheckListService {
 	        }
 	    }
 
-	    logger.info("총 점수 : " + total_score);
+	    // logger.info("총 점수 : " + total_score);
 	    params.put("total_score", String.valueOf(total_score));
-	    logger.info("파람의 값 : "+params.toString());
+	    // logger.info("파람의 값 : "+params.toString());
 	    
 	    int total_score_value = Integer.parseInt(params.get("total_score"));
 
-	    String grade;
+	    String step;
 	    if (total_score_value >= 1 && total_score_value <= 10) {
-	        grade = "플렉시테리언";
+	    	step = "플렉시테리언";
 	    } else if (total_score_value >= 11 && total_score_value <= 20) {
-	        grade = "폴로 페스코 베지테리언";
+	    	step = "폴로 페스코 베지테리언";
 	    } else if (total_score_value >= 21 && total_score_value <= 30) {
-	        grade = "페스코 베지테리언";
+	    	step = "페스코 베지테리언";
 	    } else if (total_score_value >= 31 && total_score_value <= 40) {
-	        grade = "락토 오보 베지테리언";
+	    	step = "락토 오보 베지테리언";
 	    } else if (total_score_value >= 41 && total_score_value <= 50) {
-	        grade = "비건";
+	    	step = "비건";
 	    } else {
 	        // 점수가 범위에 포함되지 않는 경우 기본값으로 플렉시테리언 설정
-	        grade = "플렉시테리언";
+	    	step = "플렉시테리언";
 	    }
-
-	    params.put("grade", grade);
-
+	    params.put("step", step);
 	    dao.resultsave(params);
+	    session.setAttribute("surveyResult", params);
 	}
 
 	public ArrayList<CheckListDTO> getresult(HashMap<String, String> params) {
 	    return dao.getresult(params);
+	}
+
+	public boolean resultCheck(String user_id) {
+		return dao.resultCheck(user_id);
+	}
+
+	public Map<String, String> getresult(String user_id) {
+	    HashMap<String, String> params = new HashMap<>();
+	    params.put("user_id", user_id);
+	    ArrayList<CheckListDTO> resultList = dao.getresult(params);
+	    if (!resultList.isEmpty()) {
+	        CheckListDTO result = resultList.get(0);
+	        Map<String, String> resultMap = new HashMap<>();
+	        resultMap.put("user_id_value", result.getUser_id());
+	        resultMap.put("total_score_value", String.valueOf(result.getTotal_score()));
+	        
+	        // 올바른 값을 설정하기 위해 step 속성이 null인 경우에만 설정합니다.
+	        if (result.getStep() == null) {
+	            int total_score_value = result.getTotal_score();
+	            String step;
+	            if (total_score_value >= 1 && total_score_value <= 10) {
+	                step = "플렉시테리언";
+	            } else if (total_score_value >= 11 && total_score_value <= 20) {
+	                step = "폴로 페스코 베지테리언";
+	            } else if (total_score_value >= 21 && total_score_value <= 30) {
+	                step = "페스코 베지테리언";
+	            } else if (total_score_value >= 31 && total_score_value <= 40) {
+	                step = "락토 오보 베지테리언";
+	            } else if (total_score_value >= 41 && total_score_value <= 50) {
+	                step = "비건";
+	            } else {
+	                step = "플렉시테리언";
+	            }
+	            resultMap.put("step", step);
+	            // 데이터베이스에도 step 값을 업데이트합니다.
+	            result.setStep(step);
+	            dao.updateStep(result);
+	        } else {
+	            resultMap.put("step", result.getStep());
+	        }
+	        
+	        return resultMap;
+	    }
+	    return null;
+	}
+
+	public boolean admincheck(String user_id) {
+		return dao.admincheck(user_id);
+	}
+
+	public void delete(int questionNumber) {
+		int row = dao.delete(questionNumber);
+		logger.info("삭제 완료 여부 : "+row);
 	}
 	
 }
