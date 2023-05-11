@@ -174,33 +174,65 @@ Logger logger = LoggerFactory.getLogger(getClass());
    }
 
 
-   public ArrayList<MagazineDTO> magacommentlist2(String board_id) {
-      ArrayList<MagazineDTO> magacommentlist = dao.magacommentlist(board_id);
-      return magacommentlist;
+    public ArrayList<MagazineDTO> magacommentlist2(String board_id) {
+         ArrayList<MagazineDTO> magacommentlist = dao.magacommentlist(board_id);
+         return magacommentlist;
+      }
+
+
+
+    public int commwrite(String board_id, String comment_content, String loginId) {
+         
+         
+        // MagazineDTO dto = new MagazineDTO();
+         
+       //dto.setCat_id("mc");
+       //dto.setUser_id(params.get("user_id"));
+       //dto.setComment_content(params.get("comment_content"));
+
+         /*
+          * int idx = dto.getBoard_id(); String cat_id = dto.getCat_id();
+          * logger.info("방금 insert 한 comment 보드 아이디 : "+idx);
+          * dao.commwrite(dto,board_id,params);
+          */
+         
+         return dao.commwrite(board_id,comment_content,loginId);
+      }
+
+
+   
+
+
+   public void commdelete(String board_id, String comment_id, String loginId) {
+      int row = dao.commdelete(board_id,comment_id,loginId);
+      logger.info("delete comm data : "+row);
+      
    }
 
 
-   public int commwrite(String board_id, String comment_content, String loginId) {
-      
-      
-     // MagazineDTO dto = new MagazineDTO();
-      
-//      dto.setCat_id("mc");
-//      dto.setUser_id(params.get("user_id"));
-//      dto.setComment_content(params.get("comment_content"));
-
-		/*
-		 * int idx = dto.getBoard_id(); String cat_id = dto.getCat_id();
-		 * logger.info("방금 insert 한 comment 보드 아이디 : "+idx);
-		 * dao.commwrite(dto,board_id,params);
-		 */
-      
-      return dao.commwrite(board_id,comment_content,loginId);
+   
+   
+   public MagazineDTO magacommentlist(String board_id, String comment_id, String comment_content) {
+      return dao.magacommentlist2(board_id, comment_id, comment_content);
    }
+   
 
+   //public String commupdate(HashMap<String, String> params) {
+      
+         //int row = dao.commupdate(params);
+         
+        // logger.info("update row :"+row);
+      
+      //return "redirect:/magazineDetail.do?board_id="+params.get("board_id");
+   //}
 
-
-
+   
+   
+   public int commupdate(String comment_id, String comment_content, String loginId) {
+      // TODO Auto-generated method stub
+      return dao.commupdate(comment_id,comment_content, loginId);
+   }
+   
 
 
 
