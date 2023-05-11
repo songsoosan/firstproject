@@ -81,14 +81,14 @@ textarea{
 			<div class="comment">
 				${comment.comment_id}
 				${comment.user_id} / ${comment.comment_date}
-				<input type ="button" onclick='location.href="magacommentdel.do?comment_id=${comment.comment_id}&board_id=${dto.board_id}"' value="삭제"/>
-				<input type ="button" onclick='location.href="magacommentupdate.go?comment_id=${comment.comment_id}&board_id=${dto.board_id}&comment_content=${comment.comment_content}"' value="수정"/>
+				<input type ="button" onclick='location.href="commentdel.do?comment_id=${comment.comment_id}&board_id=${dto.board_id}"' value="삭제"/>
+				<input type ="button" onclick='location.href="commentupdate.go?comment_id=${comment.comment_id}&board_id=${dto.board_id}&comment_content=${comment.comment_content}"' value="수정"/>
 				<p>${comment.comment_content}</p>
 			</div>
 		</c:forEach>
 		
 		<!-- 댓글 작성 -->
-	    <form method="get" action="magacommentupdate.do">
+	    <form method="get" action="commentupdate.do">
 			<input type="text" name="board_id" value="${dto.board_id}">
 	    	<input type="text" name="comment_id" value="${magacommentlist2.comment_id}">
 				<table>	

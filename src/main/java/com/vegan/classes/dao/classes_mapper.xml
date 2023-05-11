@@ -55,7 +55,7 @@
 		LEFT JOIN photo ph ON p.user_id = ph.identify_number AND ph.photo_id = (SELECT MAX(photo_id) FROM photo WHERE identify_number = u.user_id)
 		WHERE u.user_id = #{param1}
 
-	</select>
+	</select> 
 	
 	<update id="update" parameterType="hashmap">
     UPDATE class
@@ -113,16 +113,16 @@
 	
 
 
-   <select id="profile2" resultType="com.vegan.mypage.dto.MypageDTO">
+ <!--   <select id="profile2" resultType="com.vegan.mypage.dto.MypageDTO">
       SELECT u.user_id, u.user_name, u.user_email, u.user_phone, p.introduction, IFNULL(ph.photo_name, 'default_photo.jpg') AS photo_name, IFNULL(ph.photo_id, 0) AS photo_id 
       FROM user u
       JOIN profile p ON u.user_id = p.user_id
       LEFT JOIN photo ph ON p.user_id = ph.identify_number AND ph.photo_id = (SELECT MAX(photo_id) FROM photo WHERE identify_number = u.user_id)
       WHERE u.user_id = #{param1}
 
-   </select>
+   </select> -->
    
-   <update id="update" parameterType="hashmap">
+   <!-- <update id="update" parameterType="hashmap">
     UPDATE class
     SET user_id = #{user_id},
         cl_subject = #{cl_subject},
@@ -152,15 +152,15 @@
          user_id,user_name,user_phone,user_email
          from user where user_id = #{parama1}
    </select>
-   
-   <select id="appWrite4" 
+    -->
+   <!-- <select id="appWrite4" 
       resultType="String">
       select 
          cl_id
          from class where cl_subject = #{cl_subject}
-   </select>
+   </select> -->
    
-   <insert id="classApp" parameterType="com.vegan.classes.dto.ClassesDTO">
+   <!-- <insert id="classApp" parameterType="com.vegan.classes.dto.ClassesDTO">
       INSERT IGNORE INTO class_join (cl_part_id, cl_id, user_id, postcode, address, detailAddress, extraAddress, user_name, user_phone)
          SELECT #{cl_part_id}, #{cl_id}, #{user_id}, #{postcode}, #{address}, #{detailAddress}, #{extraAddress}, #{user_name}, #{user_phone}
          FROM class_join
@@ -168,16 +168,11 @@
         SELECT 1 FROM class_join WHERE cl_id = #{cl_id} AND user_id = #{user_id}
       );
 
-   </insert>
+   </insert> -->
    
-   <select id="appList" resultType="com.vegan.classes.dto.ClassesDTO">
+   <!-- <select id="appList" resultType="com.vegan.classes.dto.ClassesDTO">
       SELECT 
          cl_part_id,cl_id,user_id,postcode,address,detailAddress,extraAddress,user_name,user_phone
          from class_join where cl_id = #{cl_id} ORDER BY cl_id DESC
-   </select>
-   
-
-   
-
-
+   </select> -->
 </mapper>

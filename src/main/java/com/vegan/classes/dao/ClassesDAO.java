@@ -38,7 +38,7 @@ public interface ClassesDAO {
 
    void fileWrite(int idx, String ori_photo_name, String photo_name);
 
-   MypageDTO profile2(String user_id);
+	 MypageDTO profile2(String user_id); 
 
    
 
