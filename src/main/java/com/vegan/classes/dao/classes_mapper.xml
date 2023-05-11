@@ -71,6 +71,7 @@
         detailAddress = #{detailAddress},
         extraAddress = #{extraAddress},
         cl_content = #{cl_content}
+        WHERE cl_id = #{cl_id}
 </update>
 	
 	<select id="appWrite" 

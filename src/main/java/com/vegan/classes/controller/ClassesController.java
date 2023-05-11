@@ -34,7 +34,7 @@ public class ClassesController {
 	@RequestMapping(value="/class", method = RequestMethod.GET)
 	public String test(Model model) {
 		logger.info("test");
-		return "classTestMain";
+		return "classList";
 	}
 
 	

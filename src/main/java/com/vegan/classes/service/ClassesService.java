@@ -117,7 +117,6 @@ public class ClassesService {
 	}
 
 	public String update(HashMap<String, String> params) {
-		
 		int cl_id = Integer.parseInt(params.get("cl_id"));		
 		int row = dao.update(params);
 		
