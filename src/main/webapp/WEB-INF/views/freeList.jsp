@@ -26,9 +26,6 @@
    .none {
       display: none;
    }
-   .onlyAdmin {
-      display: block;
-   }
    .textDeco {
       text-decoration: line-through;
    }
@@ -44,11 +41,8 @@
    </span>
    <div class="inline">
       <input id="search" type="text" name="searchText">
-      <button onclick="listCall(1)">검색</button>
-      <button class="none adminArea" onclick="location.href='write.go'">글쓰기</button>
-   </div>
-   <button class="none adminArea" onclick="hide()">숨기기</button>
-   <div>
+      <button onclick="listCall(1)">검색</button></br>
+      <button onclick="location.href='freewrite.go'">글쓰기</button></br>
       게시물 갯수: 
       <select id = "pagePerNum">
          <option value="15">15</option>
@@ -59,7 +53,6 @@
    <table>
       <thead>
          <tr>
-            <th class="none adminArea">숨기기</th>
             <th>번호</th>
             <th>제목</th>
             <th>작성자</th>
@@ -71,7 +64,7 @@
       
       </tbody>
       <tr>
-         <td colspan="6" id="paging">
+         <td colspan="5" id="paging">
             <div class = "container">
                <nav aria-label = "Page navigation" style="text-align:center">
                   <ul class="pagination" id="pagination"></ul>
@@ -85,11 +78,6 @@
 var loginId = '<%=(String)session.getAttribute("loginId")%>';
 adminCheck();
 
-function adminCheck() {
-   if(loginId === "admin") {
-      $(".adminArea").addClass("onlyAdmin");
-   }
-}
 
 $("#search").keydown(function (key) {
    console.log("gg down ");
@@ -148,7 +136,6 @@ function listPrint(list){
       // 해결방법 2. js 에서 변환
       list.forEach(function(board,board_id){
          content +='<tr ' + (board.is_hide ? 'class="textDeco"' : "") + '>';
-         content +='<td class="none adminArea"><input type="checkbox" name="chk" value="'+board.board_id+'"/></td>';
          content +='<td>'+board.board_id+'</td>';
          content +='<td><a href ="boardDetail.do?board_id='+board.board_id+'">'+board.board_title+'</td>';
          content +='<td>'+board.user_id+'</td>';
@@ -159,27 +146,6 @@ function listPrint(list){
       $('#list').empty();
       $('#list').append(content);
       adminCheck();
-}
-
-function hide() {
-   var hideList = new Array();
-   $("input[name=chk]:checked").each(function() {
-      hideList.push($(this).val());
-   });
-   $.ajax({
-      type: 'post',
-      url: 'hide.ajax',
-      data: {
-         'hideList' : hideList
-      },
-      dataType: 'text',
-      success: function(data){
-         listCall(1);
-      },
-      error: function(e){
-         console.log(e);
-      }
-   });
 }
 
 </script>

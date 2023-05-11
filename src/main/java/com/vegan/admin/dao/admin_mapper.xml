@@ -10,6 +10,6 @@
 			user_id, user_name, user_phone, user_email, user_admin_chk,user_secc_chk
 		FROM user ORDER BY user_id DESC
 	</select>
-	
 
+   
 </mapper>

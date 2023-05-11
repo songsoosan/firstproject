@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -98,15 +97,29 @@ public class MemberController {
 		return service.join(params);		   
 	   }
 	
-	
-	
-	
 	@RequestMapping(value = "/findID.go", method = RequestMethod.GET)
 	public String findID(Model model) {
 			return "findID";
 	}
 
+	@RequestMapping(value="/sendMail.ajax", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> sendMail(@RequestParam HashMap<String, String> params) {
+		logger.info("params : " + params);
+		return service.sendMail(params);
+	}
 	
+	@RequestMapping(value = "/findPW.go", method = RequestMethod.GET)
+	public String findPW(Model model) {
+			return "findPW";
+	}
+	
+	@RequestMapping(value="/sendPWMail.ajax", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> sendPWMail(@RequestParam HashMap<String, String> params) {
+		logger.info("params : " + params);
+		return service.sendPWMail(params);
+	}
 
 	
 }
