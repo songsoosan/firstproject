@@ -9,12 +9,10 @@ import com.vegan.member.dto.MemberDTO;
 public interface AdminDAO {
 
 
-<<<<<<< HEAD
-	ArrayList<AdminDTO> list();
-=======
+
 	ArrayList<AdminDTO> userList();
 	
 	ArrayList<AdminDTO> reportList();
->>>>>>> origin/master
+
 
 }
