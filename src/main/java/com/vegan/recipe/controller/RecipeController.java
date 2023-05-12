@@ -1,8 +1,8 @@
 package com.vegan.recipe.controller;
 
 
-import java.util.HashMap;
 
+import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,4 +43,5 @@ public class RecipeController {
 			@RequestParam HashMap<String, String> params) {
         return service.write(photo, params);  
     }
+
 }

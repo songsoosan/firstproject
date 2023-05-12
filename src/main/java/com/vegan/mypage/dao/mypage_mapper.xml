@@ -3,11 +3,16 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
 <mapper namespace="com.vegan.mypage.dao.MypageDAO">
-	
+   
+
 
 	<select id="profile" resultType="com.vegan.mypage.dto.MypageDTO">
-		SELECT u.user_id,u.user_name,u.user_email,u.user_phone,p.introduction FROM user u, profile p
-			WHERE u.user_id=p.user_id AND u.user_id = #{param1}
+		SELECT u.user_id, u.user_name, u.user_email, u.user_phone, p.introduction, IFNULL(ph.photo_name, 'default_photo.jpg') AS photo_name, IFNULL(ph.photo_id, 0) AS photo_id 
+		FROM user u
+		JOIN profile p ON u.user_id = p.user_id
+		LEFT JOIN photo ph ON p.user_id = ph.identify_number AND ph.photo_id = (SELECT MAX(photo_id) FROM photo WHERE identify_number = u.user_id)
+		WHERE u.user_id = #{param1}
+
 	</select>
 
 	<select id="profileDetail" resultType="com.vegan.mypage.dto.MypageDTO">
@@ -42,10 +47,24 @@
 	</insert>
 		
 	<insert id="profilePhoto">
-		INSERT INTO photo(category_id,ori_photo_name, photo_name,identify_number) 
+		INSERT INTO photo(cat_id,ori_photo_name, photo_name,identify_number) 
 			VALUES('profliePhoto',#{param1},#{param2},#{param3})
+			ON DUPLICATE KEY UPDATE photo_name = #{param2}
 	</insert>	
 	
+	<select id="mclist" resultType="com.vegan.classes.dto.ClassesDTO">
+		SELECT c.cl_id,cj.user_id,c.cl_subject,c.cl_period,c.cl_deadlinePeriod,c.cl_deadline
+			,c.cl_teacher,c.cl_date,c.cl_ing_chk,c.cl_status,c.cl_content
+			,c.cl_id, cj.cl_part_id
+			FROM class c 
+			JOIN class_join cj ON c.cl_id = cj.cl_id
+			WHERE c.cl_id IN (
+			    SELECT cl_id 
+			    FROM class_join 
+   		 WHERE user_id = #{param1}
+);
+	</select>
 	
+
 
 </mapper>

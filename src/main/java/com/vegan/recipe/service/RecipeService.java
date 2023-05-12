@@ -30,7 +30,10 @@ public class RecipeService {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired RecipeDAO recipeDAO;
+
 	
+
+
 
 	public String write(MultipartFile photo, HashMap<String, String> params) {
 		
@@ -86,5 +89,6 @@ public class RecipeService {
 		}
 		
 	}
+
 
 }

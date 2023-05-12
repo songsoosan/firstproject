@@ -105,17 +105,10 @@ textarea{
 		<tr>
 			<td rowspan="4">
 				<c:if test="${user.photo_name eq null}">
-					<form action="profilePhoto.do" method="post" enctype="multipart/form-data">
-						<input type="file" name="photo"/>
-						<button>등록</button>
-					</form>	
+					기본사진	
 				</c:if>
 				<c:if test="${user.photo_name ne null }">
 					<img width="300" src="/photo/${user.photo_name}"/>			
-					<form action="profilePhoto.do" method="post" enctype="multipart/form-data">
-						<input type="file" name="photo"/>
-						<button>등록</button>
-					</form>
 				</c:if>					
 			</td>
 			<td>${user.user_id }</td>
@@ -132,24 +125,12 @@ textarea{
 		<tr>
 			<td colspan="2">비건단계</td>
 		</tr>
-		<form action="profileUpdate.do" method="post">
-			<tr>
-				<td><textarea name=introduction>${user.introduction}</textarea></td>
-				<td><input type="submit" value="확인"></td>
-			</tr>
-		</form>
 		<tr>
-			<td colspan="2"><a>내가 작성한 레시피</a></td>
-		</tr>
-		<tr>
-			<td colspan="2"><a>즐려찾기한 레시피</a></td>
-		</tr>
-		<tr>
-			<td colspan="2"><a href="myClassList.do">구매한 클래스</a></td>
+			<td colspan="2">${user.introduction}</td>		
 		</tr>
 		<tr>
 			<th colspan = "2">
-				<input type="button" value="개인정보" onclick="location.href='profileDetail.do'"/>
+				<input type="button" value="돌아가기" onclick="location.href='classDetail.do?cl_id=${cl_id}'"/>
 			</th>
 		</tr>
 	</table>

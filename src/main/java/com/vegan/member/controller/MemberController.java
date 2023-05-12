@@ -40,7 +40,9 @@ public class MemberController {
 	@RequestMapping(value = "/login.go", method = RequestMethod.GET)
 	public String loginGo(Model model) {
 
+
 			return "login";
+
 	}
 	
 	@RequestMapping(value = "/login.do", method = {RequestMethod.POST, RequestMethod.GET})

@@ -1,0 +1,13 @@
+diff a/src/main/webapp/WEB-INF/views/letterDetail.jsp b/src/main/webapp/WEB-INF/views/letterDetail.jsp	(rejected hunks)
+@@ -52,10 +49,7 @@
+ 		</tr>
+ 		<tr>
+ 			<th colspan="2">
+-			<div class="col text-center">
+-				<button type="button" class="btn btn-primary", onclick="location.href='recieveletter.go'">돌아가기</button>
+-				<button type="button" class="btn btn-danger" onclick="location.href='reportWrite.go'">신고하기</button>
+-			</div>
++				<button onclick="location.href='recieveletter.go'">돌아가기</button>
+ 			</th>
+ 		</tr>
+ 	</table>
