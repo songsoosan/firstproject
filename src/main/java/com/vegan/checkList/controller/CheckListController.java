@@ -29,30 +29,45 @@ public class CheckListController {
 	public String list(Model model, HttpSession session) {
 	    String page = "";
 	    String user_id = (String) session.getAttribute("loginId");
+
 	    if (user_id != null) {
 	        boolean resultCheck = service.resultCheck(user_id);
 	        if (resultCheck) {
 	            // 설문조사 결과가 있는 경우
 	            Map<String, String> result = service.getresult(user_id);
 	            model.addAttribute("result", result);
-	            // logger.info("result 의 값 : "+result);
 	            page = "surveyResult";
 	        } else {
 	            // 설문조사 결과가 없는 경우
-	            page = "surveyList";
 	            ArrayList<CheckListDTO> list = service.list();
 	            model.addAttribute("list", list);
+	            page = "surveyList";
 	        }
-	        
+
 	        boolean admincheck = service.admincheck(user_id);
 	        model.addAttribute("admincheck", admincheck);
 	    } else {
 	        page = "main";
 	        model.addAttribute("msg", "로그인 후 이용해주시기 바랍니다.");
 	    }
-	    
-	    // logger.info("list call");
+
+	    // 다시하기 버튼 클릭 시 설문조사 페이지로 이동
+	    if (page.equals("surveyResult")) {
+	        model.addAttribute("retryUrl", "/admin/surveyReset.do");
+	    } else {
+	        model.addAttribute("retryUrl", "/survey.do");
+	    }
+
 	    return page;
+	}
+	
+	@RequestMapping(value = "/surveyReset.do")
+	public String surveyReset(Model model, HttpSession session) {
+		String user_id = (String) session.getAttribute("loginId");
+		if(user_id != null) {
+			service.surveyReset(user_id);
+		}
+		return "redirect:/survey.do";
 	}
 		
 	@RequestMapping(value ="/surveyWrite.go")
