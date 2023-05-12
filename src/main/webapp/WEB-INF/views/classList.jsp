@@ -143,11 +143,11 @@ div {
 							    <p class="card-text">모집 기간: ${classes.cl_period} ~ ${classes.cl_deadlinePeriod}</p>
 							    <p class="card-text">
 							        <c:choose>
-							            <c:when test="${classes.cl_status == true}">
-							                <span class="status active">진행중</span>
+							            <c:when test="${classes.cl_status == 1}">
+							                <span class="status inactive">마감</span>
 							            </c:when>
 							            <c:otherwise>
-							                <span class="status inactive">마감</span>
+							                <span class="status active">진행중</span>
 							            </c:otherwise>
 							        </c:choose>
 							    </p>
