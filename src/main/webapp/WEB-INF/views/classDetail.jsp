@@ -275,15 +275,11 @@
 			<div class="comment">
 				${review.review_id}
 				${review.user_id} / ${review.date}
-<<<<<<< HEAD
-				<input type ="button" onclick='location.href="reviewDel.do?review_id=${review.review_id}&cl_id=${dto.cl_id}"' value="삭제"/>
-=======
+
 				<c:if test="${review.user_id eq sessionScope.loginId}">
 					<input type ="button" onclick='location.href="reviewDel.do?review_id=${review.review_id}&cl_id=${dto.cl_id}"' value="삭제"/>
 				</c:if>
 				
-			<%-- <input type ="button" onclick='location.href="commentupdate.go?comment_id=${comment.comment_id}&board_id=${dto.board_id}&comment_content=${comment.comment_content}"' value="수정"/>  --%>
->>>>>>> origin/master
 				<p>${review.content}</p>
 			</div>
 		</c:forEach>
