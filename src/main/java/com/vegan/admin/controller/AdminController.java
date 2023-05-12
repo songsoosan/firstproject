@@ -37,14 +37,16 @@ public class AdminController {
 	@RequestMapping(value="/admin.userList", method = RequestMethod.GET)
 	public String UserList(Model model) {
 		logger.info("list call");
-		ArrayList<AdminDTO> list = service.list();		
-		logger.info("list cnt : "+list.size());
-		model.addAttribute("list", list);
+		ArrayList<AdminDTO> userList = service.userList();		
+		logger.info("list cnt : "+userList.size());
+		model.addAttribute("userList", userList);
 		return "userList";
 	}
 	@RequestMapping(value="/admin.reportList", method = RequestMethod.GET)
 	public String ReportList(Model model) {
-
+		ArrayList<AdminDTO> reportList = service.reportList();		
+		logger.info("list cnt : "+reportList.size());
+		model.addAttribute("reportList", reportList);
 		return "reportList";
 	}
 	@RequestMapping(value="/admin.blindList", method = RequestMethod.GET)

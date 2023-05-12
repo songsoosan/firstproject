@@ -47,7 +47,13 @@ public interface ClassesDAO {
 
 	String getCl_Part_Id(HashMap<String, Object> params);
 
-	int reviewInsert(HashMap<String, Object> params); 
+	int reviewInsert(HashMap<String, Object> params);
+
+	int reviewDel(String review_id, String cl_id, String loginId);
+
+	void cl_status(int cl_id);
+
+	ClassesDTO cnt(int cl_id); 
 
    
 
