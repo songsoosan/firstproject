@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.vegan.classes.dao.ClassesDAO;
 import com.vegan.classes.dto.ClassesDTO;
+import com.vegan.magazine.dto.MagazineDTO;
 import com.vegan.mypage.dto.MypageDTO;
 
 @Service
@@ -131,4 +132,28 @@ public class ClassesService {
 		return dao.adminChk(loginId);
 	}
 
+	public int reviewWrite(String cl_id, String user_id, String review_content) {
+		
+		return dao.reviewWrite(cl_id,user_id,review_content);
+	}
+
+	public ArrayList<ClassesDTO> reviewList(String cl_id) {
+		
+		return dao.reviewList(cl_id);
+	}
+
+	public String reviewWrite(HashMap<String, Object> params) {
+		String msg = "후기 등록 실패";
+		int row = 0;
+		if(dao.getCl_Part_Id(params).equals(params.get("cl_part_id"))) {
+			row = dao.reviewInsert(params);
+		}
+		if(row == 1) {
+			msg = "okay";
+		}
+		return msg;
+	}
+
+	
+	
 }
