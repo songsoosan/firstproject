@@ -21,12 +21,12 @@
 			</tr>
 		</thead>		
 		<tbody>
-			<c:if test="${list eq null}">
+			<c:if test="${userList eq null}">
 				<tr>
 					<th colspan="6">등록된 글이 없습니다.</th>
 				</tr>
 			</c:if>
-			<c:forEach items="${list}" var="user">
+			<c:forEach items="${userList}" var="user">
 				<tr>
 					<td>${user.user_id}</td>
 					<td>${user.user_name}</td>

@@ -1,12 +1,8 @@
 package com.vegan.recipe.controller;
 
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.HashMap;
-
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,29 +26,22 @@ public class RecipeController {
 	
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
-	@Autowired RecipeService recipeService;
+	@Autowired RecipeService service;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String main(Model model) {
 			return "recipeWrite";
 	}
 	
-	/*
-	 * @RequestMapping(value="/write.do", method = RequestMethod.POST,
-	 * produces="text/plain;charset=UTF-8")
-	 * 
-	 * @ResponseBody public String write(MultipartHttpServletRequest request) {
-	 * return (new Gson()).toJson(recipeService.write(request)); }
-	 */
-	   @RequestMapping(value="/save.ajax" )
-	   @ResponseBody
-	   public HashMap<String, Object> save(MultipartFile photo,
-	         @RequestParam HashMap<String, String> params,HttpSession session){
-;
-	      String loginId = (String) session.getAttribute("loginId");
-	      
-	      logger.info("params : {}",params);
-	      return recipeService.save(photo, params, loginId);
-	   }
+	@RequestMapping(value="/recipe.write.go")
+    public String writePage() {
+        return "recipeWrite";  
+    }
 	
+	@RequestMapping(value="/recipe.write.do" , method = RequestMethod.GET)
+    public String write(MultipartFile photo, 
+			@RequestParam HashMap<String, String> params) {
+        return service.write(photo, params);  
+    }
+
 }

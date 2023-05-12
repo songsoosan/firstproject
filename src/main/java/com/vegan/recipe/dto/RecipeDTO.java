@@ -15,9 +15,7 @@ public class RecipeDTO {
 	private int rec_del_chk;
 	private int rec_blind_chk;
 	private String cat_id;
-	private List<String> tags;
-	private List<String> contents;
-	private List<foodDTO> foods;
+
 	public Date getRec_creatdate() {
 		return rec_creatdate;
 	}
@@ -84,24 +82,7 @@ public class RecipeDTO {
 	public void setCat_id(String cat_id) {
 		this.cat_id = cat_id;
 	}
-	public List<String> getTags() {
-		return tags;
-	}
-	public void setTags(List<String> tags) {
-		this.tags = tags;
-	}
-	public List<String> getContents() {
-		return contents;
-	}
-	public void setContents(List<String> contents) {
-		this.contents = contents;
-	}
-	public List<foodDTO> getFoods() {
-		return foods;
-	}
-	public void setFoods(List<foodDTO> foods) {
-		this.foods = foods;
-	}
+
 
 	
 	

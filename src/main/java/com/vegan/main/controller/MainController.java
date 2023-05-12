@@ -31,7 +31,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/recipe.go", method = RequestMethod.GET)
 	public String recipe(Model model) {
-			return "recipe";
+			return "recipeList";
 	}
 	
 	@RequestMapping(value = "/ranking.go", method = RequestMethod.GET)
