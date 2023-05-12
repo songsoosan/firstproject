@@ -20,28 +20,28 @@ import com.vegan.recipe.service.RecipeService;
 
 
 
-@Controller
-@RequestMapping(value="/recipe")
-public class RecipeController {
-	
-	Logger logger = LoggerFactory.getLogger(getClass());
-	
-	@Autowired RecipeService service;
+//@Controller
+//@RequestMapping(value="/recipe")
+//public class RecipeController {
+//	
+//	Logger logger = LoggerFactory.getLogger(getClass());
+//	
+//	@Autowired RecipeService service;
+//
+//	@RequestMapping(value = "", method = RequestMethod.GET)
+//	public String main(Model model) {
+//			return "recipeWrite";
+//	}
+//	
+//	@RequestMapping(value="/recipe.write.go")
+//    public String writePage() {
+//        return "recipeWrite";  
+//    }
+//	
+//	@RequestMapping(value="/recipe.write.do" , method = RequestMethod.GET)
+//    public String write(MultipartFile photo, 
+//			@RequestParam HashMap<String, String> params) {
+//        return service.write(photo, params);  
+//    }
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String main(Model model) {
-			return "recipeWrite";
-	}
-	
-	@RequestMapping(value="/recipe.write.go")
-    public String writePage() {
-        return "recipeWrite";  
-    }
-	
-	@RequestMapping(value="/recipe.write.do" , method = RequestMethod.GET)
-    public String write(MultipartFile photo, 
-			@RequestParam HashMap<String, String> params) {
-        return service.write(photo, params);  
-    }
-
-}
+//}
