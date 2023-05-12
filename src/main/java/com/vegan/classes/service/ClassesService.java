@@ -38,7 +38,7 @@ public class ClassesService {
 		dto.setCl_deadline(Integer.valueOf(params.get("cl_deadline")));
 		dto.setCl_teacher(params.get("cl_teacher"));
 		dto.setCl_date(params.get("cl_date"));
-		dto.setCl_ing_chk(Boolean.valueOf(params.get("cl_ing_chk")));
+		dto.setCl_ing_chk(Integer.valueOf(params.get("cl_ing_chk")));
 		dto.setPostcode(params.get("postcode"));
 		dto.setAddress(params.get("address"));
 		dto.setDetailAddress(params.get("detailAddress"));
