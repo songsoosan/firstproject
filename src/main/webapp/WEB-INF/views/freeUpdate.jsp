@@ -6,37 +6,16 @@
 <title>Insert title here</title>
 <script src = "https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <link rel="stylesheet" href="resources/css/commons.css" />
-<style>
-   table{
-      width: 100%
-   }
-   table, th, td{
-      border: 2px solid green;
-      border-collapse: collapse;
-      padding: 5px 10pxl
-   }
-   button{
-      margin: 5px;
-   }
-   input[type="text"]{
-      width: 100%
-   }
-   textarea{
-      heigt: 50%;
-      resize: none;
-      width: 100%
-      
-   }
-</style>
+<style></style>
 </head>
 <body>
-	<form action="boardUpdate.do"method="post" enctype="multipart/form-data">
-	<input type="hidden" name="board_id" value="${dto.board_id}"/>
+	<form action="freeUpdate.do" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="fboard_id" value="${dto.fboard_id}"/>
 	<input type="hidden" name="cat_id" value="${dto.cat_id}"/>
 		<table>
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="subject" value="${dto.board_title}"/></td>
+				<td><input type="text" name="subject" value="${dto.fboard_title}"/></td>
 			</tr>
 			<tr>
 				<th>작성자</th>
@@ -44,7 +23,7 @@
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea name="content">${dto.board_content}</textarea></td>
+				<td><textarea name="content">${dto.fboard_content}</textarea></td>
 			</tr>
 			<tr>
 				<th>사진</th>
@@ -59,7 +38,7 @@
 			</tr>
 			<tr>
 				<th colspan="2">
-					<input type="button" onclick="location.href='./boardList.do'" value="리스트"/>
+					<input type="button" onclick="location.href='./freeList.do'" value="리스트"/>
 					<button>저장</button>
 				</th>
 			</tr>

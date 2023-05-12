@@ -52,7 +52,6 @@
       게시물 갯수: 
       <select id = "pagePerNum">
          <option value="15">15</option>
-
       </select>
    </div>
    
@@ -113,7 +112,7 @@ function listCall(page){
       data: {
          'searchText' : $("input[name=searchText]").val(),
          'page': page,
-         'cnt' : $('#pagePerNum').val(),
+         'cnt' : $('#pagePerNum').val(), //게시물 갯수
          'loginId': loginId
       },
       dataType: 'json',

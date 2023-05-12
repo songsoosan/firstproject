@@ -25,6 +25,7 @@
             <if test='loginId != "admin"'>
                AND is_hide = 0
             </if>
+               AND cat_id = 'not'
       </where>
        ORDER BY board_id DESC LIMIT #{cnt} OFFSET #{offset} 
    </select>
@@ -39,6 +40,7 @@
          <if test='loginId != "admin"'>
             AND is_hide = 0
           </if>
+          	AND cat_id = 'not'
       </where>
    </select>
    
@@ -129,6 +131,37 @@
          AND identify_number = #{board_id}
    </update>
    
+   <select id = "freelist" resultType="com.vegan.board.dto.BoardDTO">
+      SELECT fboard_id
+             , cat_id
+             , user_id
+             , fboard_title
+             , fboard_content
+             , DATE_FORMAT(fboard_date, '%Y-%m-%d') as fboard_date
+             , fboard_views
+             , fboard_del_chk
+             , fboard_blind_chk
+             , fis_delete
+        FROM freeboard
+    <where>
+         <if test='searchText != ""'>
+            AND (fboard_title like CONCAT('%',#{searchText},'%') or user_id like CONCAT('%',#{searchText},'%'))
+         </if>
+               AND fis_delete = 0
+      </where>
+       ORDER BY fboard_id DESC LIMIT #{cnt} OFFSET #{offset} 
+   </select>
+   
+   <select id="freetotalCount" resultType="int">
+      SELECT COUNT(fboard_id) FROM freeboard 
+      <where>
+         <if test='searchText != ""'>
+            AND (fboard_title like CONCAT('%',#{searchText},'%') or user_id like CONCAT('%',#{searchText},'%'))
+         </if>
+            AND fis_delete = 0
+      </where>
+   </select>
+   
    <insert id="freewrite" parameterType="com.vegan.board.dto.BoardDTO"
       useGeneratedKeys="true"
       keyColumn="freeidx"
@@ -136,6 +169,63 @@
          INSERT INTO freeboard(fboard_title, user_id, fboard_content, cat_id)
             VALUES(#{fboard_title},#{user_id},#{fboard_content}, #{cat_id})
    </insert>
+      
+   <select id="freedetail" resultType="com.vegan.board.dto.BoardDTO">
+      SELECT b.fboard_id, b.fboard_title, b.user_id, b.fboard_views, b.fboard_date, b.fboard_content, 
+      b.cat_id, p.photo_id, p.photo_name
+      FROM freeboard b left JOIN photo p ON b.fboard_id = p.identify_number
+      WHERE b.fboard_id = #{param1}
+   </select>
+   
+   <update id="freeupHit">
+      UPDATE freeboard SET fboard_views = fboard_views+1
+         WHERE fboard_id = #{param1}
+   </update>
+   
+   <update id="freeupdate" parameterType="hashmap">
+      UPDATE freeboard SET fboard_title = #{subject}
+      ,user_id = #{user_name}
+      ,fboard_content = #{content}
+      ,cat_id = #{cat_id}
+      WHERE fboard_id = #{fboard_id}
+   </update>
+   
+   <update id="freedelete" parameterType="String">
+      UPDATE freeboard
+         SET fis_delete = 1
+       WHERE fboard_id = #{fboard_id}
+   </update>
+   
+   <insert id ="freefileWrite" >
+      INSERT INTO photo(ori_photo_name, photo_name, identify_number, cat_id)
+         VALUES(#{ori_photo_name},#{photo_name},#{fboard_id}, #{cat_id})
+   </insert>
+   
+   <update id="freefileUpdate">
+      UPDATE photo 
+         SET ori_photo_name = #{ori_photo_name}
+           , photo_name = #{photo_name}
+       WHERE identify_number = #{fboard_id}
+   </update>
+   
+   <insert id="freecommentWrite" parameterType="hashmap" useGeneratedKeys="true" keyColumn="commnetIDX" keyProperty="comment_id">
+      INSERT INTO comment
+         (user_id, cat_id, identify_number, comment_content) 
+      VALUES
+         (#{user_id}, #{cat_id}, #{fboard_id}, #{comment_content})
+   </insert>
+   
+   <select id="freecommentList" resultType="com.vegan.board.dto.BoardDTO">
+      SELECT comment_id
+          , user_id
+          , cat_id
+          , identify_number
+          , comment_content
+          , comment_date
+        FROM comment
+       WHERE cat_id = 'free' 
+         AND identify_number = #{fboard_id}
+   </select>
    
    
 </mapper>

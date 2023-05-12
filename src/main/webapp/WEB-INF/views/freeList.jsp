@@ -76,7 +76,6 @@
 </body>
 <script>
 var loginId = '<%=(String)session.getAttribute("loginId")%>';
-adminCheck();
 
 
 $("#search").keydown(function (key) {
@@ -97,7 +96,7 @@ $('pagePerNum').change(function(){
 function listCall(page){
    $.ajax({
       type: 'post',
-      url: 'noticeList.ajax',
+      url: 'freeList.ajax',
       data: {
          'searchText' : $("input[name=searchText]").val(),
          'page': page,
@@ -134,18 +133,17 @@ function listPrint(list){
    //java.sql.Date 는 js에서 읽지 못해 밀리세컨드로 반환한다.
       // 해결방법 1. DTO에서 Date를 String으로 반환
       // 해결방법 2. js 에서 변환
-      list.forEach(function(board,board_id){
-         content +='<tr ' + (board.is_hide ? 'class="textDeco"' : "") + '>';
-         content +='<td>'+board.board_id+'</td>';
-         content +='<td><a href ="boardDetail.do?board_id='+board.board_id+'">'+board.board_title+'</td>';
-         content +='<td>'+board.user_id+'</td>';
-         content +='<td>'+board.board_date+'</td>';
-         content +='<td>'+board.board_views+'</td>';
+      list.forEach(function(freeboard,fboard_id){
+         content +='<tr>';
+         content +='<td>'+freeboard.fboard_id+'</td>';
+         content +='<td><a href ="freeDetail.do?fboard_id='+freeboard.fboard_id+'">'+freeboard.fboard_title+'</td>';
+         content +='<td>'+freeboard.user_id+'</td>';
+         content +='<td>'+freeboard.fboard_date+'</td>';
+         content +='<td>'+freeboard.fboard_views+'</td>';
          content +='</tr>';
       });
       $('#list').empty();
       $('#list').append(content);
-      adminCheck();
 }
 
 </script>

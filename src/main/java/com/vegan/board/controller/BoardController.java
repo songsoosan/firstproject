@@ -66,6 +66,13 @@ public class BoardController {
     * @param HashMap params
     * @return boardDetail
     */
+   
+   @RequestMapping(value = "/write.go", method = {RequestMethod.POST, RequestMethod.GET})
+   public String writego( ) {
+      
+      return "write";
+   }
+   
    @RequestMapping(value= "/wirte.do", method = RequestMethod.POST)
    public String write(MultipartFile board_photo, @RequestParam HashMap<String, String> params) {
       
@@ -125,19 +132,6 @@ public class BoardController {
       logger.info("hide~~");
       service.hide(hideList);
    }
-   
-   @RequestMapping(value= "noticecommentList.do", method = RequestMethod.POST)
-   public String noticecommentList(@RequestParam String board_id, Model model) {
-      
-      logger.info(board_id);
-      
-      ArrayList<BoardDTO> commentList = new ArrayList<BoardDTO>();
-      commentList = service.noticecommentList(board_id);
-      model.addAttribute("commentList",commentList);
-      logger.info("공지사항 코멘트 리스트 : "+commentList);
-      
-      return "redirect:/noticecommentList.do";
-   }
       
    @RequestMapping(value = "noticecommentWrite.do", method = RequestMethod.POST)
    public String noticecommentWrite(@RequestParam HashMap<String, String> params) {
@@ -170,6 +164,17 @@ public class BoardController {
       return "freeList";
    }
    
+   @RequestMapping(value="/freeList.ajax", method = {RequestMethod.POST, RequestMethod.GET})
+   @ResponseBody
+   public HashMap<String, Object>freelist(
+         @RequestParam String page,
+         @RequestParam String cnt,
+         @RequestParam String searchText,
+         @RequestParam String loginId
+         ) {
+      return service.freelist(Integer.parseInt(page),Integer.parseInt(cnt),searchText,loginId);
+   }
+   
    @RequestMapping(value="/freewrite.go")
    public String freewrite( ) {
       
@@ -182,13 +187,59 @@ public class BoardController {
       logger.info("freeboardparams : " +params);
       return service.freewrite(board_photo, params);
    }
-   
-   @RequestMapping(value= "/freeDetail.do", method = RequestMethod.GET)
-   public String freeDetail(Model model, @RequestParam String board_id) {
+  
+   @RequestMapping(value="/freeDetail.do")
+   public String freedetail(Model model, @RequestParam String fboard_id) {
+      logger.info("freedetail : "+fboard_id);
+      String page = "redirect:/freeList";
       
-      return "freeList";
+      BoardDTO dto = service.freedetail(fboard_id,"detail");
+      if(dto != null) {
+         page="freeDetail";
+         model.addAttribute("dto",dto);
+      }
+      List<BoardDTO> replyList = service.freecommentList(fboard_id);
+      if(replyList != null) {
+         model.addAttribute("commentList",replyList);
+      }
+      return page;
    }
+   
+   @RequestMapping(value="/freeUpdate.go")
+   public String freeUpdate(Model model,@RequestParam String fboard_id) {
+      logger.info("detail : "+fboard_id);
+      String page = "redirect:/freeList";
+      
+      BoardDTO dto = service.freedetail(fboard_id,"update");
+      if(dto != null) {
+         page="freeUpdate";
+         model.addAttribute("dto",dto);
+      }
+      return page;
+   }
+   
+   @RequestMapping(value="/freeUpdate.do", method = RequestMethod.POST)
+   public String freeUpdateDo(MultipartFile photo, @RequestParam HashMap<String, String> params) {
+      logger.info("params : " +params);
+      return service.freeupdate(photo, params);
+   }
+   
+   @RequestMapping(value="/freeDelete.go", method = RequestMethod.GET)
+   public String freeDelete(Model model, @RequestParam String fboard_id) {
+      logger.info("detail : " + fboard_id);
+      String page = "redirect:/freeList.do";
+      
+      service.freedelete(fboard_id);
+      
+      return page;
+   }
+   
+   @RequestMapping(value = "freecommentWrite.do", method = RequestMethod.POST)
+   public String freecommentWrite(@RequestParam HashMap<String, String> params) {
 
+      logger.info("댓글 작성" + params);
 
+      return service.freecommentWrite(params);
+   }
 
 }

@@ -50,7 +50,7 @@
 				 , user_sex
 				 , user_admin_chk
 				 , user_secc_chk
-			  FROM userd
+			  FROM user
 			 WHERE user_id = #{user_id}
 			   AND user_name = #{user_name}
 			   AND user_email = #{user_email}

@@ -39,5 +39,25 @@ public interface BoardDAO {
    void noticecommentUpdate(@Param("board_id")int board_id, @Param("comment_id")int comment_id, @Param("comment_content")String comment_content);
    
    int freewrite(BoardDTO dto);
+
+   BoardDTO freedetail(String fboard_id);
+   
+   int freetotalCount(@Param("searchText")String searchText, @Param("loginId") String loginId);
+   
+   ArrayList<BoardDTO> freelist(@Param("cnt")int cnt, @Param("offset")int offset, @Param("searchText")String searchText, @Param("loginId") String loginId);
+   
+   void freeupHit(String board_id);
+   
+   int freeupdate(HashMap<String, String> params);
+   
+   void freedelete(@Param("fboard_id") String fboard_id);
+   
+   void freefileWrite(@Param("cat_id")String cat_id, @Param("fboard_id")int fboard_id, @Param("ori_photo_name")String ori_photo_name, @Param("photo_name")String photo_name);
+   
+   void freefileUpdate(@Param("fboard_id")int fboard_id, @Param("ori_photo_name")String ori_photo_name, @Param("photo_name")String photo_name);
+
+   int freecommentWrite(BoardDTO dto);
+   
+   ArrayList<BoardDTO>freecommentList(@Param("fboard_id") String fboard_id);
    
 }
