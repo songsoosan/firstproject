@@ -57,6 +57,9 @@
 
 </head>
 <body>
+
+			<a href="survey.do">설문조사</a>
+
 	<div>
 		<a href="main.go">
 			<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
