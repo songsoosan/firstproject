@@ -104,7 +104,7 @@
 <script>
 var loginId = '<%=(String)session.getAttribute("loginId")%>';
 if(loginId === "admin") {
-   $(".adminArea").addClass("onlyAdmin");   
+   $(".adminArea").addClass("onlyAdmin");
 }
 
 function writeMode(idx) {
