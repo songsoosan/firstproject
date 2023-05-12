@@ -23,6 +23,7 @@
       FROM user Where user_id = #{param1}
    </select>
 
+
    <insert
       useGeneratedKeys = "true"
       keyColumn = "idx"

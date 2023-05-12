@@ -13,6 +13,8 @@ public class ClassesDTO {
 	private String cl_teacher;
 	private String cl_date;
 	private int cl_ing_chk;
+
+
 	private int cl_status;
 	private String postcode;
 	private String address;
@@ -127,12 +129,14 @@ public class ClassesDTO {
 		this.cl_date = cl_date;
 	}
 
+
 	public int getCl_ing_chk() {
 		return cl_ing_chk;
 	}
 	public void setCl_ing_chk(int cl_ing_chk) {
 		this.cl_ing_chk = cl_ing_chk;
 	}
+
 	public int getCl_status() {
 		return cl_status;
 	}
