@@ -20,10 +20,18 @@ public class AdminService {
 	
 	@Autowired AdminDAO dao;
 
-	public ArrayList<AdminDTO> list() {
+	
+	public ArrayList<AdminDTO> userList() {
 		
-		return dao.list();
+		return dao.userList();
 	}
+
+
+	public ArrayList<AdminDTO> reportList() {
+
+		return dao.reportList();
+	}
+	
 
 
 }

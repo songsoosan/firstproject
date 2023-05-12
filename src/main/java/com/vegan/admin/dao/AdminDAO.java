@@ -7,7 +7,8 @@ import com.vegan.admin.dto.AdminDTO;
 public interface AdminDAO {
 
 
-	ArrayList<AdminDTO> list();
-
+	ArrayList<AdminDTO> userList();
+	
+	ArrayList<AdminDTO> reportList();
 
 }

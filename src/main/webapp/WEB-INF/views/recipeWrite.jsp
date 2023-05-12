@@ -1,61 +1,109 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <meta charset="UTF-8">
-
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<script src="${path}/resources/js/recipeWrite.js" type="text/javascript"></script>
-<script>
-	$(document).ready(function () {
-		recipeWrite.init();
-	})
-</script>
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link rel="stylesheet" href="resources/css/commons.css">
+<style>
+.input-file-button{
+  padding: 6px 25px;
+  background-color:#FF6600;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+</style>
 </head>
+<script>
+var x = 1;
+
+$(document).on('click','#addButton',function(){
+	var html = '<div class="group">'
+					+'내용<input type = "text" class="rec_content'+x+'">'
+					+'<input type = "file" id="thumbnailFile'+x+'" accept="image/*" onchange="setThumbnail3(event);">'
+					+'</div>'
+					+'<div id="thumbnailFile'+x+'"></div>';
+					x++;
+	$('#recipeContents').append(html);
+});
+
+function setThumbnail(event) {
+    var reader = new FileReader();
+
+    reader.onload = function(event) {
+    	$("div#image_container_main").empty();
+      var img = document.createElement("img");
+      img.setAttribute("src", event.target.result);
+      document.querySelector("div#image_container_main").appendChild(img);
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
+  }
+  
+function setThumbnail2(event) {
+    var reader = new FileReader();
+
+    reader.onload = function(event) {
+    	$("div#image_container").empty();
+      var img = document.createElement("img");
+      img.setAttribute("src", event.target.result);
+      document.querySelector("div#image_container").appendChild(img);
+      
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
+  }
+  
+function setThumbnail3(event) {
+    var reader = new FileReader();
+    var inputId = $(event.target).attr('id')
+    reader.onload = function(event) {
+    	$('div#'+inputId).empty();
+      var img = document.createElement("img");
+      
+      console.log(inputId);
+      img.setAttribute("src", event.target.result);
+      document.querySelector("div#"+inputId).appendChild(img);
+      
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+	
+$(document).on('click','#submit',function(){
+	document.getElementById("myInput").value = x;
+});
+	
+</script>
+
 <body>
 	<div class="main">
-	<!-- method: get(불러올때), put(저장할때), delete(삭제할때), patch(수정할때), post(수정할때 > patch랑 차이점이 있음, post통신을 알아야함) -->
-		<!-- <form action="write.do" method = "post" enctype="multipart/form-data">
-			<div>
-				<input type = "text" name = "rec_title">
-			</div>
-			<div class="contents" id="recipeContents">
-				<div class="group">
-					<input type = "text" name="contents[0].rec_content">
-					<img name="contents[0].photo_name">
-					<button id="addImgButton">사진추가</button>
-				</div>
-				
-			</div>
-			
-			<div class="contents">
-				<button type = "button" id="addButton">추가</button>
-				<button type="submit" id="saveButton">저장</button>
-			</div>
-		</form> -->
 	<h3>레시피 등록</h3>
-	<table>
 
-
-	<thead>
-	</thead>
-	<tbody>
-		<form class="form" id="addForm" enctype="multipart/form-data">
+		<form action="./recipe.write.do" method="get" enctype="multipart/form-data">
+		<input type="hidden" id="myInput">
 			<div>
-			제목<input type = "text" name = "rec_title" id="rec_title">
+			레시피 제목 <input type = "text" name = "rec_title" id="rec_title">
 			</div>
+			<div>
+			동영상 링크 <input type = "text" name = "rec_video" id="rec_video">
+			</div>
+			<div>
+			대표사진 등록 <input type = "file" name = "rec_photo" id="rec_photo" accept="image/*" onchange="setThumbnail(event);">
+			</div>
+			<div id="image_container_main"></div>
+			
+			
+			
 			<div class="contents" id="recipeContents">
 				<div class="group">
 					내용<input type = "text" class="rec_content">
-						<input type = "file" name="thumbnailFile">
-						<button id="addImgButton">사진추가</button>
+						<input type="file" name="thumbnailFile" accept="image/*" onchange="setThumbnail2(event);"/>
+						<div id="image_container"></div>
 				</div>
 			</div>
-			
 			<div class="contents">
 				<button type = "button" id="addButton">추가</button>
 				<div class="tags">
@@ -65,11 +113,9 @@
 					<input type="checkbox" value="4"/>
 					<input type="checkbox" value="5"/>
 				</div>
-				<button type="button" id="saveButton">저장</button>
+				<input type="submit" id="submit"/>
 			</div>
-		</form>
-	</tbody>
-	</table>
+			</form>
 </div>
 </body>
 </html>
