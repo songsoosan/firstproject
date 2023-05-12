@@ -264,6 +264,53 @@
 			  </div>
 			</div>
 			
+		<%-- 	<form id="comment-form">
+			  <input type="hidden" id="cl_id" name="post_id" value="${dto.cl_id}">
+			  <textarea id="content" name="content" placeholder="댓글을 입력하세요"></textarea>
+			  <button type="submit">작성</button>
+			</form> --%>
+			
+			
+				<!-- 문의글 댓글 리스트 가져오기-->
+		<c:if test="${clReviewList.size() eq 0}">
+			<tr><th colspan="10">등록된 후기가 없습니다.</th></tr>
+		</c:if>
+		
+		<c:forEach items="${clReviewList}" var="review">
+			<div class="comment">
+				${review.review_id}
+				${review.user_id} / ${review.date}
+				<c:if test="${review.user_id eq sessionScope.loginId}">
+					<input type ="button" onclick='location.href="reviewDel.do?review_id=${review.review_id}&cl_id=${dto.cl_id}"' value="삭제"/>
+				</c:if>
+				
+			<%-- <input type ="button" onclick='location.href="commentupdate.go?comment_id=${comment.comment_id}&board_id=${dto.board_id}&comment_content=${comment.comment_content}"' value="수정"/>  --%>
+				<p>${review.content}</p>
+			</div>
+		</c:forEach>
+		
+		<!-- 댓글 작성 -->
+	    <form method="post" action="reviewWrite.do">
+	    	<input type="hidden" name="cl_id" value="${dto.cl_id}">
+	    	<input type="hidden" name="user_id" value="${sessionScope.loginId}">
+	    	<input type="text" name="cl_part_id" value="">
+	    	<%-- <input type="text" name="review_id" value="${eventcommentlist2.comment_id}"> --%>
+				<table>	
+						<tr>
+							<th colspan="2">${sessionScope.loginId}</th>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td><textarea name="review_content"></textarea></td>
+						</tr>
+						<tr>
+							<th colspan="2">
+								<button type="button" onclick="reviewWrite()">등록</button>
+							</th>
+						</tr>
+	    		</table>
+	    </form>
+		<!--  댓글 끝 -->
 			
 
 </body>
@@ -273,5 +320,29 @@ var msg = "${msg}";
 if(msg != ""){
 	alert(msg);
 }
+
+function reviewWrite() {
+	$.ajax({
+		type:'get',
+		url:'reviewWrite.ajax',
+		data:{
+			id : '${sessionScope.loginId}',
+			cl_id : $('input[name="cl_id"]').val(),
+			content : $('textarea[name="review_content"]').val(),	
+			cl_part_id : $('input[name="cl_part_id"]').val()	
+		},
+		dataType:'text',
+		success:function(data){
+			console.log(data);
+			alert(data);
+			location.href='classDetail.do?cl_id='+$('input[name="cl_id"]').val();
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});	
+} 
+
+
 </script>
 </html>

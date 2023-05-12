@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.vegan.classes.dto.ClassesDTO;
+import com.vegan.magazine.dto.MagazineDTO;
 import com.vegan.mypage.dto.MypageDTO;
 
 public interface ClassesDAO {
@@ -38,7 +39,21 @@ public interface ClassesDAO {
 
    void fileWrite(int idx, String ori_photo_name, String photo_name);
 
-	 MypageDTO profile2(String user_id); 
+	 MypageDTO profile2(String user_id);
+
+	int reviewWrite(String cl_id, String user_id, String review_content);
+
+	ArrayList<ClassesDTO> reviewList(String cl_id);
+
+	String getCl_Part_Id(HashMap<String, Object> params);
+
+	int reviewInsert(HashMap<String, Object> params);
+
+	int reviewDel(String review_id, String cl_id, String loginId);
+
+	void cl_status(int cl_id);
+
+	ClassesDTO cnt(int cl_id); 
 
    
 

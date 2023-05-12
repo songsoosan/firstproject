@@ -13,6 +13,7 @@ public interface MemberDAO {
 
 	void creatProfile(String user_id);
 
+	MemberDTO getUserInfo(HashMap<String, String> params);
 	
-	
+	MemberDTO getUserInfoPW(HashMap<String, String> params);
 }

@@ -29,11 +29,11 @@
 </style>
 </head>
 <body>
-   <input type="hidden" name = "board_id" value="${dto.board_id}">
+   <input type="hidden" name = "fboard_id" value="${dto.fboard_id}">
    <table>
       <tr>
          <th>제목</th>
-         <td colspan="3">${dto.board_title}</td>
+         <td colspan="3">${dto.fboard_title}</td>
       </tr>
       <tr>
          <th>작성자</th>
@@ -41,11 +41,11 @@
       </tr>
       <tr>
          <th>작성일</th>
-         <td colspan="3">${dto.board_date}</td>
+         <td colspan="3">${dto.fboard_date}</td>
       </tr>
       <tr>
          <th>내용</th>
-         <td colspan="3">${dto.board_content}</td>
+         <td colspan="3">${dto.fboard_content}</td>
       </tr>
       <c:if test="${dto.photo_name ne null}">
       <tr>
@@ -58,12 +58,12 @@
       </c:if>
       <tr>
          <th colspan="4">
-         <div><input type="button" onclick="location.href='./boardList.do'" value="리스트"/></div>
-         <div><input class="none adminArea" type="button" onclick="location.href='./boardUpdate.go?board_id=${dto.board_id}'" value="수정"/></div>
-         <div><input class="none adminArea" type="button" onclick="location.href='./boardDelete.go?board_id=${dto.board_id}'" value="삭제"/></div>
+         <div><input type="button" onclick="location.href='./freeList.do'" value="리스트"/></div>
+         <div><input type="button" onclick="location.href='./freeUpdate.go?fboard_id=${dto.fboard_id}'" value="수정"/></div>
+         <div><input type="button" onclick="location.href='./freeDelete.go?fboard_id=${dto.fboard_id}'" value="삭제"/></div>
          </th>
       </tr>
-   
+
       <c:forEach items="${commentList}" var="commentList" varStatus="status">
          <tr class="reply">
             <th>${commentList.user_id} </th>
@@ -72,22 +72,11 @@
                <textarea rows="3" name="comment_content" class="editMode none">${commentList.comment_content}</textarea>
             </td>
             <td>${commentList.comment_date}</td>
-            <td>
-               <c:if test="${commentList.user_id eq loginId}">
-               <a class="readMode" href="javascript:void(0);" onclick="writeMode(${status.index});">수정</a>
-               <a class="readMode" href="noticecommentDelete.do?comment_id=${commentList.comment_id}&board_id=${dto.board_id}">삭제</a>
-               <a class="editMode none" href="javascript:void(0);" onclick="commentUpdate(${status.index}, '${commentList.comment_id}', ${dto.board_id});">확인</a>
-               <a class="editMode none" href="javascript:void(0);" onclick="readMode(${status.index});">취소</a>
-               </c:if>
-               <c:if test="${commentList.user_id ne loginId}">
-               <a href="#">신고</a>
-               </c:if>                    
-            </td>
          </tr>
       </c:forEach>
 
-   <form action="noticecommentWrite.do" method="post">
-         <input type="hidden" name = "board_id" value="${dto.board_id}">
+   <form action="freecommentWrite.do" method="post">
+         <input type="hidden" name = "fboard_id" value="${dto.fboard_id}">
          <th>
             <input type="hidden" name="user_id" value="<%=(String)session.getAttribute("loginId")%>"/>
             <b><%=(String)session.getAttribute("loginId")%></b>
@@ -104,7 +93,7 @@
 <script>
 var loginId = '<%=(String)session.getAttribute("loginId")%>';
 if(loginId === "admin") {
-   $(".adminArea").addClass("onlyAdmin");
+   $(".adminArea").addClass("onlyAdmin");   
 }
 
 function writeMode(idx) {

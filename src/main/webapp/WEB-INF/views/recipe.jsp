@@ -8,5 +8,8 @@
 </head>
 <body>
 레시피 페이지 입니다.
+
+
+<input type="button" onclick="location.href='./recipe.write.go'" value="레시피 작성"/>
 </body>
 </html>
