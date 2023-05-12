@@ -133,7 +133,6 @@ public class ClassesDTO {
 	public void setCl_ing_chk(int cl_ing_chk) {
 		this.cl_ing_chk = cl_ing_chk;
 	}
-
 	public int getCl_status() {
 		return cl_status;
 	}
