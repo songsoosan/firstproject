@@ -107,8 +107,19 @@ public class ClassesService {
 	}
 
 	public int classApp(ClassesDTO dto) {
+	 int cl_id = dto.getCl_id();
+	 int cnt = dao.classApp(dto);
+	 	if (cnt == 1 ) {
+	 		ClassesDTO dto2 = dao.cnt(cl_id);
+	 		logger.info("dto2"+dto2);
+	 		int deadline = dto2.getCl_deadline();
+	 		 int join_cnt = dto2.getJoin_count();
+		   if (deadline == join_cnt ) {
+		       dao.cl_status(cl_id);
+		   }
+		}
 
-		return dao.classApp(dto);
+	 return cnt;
 	}
 
 	public ArrayList<ClassesDTO> appList(String cl_id) {
@@ -154,6 +165,13 @@ public class ClassesService {
 			msg = "okay";
 		}
 		return msg;
+	}
+
+	public int reviewDel(String review_id, String cl_id, String loginId) {
+		
+	    int row = dao.reviewDel(review_id, cl_id,loginId);
+	      logger.info("delete comm data : "+row);
+		return dao.reviewDel(review_id, cl_id,loginId);
 	}
 
 	

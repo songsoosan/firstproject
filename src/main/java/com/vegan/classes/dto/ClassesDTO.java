@@ -13,7 +13,7 @@ public class ClassesDTO {
 	private String cl_teacher;
 	private String cl_date;
 	private boolean cl_ing_chk;
-	private boolean cl_status;
+	private int cl_status;
 	private String postcode;
 	private String address;
 	private String detailAddress;
@@ -131,10 +131,11 @@ public class ClassesDTO {
 	public void setCl_ing_chk(boolean cl_ing_chk) {
 		this.cl_ing_chk = cl_ing_chk;
 	}
-	public boolean isCl_status() {
+	
+	public int getCl_status() {
 		return cl_status;
 	}
-	public void setCl_status(boolean cl_status) {
+	public void setCl_status(int cl_status) {
 		this.cl_status = cl_status;
 	}
 	public String getPostcode() {
