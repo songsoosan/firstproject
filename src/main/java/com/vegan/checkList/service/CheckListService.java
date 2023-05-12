@@ -51,7 +51,7 @@ public class CheckListService {
 
 	public void resultsave(HttpSession session, HashMap<String, String> params) {
 	    String user_id = params.get("user_id");
-	    logger.info("유저 아이디 확인 : " + user_id);
+	    // logger.info("유저 아이디 확인 : " + user_id);
 	    // logger.info("서비스 파람 확인 : " + params);
 
 	    int total_score = 0;
@@ -153,6 +153,11 @@ public class CheckListService {
 	public void delete(int questionNumber) {
 		int row = dao.delete(questionNumber);
 		logger.info("삭제 완료 여부 : "+row);
+	}
+
+	public void surveyReset(String user_id) {
+		int row = dao.surveyReset(user_id);
+		logger.info("재 설문조사를 위한 삭제 완료 여부 : "+row);
 	}
 	
 }

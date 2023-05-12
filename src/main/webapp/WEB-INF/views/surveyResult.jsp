@@ -22,6 +22,7 @@
     <!-- 31~40점 락토 오보 베지테리언 -->
     <!-- 41~50점 비건 -->
     <button onclick="location.href='main.go'">메인</button>
+    <button onclick="location.href='${retryUrl}'">다시하기</button>
 </body>
 <script></script>
 </html>
