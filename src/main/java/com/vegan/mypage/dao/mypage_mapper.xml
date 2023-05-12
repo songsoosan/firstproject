@@ -48,7 +48,7 @@
 		
 	<insert id="profilePhoto">
 		INSERT INTO photo(cat_id,ori_photo_name, photo_name,identify_number) 
-			VALUES('profliePhoto',#{param1},#{param2},#{param3})
+			VALUES('profilePhoto',#{param1},#{param2},#{param3})
 			ON DUPLICATE KEY UPDATE photo_name = #{param2}
 	</insert>	
 	

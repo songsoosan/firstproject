@@ -193,13 +193,13 @@
 			  <div class="row">
 			    <div class="col-md-6">
 			      <div class="card mb-3">
-			      	<c:if test="${dto.cl_ing_chk == true}">
+			      	<c:if test="${dto.cl_ing_chk == 1}">
 			        <div class="card-body text-center">
 			          <h5 class="card-title">재료 제공 여부</h5>
 			          <p class="card-text">제공</p>
 			        </div>
 			        </c:if>
-			        <c:if test="${dto.cl_ing_chk == false}">
+			        <c:if test="${dto.cl_ing_chk == 0}">
 			        <div class="card-body text-center">
 			          <h5 class="card-title">재료 제공 여부</h5>
 			          <p class="card-text">미제공</p>
