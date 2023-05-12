@@ -3,4 +3,78 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
 <mapper namespace="com.vegan.event.dao.EventDAO">
+
+	<!--  
+	 <select id="list" resultType="com.vegan.magazine.dto.MagazineDTO">
+	    SELECT 
+			board_id, user_id, board_title, board_content, board_date, board_views, cat_id
+		FROM board ORDER BY board_id DESC
+	   </select>
+	   -->
+	   
+	 <select id="list" resultType="com.vegan.event.dto.EventDTO">
+    SELECT 
+        event_id, user_id, event_title, event_content, event_start_date, event_end_date, cat_id, event_status
+    FROM event
+    ORDER BY event_id DESC
+    LIMIT #{param1} OFFSET #{param2}
+</select>
+
+	
+	
+	   
+	<update id="update" parameterType="hashmap">
+		UPDATE event SET event_title = #{event_title}
+			,user_id = #{user_id}
+			,event_content = #{event_content}
+			,event_start_date = #{event_start_date}
+			,event_end_date = #{evemt_end_date}
+			
+		WHERE event_id = #{event_id} and cat_id = 'e'
+	</update>
+	   
+	 <select id="totalCount" resultType="int">
+		SELECT COUNT(event_id) FROM event
+	 </select>
+	 
+	  
+	   
+	   <!-- 조건 2 : generatedKey 옵션을 사용해야 한다. 
+		useGeneratedKeys="true"
+		keyColumn="idx"	<- 가져올 키 컬럼의 이름
+		keyProperty="idx"	<- DTO 에 담을 필드 이름
+	-->
+	
+	<insert 
+		useGeneratedKeys="true"
+		keyColumn="idx"
+		keyProperty="event_id"
+		id="write" parameterType="com.vegan.event.dto.EventDTO">
+		INSERT INTO event(event_title, user_id, event_content, cat_id, event_start_date, event_end_date, event_status)
+			VALUES(#{event_title},#{user_id},#{event_content},#{cat_id},#{event_start_date},#{event_end_date}, #{event_status})
+	</insert>
+	
+	<insert id="fileWrite">
+		INSERT INTO photo(cat_id ,ori_photo_name, photo_name, identify_number)
+			VALUES(#{cat_id},#{ori_photo_name},#{photo_name}, #{event_id})
+	</insert>
+	
+	
+	<select id="detail" 
+		resultType="com.vegan.event.dto.EventDTO">
+		SELECT 
+			e.event_id, e.user_id, e.event_title,event_date ,e.event_content, e.event_start_date, e.event_end_date
+			,p.photo_id, p.photo_name
+		FROM event e left JOIN photo p ON e.event_id = p.identify_number
+		WHERE e.event_id = #{param1} AND e.cat_id = 'e'
+	</select>
+	
+	<delete id="delete">
+		DELETE FROM event WHERE event_id = #{event_id} AND cat_id = 'e'
+	</delete>
+	
+	<select id="findFile" resultType="String">
+		SELECT photo_name FROM photo 
+			WHERE identify_number = #{event_id}
+	</select>
 </mapper>

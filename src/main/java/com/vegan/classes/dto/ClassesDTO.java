@@ -6,22 +6,51 @@ public class ClassesDTO {
 	private String user_id;
 	private String cl_subject;
 	private String cl_period;
-	private String cl_deadline;
+	private String cl_deadlinePeriod;
+	private int cl_deadline;
 	private String cl_teacher;
 	private String cl_date;
 	private boolean cl_ing_chk;
 	private boolean cl_status;
-	private String cl_adress;
+	private String postcode;
+	private String address;
+	private String detailAddress;
+	private String extraAddress;
 	private String cl_content;
 	private boolean cl_del_chk;
 	private String user_adress;
-	
 	private String user_name;
 	private String user_phone;
 	private String user_email;
-	private long cl_part_id;
+	private String cl_part_id;
+	private String photo_name;
+	private int idx;
+	private int join_count;
 	
 	
+
+	public int getJoin_count() {
+		return join_count;
+	}
+	public void setJoin_count(int join_count) {
+		this.join_count = join_count;
+	}
+
+	
+
+	public int getIdx() {
+		return idx;
+	}
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
+	public String getPhoto_name() {
+		return photo_name;
+	}
+	public void setPhoto_name(String photo_name) {
+		this.photo_name = photo_name;
+
+	}
 	public int getCl_id() {
 		return cl_id;
 	}
@@ -46,10 +75,17 @@ public class ClassesDTO {
 	public void setCl_period(String cl_period) {
 		this.cl_period = cl_period;
 	}
-	public String getCl_deadline() {
+	
+	public String getCl_deadlinePeriod() {
+		return cl_deadlinePeriod;
+	}
+	public void setCl_deadlinePeriod(String cl_deadlinePeriod) {
+		this.cl_deadlinePeriod = cl_deadlinePeriod;
+	}
+	public int getCl_deadline() {
 		return cl_deadline;
 	}
-	public void setCl_deadline(String cl_deadline) {
+	public void setCl_deadline(int cl_deadline) {
 		this.cl_deadline = cl_deadline;
 	}
 	public String getCl_teacher() {
@@ -76,11 +112,29 @@ public class ClassesDTO {
 	public void setCl_status(boolean cl_status) {
 		this.cl_status = cl_status;
 	}
-	public String getCl_adress() {
-		return cl_adress;
+	public String getPostcode() {
+		return postcode;
 	}
-	public void setCl_adress(String cl_adress) {
-		this.cl_adress = cl_adress;
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getDetailAddress() {
+		return detailAddress;
+	}
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
+	}
+	public String getExtraAddress() {
+		return extraAddress;
+	}
+	public void setExtraAddress(String extraAddress) {
+		this.extraAddress = extraAddress;
 	}
 	public String getCl_content() {
 		return cl_content;
@@ -118,10 +172,10 @@ public class ClassesDTO {
 	public void setUser_adress(String user_adress) {
 		this.user_adress = user_adress;
 	}
-	public long getCl_part_id() {
+	public String getCl_part_id() {
 		return cl_part_id;
 	}
-	public void setCl_part_id(long cl_part_id) {
+	public void setCl_part_id(String cl_part_id) {
 		this.cl_part_id = cl_part_id;
 	}
 

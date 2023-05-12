@@ -186,7 +186,6 @@ public class BoardController {
    @RequestMapping(value= "/freeDetail.do", method = RequestMethod.GET)
    public String freeDetail(Model model, @RequestParam String board_id) {
       
-      
       return "freeList";
    }
 

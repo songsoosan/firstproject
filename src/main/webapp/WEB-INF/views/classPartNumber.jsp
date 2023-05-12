@@ -4,8 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src = "https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
 	div {
 	   margin:0 auto; 
@@ -50,8 +49,6 @@
 	.logout-button {
  		float: right;
 	}
-	
-	
 
 </style>
 
@@ -82,10 +79,10 @@
 			</svg>
 		</a>
 	</div>
-	<c:if test="${loginChk eq null}">
+	<c:if test="${sessionScope.loginId eq null}">
 		<button class="logout-button" onclick="location.href='/login.go'">로그인</button>	
 	</c:if>
-	<c:if test="${loginChk ne null}">
+	<c:if test="${sessionScope.loginId ne null}">
 		<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
 	</c:if>	
 	<div class ="menu">
@@ -98,34 +95,15 @@
 			<li class="li"><a href="event.go">이벤트</a></li>
 			<li class="li"><a href="admin.go">관리자(test)</a></li>
 		</ul>
-	</div>
-	
-	<div class ="divImages">
-		<ul class="ul">
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-		</ul>
-	</div>
-	
-	<div>
-		<ul class="ul">
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-			<li class="img"><a href="#"><img src="resources/img/logo.png" width="100" height="100"></a></li>
-		</ul>
-	</div>
-
-
-    </body>
-
+	</div>	
+	<h3>${dto.user_name }님 해당 클래스의 접수가 완료되었습니다.</h3>
+	<h2>회원님의 해당 클래스 참여번호는 ${dto.cl_part_id }입니다!</h2>
+	<button onclick="location.href='classDetail.do?cl_id=${dto.cl_id}'">확인</button>
+</body>
 <script>
-
-var msg = "${msg}";
-if(msg != ""){
-	alert(msg);
-}
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
+	}
 </script>
 </html>

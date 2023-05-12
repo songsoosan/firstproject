@@ -1,0 +1,13 @@
+diff a/src/main/java/com/vegan/letter/controller/LetterController.java b/src/main/java/com/vegan/letter/controller/LetterController.java	(rejected hunks)
+@@ -115,11 +115,6 @@
+ 	
+ 			return "sendLetter";
+ 		}
+-		@RequestMapping(value="/reportWrite.go")
+-		public String reportWrite() {
+-	
+-			return "reportWrite";
+-		}
+ 		
+ 		
+ }
