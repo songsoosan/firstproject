@@ -1,5 +1,7 @@
 package com.vegan.classes.dto;
 
+import java.sql.Date;
+
 public class ClassesDTO {
 	
 	private int cl_id;
@@ -26,9 +28,32 @@ public class ClassesDTO {
 	private String photo_name;
 	private int idx;
 	private int join_count;
+//	댓글관련
+	  private int review_id;
+	   private Date date;
+	   private String content;
+	   
 	
 	
 
+	public int getReview_id() {
+		return review_id;
+	}
+	public void setReview_id(int review_id) {
+		this.review_id = review_id;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public int getJoin_count() {
 		return join_count;
 	}

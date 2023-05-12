@@ -14,10 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.vegan.classes.dto.ClassesDTO;
 import com.vegan.classes.service.ClassesService;
+import com.vegan.magazine.dto.MagazineDTO;
 import com.vegan.mypage.dto.MypageDTO;
 
 @Controller
@@ -84,7 +86,7 @@ public class ClassesController {
 
 			session.removeAttribute("msg");
 		}
-
+		//관리자 여부 부분	
 		if (session.getAttribute("loginId") != null) {
 			String loginId = String.valueOf(session.getAttribute("loginId"));
 			int admin = (int) service.adminChk(loginId);
@@ -93,12 +95,17 @@ public class ClassesController {
 				model.addAttribute("adminChk", admin);
 			}
 		}
+		//클래스내용부분
 		ClassesDTO dto = service.detail(cl_id);
 
 		if (dto != null) {
 			page = "classDetail";
 			model.addAttribute("dto", dto);
 		}
+		//클래스 후기 부분
+		ArrayList<ClassesDTO> reviewList = service.reviewList(cl_id);
+		model.addAttribute("clReviewList", reviewList);
+		
 		return page;
 	}
 
@@ -199,5 +206,42 @@ public class ClassesController {
 		logger.info("params : " + params);
 		return service.update(params);
 	}
-
+	
+	
+	
+	@RequestMapping(value="/reviewWrite.do")
+    public String reviewWrite(
+          @RequestParam String cl_id,@RequestParam String user_id,@RequestParam String review_content, HttpSession session) {
+       logger.info("param : "+ cl_id+user_id+review_content);
+       String page = "";
+       int commwrite = service.reviewWrite(cl_id, user_id,review_content);
+       if (commwrite == 1) {
+       page = "redirect:/classDetail.do?cl_id="+cl_id;
+       }
+       return page;
+    }
+	
+	@RequestMapping(value="/reviewWrite.ajax")
+	@ResponseBody
+    public String reviewWrite(@RequestParam HashMap<String, Object> params) {
+       logger.info("params : " + params);
+       
+       return service.reviewWrite(params);
+    }
+	
+	
+	
+	/*
+	 * @RequestMapping(value="/reviewDel.do") public String commdelete(@RequestParam
+	 * String board_id ,@RequestParam String comment_id, HttpSession session) {
+	 * 
+	 * logger.info("board_id params : "+board_id);
+	 * logger.info("comment_id params : "+comment_id);
+	 * 
+	 * String page = ""; String loginId =
+	 * String.valueOf(session.getAttribute("loginId"));
+	 * service.commdelete(board_id,comment_id,loginId);
+	 * 
+	 * page = "redirect:/magazineDetail.do?board_id="+board_id; return page; }
+	 */
 }
