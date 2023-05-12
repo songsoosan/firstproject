@@ -116,7 +116,7 @@ public class ClassesController {
 	  session.removeAttribute("msg"); }
 	  
 	  
-	 }
+	  }
 	 
 	  return page; 
 	  }

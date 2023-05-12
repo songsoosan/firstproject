@@ -32,6 +32,7 @@ textarea{
 </style>
 </head>
 <body>
+		<% String userId = (String) session.getAttribute("loginId"); %>
 		<table>
 			<c:forEach items="dto">
 			<tr>
@@ -48,7 +49,7 @@ textarea{
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td>${dto.user_id}</td>
+				<td><%= userId %></td>
 			</tr>
 			<tr>
 				<th>작성일</th>
@@ -77,7 +78,6 @@ textarea{
 			</tr>
 			</c:forEach>
 		</table>
-		
 </body>
 <script>
 

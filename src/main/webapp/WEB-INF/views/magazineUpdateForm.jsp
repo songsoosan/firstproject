@@ -33,8 +33,10 @@ textarea{
 </style>
 </head>
 <body>
+	<% String userId = (String) session.getAttribute("loginId"); %>
 	<form action="magazineUpdate.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="board_id" value="${dto.board_id}"/>
+		<input type="hidden" name = "cat_id" value = "m"/> 
 		<table>
 			<tr>
 				<th>제목</th>
@@ -42,7 +44,7 @@ textarea{
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="user_id" value="${dto.user_id}"/></td>
+				<td><input type="text" name="user_id" value="<%= userId %>"/></td>
 			</tr>
 			<tr>
 				<th>내용</th>

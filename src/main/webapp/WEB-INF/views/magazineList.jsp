@@ -37,7 +37,9 @@
 		<option value="15">15</option>
 		<option value="20">20</option>
 	</select>
-	<button onclick="location.href='magazineWrite.go'">글쓰기</button>
+	<c:if test="${adminChk ne null}">
+		<button onclick="location.href='magazineWrite.go'">글쓰기</button>
+	</c:if>
 	<table>
 		<thead>
 			<tr>
@@ -119,6 +121,7 @@ function listPrint(list){
 		content +='<tr>';
 		content +='<td>'+board.board_id+'</td>';
 		content +='<td><a href="magazineDetail.do?board_id='+board.board_id+'">'+board.board_title+'</td>';
+		
 		content +='<td>'+board.user_id+'</td>';
 		content +='<td>'+board.board_views+'</td>';
 		

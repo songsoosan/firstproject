@@ -5,14 +5,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<<<<<<< HEAD
 <link rel="stylesheet" href="resources/css/commons.css" type="text/css">
-<style>
-table{
-   width: 100%;
-}
-=======
-
 <style>
 table{
 	width: 100%;
@@ -36,11 +29,12 @@ textarea{
 	width: 100%;
 	height: 150px;
 	resize: none;
->>>>>>> origin/master
+}
 
 </style>
 </head>
 <body>
+		<% String userId = (String) session.getAttribute("loginId"); %>
 		<table>
 			<c:forEach items="dto">
 			<tr>
@@ -49,7 +43,7 @@ textarea{
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td>${dto.user_id}</td>
+				<td><%= userId %></td>
 			</tr>
 			<tr>
 				<th>작성일</th>
@@ -72,8 +66,10 @@ textarea{
 			<tr>
 				<th colspan="2">
 					<input type="button" onclick="location.href='./magazine.do'" value="리스트"/>
+			<c:if test="${adminChk ne null}">
 					<input type="button" onclick="location.href='./magazineUpdate.go?board_id=${dto.board_id}'" value="수정"/>
 					<input type="button" onclick="location.href='./magazineDelete.do?board_id=${dto.board_id}'" value="삭제"/>
+			</c:if>
 				</th>
 			</tr>
 			</c:forEach>
@@ -90,8 +86,11 @@ textarea{
 			<div class="comment">
 				${comment.comment_id}
 				${comment.user_id} / ${comment.comment_date}
-				<input type ="button" onclick='location.href="commentdel.do?comment_id=${comment.comment_id}&board_id=${dto.board_id}"' value="삭제"/>
+				<c:if test="${comment.user_id eq sessionScope.loginId}">
+					<input type ="button" onclick='location.href="commentdel.do?comment_id=${comment.comment_id}&board_id=${dto.board_id}"' value="삭제"/>
 				<input type ="button" onclick='location.href="commentupdate.go?comment_id=${comment.comment_id}&board_id=${dto.board_id}&comment_content=${comment.comment_content}"' value="수정"/>
+				</c:if>
+				
 				<p>${comment.comment_content}</p>
 			</div>
 		</c:forEach>
@@ -101,8 +100,9 @@ textarea{
 	    	<input type="hidden" name="board_id" value="${dto.board_id}">
 	    	<input type="text" name="comment_id" value="${eventcommentlist2.comment_id}">
 				<table>	
+					<c:if test="${loginId ne null}">
 						<tr>
-							<th>내용</th>
+							<th>댓글 작성</th>
 							<td><textarea name="comment_content"></textarea></td>
 						</tr>
 						<tr>
@@ -110,6 +110,12 @@ textarea{
 								<button type="submit">등록</button>
 							</th>
 						</tr>
+					</c:if>
+					<c:if test="${loginId eq null}">
+						<tr>
+							<th>댓글 작성</th>
+						</tr>
+					</c:if>
 	    		</table>
 	    </form>
 		<!--  댓글 끝 -->
@@ -123,10 +129,4 @@ alert("${message}");
 </script>
 </c:if>
 
-
-<<<<<<< HEAD
-</script>
-
-=======
->>>>>>> origin/master
 </html>

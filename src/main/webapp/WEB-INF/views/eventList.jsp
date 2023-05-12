@@ -124,7 +124,6 @@ function listPrint(list) {
         var endDateFormatted = event_end_date.toISOString().substring(0, 10);
 
         content += '<td>' + startDateFormatted + ' ~ ' + endDateFormatted + '</td>';
-
         content += '<td>' + event.user_id + '</td>';
         
 
@@ -132,7 +131,7 @@ function listPrint(list) {
         if (new Date() > event_end_date) {
             status = false;
         }
-        
+		
         
         content += '<td>' + status + '</td>';
         content += '</tr>';
@@ -143,8 +142,6 @@ function listPrint(list) {
     $('#list').empty();
     $('#list').append(content);
 }
-
-
 
 </script>
 </html>

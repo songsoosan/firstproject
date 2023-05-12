@@ -35,32 +35,9 @@ textarea{
 </style>
 </head>
 <body>
-	<form action="magazineWrite.do" method="post" enctype="multipart/form-data">
-<style>
-	table{
-		width: 100%
-	}
-	table, th, td{
-		border: 2px solid green;
-		border-collapse: collapse;
-		padding: 5px 10pxl
-	}
-	button{
-		margin: 5px;
-	}
-	input[type="text"]{
-		width: 100%
-	}
-	textarea{
-		heigt: 50%;
-		resize: none;
-		width: 100%
-		
-	}
-</style>
-</head>
-<body>
-	<form action="wirte.do" method="post" enctype="multipart/form-data">
+	 <% String userId = (String) session.getAttribute("loginId"); %>
+	<form action="magazinewrite.do" method="post" enctype="multipart/form-data">
+	<input type="hidden" name = "cat_id" value = "m"/> 
 		<table>
 			<tr>
 				<th>제목</th>
@@ -68,7 +45,7 @@ textarea{
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="user_id"/></td>
+				<td><input type="text" name="user_id" value="<%= userId %>"/></td>
 			</tr>
 			<tr>
 				<th>내용</th>
@@ -82,7 +59,6 @@ textarea{
 			</tr>
 			<tr>
 				<th>링크</th>
-				<td><a href="https://www.naver.com" target="_blank">링크 3</a></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -93,5 +69,8 @@ textarea{
 		</table>	
 	</form>
 </body>
-<script></script>
+<script>
+
+
+</script>
 </html>

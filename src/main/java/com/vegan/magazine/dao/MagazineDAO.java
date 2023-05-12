@@ -14,7 +14,7 @@ public interface MagazineDAO {
    
    //ArrayList<MagazineDTO> list();
 
-   int write(MagazineDTO dto);
+   //int write(MagazineDTO dto);
 
    MagazineDTO detail(String board_id);
 
@@ -57,6 +57,12 @@ public interface MagazineDAO {
    //int commupdate(HashMap<String, String> params);
 
    int commupdate(String comment_id, String comment_content, String loginId);
+
+   byte adminChk(String loginId);
+
+
+
+int magazinewrite(MagazineDTO dto);
 
 
 

@@ -178,6 +178,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		
 		// 2. photo 에 파일명이 존재 한다면?
 		if(photo != null && !photo.getOriginalFilename().equals("")) {
+			String cat_id = params.get("cat_id");
 			fileSave(null, idx, photo);
 		}
 		

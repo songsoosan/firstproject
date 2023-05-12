@@ -58,13 +58,17 @@ textarea{
 			</c:if>
 			<tr>
 				<th>링크</th>
-				<td><a href="https://www.naver.com" target="_blank">링크 3</a></td>
+				<td>
+        			<span id="site_link" style="text-decoration: underline; color: blue; cursor: pointer;">https://www.example.com</span>
+    			</td>
 			</tr>
 			<tr>
 				<th colspan="2">
 					<input type="button" onclick="location.href='./magazine.do'" value="리스트"/>
+			<c:if test="${adminChk ne null}">
 					<input type="button" onclick="location.href='./magazineUpdate.go?board_id=${dto.board_id}'" value="수정"/>
 					<input type="button" onclick="location.href='./magazineDelete.do?board_id=${dto.board_id}'" value="삭제"/>
+			</c:if>
 				</th>
 			</tr>
 			</c:forEach>
@@ -89,11 +93,11 @@ textarea{
 		
 		<!-- 댓글 작성 -->
 	    <form method="get" action="commentupdate.do">
-			<input type="text" name="board_id" value="${dto.board_id}">
-	    	<input type="text" name="comment_id" value="${magacommentlist2.comment_id}">
+			<input type="hidden" name="board_id" value="${dto.board_id}">
+	    	<input type="hidden" name="comment_id" value="${magacommentlist2.comment_id}">
 				<table>	
 						<tr>
-							<th>내용</th>
+							<th>댓글 수정</th>
 							<td><textarea name="comment_content">${magacommentlist2.comment_content}</textarea></td>
 						</tr>
 						<tr>
@@ -106,8 +110,11 @@ textarea{
 		<!--  댓글 끝 -->
 		
 </body>
+<c:if test="${not empty message}">
 <script>
 
+alert("${message}");
 
 </script>
+</c:if>
 </html>
