@@ -10,6 +10,8 @@
 			user_id, user_name, user_phone, user_email, user_admin_chk,user_secc_chk
 		FROM user ORDER BY user_id DESC
 	</select>
+<<<<<<< HEAD
+=======
 	
 	<select id="reportList" resultType="com.vegan.admin.dto.AdminDTO">
 		SELECT r.report_id, r.user_id, r2.user_id AS user_id2, h.report_date ,h.report_result,h.result_date
@@ -19,5 +21,7 @@
  		 ORDER BY r.report_id desc
 	</select>
 
+>>>>>>> origin/master
 
+   
 </mapper>
