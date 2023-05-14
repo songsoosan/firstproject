@@ -59,6 +59,9 @@ textarea{
 			</tr>
 			<tr>
 				<th>링크</th>
+				<td>
+					<input type="text" name="link" id="linkInput" />
+				</td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -70,7 +73,19 @@ textarea{
 	</form>
 </body>
 <script>
+var linkInput = document.getElementById("linkInput");
+var linkAnchor = document.getElementById("linkAnchor");
 
+linkInput.addEventListener('input', function() {
+    var link = linkInput.value.trim();
+    if (link !== "") {
+        linkAnchor.href = link;
+        linkAnchor.innerText = link;
+    } else {
+        linkAnchor.href = "";
+        linkAnchor.innerText = "";
+    }
+});
 
 </script>
 </html>

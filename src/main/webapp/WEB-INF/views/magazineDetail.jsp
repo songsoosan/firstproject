@@ -43,7 +43,7 @@ textarea{
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><%= userId %></td>
+				<td>${dto.user_id}</td>
 			</tr>
 			<tr>
 				<th>작성일</th>
@@ -61,7 +61,7 @@ textarea{
 			</c:if>
 			<tr>
 				<th>링크</th>
-				<td><a href="https://www.naver.com" target="_blank">링크 3</a></td>
+				<td> <a href="#" target="_blank" id="linkAnchor"></a></td>
 			</tr>
 			<tr>
 				<th colspan="2">
@@ -98,7 +98,7 @@ textarea{
 		<!-- 댓글 작성 -->
 	    <form method="post" action="commentWrite.do">
 	    	<input type="hidden" name="board_id" value="${dto.board_id}">
-	    	<input type="text" name="comment_id" value="${eventcommentlist2.comment_id}">
+	    	<input type="hidden" name="comment_id" value="${eventcommentlist2.comment_id}">
 				<table>	
 					<c:if test="${loginId ne null}">
 						<tr>
@@ -114,6 +114,7 @@ textarea{
 					<c:if test="${loginId eq null}">
 						<tr>
 							<th>댓글 작성</th>
+							<td>회원만 입력 가능합니다.</td>
 						</tr>
 					</c:if>
 	    		</table>
@@ -121,12 +122,15 @@ textarea{
 		<!--  댓글 끝 -->
 		
 </body>
-<c:if test="${not empty message}">
 <script>
 
-alert("${message}");
+
+var link = "<%= request.getParameter("link") %>";
+var linkAnchor = document.getElementById("linkAnchor");
+if (link && link !== "null") {
+    linkAnchor.href = link;
+    linkAnchor.innerText = link;
+}
 
 </script>
-</c:if>
-
 </html>

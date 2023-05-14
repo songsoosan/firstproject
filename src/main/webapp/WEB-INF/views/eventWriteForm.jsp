@@ -37,6 +37,7 @@ textarea{
 </style>
 </head>
 <body>
+	<% String userId = (String) session.getAttribute("loginId"); %>
 	<form action="eventWrite.do" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
@@ -45,7 +46,7 @@ textarea{
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="user_id"/></td>
+				<td><input type="text" name="user_id" value="<%= userId %>"/></td>
 			</tr>
 			<tr>
 				<th>시작일</th>
@@ -81,11 +82,11 @@ textarea{
 <script>
 $(document).ready(function() {
 	  $("#event_start_date").datepicker({
-	    dateFormat: "yy-mm-dd" // 날짜 형식 설정
+	    dateFormat: "yy-mm-dd" //날짜형식설정
 	  });
 	  
 	  $("#event_end_date").datepicker({
-	    dateFormat: "yy-mm-dd" // 날짜 형식 설정
+	    dateFormat: "yy-mm-dd" 
 	  });
 	});
 

@@ -49,7 +49,7 @@ textarea{
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><%= userId %></td>
+				<td>${dto.user_id}</td>
 			</tr>
 			<tr>
 				<th>작성일</th>
@@ -72,8 +72,10 @@ textarea{
 			<tr>
 				<th colspan="2">
 					<input type="button" onclick="location.href='./event.do'" value="리스트"/>
+				<c:if test="${adminChk ne null}">
 					<input type="button" onclick="location.href='./eventUpdate.go?event_id=${dto.event_id}'" value="수정"/>
 					<input type="button" onclick="location.href='./eventDelete.do?event_id=${dto.event_id}'" value="삭제"/>
+				</c:if>
 				</th>
 			</tr>
 			</c:forEach>

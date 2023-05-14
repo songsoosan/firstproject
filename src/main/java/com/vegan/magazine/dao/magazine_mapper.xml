@@ -113,5 +113,8 @@
 		FROM user Where user_id = #{param1}
 	</select>
    
+   <delete id="photoDelete">
+      DELETE FROM photo WHERE photo_name = #{param1}
+   </delete>
 
 </mapper>

@@ -162,19 +162,33 @@ Logger logger = LoggerFactory.getLogger(getClass());
       logger.info("idx : " + params.get("board_id"));
       int idx = Integer.parseInt(params.get("board_id"));
       int row = dao.update(params);
+      boolean deletePhoto = params.get("deletePhoto") != null;
+      String page = "redirect:/magazineDetail.do?board_id="+idx;
       logger.info("row:"+row);
       
+      if (deletePhoto) {
+          String photo_name = params.get("photo_name");
+          logger.info("사진 삭제");
+          logger.info("del serPhotoname: " +photo_name);
+          int rowphoto = dao.photoDelete(photo_name);
+          if(rowphoto == 1) {
+             logger.info("사진 블라인드 처리 완료");
+             page = rowphoto>0 ? "redirect:/magazineDetail.do?board_id="+idx : "redirect:/magazine";
+             logger.info("update => "+page);
+          }
       
+      }
+     
       // 2. photo 에 파일명이 존재 한다면?
       if(photo != null && !photo.getOriginalFilename().equals("")) {
     	 String cat_id = params.get("cat_id");
          fileSave(cat_id,idx, photo);
       }
       
-      String page = row>0 ? "redirect:/magazineDetail.do?board_id="+idx : "redirect:/magazine";
-      logger.info("update => "+page);
+      
       
       return page;
+      
    }
 
 

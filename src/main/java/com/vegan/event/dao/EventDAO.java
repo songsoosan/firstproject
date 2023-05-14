@@ -10,7 +10,7 @@ import com.vegan.event.dto.EventDTO;
 public interface EventDAO {
 	
 
-	int write(EventDTO dto);
+	int eventwrite(EventDTO dto);
 
 	EventDTO detail(String event_id);
 
@@ -30,6 +30,8 @@ public interface EventDAO {
 	int totalCount();
 
 	ArrayList<EventDTO> list(int cnt, int offset);
+
+	byte adminChk(String loginId);
 
 
 

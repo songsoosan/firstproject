@@ -37,7 +37,9 @@
 		<option value="15">15</option>
 		<option value="20">20</option>
 	</select>
+	<c:if test="${adminChk ne null}">
 	<button onclick="location.href='eventWrite.go'">글쓰기</button>
+	</c:if>
 	<table>
 		<thead>
 			<tr>

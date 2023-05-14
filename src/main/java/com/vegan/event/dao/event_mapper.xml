@@ -47,9 +47,9 @@
 	
 	<insert 
 		useGeneratedKeys="true"
-		keyColumn="idx"
+		keyColumn="event_id"
 		keyProperty="event_id"
-		id="write" parameterType="com.vegan.event.dto.EventDTO">
+		id="eventwrite" parameterType="com.vegan.event.dto.EventDTO">
 		INSERT INTO event(event_title, user_id, event_content, cat_id, event_start_date, event_end_date, event_status)
 			VALUES(#{event_title},#{user_id},#{event_content},#{cat_id},#{event_start_date},#{event_end_date}, #{event_status})
 	</insert>
@@ -76,5 +76,11 @@
 	<select id="findFile" resultType="String">
 		SELECT photo_name FROM photo 
 			WHERE identify_number = #{event_id}
+	</select>
+	
+	<select id="adminChk"  resultType="java.lang.Byte">
+		SELECT 
+			user_admin_chk
+		FROM user Where user_id = #{param1}
 	</select>
 </mapper>

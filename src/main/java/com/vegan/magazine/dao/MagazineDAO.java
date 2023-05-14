@@ -64,6 +64,8 @@ public interface MagazineDAO {
 
 int magazinewrite(MagazineDTO dto);
 
+int photoDelete(String photo_name);
+
 
 
 

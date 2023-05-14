@@ -94,7 +94,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
          
          logger.info("comment list cnt : "+magacommentlist.size());
          
-         // 디테일에 세션을 추가해야 관리자 로그인 아이디가 세션에 저장이 되서 로그인 했을경우 수정삭제 버튼 뜨고 일반회원일경우 안뜸
+         // 디테일에 세션을 추가해야 관리자 로그인 아이디가 세션에 저장이 되서 로그인 했을경우 수정삭제 버튼 뜨고 관리자 아닐경우 안뜸
          if(session.getAttribute("loginId") != null) {
         	 page = "magazineDetail";
         	 String loginId = String.valueOf(session.getAttribute("loginId"));

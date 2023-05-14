@@ -53,13 +53,20 @@ textarea{
 			<tr>
 				<th>대표사진</th>
 				<td>
+					<p id="filename">
 					<c:if test="${dto.photo_name eq null}">
 						<input type="file" name="photo"/>
 					</c:if>
 					<c:if test="${dto.photo_name ne null }">
 						<img src="/photo/${dto.photo_name}"/>
-					</c:if>					
+						<button id="deleteButton" onclick="delphoto()">삭제</button>
+					</c:if>	
+					</p>
+					 <input type="file" name="photo" id ="fileInput" onchange="checkExtension()"/>	
+					   <input type="hidden" name="deletePhoto" value="false" id="deletePhotoInput">
+                      <input type="hidden" name="photo_name" value="${dto.photo_name}">
 				</td>
+
 			<tr>
 				<th>링크</th>
 				<td><a href="https://www.naver.com" target="_blank">링크 3</a></td>
@@ -73,5 +80,35 @@ textarea{
 		</table>	
 	</form>
 </body>
-<script></script>
+<script>
+function delphoto(){
+	   document.getElementById("filename").remove();    
+	    document.getElementById("deletePhotoInput").value = "true";
+	    
+	}
+
+	function checkExtension() {
+	    var file = document.getElementById("fileInput");
+	    var fileName = file.value;
+        var idx = fileName.lastIndexOf(".");
+      
+        // 확장자명 추출
+        var ext = fileName.slice(idx + 1).toLowerCase();
+      
+        // 확장자명이 jsp인 경우 경고창 출력
+        if (ext != "jpg" && ext != "png") {
+          alert("확장자가 .jpg, .png인 파일만 선택할 수 있습니다.");
+          file.value = "";
+          return false;
+              }
+
+
+	    if(document.getElementById("filename")) {
+	            alert("이미 등록된 이미지가 있습니다. 새로운 이미지를 등록하려면 삭제 버튼을 눌러주세요.");
+	            file.value = "";
+	            return false;
+	           }    
+	  }
+
+</script>
 </html>

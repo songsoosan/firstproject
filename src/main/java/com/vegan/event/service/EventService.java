@@ -63,7 +63,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
 	}
 	
 	
-	public String write(MultipartFile photo, HashMap<String, String> params) {
+	public String eventwrite(MultipartFile photo, HashMap<String, String> params) {
 		
 		String page = "redirect:/event";
 		
@@ -92,27 +92,26 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		    dto.setEvent_start_date(eventStartDate);
 		    dto.setEvent_end_date(eventEndDate);
 		} catch (ParseException e) {
-		    // 예외 처리
 		    e.printStackTrace();
 		}
 		
 		
-		int row = dao.write(dto);
+		int row = dao.eventwrite(dto);
 		logger.info("update row : "+row);
 		
 
 		// 조건 3. 받아온 키는 파라메터 dto 에서 뺀다.
-		int idx = dto.getEvent_id();
+		int event_id = dto.getEvent_id();
 		String cat_id = dto.getCat_id();
-		logger.info("방금 insert 한 event_id : "+idx);
+		logger.info("방금 insert 한 event_id : "+event_id);
 		
-		page = "redirect:/eventDetail.do?event_id="+idx;
+		page = "redirect:/eventDetail.do?event_id="+event_id;
 		
 		// 2. 파일도 업로드 한 경우
 		if(!photo.getOriginalFilename().equals("")) {
 			logger.info("파일 업로드 작업");
 			
-			fileSave(cat_id,idx,photo);
+			fileSave(cat_id,event_id,photo);
 		}
 		return page;
 	}
@@ -186,6 +185,12 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		logger.info("update => "+page);
 		
 		return page;
+	}
+
+
+	public byte adminChk(String loginId) {
+		
+		return dao.adminChk(loginId);
 	}
 
 	
