@@ -30,16 +30,24 @@
       margin: 0 0 0 0;
       padding: 5px 50px;
    }
-   .menu li {
+   .menu>ul>li {
       width:16%;
       float: left;
       text-align: center;
       list-style: none;
    }
-   .menu a {
+   .menu>ul>li>a {
       color: white;
       text-decoration-line: none;
       font-size: 25px;
+   }
+   .nav-item {
+         text-align: center;
+         list-style: none;
+   }
+   .nav-item>ul>li>a {
+      text-decoration-line: none;
+      font-size: 20px;
    }
    .contentWrap > .contentBox {
        border: 1px solid #49c5a2;
@@ -63,7 +71,7 @@
       <div class="col-sm-3">
          <div class="input-group mt-4">
             <input type="text" id="searchText" class="form-control" placeholder="검색어 입력">
-            <a href="main.go" class="input-group-text"><i class="bi bi-search"></i></a>
+            <a href="javascript:void(0);" id="search" class="input-group-text"><i class="bi bi-search"></i></a>
          </div>
       </div>
       <div class="col-sm-2 text-center">
@@ -90,7 +98,15 @@
          <li><a href="ranking.go">랭킹</a></li>
          <li><a href="class.go">클래스</a></li>
          <li><a href="magazine.go">매거진</a></li>
-         <li><a href="board.go">공지사항</a></li>
+         <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               게시판
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+               <li><a href="board.go">공지사항</a></li>
+               <li><a href="freeList.go">자유게시판</a></li>
+            </ul>
+         </li>
          <li><a href="event.go">이벤트</a></li>
          <!-- <li><a href="admin.go">관리자(test)</a></li> -->
       </ul>

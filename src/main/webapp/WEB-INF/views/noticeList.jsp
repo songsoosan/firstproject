@@ -30,8 +30,7 @@
 <div class="contentWrap mt-5">
    <div class="contentBox">
       <div class="text-center">
-         <h2><a href="board.go">공지사항</a></h2>
-         <h2><a href="freeList.go">자유게시판</a></h2>
+         <h2>공지사항</h2>
       </div>
       <hr/>
       <div>
@@ -79,7 +78,7 @@ var showPage= 1;
 
 adminCheck();
 listCall(showPage);
-
+	
 function listCall(page){
    $.ajax({
       type: 'post',
@@ -161,6 +160,11 @@ $("#searchText").keydown(function (key) {
       listCall(1);
       $('#pagination').twbsPagination('destroy');
    }
+});
+
+$("#search").click(function (key) {
+   listCall(1);
+   $('#pagination').twbsPagination('destroy');
 });
 
 $('#pagePerNum').change(function(){
