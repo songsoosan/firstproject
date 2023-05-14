@@ -40,7 +40,7 @@ public interface BoardDAO {
    
    int freewrite(BoardDTO dto);
 
-   BoardDTO freedetail(String fboard_id);
+   BoardDTO freedetail(String board_id);
    
    int freetotalCount(@Param("searchText")String searchText, @Param("loginId") String loginId);
    
@@ -50,14 +50,14 @@ public interface BoardDAO {
    
    int freeupdate(HashMap<String, String> params);
    
-   void freedelete(@Param("fboard_id") String fboard_id);
+   void freedelete(@Param("board_id") String board_id);
    
-   void freefileWrite(@Param("cat_id")String cat_id, @Param("fboard_id")int fboard_id, @Param("ori_photo_name")String ori_photo_name, @Param("photo_name")String photo_name);
+   void freefileWrite(@Param("cat_id")String cat_id, @Param("board_id")int board_id, @Param("ori_photo_name")String ori_photo_name, @Param("photo_name")String photo_name);
    
-   void freefileUpdate(@Param("fboard_id")int fboard_id, @Param("ori_photo_name")String ori_photo_name, @Param("photo_name")String photo_name);
+   void freefileUpdate(@Param("board_id")int board_id, @Param("ori_photo_name")String ori_photo_name, @Param("photo_name")String photo_name);
 
    int freecommentWrite(BoardDTO dto);
    
-   ArrayList<BoardDTO>freecommentList(@Param("fboard_id") String fboard_id);
+   ArrayList<BoardDTO>freecommentList(@Param("board_id") String board_id);
    
 }

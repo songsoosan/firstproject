@@ -46,7 +46,6 @@
       게시물 갯수: 
       <select id = "pagePerNum">
          <option value="15">15</option>
-
       </select>
    </div>
    
@@ -133,13 +132,13 @@ function listPrint(list){
    //java.sql.Date 는 js에서 읽지 못해 밀리세컨드로 반환한다.
       // 해결방법 1. DTO에서 Date를 String으로 반환
       // 해결방법 2. js 에서 변환
-      list.forEach(function(freeboard,fboard_id){
+      list.forEach(function(board,board_id){
          content +='<tr>';
-         content +='<td>'+freeboard.fboard_id+'</td>';
-         content +='<td><a href ="freeDetail.do?fboard_id='+freeboard.fboard_id+'">'+freeboard.fboard_title+'</td>';
-         content +='<td>'+freeboard.user_id+'</td>';
-         content +='<td>'+freeboard.fboard_date+'</td>';
-         content +='<td>'+freeboard.fboard_views+'</td>';
+         content +='<td>'+board.board_id+'</td>';
+         content +='<td><a href ="freeDetail.do?board_id='+board.board_id+'">'+board.board_title+'</td>';
+         content +='<td>'+board.user_id+'</td>';
+         content +='<td>'+board.board_date+'</td>';
+         content +='<td>'+board.board_views+'</td>';
          content +='</tr>';
       });
       $('#list').empty();
