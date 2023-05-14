@@ -173,16 +173,31 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		logger.info("idx : " + params.get("event_id"));
 		int idx = Integer.parseInt(params.get("event_id"));
 		int row = dao.update(params);
+		boolean deletePhoto = "true".equals(params.get("deletePhoto"));
+		String page = "redirect:/eventDetail.do?event_id="+idx;
 		logger.info("row:"+row);
+		
+		
+		if (deletePhoto) {
+	          String photo_name = params.get("photo_name");
+	          logger.info("사진 삭제");
+	          logger.info("del serPhotoname: " +photo_name);
+	          int rowphoto = dao.photoDelete(photo_name);
+	          if(rowphoto == 1) {
+	             logger.info("사진 삭제 처리 완료");
+	             page = row>0 ? "redirect:/eventDetail.do?event_id="+idx : "redirect:/event";
+	             
+	             logger.info("update => "+page);
+	          }
+	      
+	      }
 		
 		// 2. photo 에 파일명이 존재 한다면?
 		if(photo != null && !photo.getOriginalFilename().equals("")) {
 			String cat_id = params.get("cat_id");
 			fileSave(null, idx, photo);
 		}
-		
-		String page = row>0 ? "redirect:/eventDetail.do?event_id="+idx : "redirect:/event";
-		logger.info("update => "+page);
+
 		
 		return page;
 	}

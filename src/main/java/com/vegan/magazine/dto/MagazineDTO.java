@@ -14,7 +14,10 @@ public class MagazineDTO {
    private int board_views;
    private int photo_id;
    private String photo_name;
+   private String ori_photo_name;
+   private String identify_number;
    private String cat_id;
+   
    
    // comment dto
    private int comment_id;
@@ -22,6 +25,20 @@ public class MagazineDTO {
    private String comment_content;
    
    
+   
+   
+public String getOri_photo_name() {
+	return ori_photo_name;
+}
+public void setOri_photo_name(String ori_photo_name) {
+	this.ori_photo_name = ori_photo_name;
+}
+public String getIdentify_number() {
+	return identify_number;
+}
+public void setIdentify_number(String identify_number) {
+	this.identify_number = identify_number;
+}
 public int getBoard_id() {
 	return board_id;
 }

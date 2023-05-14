@@ -33,6 +33,8 @@ public interface EventDAO {
 
 	byte adminChk(String loginId);
 
+	int photoDelete(String photo_name);
+
 
 
 

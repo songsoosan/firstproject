@@ -64,6 +64,8 @@ Logger logger = LoggerFactory.getLogger(getClass());
       
       ArrayList<MagazineDTO> list = dao.list(cnt, offset);
       map.put("list", list);
+      logger.info("list : "+list);
+      logger.info("map : "+map);
       return map;
    }
    
@@ -162,7 +164,11 @@ Logger logger = LoggerFactory.getLogger(getClass());
       logger.info("idx : " + params.get("board_id"));
       int idx = Integer.parseInt(params.get("board_id"));
       int row = dao.update(params);
-      boolean deletePhoto = params.get("deletePhoto") != null;
+      // 아래 코드 한줄 대로 하면 false 일떄 true 로 바로 바꿔주기 때문에 삭제 버튼 눌렀을 때만 true 로 바껴야 하는데 
+      // 그래서 그 바로 아래 코드로 수정함 그러면 삭제 버튼 눌렀을때만 수정되고 나머지는 다 false
+      //boolean deletePhoto = params.get("deletePhoto") != null;
+      boolean deletePhoto = "true".equals(params.get("deletePhoto"));
+      logger.info("delete photo : "+ deletePhoto);
       String page = "redirect:/magazineDetail.do?board_id="+idx;
       logger.info("row:"+row);
       
@@ -172,21 +178,25 @@ Logger logger = LoggerFactory.getLogger(getClass());
           logger.info("del serPhotoname: " +photo_name);
           int rowphoto = dao.photoDelete(photo_name);
           if(rowphoto == 1) {
-             logger.info("사진 블라인드 처리 완료");
-             page = rowphoto>0 ? "redirect:/magazineDetail.do?board_id="+idx : "redirect:/magazine";
+             logger.info("사진 삭제 처리 완료");
+             page = rowphoto > 0 ? "redirect:/magazineDetail.do?board_id="+idx : "redirect:/magazine";
              logger.info("update => "+page);
           }
       
       }
-     
+      
+      if(row == 1) {
+  
+          logger.info("매거진 사진 수정 완료");
+          
+
       // 2. photo 에 파일명이 존재 한다면?
       if(photo != null && !photo.getOriginalFilename().equals("")) {
     	 String cat_id = params.get("cat_id");
          fileSave(cat_id,idx, photo);
       }
-      
-      
-      
+     }
+
       return page;
       
    }

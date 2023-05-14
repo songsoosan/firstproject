@@ -12,13 +12,17 @@
 	   </select>
 	   -->
 	   
-	 <select id="list" resultType="com.vegan.event.dto.EventDTO">
-    SELECT 
-        event_id, user_id, event_title, event_content, event_start_date, event_end_date, cat_id, event_status
-    FROM event
-    ORDER BY event_id DESC
-    LIMIT #{param1} OFFSET #{param2}
-</select>
+	<select id="list" resultType="com.vegan.event.dto.EventDTO">
+	     SELECT 
+	    event_id, user_id, event_title, event_content, event_start_date, event_end_date, cat_id,
+	    CASE
+	    	WHEN event_end_date &lt; CURDATE() OR event_start_date &gt; CURDATE() THEN 0
+        ELSE 1
+	    END AS event_status
+	FROM event
+	ORDER BY event_id DESC
+	LIMIT #{param1} OFFSET #{param2}
+	</select>
 
 	
 	
@@ -83,4 +87,9 @@
 			user_admin_chk
 		FROM user Where user_id = #{param1}
 	</select>
+	
+	
+	<delete id="photoDelete">
+      DELETE FROM photo WHERE photo_name = #{param1}
+   </delete>
 </mapper>

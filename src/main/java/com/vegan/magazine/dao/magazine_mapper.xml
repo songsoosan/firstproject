@@ -11,12 +11,14 @@
       FROM board ORDER BY board_id DESC
       </select>
       -->
-    <select id="list" resultType="com.vegan.magazine.dto.MagazineDTO">
+
+	<select id="list" resultType="com.vegan.magazine.dto.MagazineDTO">
        SELECT 
          board_id, user_id, board_title, board_content, board_date, board_views, cat_id
       FROM board ORDER BY board_id DESC
       LIMIT #{param1} OFFSET #{param2}
     </select>
+
     
       <select id="magacommentlist" resultType="com.vegan.magazine.dto.MagazineDTO">
        SELECT 
