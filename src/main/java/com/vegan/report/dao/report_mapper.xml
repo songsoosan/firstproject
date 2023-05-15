@@ -3,4 +3,14 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
 <mapper namespace="com.vegan.report.dao.ReportDAO">
+
+<insert id="report" parameterType="hashmap">
+	INSERT INTO report(
+        user_id,cat_id,identify_number,reporter,reason,content
+      )VALUES(
+       #{user_id},#{cat_id},#{board_id},#{reporter},#{reason},#{content}
+      )
+</insert>
+
+   
 </mapper>

@@ -38,7 +38,8 @@ public class MainController {
 	public String ranking(Model model) {
 			return "ranking";
 	}
-
+	
+	
 	@RequestMapping(value = "/magazine.go", method = RequestMethod.GET)
 	public String magazine(Model model) {
 			return "magazineList";

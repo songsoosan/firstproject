@@ -96,7 +96,7 @@
       <ul>
          <li><a href="recipe.go">레시피</a></li>
          <li><a href="ranking.go">랭킹</a></li>
-         <li><a href="class.go">클래스</a></li>
+         <li><a href="classList.go">클래스</a></li>
          <li><a href="magazine.go">매거진</a></li>
          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
