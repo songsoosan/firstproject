@@ -34,7 +34,10 @@ public class RecipeService {
 	
 	@Autowired RecipeDAO dao;
 
-	
+
+	@Autowired
+	RecipeDAO recipeDAO;
+
 
 
 

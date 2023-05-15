@@ -21,8 +21,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.vegan.recipe.service.RecipeService;
 
-
-
 @Controller
 public class RecipeController {
 	
@@ -66,3 +64,4 @@ public class RecipeController {
     }
 
 }
+

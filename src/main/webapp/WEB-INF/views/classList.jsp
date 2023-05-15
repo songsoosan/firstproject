@@ -142,20 +142,14 @@ div {
 							    <h5 class="card-title">${classes.cl_subject}</h5>
 							    <p class="card-text">모집 기간: ${classes.cl_period} ~ ${classes.cl_deadlinePeriod}</p>
 							    <p class="card-text">
+
 							    	<c:if test="${classes.cl_status == 1}">
 							    		<span class="status inactive">마감</span>
 							    	</c:if>
 							    	<c:if test="${classes.cl_status == 0}">
 							    		<span class="status active">진행중</span>
 							    	</c:if>
-							        <%-- <c:choose>
-							            <c:when test="${classes.cl_status == 1}">
-							                <span class="status active">마감</span>
-							            </c:when>
-							            <c:otherwise>
-							                <span class="status inactive">진행중</span>
-							            </c:otherwise>
-							        </c:choose> --%>
+	
 							    </p>
 							    <a href="classDetail.do?cl_id=${classes.cl_id}" class="btn btn-primary">자세히 보기</a>
 							</div>

@@ -3,4 +3,26 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
 <mapper namespace="com.vegan.report.dao.ReportDAO">
+
+	<insert id="report" parameterType="hashmap">
+		INSERT INTO report(
+		user_id,cat_id,identify_number,reporter,reason,content
+		)VALUES(
+		#{user_id},#{cat_id},#{board_id},#{reporter},#{reason},#{content}
+		)
+	</insert>
+	
+	<select id="reportList" resultType="com.vegan.report.dto.ReportDTO">
+		SELECT * FROM report  
+	</select>
+
+
+<!-- 	<select id="reportList" resultType="com.vegan.admin.dto.AdminDTO">
+		SELECT r.report_id, r.user_id, r2.user_id AS user_id2, h.report_date ,h.report_result,h.result_date
+ 		 FROM report r
+  		LEFT JOIN report_id r2 ON r.report_id = r2.report_id
+  		LEFT JOIN history h ON r.report_id = h.report_id
+ 		 ORDER BY r.report_id desc
+	</select> -->
+
 </mapper>

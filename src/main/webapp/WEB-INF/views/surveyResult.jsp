@@ -5,7 +5,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<style></style>
+<style>
+
+</style>
 </head>
 <body>
 	<h3>답변의 대한 점수는 다음과 같습니다.</h3>
@@ -22,6 +24,7 @@
     <!-- 31~40점 락토 오보 베지테리언 -->
     <!-- 41~50점 비건 -->
     <button onclick="location.href='main.go'">메인</button>
+    <button onclick="location.href='${retryUrl}'">다시하기</button>
 </body>
 <script></script>
 </html>

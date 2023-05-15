@@ -10,14 +10,22 @@
 			user_id, user_name, user_phone, user_email, user_admin_chk,user_secc_chk
 		FROM user ORDER BY user_id DESC
 	</select>
+
 	
-	<select id="reportList" resultType="com.vegan.admin.dto.AdminDTO">
-		SELECT r.report_id, r.user_id, r2.user_id AS user_id2, h.report_date ,h.report_result,h.result_date
- 		 FROM report r
-  		LEFT JOIN report_id r2 ON r.report_id = r2.report_id
-  		LEFT JOIN history h ON r.report_id = h.report_id
- 		 ORDER BY r.report_id desc
-	</select>
+	
+
+	 <update id="adminCommit" parameterType="String">
+    UPDATE user
+    SET user_admin_chk = 1
+        WHERE user_id = #{user_id}
+   </update>
+   
+   <update id="adminCommit2" parameterType="String">
+    UPDATE user
+    SET user_admin_chk = 0
+        WHERE user_id = #{user_id}
+   </update>
 
 
+   
 </mapper>

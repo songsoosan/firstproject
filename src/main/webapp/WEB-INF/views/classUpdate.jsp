@@ -34,7 +34,6 @@ ${msg}
                             <c:if test="${dto.photo_name ne null}">
                                 <img src="/photo/${dto.photo_name}" class="img-fluid">
                             </c:if>
-                            <input type="file" class="form-control-file" id="photo" name="photo">
                         </div>
                     </div>
                     <div class="form-group">

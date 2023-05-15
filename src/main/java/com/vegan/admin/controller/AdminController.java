@@ -1,6 +1,9 @@
 package com.vegan.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vegan.admin.dto.AdminDTO;
 import com.vegan.admin.service.AdminService;
+import com.vegan.member.dto.MemberDTO;
 
 
 
@@ -36,13 +42,7 @@ public class AdminController {
 		model.addAttribute("userList", userList);
 		return "userList";
 	}
-	@RequestMapping(value="/admin.reportList", method = RequestMethod.GET)
-	public String ReportList(Model model) {
-		ArrayList<AdminDTO> reportList = service.reportList();		
-		logger.info("list cnt : "+reportList.size());
-		model.addAttribute("reportList", reportList);
-		return "reportList";
-	}
+	
 	@RequestMapping(value="/admin.blindList", method = RequestMethod.GET)
 	public String BlindList(Model model) {
 
@@ -58,5 +58,19 @@ public class AdminController {
 
 		return "adminLetterList";
 	}
+	
+	@RequestMapping(value="/adminCommit.do", method = RequestMethod.GET)
+	public String adminCommit(Model model, @RequestParam String user_id) {
+		logger.info("adminuser_id:"+user_id);
+		service.adminCommit(user_id);
+		return "redirect:/admin.userList";
+	}
+	@RequestMapping(value="/adminCommit2.do", method = RequestMethod.GET)
+	public String adminCommit2(Model model, @RequestParam String user_id) {
+		logger.info("adminuser_id:"+user_id);
+		service.adminCommit2(user_id);
+		return "redirect:/admin.userList";
+	}
 
+    
 }

@@ -26,6 +26,8 @@ public interface CheckListDAO {
 
 	int delete(int questionnumber);
 
+	int surveyReset(String user_id);
+
 	
 
 	

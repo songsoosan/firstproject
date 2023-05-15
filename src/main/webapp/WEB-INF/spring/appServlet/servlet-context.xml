@@ -30,7 +30,7 @@
 	<!-- datasource -->
 	<beans:bean name="datasource" class="org.apache.commons.dbcp.BasicDataSource">
 		<beans:property name="driverClassName" value= "org.mariadb.jdbc.Driver"/>
-		<beans:property name="url" value= "jdbc:mariadb://localhost:3306/vegan?useUnicode=true;characterEncoding=utf8;"/>
+		<beans:property name="url" value= "jdbc:mariadb://192.168.12.36:3306/vegan?useUnicode=true;characterEncoding=utf8;"/>
 		<beans:property name="username" value= "web_user"/>
 		<beans:property name="password" value= "pass"/>
 	</beans:bean>
@@ -49,11 +49,6 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-	
-
-<!-- 	<beans:bean id="uploadTempDir" class="org.springframework.core.io.FileSystemResource">
-	        <beans:constructor-arg value="c:/temp/"/>
-	</beans:bean> -->
 
 	
 	<!-- matbatis area -->

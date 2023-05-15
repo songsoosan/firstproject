@@ -193,13 +193,13 @@
 			  <div class="row">
 			    <div class="col-md-6">
 			      <div class="card mb-3">
-			      	<c:if test="${dto.cl_ing_chk == true}">
+			      	<c:if test="${dto.cl_ing_chk == 1}">
 			        <div class="card-body text-center">
 			          <h5 class="card-title">재료 제공 여부</h5>
 			          <p class="card-text">제공</p>
 			        </div>
 			        </c:if>
-			        <c:if test="${dto.cl_ing_chk == false}">
+			        <c:if test="${dto.cl_ing_chk == 0}">
 			        <div class="card-body text-center">
 			          <h5 class="card-title">재료 제공 여부</h5>
 			          <p class="card-text">미제공</p>
@@ -264,11 +264,6 @@
 			  </div>
 			</div>
 			
-		<%-- 	<form id="comment-form">
-			  <input type="hidden" id="cl_id" name="post_id" value="${dto.cl_id}">
-			  <textarea id="content" name="content" placeholder="댓글을 입력하세요"></textarea>
-			  <button type="submit">작성</button>
-			</form> --%>
 			
 			
 				<!-- 문의글 댓글 리스트 가져오기-->
@@ -280,11 +275,11 @@
 			<div class="comment">
 				${review.review_id}
 				${review.user_id} / ${review.date}
+
 				<c:if test="${review.user_id eq sessionScope.loginId}">
 					<input type ="button" onclick='location.href="reviewDel.do?review_id=${review.review_id}&cl_id=${dto.cl_id}"' value="삭제"/>
 				</c:if>
 				
-			<%-- <input type ="button" onclick='location.href="commentupdate.go?comment_id=${comment.comment_id}&board_id=${dto.board_id}&comment_content=${comment.comment_content}"' value="수정"/>  --%>
 				<p>${review.content}</p>
 			</div>
 		</c:forEach>
@@ -294,7 +289,7 @@
 	    	<input type="hidden" name="cl_id" value="${dto.cl_id}">
 	    	<input type="hidden" name="user_id" value="${sessionScope.loginId}">
 	    	<input type="text" name="cl_part_id" value="">
-	    	<%-- <input type="text" name="review_id" value="${eventcommentlist2.comment_id}"> --%>
+	    	
 				<table>	
 						<tr>
 							<th colspan="2">${sessionScope.loginId}</th>

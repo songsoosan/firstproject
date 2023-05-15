@@ -90,11 +90,10 @@ public class ClassesService {
 		return dao.detail(cl_id);
 	}
 
-	
-	  public MypageDTO profile2(String user_id) {
-	  
-	  return dao.profile2(user_id); }
-	 
+	public MypageDTO profile2(String user_id) {
+
+		return dao.profile2(user_id);
+	}
 
 	public String appWrite(String cl_id) {
 
@@ -107,19 +106,19 @@ public class ClassesService {
 	}
 
 	public int classApp(ClassesDTO dto) {
-	 int cl_id = dto.getCl_id();
-	 int cnt = dao.classApp(dto);
-	 	if (cnt == 1 ) {
-	 		ClassesDTO dto2 = dao.cnt(cl_id);
-	 		logger.info("dto2"+dto2);
-	 		int deadline = dto2.getCl_deadline();
-	 		 int join_cnt = dto2.getJoin_count();
-		   if (deadline == join_cnt ) {
-		       dao.cl_status(cl_id);
-		   }
+		int cl_id = dto.getCl_id();
+		int cnt = dao.classApp(dto);
+		if (cnt == 1) {
+			ClassesDTO dto2 = dao.cnt(cl_id);
+			logger.info("dto2" + dto2);
+			int deadline = dto2.getCl_deadline();
+			int join_cnt = dto2.getJoin_count();
+			if (deadline == join_cnt) {
+				dao.cl_status(cl_id);
+			}
 		}
 
-	 return cnt;
+		return cnt;
 	}
 
 	public ArrayList<ClassesDTO> appList(String cl_id) {
@@ -128,7 +127,6 @@ public class ClassesService {
 	}
 
 	public String update(HashMap<String, String> params) {
-
 
 		int cl_id = Integer.parseInt(params.get("cl_id"));
 
@@ -146,34 +144,32 @@ public class ClassesService {
 	}
 
 	public int reviewWrite(String cl_id, String user_id, String review_content) {
-		
-		return dao.reviewWrite(cl_id,user_id,review_content);
+
+		return dao.reviewWrite(cl_id, user_id, review_content);
 	}
 
 	public ArrayList<ClassesDTO> reviewList(String cl_id) {
-		
+
 		return dao.reviewList(cl_id);
 	}
 
 	public String reviewWrite(HashMap<String, Object> params) {
 		String msg = "후기 등록 실패";
 		int row = 0;
-		if(dao.getCl_Part_Id(params).equals(params.get("cl_part_id"))) {
+		if (dao.getCl_Part_Id(params).equals(params.get("cl_part_id"))) {
 			row = dao.reviewInsert(params);
 		}
-		if(row == 1) {
+		if (row == 1) {
 			msg = "okay";
 		}
 		return msg;
 	}
 
 	public int reviewDel(String review_id, String cl_id, String loginId) {
-		
-	    int row = dao.reviewDel(review_id, cl_id,loginId);
-	      logger.info("delete comm data : "+row);
-		return dao.reviewDel(review_id, cl_id,loginId);
+
+		int row = dao.reviewDel(review_id, cl_id, loginId);
+		logger.info("delete comm data : " + row);
+		return dao.reviewDel(review_id, cl_id, loginId);
 	}
 
-	
-	
 }
