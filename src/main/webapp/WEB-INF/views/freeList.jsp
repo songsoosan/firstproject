@@ -3,16 +3,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>Insert title here</title>   
 <style>
    .none {
-      display: none !important;
-   }
-   .onlyAdmin {
-      display: block !important;
-   }
-   th.onlyAdmin, td.onlyAdmin {
-      display: table-cell !important;
+      display: none;
    }
    .textDeco {
       text-decoration: line-through;
@@ -28,11 +22,12 @@
 <body>
 <%@ include file="./header.jsp" %>
 <div class="contentWrap mt-5">
-   <div class="contentBox">
+	<div class="contentBox">
       <div class="text-center">
-         <h2>공지사항</h2>
+         <h2>자유게시판</h2>
       </div>
       <hr/>
+
       <div>
          <div class="d-flex" style="float: left;">
             <span class="mt-1">게시물 갯수&nbsp;:&nbsp;</span>
@@ -44,15 +39,13 @@
             </select>
          </div>
          <div style="float: right;" class="d-flex">
-            <button class="none adminArea btn btn-outline-primary float-right" onclick="location.href='write.go'">글쓰기</button>
-            <button class="none adminArea btn btn-outline-danger float-right mx-1" onclick="hide()">숨기기</button>
+            <button class="btn btn-outline-primary float-right" onclick="location.href='freewrite.go'">글쓰기</button>
          </div>         
       </div>
-      <div style="margin-top: 70px;">
+	  <div style="margin-top: 70px;">
       <table class="table table-striped table-bordered">
          <thead>
             <tr>
-               <th class="none adminArea text-center col-md-1">숨기기</th>
                <th class="text-center col-md-1">번호</th>
                <th class="text-center" style="width:25%">제목</th>
                <th class="text-center col-md-1">작성자</th>
@@ -69,91 +62,18 @@
             <ul class="pagination" id="pagination"></ul>
          </nav>
       </div>
-   </div>
+	</div>
 </div>
 </body>
 <script>
 var loginId = '<%=(String)session.getAttribute("loginId")%>';
 var showPage= 1;
-
-adminCheck();
 listCall(showPage);
-	
-function listCall(page){
-   $.ajax({
-      type: 'post',
-      url: 'noticeList.ajax',
-      data: {
-         'searchText' : $("#searchText").val(),
-         'page': page,
-         'cnt' : $('#pagePerNum').val(),
-         'loginId': loginId
-      },
-      dataType: 'json',
-      success: function(data){
-         listPrint(data.list);
-         //paging plugin
-         $('#pagination').twbsPagination({
-            startPage: data.currPage,
-            totalPages: data.pages,
-            visiblePages: $("#pagePerNum").val(),
-            onPageClick: function(event,page){
-               if(page != showPage){
-                  showPage=page;
-                  listCall(page);
-               }
-               }
-         });
-      },
-      error: function(e){
-         console.log(e);
-      }
-   });
-}
 
-function listPrint(list){
-   var content="";
-   list.forEach(function(board,board_id){
-      content +='<tr ' + (board.is_hide ? 'class="textDeco"' : "") + '>';
-      content +='<td class="none adminArea text-center col-md-1"><input type="checkbox" name="chk" value="'+board.board_id+'"/></td>';
-      content +='<td class="text-center col-md-1">'+board.board_id+'</td>';
-      content +='<td class="text-center" style="width:25%"><a href ="boardDetail.do?board_id='+board.board_id+'">'+board.board_title+'</td>';
-      content +='<td class="text-center col-md-1">'+board.user_id+'</td>';
-      content +='<td class="text-center col-md-1">'+board.board_date+'</td>';
-      content +='<td class="text-center col-md-1">'+board.board_views+'</td>';
-      content +='</tr>';
-   });
-   $('#list').empty();
-   $('#list').append(content);
-   adminCheck();
-}
-
-function hide() {
-   var hideList = new Array();
-   $("input[name=chk]:checked").each(function() {
-      hideList.push($(this).val());
-   });
-   $.ajax({
-      type: 'post',
-      url: 'hide.ajax',
-      data: {
-         'hideList' : hideList
-      },
-      dataType: 'text',
-      success: function(data){
-         listCall(1);
-      },
-      error: function(e){
-         console.log(e);
-      }
-   });
-}
-
-function adminCheck() {
-   if(loginId === "admin") {
-      $(".adminArea").addClass("onlyAdmin");
-   }
-}
+$('#pagePerNum').change(function(){
+   listCall(showPage);
+   $('#pagination').twbsPagination('destroy');
+});
 
 $("#searchText").keydown(function (key) {
    if (key.keyCode == 13) {
@@ -167,10 +87,58 @@ $("#search").click(function (key) {
    $('#pagination').twbsPagination('destroy');
 });
 
-$('#pagePerNum').change(function(){
-   listCall(showPage);
-   $('#pagination').twbsPagination('destroy');
-});
+function listCall(page){
+   $.ajax({
+      type: 'post',
+      url: 'freeList.ajax',
+      data: {
+         'searchText' : $("#searchText").val(),
+         'page': page,
+         'cnt' : $('#pagePerNum').val(),
+         'loginId': loginId
+      },
+      dataType: 'json',
+      success: function(data){
+         listPrint(data.list);
+         
+         //paging plugin
+         $('#pagination').twbsPagination({
+            startPage: data.currPage,
+            totalPages: data.pages,
+            visiblePages: $("#pagePerNum").val(),
+            onPageClick: function(event,page){
+               if(page != showPage){
+                  showPage=page;
+                  listCall(page);
+               }
+            }
+         });
+      },
+      error: function(e){
+         console.log(e);
+      }
+   });
+}
+
+function listPrint(list){
+   console.log("listPrint!");
+   var content="";
+   
+   //java.sql.Date 는 js에서 읽지 못해 밀리세컨드로 반환한다.
+      // 해결방법 1. DTO에서 Date를 String으로 반환
+      // 해결방법 2. js 에서 변환
+      list.forEach(function(board,board_id){
+         content +='<tr>';
+         content +='<td class="text-center col-md-1">'+board.board_id+'</td>';
+         content +='<td class="text-center" style="width:25%"><a href ="freeDetail.do?board_id='+board.board_id+'">'+board.board_title+'</td>';
+         content +='<td class="text-center col-md-1">'+board.user_id+'</td>';
+         content +='<td class="text-center col-md-1">'+board.board_date+'</td>';
+         content +='<td class="text-center col-md-1">'+board.board_views+'</td>';
+         content +='</tr>';
+      });
+      $('#list').empty();
+      $('#list').append(content);
+}
 
 </script>
 </html>

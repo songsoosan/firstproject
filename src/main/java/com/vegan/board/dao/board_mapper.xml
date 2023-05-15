@@ -5,15 +5,29 @@
 <mapper namespace="com.vegan.board.dao.BoardDAO">
 
    <select id = "list" resultType="com.vegan.board.dto.BoardDTO">
-      SELECT 
-         *
-      FROM board 
+      SELECT board_id
+             , cat_id
+             , user_id
+             , board_title
+             , board_content
+             , DATE_FORMAT(board_date, '%Y-%m-%d') as board_date
+             , board_views
+             , board_del_chk
+             , board_blind_chk
+             , is_delete
+             , is_hide
+        FROM board 
       <where>
          <if test='searchText != ""'>
             AND (board_title like CONCAT('%',#{searchText},'%') or user_id like CONCAT('%',#{searchText},'%'))
          </if>
+               AND is_delete = 0
+            <if test='loginId != "admin"'>
+               AND is_hide = 0
+            </if>
+               AND cat_id = 'not'
       </where>
-      ORDER BY board_id DESC LIMIT #{cnt} OFFSET #{offset} 
+       ORDER BY board_id DESC LIMIT #{cnt} OFFSET #{offset} 
    </select>
    
    <select id="totalCount" resultType="int">
@@ -22,6 +36,11 @@
          <if test='searchText != ""'>
             AND (board_title like CONCAT('%',#{searchText},'%') or user_id like CONCAT('%',#{searchText},'%'))
          </if>
+            AND is_delete = 0
+         <if test='loginId != "admin"'>
+            AND is_hide = 0
+          </if>
+          	AND cat_id = 'not'
       </where>
    </select>
    
@@ -38,16 +57,175 @@
       INSERT INTO photo(ori_photo_name, photo_name, identify_number, cat_id)
          VALUES(#{ori_photo_name},#{photo_name},#{board_id}, #{cat_id})
    </insert>
-
+   
+   <update id="fileUpdate">
+      UPDATE photo 
+         SET ori_photo_name = #{ori_photo_name}
+           , photo_name = #{photo_name}
+       WHERE identify_number = #{board_id}
+   </update>
+   
    <update id="upHit">
       UPDATE board SET board_views = board_views+1
          WHERE board_id = #{param1}
    </update>
    
    <select id="detail" resultType="com.vegan.board.dto.BoardDTO">
+      SELECT b.board_id, b.board_title, b.user_id, b.board_views, DATE_FORMAT(b.board_date, '%Y-%m-%d') as board_date, b.board_content, 
+      b.cat_id, p.photo_id, p.photo_name
+      FROM board b left JOIN photo p ON b.board_id = p.identify_number
+      WHERE b.board_id = #{param1}
+   </select>
+   
+   <update id="update" parameterType="hashmap">
+      UPDATE board SET board_title = #{subject}
+      ,user_id = #{user_name}
+      ,board_content = #{content}
+      ,cat_id = #{cat_id}
+      WHERE board_id = #{board_id}
+   </update>
+   
+   <update id="delete" parameterType="String">
+      UPDATE BOARD
+         SET is_delete = 1
+       WHERE board_id = #{board_id}
+   </update>
+   
+   <update id="hide" parameterType="java.util.List">
+      UPDATE BOARD
+         SET is_hide = 1
+       WHERE board_id IN (
+      <foreach collection="hideList" item="item" separator=",">
+         #{item}
+      </foreach>
+      )
+   </update>
+   
+   <insert id="noticecommentWrite" parameterType="hashmap" useGeneratedKeys="true" keyColumn="commnetIDX" keyProperty="comment_id">
+      INSERT INTO comment
+         (user_id, cat_id, identify_number, comment_content) 
+      VALUES
+         (#{user_id}, #{cat_id}, #{board_id}, #{comment_content})
+   </insert>
+   
+   <select id="noticecommentList" resultType="com.vegan.board.dto.BoardDTO">
+      SELECT comment_id
+          , user_id
+          , cat_id
+          , identify_number
+          , comment_content
+          , DATE_FORMAT(comment_date, '%Y-%m-%d') as comment_date
+        FROM comment
+       WHERE cat_id = 'not' 
+         AND identify_number = #{board_id}
+   </select>
+   
+   <delete id="noticecommentDelete">
+      DELETE FROM comment WHERE comment_id = #{comment_id}
+   </delete>
+   
+   <update id="noticecommentUpdate">
+      UPDATE comment
+         SET comment_content = #{comment_content}
+       WHERE comment_id = #{comment_id}
+         AND identify_number = #{board_id}
+   </update>
+   
+   <select id = "freelist" resultType="com.vegan.board.dto.BoardDTO">
+      SELECT board_id
+             , cat_id
+             , user_id
+             , board_title
+             , board_content
+             , DATE_FORMAT(board_date, '%Y-%m-%d') as board_date
+             , board_views
+             , board_del_chk
+             , board_blind_chk
+             , is_delete
+        FROM board
+    <where>
+         <if test='searchText != ""'>
+            AND (board_title like CONCAT('%',#{searchText},'%') or user_id like CONCAT('%',#{searchText},'%'))
+         </if>
+               AND is_delete = 0 AND cat_id = 'free'
+      </where>
+       ORDER BY board_id DESC LIMIT #{cnt} OFFSET #{offset} 
+   </select>
+   
+   <select id="freetotalCount" resultType="int">
+      SELECT COUNT(board_id) FROM board 
+      <where>
+         <if test='searchText != ""'>
+            AND (board_title like CONCAT('%',#{searchText},'%') or user_id like CONCAT('%',#{searchText},'%'))
+         </if>
+            AND is_delete = 0 AND cat_id = 'free'
+      </where>
+   </select>
+   
+   <insert id="freewrite" parameterType="com.vegan.board.dto.BoardDTO"
+      useGeneratedKeys="true"
+      keyColumn="freeidx"
+      keyProperty="board_id"> <!-- 서비스에 idx= 하고 넣어준다 / 리턴해줄 idx -->
+         INSERT INTO board(board_title, user_id, board_content, cat_id)
+            VALUES(#{board_title},#{user_id},#{board_content}, #{cat_id})
+   </insert>
+      
+   <select id="freedetail" resultType="com.vegan.board.dto.BoardDTO">
       SELECT b.board_id, b.board_title, b.user_id, b.board_views, b.board_date, b.board_content, 
       b.cat_id, p.photo_id, p.photo_name
       FROM board b left JOIN photo p ON b.board_id = p.identify_number
       WHERE b.board_id = #{param1}
    </select>
+   
+   <update id="freeupHit">
+      UPDATE board SET board_views = board_views+1
+         WHERE board_id = #{param1}
+   </update>
+   
+   <update id="freeupdate" parameterType="hashmap">
+      UPDATE board SET board_title = #{subject}
+      ,user_id = #{user_name}
+      ,board_content = #{content}
+      ,cat_id = #{cat_id}
+      WHERE board_id = #{board_id}
+   </update>
+   
+   <update id="freedelete" parameterType="String">
+      UPDATE board
+         SET is_delete = 1
+       WHERE board_id = #{board_id}
+   </update>
+   
+   <insert id ="freefileWrite" >
+      INSERT INTO photo(ori_photo_name, photo_name, identify_number, cat_id)
+         VALUES(#{ori_photo_name},#{photo_name},#{board_id}, #{cat_id})
+   </insert>
+   
+   <update id="freefileUpdate">
+      UPDATE photo 
+         SET ori_photo_name = #{ori_photo_name}
+           , photo_name = #{photo_name}
+       WHERE identify_number = #{board_id}
+   </update>
+   
+   <insert id="freecommentWrite" parameterType="hashmap" useGeneratedKeys="true" keyColumn="commnetIDX" keyProperty="comment_id">
+      INSERT INTO comment
+         (user_id, cat_id, identify_number, comment_content) 
+      VALUES
+         (#{user_id}, #{cat_id}, #{board_id}, #{comment_content})
+   </insert>
+   
+   <select id="freecommentList" resultType="com.vegan.board.dto.BoardDTO">
+      SELECT comment_id
+          , user_id
+          , cat_id
+          , identify_number
+          , comment_content
+          , comment_date
+        FROM comment
+       WHERE cat_id = 'free' 
+         AND identify_number = #{board_id}
+   </select>
+   
+   
 </mapper>

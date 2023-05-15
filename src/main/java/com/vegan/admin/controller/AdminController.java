@@ -1,6 +1,9 @@
 package com.vegan.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vegan.admin.dto.AdminDTO;
 import com.vegan.admin.service.AdminService;
+import com.vegan.member.dto.MemberDTO;
 
 
 
@@ -31,14 +37,16 @@ public class AdminController {
 	@RequestMapping(value="/admin.userList", method = RequestMethod.GET)
 	public String UserList(Model model) {
 		logger.info("list call");
-		ArrayList<AdminDTO> list = service.list();		
-		logger.info("list cnt : "+list.size());
-		model.addAttribute("list", list);
+		ArrayList<AdminDTO> userList = service.userList();		
+		logger.info("list cnt : "+userList.size());
+		model.addAttribute("userList", userList);
 		return "userList";
 	}
 	@RequestMapping(value="/admin.reportList", method = RequestMethod.GET)
 	public String ReportList(Model model) {
-
+		ArrayList<AdminDTO> reportList = service.reportList();		
+		logger.info("list cnt : "+reportList.size());
+		model.addAttribute("reportList", reportList);
 		return "reportList";
 	}
 	@RequestMapping(value="/admin.blindList", method = RequestMethod.GET)
@@ -56,5 +64,7 @@ public class AdminController {
 
 		return "adminLetterList";
 	}
+	
 
+    
 }

@@ -193,13 +193,13 @@
 			  <div class="row">
 			    <div class="col-md-6">
 			      <div class="card mb-3">
-			      	<c:if test="${dto.cl_ing_chk == true}">
+			      	<c:if test="${dto.cl_ing_chk == 1}">
 			        <div class="card-body text-center">
 			          <h5 class="card-title">재료 제공 여부</h5>
 			          <p class="card-text">제공</p>
 			        </div>
 			        </c:if>
-			        <c:if test="${dto.cl_ing_chk == false}">
+			        <c:if test="${dto.cl_ing_chk == 0}">
 			        <div class="card-body text-center">
 			          <h5 class="card-title">재료 제공 여부</h5>
 			          <p class="card-text">미제공</p>
@@ -265,6 +265,48 @@
 			</div>
 			
 			
+			
+				<!-- 문의글 댓글 리스트 가져오기-->
+		<c:if test="${clReviewList.size() eq 0}">
+			<tr><th colspan="10">등록된 후기가 없습니다.</th></tr>
+		</c:if>
+		
+		<c:forEach items="${clReviewList}" var="review">
+			<div class="comment">
+				${review.review_id}
+				${review.user_id} / ${review.date}
+
+				<c:if test="${review.user_id eq sessionScope.loginId}">
+					<input type ="button" onclick='location.href="reviewDel.do?review_id=${review.review_id}&cl_id=${dto.cl_id}"' value="삭제"/>
+				</c:if>
+				
+				<p>${review.content}</p>
+			</div>
+		</c:forEach>
+		
+		<!-- 댓글 작성 -->
+	    <form method="post" action="reviewWrite.do">
+	    	<input type="hidden" name="cl_id" value="${dto.cl_id}">
+	    	<input type="hidden" name="user_id" value="${sessionScope.loginId}">
+	    	<input type="text" name="cl_part_id" value="">
+	    	
+				<table>	
+						<tr>
+							<th colspan="2">${sessionScope.loginId}</th>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td><textarea name="review_content"></textarea></td>
+						</tr>
+						<tr>
+							<th colspan="2">
+								<button type="button" onclick="reviewWrite()">등록</button>
+							</th>
+						</tr>
+	    		</table>
+	    </form>
+		<!--  댓글 끝 -->
+			
 
 </body>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -273,5 +315,29 @@ var msg = "${msg}";
 if(msg != ""){
 	alert(msg);
 }
+
+function reviewWrite() {
+	$.ajax({
+		type:'get',
+		url:'reviewWrite.ajax',
+		data:{
+			id : '${sessionScope.loginId}',
+			cl_id : $('input[name="cl_id"]').val(),
+			content : $('textarea[name="review_content"]').val(),	
+			cl_part_id : $('input[name="cl_part_id"]').val()	
+		},
+		dataType:'text',
+		success:function(data){
+			console.log(data);
+			alert(data);
+			location.href='classDetail.do?cl_id='+$('input[name="cl_id"]').val();
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});	
+} 
+
+
 </script>
 </html>

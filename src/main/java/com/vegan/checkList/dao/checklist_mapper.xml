@@ -2,5 +2,65 @@
 <!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
-<mapper namespace="com.vegan.CheckList.dao.CheckListDAO">
+<mapper namespace="com.vegan.checkList.dao.CheckListDAO">
+
+	<select id="list" resultType="com.vegan.checkList.dto.CheckListDTO">
+		SELECT question_number, question_detail
+			FROM question_list 
+	</select>
+	
+	<insert id="write" parameterType="hashmap">
+		INSERT INTO question_list(question_number, question_detail)
+			VALUES(#{question_number},#{question_detail})
+	</insert>
+	
+	<update id="update" parameterType="hashmap">
+		 UPDATE question_list SET question_detail = #{question_detail}
+ 		 WHERE question_number = #{question_number}
+	</update>
+	
+	<insert id="resultsave" parameterType="hashmap">
+				INSERT INTO question_result (user_id, total_score, create_date, list_check, step)
+    		VALUES (#{user_id,jdbcType=VARCHAR}, #{total_score,jdbcType=INTEGER}, NOW(), 1, #{step,jdbcType=VARCHAR});
+	</insert>
+	
+	<!--  <insert id="resultsave" parameterType="hashmap">
+    	INSERT INTO question_result (user_id, total_score, create_date, list_check, step)
+    	VALUES (#{user_id,jdbcType=VARCHAR}, #{total_score,jdbcType=INTEGER}, NOW(), 1, #{step,jdbcType=VARCHAR})
+	</insert> -->
+	
+	<select id="getresult" resultType="com.vegan.checkList.dto.CheckListDTO">
+    	SELECT user_id, total_score
+    	FROM question_result
+    	WHERE user_id = #{user_id}
+	</select>
+	
+	<select id="resultCheck" parameterType="string" resultType="Boolean">
+		 SELECT COUNT(*) FROM question_result WHERE user_id = #{user_id}
+	</select>
+	
+	<update id="updateStep" parameterType="com.vegan.checkList.dto.CheckListDTO">
+    	UPDATE question_result
+   		SET step = #{step}
+    	WHERE user_id = #{user_id}
+	</update>
+	
+	<select id="admincheck" parameterType="string" resultType="boolean">
+    	SELECT user_admin_chk FROM user WHERE user_id = #{user_id}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		DELETE from question_list WHERE question_number = #{questionNumber}
+	</delete>
+	
+	<delete id="surveyReset" parameterType="string">
+		DELETE from question_result WHERE user_id = #{user_id}
+	</delete>
+	
+	<!--<update id="surveyReset" parameterType="com.vegan.checkList.dto.CheckListDTO">
+		UPDATE question_result
+   		SET step = #{step}
+    	WHERE user_id = #{user_id}
+	</update> -->
+	
 </mapper>

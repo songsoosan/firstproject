@@ -34,16 +34,15 @@ ${msg}
                             <c:if test="${dto.photo_name ne null}">
                                 <img src="/photo/${dto.photo_name}" class="img-fluid">
                             </c:if>
-                            <input type="file" class="form-control-file" id="photo" name="photo">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>모집기간</label>
-                        <div>모집 시작일<input type="date" name="cl_period">모집 마감일<input type="date" name="cl_deadlinePeriod"></div>
+                        <div>모집 시작일<input type="date" name="cl_period" value="${dto.cl_period}">모집 마감일<input type="date" name="cl_deadlinePeriod" value="${dto.cl_deadlinePeriod}"></div>
                     </div>
                     <div class="form-group">
                         <label>모집인원</label>
-                        <input type="text" class="form-control" name="cl_deadline">
+                        <input type="text" class="form-control" name="cl_deadline" value="${dto.cl_deadline}">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -73,11 +72,11 @@ ${msg}
                     </div>
                     <div class="form-group">
                         <label>주소</label>
-                        <input type="text" id="postcode" class="form-control" placeholder="우편번호">                    
+                        <input type="text" id="postcode" name="postcode" class="form-control" placeholder="우편번호" value="${dto.postcode}">                    
                         <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-                        <input type="text" id="address" class="form-control" placeholder="주소"><br>
-                        <input type="text" id="detailAddress" class="form-control" placeholder="상세주소"><br>
-                        <input type="text" id="extraAddress" class="form-control" placeholder="참고항목">
+                        <input type="text" id="address" name="address" class="form-control" placeholder="주소" value="${dto.address}"><br>
+                        <input type="text" id="detailAddress" name="detailAddress" class="form-control" placeholder="상세주소" value="${dto.detailAddress}"><br>
+                        <input type="text" id="extraAddress" name="extraAddress" class="form-control" placeholder="참고항목" value="${dto.extraAddress}">
                     </div>
                     <div class="form-group">
                         <label>내용</label>

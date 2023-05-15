@@ -174,7 +174,12 @@ textarea{
 			<c:if test="${adminChk ne null}">
 					<input type="button" onclick="location.href='./magazineUpdate.go?board_id=${dto.board_id}'" value="수정"/>
 					<input type="button" onclick="location.href='./magazineDelete.do?board_id=${dto.board_id}'" value="삭제"/>
+
 			</c:if>
+
+					<input type="button" onclick="location.href='./reportWrite.go?board_id=${dto.board_id}&board_title=${dto.board_title}&cat_id=${dto.cat_id}'" value="신고"/>
+
+
 				</th>
 			</tr>
 			</c:forEach>

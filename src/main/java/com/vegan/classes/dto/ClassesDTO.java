@@ -1,5 +1,7 @@
 package com.vegan.classes.dto;
 
+import java.sql.Date;
+
 public class ClassesDTO {
 	
 	private int cl_id;
@@ -10,8 +12,10 @@ public class ClassesDTO {
 	private int cl_deadline;
 	private String cl_teacher;
 	private String cl_date;
-	private boolean cl_ing_chk;
-	private boolean cl_status;
+	private int cl_ing_chk;
+
+
+	private int cl_status;
 	private String postcode;
 	private String address;
 	private String detailAddress;
@@ -26,9 +30,33 @@ public class ClassesDTO {
 	private String photo_name;
 	private int idx;
 	private int join_count;
+
+//	댓글관련
+	  private int review_id;
+	   private Date date;
+	   private String content;
+	   
 	
 	
 
+	public int getReview_id() {
+		return review_id;
+	}
+	public void setReview_id(int review_id) {
+		this.review_id = review_id;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public int getJoin_count() {
 		return join_count;
 	}
@@ -100,16 +128,19 @@ public class ClassesDTO {
 	public void setCl_date(String cl_date) {
 		this.cl_date = cl_date;
 	}
-	public boolean isCl_ing_chk() {
+
+
+	public int getCl_ing_chk() {
 		return cl_ing_chk;
 	}
-	public void setCl_ing_chk(boolean cl_ing_chk) {
+	public void setCl_ing_chk(int cl_ing_chk) {
 		this.cl_ing_chk = cl_ing_chk;
 	}
-	public boolean isCl_status() {
+
+	public int getCl_status() {
 		return cl_status;
 	}
-	public void setCl_status(boolean cl_status) {
+	public void setCl_status(int cl_status) {
 		this.cl_status = cl_status;
 	}
 	public String getPostcode() {

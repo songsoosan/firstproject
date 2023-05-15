@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 상세</title>
+<title>자유게시판 상세</title>
 <style>
    .none {
       display: none !important;
@@ -21,15 +21,16 @@
 <div class="contentWrap mt-5">
    <div class="contentBox">
       <div class="row mb-2 text-center">
-         <h2 class="text-center">공지사항 상세</h2>
+         <h2 class="text-center">자유게시판 상세</h2>
          <hr/>
       </div>
       <div class="fr" style="display:inline-flex;">
-         <button type="button" class="btn btn-outline-secondary" onclick="location.href='./boardList.do'">리스트</button>
-           <button type="button" class="mx-1 none adminArea btn btn-outline-primary" onclick="location.href='./boardUpdate.go?board_id=${dto.board_id}'" >수정</button>
-           <button type="button" class="none adminArea btn btn-outline-danger" onclick="location.href='./boardDelete.go?board_id=${dto.board_id}'" >삭제</button>
+         <button type="button" class="btn btn-outline-secondary" onclick="location.href='freeList.do'">리스트</button>
+           <button type="button" class="mx-1 btn btn-outline-primary" onclick="location.href='./freeUpdate.go?board_id=${dto.board_id}'" >수정</button>
+           <button type="button" class="btn btn-outline-danger" onclick="location.href='./freeDelete.go?board_id=${dto.board_id}'" >삭제</button>
       </div>
-      <input type="hidden" name = "board_id" value="${dto.board_id}">
+	
+	  <input type="hidden" name = "board_id" value="${dto.board_id}">
       <div class="input-group borderBottom mb-3 mt-3">
          <label class="col-sm-2 offset-sm-1 col-form-label">제목</label>
          <div class="col-sm-9">
@@ -51,7 +52,7 @@
       <div class="input-group borderBottom mb-3 mt-3">
          <label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
          <div class="col-sm-9">
-            <input type="text" class="form-control-plaintext" value="${dto.board_title}">
+            <input type="text" class="form-control-plaintext" value="${dto.board_content}">
          </div>
       </div>
       <c:if test="${dto.photo_name ne null}">
@@ -62,6 +63,7 @@
             </div>
          </div>
       </c:if>
+
       <div>
          <b style="margin-left:45px;">댓글</b>${fn:length(commentList)}<b>개</b>
       </div>
@@ -89,7 +91,7 @@
             </tr>
       </c:forEach>
       </table>
-      <form action="noticecommentWrite.do" method="post">
+      <form action="freecommentWrite.do" method="post">
          <input type="hidden" name = "board_id" value="${dto.board_id}">
          <table class="table">
             <tr>
@@ -110,41 +112,41 @@
 </div>
 </body>
 <script>
-var loginId = '<%=(String)session.getAttribute("loginId")%>';
-if(loginId === "admin") {
-   console.log("gg");
-   $(".adminArea").addClass("onlyAdmin");
-}
+var loginId = '<%=(String) session.getAttribute("loginId")%>
+	';
+	if (loginId === "admin") {
+		$(".adminArea").addClass("onlyAdmin");
+	}
 
-function writeMode(idx) {
-   $("tr.reply:eq("+idx+")").find(".editMode").removeClass("none");
-   $("tr.reply:eq("+idx+")").find(".readMode").addClass("none");
-}
+	function writeMode(idx) {
+		$("tr.reply:eq(" + idx + ")").find(".editMode").removeClass("none");
+		$("tr.reply:eq(" + idx + ")").find(".readMode").addClass("none");
+	}
 
-function readMode(idx) {
-   $("tr.reply:eq("+idx+")").find(".readMode").removeClass("none");
-   $("tr.reply:eq("+idx+")").find(".editMode").addClass("none");
-}
+	function readMode(idx) {
+		$("tr.reply:eq(" + idx + ")").find(".readMode").removeClass("none");
+		$("tr.reply:eq(" + idx + ")").find(".editMode").addClass("none");
+	}
 
-function commentUpdate(idx, comment_id, board_id) {
-   var comment_content = $("tr.reply:eq("+idx+")").find("textarea[name=comment_content]").val();
-   $.ajax({
-      type: 'post',
-      url: 'commentUpdate.ajax',
-      data: {
-         'board_id' : board_id,
-         'comment_id': comment_id,
-         'comment_content': comment_content
-      },
-      dataType: 'text',
-      success: function(res){
-         location.href='boardDetail.do?board_id='+board_id;
-      },
-      error: function(e){
-         console.log(e);
-      }
-   });
-}
-
+	function commentUpdate(idx, comment_id, board_id) {
+		var comment_content = $("tr.reply:eq(" + idx + ")").find(
+				"textarea[name=comment_content]").val();
+		$.ajax({
+			type : 'post',
+			url : 'commentUpdate.ajax',
+			data : {
+				'board_id' : board_id,
+				'comment_id' : comment_id,
+				'comment_content' : comment_content
+			},
+			dataType : 'text',
+			success : function(res) {
+				location.href = 'boardDetail.do?board_id=' + board_id;
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
+	}
 </script>
 </html>
