@@ -42,13 +42,7 @@ public class AdminController {
 		model.addAttribute("userList", userList);
 		return "userList";
 	}
-	@RequestMapping(value="/admin.reportList", method = RequestMethod.GET)
-	public String ReportList(Model model) {
-		ArrayList<AdminDTO> reportList = service.reportList();		
-		logger.info("list cnt : "+reportList.size());
-		model.addAttribute("reportList", reportList);
-		return "reportList";
-	}
+	
 	@RequestMapping(value="/admin.blindList", method = RequestMethod.GET)
 	public String BlindList(Model model) {
 

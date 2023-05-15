@@ -12,13 +12,7 @@
 	</select>
 
 	
-	<select id="reportList" resultType="com.vegan.admin.dto.AdminDTO">
-		SELECT r.report_id, r.user_id, r2.user_id AS user_id2, h.report_date ,h.report_result,h.result_date
- 		 FROM report r
-  		LEFT JOIN report_id r2 ON r.report_id = r2.report_id
-  		LEFT JOIN history h ON r.report_id = h.report_id
- 		 ORDER BY r.report_id desc
-	</select>
+	
 
 	 <update id="adminCommit" parameterType="String">
     UPDATE user
