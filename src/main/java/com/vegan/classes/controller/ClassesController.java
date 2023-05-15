@@ -30,11 +30,10 @@ public class ClassesController {
    @Autowired
    ClassesService service;
 
-   @RequestMapping(value = "/class", method = RequestMethod.GET)
-   public String test(Model model) {
-      logger.info("test");
-      return "classList";
-   }
+	/*
+	 * @RequestMapping(value = "/class", method = RequestMethod.GET) public String
+	 * test(Model model) { logger.info("test"); return "classList"; }
+	 */
 
    @RequestMapping(value = "/classList.go", method = RequestMethod.GET)
    public String ClassList(Model model, HttpSession session) {
