@@ -154,7 +154,7 @@ textarea{
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="user_id" value="<%= userId %>"/></td>
+				<td><input type="text" name="user_id" value="<%= userId %>" readonly/></td>
 			</tr>
 			<tr>
 				<th>내용</th>

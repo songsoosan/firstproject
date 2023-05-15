@@ -72,7 +72,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		// 조건 1. 파라메터를 dto 로 보내야 한다.
 		EventDTO dto = new EventDTO();
 		//receipeDTO.setCat_id("recipe");
-		dto.setCat_id("e");
+		dto.setCat_id(params.get("cat_id"));
 		dto.setEvent_title(params.get("event_title"));
 		dto.setEvent_content(params.get("event_content"));
 		dto.setUser_id(params.get("user_id"));
@@ -189,13 +189,16 @@ Logger logger = LoggerFactory.getLogger(getClass());
 	             
 	             logger.info("update => "+page);
 	          }
+	       if(row == 1) {
+	    	   logger.info("사진 삭제 완료");
+	       }
 	      
 	      }
 		
 		// 2. photo 에 파일명이 존재 한다면?
 		if(photo != null && !photo.getOriginalFilename().equals("")) {
 			String cat_id = params.get("cat_id");
-			fileSave(null, idx, photo);
+			fileSave(cat_id, idx, photo);
 		}
 
 		

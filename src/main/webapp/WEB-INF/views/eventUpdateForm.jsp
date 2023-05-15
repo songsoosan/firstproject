@@ -147,9 +147,11 @@ margin:0 auto;
         </li>
     </ul>
 </div>
-
+	
+	<% String userId = (String) session.getAttribute("loginId"); %>
 	<form action="eventWrite.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="event_id" value="${dto.event_id}"/>
+		<input type="hidden" name = "cat_id" value = "e"/> 
 		<table>
 			<tr>
 				<th>제목</th>
@@ -157,7 +159,7 @@ margin:0 auto;
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="user_id" value="${dto.user_id}"/></td>
+				<td><input type="text" name="user_id" value="<%= userId %>" readonly/></td>
 			</tr>
 			<tr>
 				<th>시작일</th>

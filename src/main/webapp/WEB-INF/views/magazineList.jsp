@@ -231,9 +231,7 @@ function listPrint(list){
 		content +='<td>'+board.board_id+'</td>';
 		content +='<td><a href="magazineDetail.do?board_id='+board.board_id+'">'+board.board_title+'</td>';
 		
-		// 대표사진 추가
-		//var photoName = board.photo_name; // 대표사진 파일명 가져오기
-		//content += '<td><img width="500" src="/photo/' + board.photo_name + '"/></td>';
+		
 		
 	
 		

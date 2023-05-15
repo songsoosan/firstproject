@@ -155,7 +155,7 @@ textarea{
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="user_id" value="<%= userId %>"/></td>
+				<td><input type="text" name="user_id" value="<%= userId %>" readonly/></td>
 			</tr>
 			<tr>
 				<th>내용</th>
@@ -188,11 +188,9 @@ textarea{
 	</form>
 </body>
 <script>
-function delphoto(){
+function delphoto() {
 	   document.getElementById("filename").remove();    
-	    document.getElementById("deletePhotoInput").value() = "true";
-	    console.log("너 왜 자꾸 나오냐");
-	    
+	   document.getElementById("deletePhotoInput").value = "true";
 	}
 
 	function checkExtension() {

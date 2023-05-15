@@ -86,6 +86,7 @@
          VALUES(#{cat_id},#{ori_photo_name},#{photo_name}, #{board_id})
    </insert>
    
+
    <update id="up_views">
       UPDATE board SET board_views = board_views+1   
          WHERE board_id = #{board_id}
@@ -118,5 +119,6 @@
    <delete id="photoDelete">
       DELETE FROM photo WHERE photo_name = #{param1}
    </delete>
+   
 
 </mapper>

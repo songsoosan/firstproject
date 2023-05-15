@@ -230,7 +230,7 @@ function listPrint(list) {
         var event_start_date = new Date(event.event_start_date);
         var event_end_date = new Date(event.event_end_date);
 
-        // 날짜 형식 설정
+        // 날짜형식설정
         var startDateFormatted = event_start_date.toISOString().substring(0, 10);
         var endDateFormatted = event_end_date.toISOString().substring(0, 10);
 
@@ -239,8 +239,18 @@ function listPrint(list) {
         
 		
         
-     // 이벤트 상태에 따라 텍스트 설정
-        var eventStatusText = event.event_status ? '진행중' : '마감';
+        // 준비중,마감,진행중
+        var currentDate = new Date();
+        var eventStatusText = '';
+
+        if (event_start_date > currentDate) {
+            eventStatusText = '준비중';
+        } else if (event_end_date < currentDate) {
+            eventStatusText = '마감';
+        } else {
+            eventStatusText = '진행중';
+        }
+        
         content += '<td>' + eventStatusText + '</td>';
         
         content += '</tr>';
