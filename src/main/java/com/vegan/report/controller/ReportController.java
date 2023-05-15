@@ -42,6 +42,7 @@ public class ReportController {
 	 */
 	
 	@RequestMapping(value = "/reportWrite.go")
+
 	public String reportWrite(@RequestParam HashMap<String, Object> params, Model model) {
 		
 		model.addAttribute("params", params);
