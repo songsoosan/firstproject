@@ -28,6 +28,7 @@ public class ReportController {
 		model.addAttribute("cat_id",cat_id);
 		model.addAttribute("user_id",user_id);
 		model.addAttribute("reporter",reporter);
+		/* model.addAttribute("comment_id",comment_id); */
 		logger.info("board_title"+board_title+user_id+reporter);
 		
 		return "reportWrite";
