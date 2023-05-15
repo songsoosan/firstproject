@@ -13,12 +13,8 @@ public class ClassesDTO {
 	private String cl_teacher;
 	private String cl_date;
 	private int cl_ing_chk;
-	public int getCl_ing_chk() {
-		return cl_ing_chk;
-	}
-	public void setCl_ing_chk(int cl_ing_chk) {
-		this.cl_ing_chk = cl_ing_chk;
-	}
+
+
 	private int cl_status;
 	private String postcode;
 	private String address;
@@ -34,6 +30,7 @@ public class ClassesDTO {
 	private String photo_name;
 	private int idx;
 	private int join_count;
+
 //	댓글관련
 	  private int review_id;
 	   private Date date;
@@ -131,8 +128,15 @@ public class ClassesDTO {
 	public void setCl_date(String cl_date) {
 		this.cl_date = cl_date;
 	}
-	
-	
+
+
+	public int getCl_ing_chk() {
+		return cl_ing_chk;
+	}
+	public void setCl_ing_chk(int cl_ing_chk) {
+		this.cl_ing_chk = cl_ing_chk;
+	}
+
 	public int getCl_status() {
 		return cl_status;
 	}

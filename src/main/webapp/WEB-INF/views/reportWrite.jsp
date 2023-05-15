@@ -14,9 +14,12 @@
 <body>
 <h3>신고하기</h3>
 		<div class="mb-3 row">
-		    <label for="staticReport" class="col-sm-2 col-form-label">신고 대상글</label>
+		    <label for="staticReport" class="col-sm-2 col-form-label">신고 글 작성</label>
+		    
 		    <div class="col-sm-10">
-		      <input type="text" readonly class="form-control-plaintext" id="staticReport" value="reportTarget">
+		      <input type="text" readonly class="form-control-plaintext" id="staticReport" value="" >
+		      ${cat_id}
+		      ${board_title}
 		    </div>
 		  </div>
 		  <label for="staticReason" class="col-sm-2 col-form-label">신고 사유</label>

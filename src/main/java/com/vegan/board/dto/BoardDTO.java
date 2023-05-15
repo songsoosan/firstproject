@@ -19,12 +19,6 @@ public class BoardDTO {
    private String comment_date;
    private String comment_content;
    private String identify_number;
-   private int fboard_id;
-   private String fboard_title;
-   private String fboard_content;
-   private String fboard_date;
-   private int fboard_views;
-   private boolean fis_delete;
    
    
    public int getBoard_id() {
@@ -129,43 +123,5 @@ public class BoardDTO {
 	public void setIdentify_number(String identify_number) {
 		this.identify_number = identify_number;
 	}
-	public int getFboard_id() {
-		return fboard_id;
-	}
-	public void setFboard_id(int fboard_id) {
-		this.fboard_id = fboard_id;
-	}
-	public String getFboard_title() {
-		return fboard_title;
-	}
-	public void setFboard_title(String fboard_title) {
-		this.fboard_title = fboard_title;
-	}
-	public String getFboard_content() {
-		return fboard_content;
-	}
-	public void setFboard_content(String fboard_content) {
-		this.fboard_content = fboard_content;
-	}
-	public String getFboard_date() {
-		return fboard_date;
-	}
-	public void setFboard_date(String fboard_date) {
-		this.fboard_date = fboard_date;
-	}
-	public int getFboard_views() {
-		return fboard_views;
-	}
-	public void setFboard_views(int fboard_views) {
-		this.fboard_views = fboard_views;
-	}
-	public boolean isFis_delete() {
-		return fis_delete;
-	}
-	public void setFis_delete(boolean fis_delete) {
-		this.fis_delete = fis_delete;
-	}
-	
-
 
 }

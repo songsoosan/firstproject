@@ -55,6 +55,7 @@ public class RecipeService {
 	 * return page; }
 	 */
 
+
 	/*
 	 * private void fileSave(int idx, MultipartFile file) { // 1. 파일을 C:/img/upload/
 	 * 에 저장 //1-1. 원본 이름 추출 String oriFileName = file.getOriginalFilename(); //1-2.
@@ -70,5 +71,6 @@ public class RecipeService {
 	 * 
 	 * }
 	 */
+
 
 }

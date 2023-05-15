@@ -10,12 +10,12 @@
 </head>
 <body>
 	<form action="freeUpdate.do" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="fboard_id" value="${dto.fboard_id}"/>
+	<input type="hidden" name="board_id" value="${dto.board_id}"/>
 	<input type="hidden" name="cat_id" value="${dto.cat_id}"/>
 		<table>
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="subject" value="${dto.fboard_title}"/></td>
+				<td><input type="text" name="subject" value="${dto.board_title}"/></td>
 			</tr>
 			<tr>
 				<th>작성자</th>
@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea name="content">${dto.fboard_content}</textarea></td>
+				<td><textarea name="content">${dto.board_content}</textarea></td>
 			</tr>
 			<tr>
 				<th>사진</th>
