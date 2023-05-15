@@ -20,6 +20,17 @@
  		 ORDER BY r.report_id desc
 	</select>
 
+	 <update id="adminCommit" parameterType="String">
+    UPDATE user
+    SET user_admin_chk = 1
+        WHERE user_id = #{user_id}
+   </update>
+   
+   <update id="adminCommit2" parameterType="String">
+    UPDATE user
+    SET user_admin_chk = 0
+        WHERE user_id = #{user_id}
+   </update>
 
 
    

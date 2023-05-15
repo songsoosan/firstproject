@@ -65,6 +65,18 @@ public class AdminController {
 		return "adminLetterList";
 	}
 	
+	@RequestMapping(value="/adminCommit.do", method = RequestMethod.GET)
+	public String adminCommit(Model model, @RequestParam String user_id) {
+		logger.info("adminuser_id:"+user_id);
+		service.adminCommit(user_id);
+		return "redirect:/admin.userList";
+	}
+	@RequestMapping(value="/adminCommit2.do", method = RequestMethod.GET)
+	public String adminCommit2(Model model, @RequestParam String user_id) {
+		logger.info("adminuser_id:"+user_id);
+		service.adminCommit2(user_id);
+		return "redirect:/admin.userList";
+	}
 
     
 }

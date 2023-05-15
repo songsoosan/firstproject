@@ -14,5 +14,9 @@ public interface AdminDAO {
 	
 	ArrayList<AdminDTO> reportList();
 
+	void adminCommit(String user_id);
+
+	void adminCommit2(String user_id);
+
 
 }

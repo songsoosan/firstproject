@@ -35,6 +35,20 @@ public class AdminService {
 
 		return dao.reportList();
 	}
+
+
+
+	public void adminCommit(String user_id) {
+		
+		dao.adminCommit(user_id);
+	}
+
+
+
+	public void adminCommit2(String user_id) {
+		// TODO Auto-generated method stub
+		dao.adminCommit2(user_id);
+	}
 	
 }
 	
