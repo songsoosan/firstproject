@@ -28,9 +28,7 @@ public class AdminService {
 		
 		return dao.userList();
 	}
-<<<<<<< HEAD
-}
-=======
+
 
 
 	public ArrayList<AdminDTO> reportList() {
@@ -38,7 +36,5 @@ public class AdminService {
 		return dao.reportList();
 	}
 	
-
-
 }
->>>>>>> origin/master
+	

@@ -5,7 +5,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<style></style>
+<style>
+
+</style>
 </head>
 <body>
 	<h3>답변의 대한 점수는 다음과 같습니다.</h3>
