@@ -223,7 +223,7 @@
           , comment_content
           , comment_date
         FROM comment
-       WHERE cat_id = 'free' 
+       WHERE cat_id = 'free_c' 
          AND identify_number = #{board_id}
    </select>
    
