@@ -31,14 +31,10 @@ public class AdminService {
 
 
 
-
-
 	public ArrayList<AdminDTO> reportList() {
 
 		return dao.reportList();
 	}
 	
-
-
 }
-
+	

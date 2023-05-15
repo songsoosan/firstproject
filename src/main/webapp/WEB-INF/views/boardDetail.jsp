@@ -1,109 +1,118 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<title>공지사항 상세</title>
 <style>
-   div{
-    text-align: center;
-       display :inline-block;
-   }
-   table{
-      width: 100%
-   }
-   table, th, td{
-      border: 2px solid green;
-      border-collapse: collapse;
-      padding: 5px 10pxl
-   }
    .none {
-      display: none;
+      display: none !important;
    }
    .onlyAdmin {
-      display: block;
+      display: block !important;
+   }
+   .borderBottom {
+        border-bottom: solid 1px #49c5a2;
    }
 </style>
 </head>
 <body>
-   <input type="hidden" name = "board_id" value="${dto.board_id}">
-   <table>
-      <tr>
-         <th>제목</th>
-         <td colspan="3">${dto.board_title}</td>
-      </tr>
-      <tr>
-         <th>작성자</th>
-         <td colspan="3">${dto.user_id}</td>
-      </tr>
-      <tr>
-         <th>작성일</th>
-         <td colspan="3">${dto.board_date}</td>
-      </tr>
-      <tr>
-         <th>내용</th>
-         <td colspan="3">${dto.board_content}</td>
-      </tr>
+<%@ include file="./header.jsp" %>
+<div class="contentWrap mt-5">
+   <div class="contentBox">
+      <div class="row mb-2 text-center">
+         <h2 class="text-center">공지사항 상세</h2>
+         <hr/>
+      </div>
+      <div class="fr" style="display:inline-flex;">
+         <button type="button" class="btn btn-outline-secondary" onclick="location.href='./boardList.do'">리스트</button>
+           <button type="button" class="mx-1 none adminArea btn btn-outline-primary" onclick="location.href='./boardUpdate.go?board_id=${dto.board_id}'" >수정</button>
+           <button type="button" class="none adminArea btn btn-outline-danger" onclick="location.href='./boardDelete.go?board_id=${dto.board_id}'" >삭제</button>
+      </div>
+      <input type="hidden" name = "board_id" value="${dto.board_id}">
+      <div class="input-group borderBottom mb-3 mt-3">
+         <label class="col-sm-2 offset-sm-1 col-form-label">제목</label>
+         <div class="col-sm-9">
+            <input type="text" class="form-control-plaintext" value="${dto.board_title}">
+         </div>
+      </div>
+      <div class="input-group borderBottom mb-3 mt-3">
+         <label class="col-sm-2 offset-sm-1 col-form-label">작성자</label>
+         <div class="col-sm-9">
+            <input type="text" class="form-control-plaintext" value="${dto.user_id}">
+         </div>
+      </div>
+      <div class="input-group borderBottom mb-3 mt-3">
+         <label class="col-sm-2 offset-sm-1 col-form-label">작성일</label>
+         <div class="col-sm-9">
+            <input type="text" class="form-control-plaintext" value="${dto.board_date}">
+         </div>
+      </div>
+      <div class="input-group borderBottom mb-3 mt-3">
+         <label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
+         <div class="col-sm-9">
+            <input type="text" class="form-control-plaintext" value="${dto.board_title}">
+         </div>
+      </div>
       <c:if test="${dto.photo_name ne null}">
-      <tr>
-         <th>사진</th>
-         <td colspan="3">
-            <img width="500" src="/photo/${dto.photo_name}"/>
-            <input type="hidden" name="photo_id" value="${dto.photo_id}"/>
-         </td>
-      </tr>
+         <div class="input-group mb-3 mt-3">
+            <label class="col-sm-2 offset-sm-1 col-form-label">사진</label>
+            <div class="col-sm-9">
+               <img max-width="300" max-height="300" src="/photo/${dto.photo_name}"/>
+            </div>
+         </div>
       </c:if>
-      <tr>
-         <th colspan="4">
-         <div><input type="button" onclick="location.href='./boardList.do'" value="리스트"/></div>
-         <div><input class="none adminArea" type="button" onclick="location.href='./boardUpdate.go?board_id=${dto.board_id}'" value="수정"/></div>
-         <div><input class="none adminArea" type="button" onclick="location.href='./boardDelete.go?board_id=${dto.board_id}'" value="삭제"/></div>
-         </th>
-      </tr>
-   
+      <div>
+         <b style="margin-left:45px;">댓글</b>${fn:length(commentList)}<b>개</b>
+      </div>
+      <hr/>
+      <table class="table">
       <c:forEach items="${commentList}" var="commentList" varStatus="status">
          <tr class="reply">
-            <th>${commentList.user_id} </th>
-            <td>
+            <th class="col-sm-2 px-5">${commentList.user_id} </th>
+            <td class="col-sm-6">
                <p class="readMode">${commentList.comment_content}</p>
-               <textarea rows="3" name="comment_content" class="editMode none">${commentList.comment_content}</textarea>
+               <textarea rows="3" name="comment_content" class="editMode none form-control">${commentList.comment_content}</textarea>
             </td>
-            <td>${commentList.comment_date}</td>
-            <td>
+            <td class="col-sm-2 text-center">${commentList.comment_date}</td>
+            <td class="col-sm-2">
                <c:if test="${commentList.user_id eq loginId}">
-               <a class="readMode" href="javascript:void(0);" onclick="writeMode(${status.index});">수정</a>
-               <a class="readMode" href="noticecommentDelete.do?comment_id=${commentList.comment_id}&board_id=${dto.board_id}">삭제</a>
-               <a class="editMode none" href="javascript:void(0);" onclick="commentUpdate(${status.index}, '${commentList.comment_id}', ${dto.board_id});">확인</a>
-               <a class="editMode none" href="javascript:void(0);" onclick="readMode(${status.index});">취소</a>
+                  <button type="button" class="readMode btn btn-outline-primary" onclick="writeMode(${status.index});">수정</button>
+                  <button type="button" class="readMode btn btn-outline-danger" onclick="location.href='noticecommentDelete.do?comment_id=${commentList.comment_id}&board_id=${dto.board_id}'">삭제</button>
+                  <button type="button" class="editMode none btn btn-outline-primary" onclick="commentUpdate(${status.index}, '${commentList.comment_id}', ${dto.board_id});">확인</button>
+                  <button type="button" class="editMode none btn btn-outline-danger" onclick="readMode(${status.index});">취소</button>
                </c:if>
                <c:if test="${commentList.user_id ne loginId}">
-               <a href="#">신고</a>
+                  <button type="button" class="btn btn-outline-danger"">신고</button>
                </c:if>                    
-            </td>
-         </tr>
+               </td>
+            </tr>
       </c:forEach>
-
-   <form action="noticecommentWrite.do" method="post">
+      </table>
+      <form action="noticecommentWrite.do" method="post">
          <input type="hidden" name = "board_id" value="${dto.board_id}">
-         <th>
-            <input type="hidden" name="user_id" value="<%=(String)session.getAttribute("loginId")%>"/>
-            <b><%=(String)session.getAttribute("loginId")%></b>
-         </th>
-         <th>
-            <input type="text" name="comment_content"/>
-         </th>
-         <th colspan="2">
-            <button>작성</button>
-         </th>
-   </form>
-   </table>
+         <table class="table">
+            <tr>
+               <th class="col-sm-2 px-5">
+                  <input type="hidden" name="user_id" value="<%=(String)session.getAttribute("loginId")%>"/>
+                  <b><%=(String)session.getAttribute("loginId")%></b>
+               </th>
+               <th class="col-sm-8">
+                  <textarea class="form-control" name="comment_content"></textarea>
+               </th>
+               <th class="col-sm-2">
+                  <button class="btn btn-outline-primary">작성</button>
+               </th>
+            </tr>
+         </table>
+      </form>
+   </div>
+</div>
 </body>
 <script>
 var loginId = '<%=(String)session.getAttribute("loginId")%>';
 if(loginId === "admin") {
+   console.log("gg");
    $(".adminArea").addClass("onlyAdmin");
 }
 

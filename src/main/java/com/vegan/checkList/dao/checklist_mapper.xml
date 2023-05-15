@@ -20,9 +20,14 @@
 	</update>
 	
 	<insert id="resultsave" parameterType="hashmap">
+				INSERT INTO question_result (user_id, total_score, create_date, list_check, step)
+    		VALUES (#{user_id,jdbcType=VARCHAR}, #{total_score,jdbcType=INTEGER}, NOW(), 1, #{step,jdbcType=VARCHAR});
+	</insert>
+	
+	<!--  <insert id="resultsave" parameterType="hashmap">
     	INSERT INTO question_result (user_id, total_score, create_date, list_check, step)
     	VALUES (#{user_id,jdbcType=VARCHAR}, #{total_score,jdbcType=INTEGER}, NOW(), 1, #{step,jdbcType=VARCHAR})
-	</insert>
+	</insert> -->
 	
 	<select id="getresult" resultType="com.vegan.checkList.dto.CheckListDTO">
     	SELECT user_id, total_score

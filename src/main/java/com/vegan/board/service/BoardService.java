@@ -48,7 +48,6 @@ public class BoardService {
          ArrayList<BoardDTO> list = dao.list(cnt, offset, searchText, loginId);
          map.put("list", list);
          return map;
-
    }
 
    public String write(MultipartFile board_photo, HashMap<String, String> params) {
@@ -215,20 +214,19 @@ public class BoardService {
 	      //1. 게시글만 작성한 경우
 	      BoardDTO dto = new BoardDTO();
 	      dto.setCat_id("free");
-	      dto.setFboard_title(params.get("board_title")); //파라메터 DTO로 보내기
+	      dto.setBoard_title(params.get("board_title")); //파라메터 DTO로 보내기
 	      dto.setUser_id(params.get("user_id"));
-	      dto.setFboard_content(params.get("board_content"));
+	      dto.setBoard_content(params.get("board_content"));
 	      
 	      int row = dao.freewrite(dto);
 	      logger.info("update row :" + row);
 	      
-	      int freeidx = dto.getFboard_id();
+	      int freeidx = dto.getBoard_id();
 	      String cat_id = dto.getCat_id();
 	      logger.info("방금 insert한 idx : "+freeidx);
 	      logger.info("방금 insert한 cat_id: "+cat_id);
 	      
-	      
-	      page = "redirect:/freeDetail.do?fboard_id="+freeidx;
+	      page = "redirect:/freeDetail.do?board_id="+freeidx;
 	      
 	      //2. 파일도 업로드 한 경우
 	      if(!board_photo.getOriginalFilename().equals("")) {
@@ -238,7 +236,7 @@ public class BoardService {
 	      return page;
 	   }
    
-   private void freefileSave(String cat_id, int fboard_id, MultipartFile file, String photo_id) {
+   private void freefileSave(String cat_id, int board_id, MultipartFile file, String photo_id) {
 	      //1. 파일은 c:/img/upload/ 에 저장
 
 	      String ori_photo_name = file.getOriginalFilename();
@@ -251,33 +249,32 @@ public class BoardService {
 	         Path path = Paths.get("C:/img/upload/"+photo_name);
 	         Files.write(path, bytes);
 	         logger.info(photo_name+"save OK");
-	         //DB에 저장 fboard_id 는 식별번호로 들어감
+	         //DB에 저장 board_id 는 식별번호로 들어감
 	         if("".equals(photo_id)) {
-	            dao.freefileWrite(cat_id, fboard_id, ori_photo_name, photo_name);
+	            dao.freefileWrite(cat_id, board_id, ori_photo_name, photo_name);
 	         } else {
-	            dao.freefileUpdate(fboard_id, ori_photo_name, photo_name);
+	            dao.freefileUpdate(board_id, ori_photo_name, photo_name);
 	         }
 	      } catch (IOException e) {
 	         e.printStackTrace();
 	      }
-	      
 	   }
    
-   public BoardDTO freedetail(String fboard_id, String flag) {
+   public BoardDTO freedetail(String board_id, String flag) {
 	      if(flag.equals("detail")) {
-	         dao.freeupHit(fboard_id); //조회수 증가
+	         dao.freeupHit(board_id); //조회수 증가
 	      }
-	      return dao.freedetail(fboard_id);
+	      return dao.freedetail(board_id);
 	   }
    
    public String freeupdate(MultipartFile photo, HashMap<String, String> params) {
 	      
 	      logger.info("params : " + params);
-	      int fboard_id = Integer.parseInt(params.get("fboard_id"));
+	      int board_id = Integer.parseInt(params.get("board_id"));
 	      String cat_id = params.get("cat_id");
 	      String photo_id = params.get("photo_id");
 	      
-	      logger.info("fboard_id : "+fboard_id);
+	      logger.info("board_id : "+board_id);
 	      logger.info("cat_id : "+cat_id);
 	      // 1. update 실행
 	      int row = dao.freeupdate(params);
@@ -285,17 +282,17 @@ public class BoardService {
 	      // 2. photo 에 파일명이 존재 한다면?
 	      
 	      if(photo != null && !photo.getOriginalFilename().equals("")  ) {
-	         fileSave(cat_id, fboard_id, photo, photo_id);         
+	         fileSave(cat_id, board_id, photo, photo_id);         
 	      }
 	      
-	      String page= row >0 ? "redirect:/freeDetail.do?fboard_id="+fboard_id : "redirect:/freeList";
+	      String page= row >0 ? "redirect:/freeDetail.do?board_id="+board_id : "redirect:/freeList";
 	      logger.info("update =>" +page);
 	      
 	      return page;
 	   }
    
-   public void freedelete(String fboard_id) {
-	      dao.freedelete(fboard_id); //삭제
+   public void freedelete(String board_id) {
+	      dao.freedelete(board_id); //삭제
 	   }
       
    public String freecommentWrite(HashMap<String, String> params) {
@@ -305,24 +302,24 @@ public class BoardService {
        dto.setCat_id("free");
        dto.setComment_content(params.get("comment_content"));///파라메터 DTO로 보내기
        dto.setUser_id(params.get("user_id"));
-       dto.setFboard_id(Integer.valueOf(params.get("fboard_id")));
+       dto.setBoard_id(Integer.valueOf(params.get("board_id")));
        
        int row = dao.freecommentWrite(dto);
        logger.info("update row :" + row);
        
-       int idx = dto.getFboard_id();
+       int idx = dto.getBoard_id();
        int commentIDX = dto.getComment_id();
        String cat_id = dto.getCat_id();
        logger.info("방금 insert한 commentid : "+commentIDX);
        logger.info("방금 insert한 cat_id: "+cat_id);
        
-       int board_id = Integer.parseInt(params.get("fboard_id"));
-       String page = "redirect:/freeDetail.do?fboard_id="+board_id;
+       int board_id = Integer.parseInt(params.get("board_id"));
+       String page = "redirect:/freeDetail.do?board_id="+board_id;
        
        return page;
     }
    
-   public ArrayList<BoardDTO>freecommentList(String fboard_id){
-	      return dao.freecommentList(fboard_id);
+   public ArrayList<BoardDTO>freecommentList(String board_id){
+	      return dao.freecommentList(board_id);
 	   }
 }
