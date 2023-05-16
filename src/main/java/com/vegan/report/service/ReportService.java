@@ -24,4 +24,17 @@ public class ReportService {
 		return dao.reportList();
 	}
 
+
+	public ReportDTO reportDetail(String report_id) {
+		// TODO Auto-generated method stub
+		return dao.reportDetail(report_id);
+	}
+
+
+
+	public int reportStatus(String report_id, String status, String adminId) {
+		// TODO Auto-generated method stub
+		return dao.reportStatus(report_id,status,adminId);
+	}
+
 }

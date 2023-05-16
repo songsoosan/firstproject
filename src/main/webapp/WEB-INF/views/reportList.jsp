@@ -28,7 +28,7 @@
 			</c:if>
 			<c:forEach items="${reportList}" var="report">
 				<tr>
-					<td><a href="class.detail.do?cl_id=${report.report_id}">${report.report_id}</a></td> 
+					<td><a href="reportDetail.go?report_id=${report.report_id}">${report.report_id}</a></td> 
 					<td>${report.user_id}</td>
 					<td>${report.reporter}</td>
 					<td>${report.date}</td>
