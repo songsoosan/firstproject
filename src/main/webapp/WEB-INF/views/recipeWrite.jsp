@@ -61,7 +61,7 @@ $(document).on('click','#removeButton',function(){
 
 $(document).on('click','#addFoods',function(){
 	var html = '<div class="food">'
-					+'재료'+y+' <input type = "text" name="food_name'+y+'">'
+					+' '+y+' <input type = "text" name="food_name'+y+'">'
 					+'<input type = "text" name="food_quantity'+y+'">'
 					+'</div>';
 					document.getElementById("food_id").value = y;
@@ -180,7 +180,7 @@ $(document).on('click','#submit',function(){
        <div id="image_container_main"></div>
 			<div class="contents" id="recipeFoods">
 				<div class="food">
-					재료 1<input type ="text" name="food_name1"><input type = "text" name="food_quantity1">
+					1 <input type ="text" name="food_name1"><input type = "text" name="food_quantity1">
 				</div>
 			</div>
 		</div>

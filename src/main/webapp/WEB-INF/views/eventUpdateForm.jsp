@@ -59,7 +59,7 @@
         </c:if>
         <c:if test="${dto.photo_name ne null}">
             <div class="offset-sm-3">
-            	<p id="filename">
+            	<p id="filename" style="margin: 0;">
                     	<img max-width="300" max-height="300" src="/photo/${dto.photo_name}"/>
                     	<button id="deleteButton" onclick="delphoto()">삭제</button>
                 </p>
@@ -75,56 +75,11 @@
         </form>
     </div>
 </div>
+</div>
+      
          
          
-         
-			<tr>
-				<th>제목</th>
-				<td><input type="text" name="event_title" value="${dto.event_title}"/></td>
-			</tr>
-			<tr>
-				<th>작성자</th>
-				<td><input type="text" name="user_id" value="<%= userId %>" readonly/></td>
-			</tr>
-			<tr>
-				<th>시작일</th>
-				<td><input type="date" id="event_start_date" name="event_start_date" placeholder="시작일"
-					value="${dto.event_start_date}"></td>
-			</tr>
-			<tr>
-				<th>종료일</th>
-				<td><input type="date" id="event_end_date" name="event_end_date" placeholder="종료일"
-					value="${dto.event_end_date}"></td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td><textarea name="event_content">${dto.event_content}</textarea></td>
-			</tr>
-			<tr>
-				<th>대표사진</th>
-				<td>
-					<p id="filename">
-					<c:if test="${dto.photo_name eq null}">
-						<input type="file" name="photo"/>
-					</c:if>
-					<c:if test="${dto.photo_name ne null }">
-						<img src="/photo/${dto.photo_name}"/>
-						<button id="deleteButton" onclick="delphoto()">삭제</button>
-					</p>
-					 <input type="file" name="photo" id ="fileInput" onchange="checkExtension()"/>	
-					   <input type="hidden" name="deletePhoto" value="false" id="deletePhotoInput">
-                      <input type="hidden" name="photo_name" value="${dto.photo_name}">	
-					</c:if>	
-				</td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<input type="button" onclick="location.href='./event'" value="리스트"/>
-					<button>저장</button>
-				</th>
-			</tr>
-		</table>	
-	</form>
+			
 </body>
 <script>
 var loginId = '<%=(String)session.getAttribute("loginId")%>';
