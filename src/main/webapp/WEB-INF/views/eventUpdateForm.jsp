@@ -149,7 +149,7 @@ margin:0 auto;
 </div>
 	
 	<% String userId = (String) session.getAttribute("loginId"); %>
-	<form action="eventWrite.do" method="post" enctype="multipart/form-data">
+	<form action=eventUpdate.do method="post" enctype="multipart/form-data">
 		<input type="hidden" name="event_id" value="${dto.event_id}"/>
 		<input type="hidden" name = "cat_id" value = "e"/> 
 		<table>
@@ -185,11 +185,11 @@ margin:0 auto;
 					<c:if test="${dto.photo_name ne null }">
 						<img src="/photo/${dto.photo_name}"/>
 						<button id="deleteButton" onclick="delphoto()">삭제</button>
-					</c:if>	
 					</p>
 					 <input type="file" name="photo" id ="fileInput" onchange="checkExtension()"/>	
 					   <input type="hidden" name="deletePhoto" value="false" id="deletePhotoInput">
                       <input type="hidden" name="photo_name" value="${dto.photo_name}">	
+					</c:if>	
 				</td>
 			</tr>
 			<tr>

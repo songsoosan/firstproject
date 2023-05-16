@@ -147,3 +147,4 @@
         WHERE cl_id = #{cl_id}
    </update>
 
+</mapper>

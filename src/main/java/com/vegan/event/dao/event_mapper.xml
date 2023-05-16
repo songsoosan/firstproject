@@ -32,9 +32,9 @@
 			,user_id = #{user_id}
 			,event_content = #{event_content}
 			,event_start_date = #{event_start_date}
-			,event_end_date = #{evemt_end_date}
+			,event_end_date = #{event_end_date}
+			WHERE event_id = #{event_id}
 			
-		WHERE event_id = #{event_id} and cat_id = 'e'
 	</update>
 	   
 	 <select id="totalCount" resultType="int">

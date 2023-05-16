@@ -23,27 +23,27 @@
       <select id="magacommentlist" resultType="com.vegan.magazine.dto.MagazineDTO">
        SELECT 
          *
-      FROM comment WHERE identify_id = #{param1} AND cat_id = 'mc' ORDER BY identify_id DESC
+      FROM comment WHERE identify_number = #{param1} AND cat_id = 'mc' ORDER BY identify_number DESC
       </select>
    
     <select id="magacommentlist2" resultType="com.vegan.magazine.dto.MagazineDTO">
        SELECT 
          *
-      FROM comment WHERE identify_id = #{param1} AND comment_id = #{param2} AND cat_id = 'mc'
-       ORDER BY identify_id DESC
+      FROM comment WHERE identify_number = #{param1} AND comment_id = #{param2} AND cat_id = 'mc'
+       ORDER BY identify_number DESC
       </select>
     
    
    
     <insert 
       id="commwrite" parameterType="String">
-      INSERT INTO comment(identify_id, comment_content,user_id, cat_id)
+      INSERT INTO comment(identify_number, comment_content,user_id, cat_id)
          VALUES(#{param1},#{param2},#{param3},'mc')
       </insert>
       
 
    <delete id="commdelete">
-   DELETE FROM comment WHERE identify_id = #{param1}  
+   DELETE FROM comment WHERE identify_number = #{param1}  
       AND comment_id = #{param2} AND user_id = #{param3}
    </delete>
    

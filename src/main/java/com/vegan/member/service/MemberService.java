@@ -141,6 +141,7 @@ public class MemberService {
 		
 		return resMap;
 	}
+
 	
 	
 }

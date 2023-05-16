@@ -40,9 +40,10 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/magazine.go", method = RequestMethod.GET)
-	public String magazine(Model model, HttpSession session) {
-			return "magazineList";
-	}
+	public String magazine(Model model) {
+
+	      return "magazineList";
+	   }
 
 	@RequestMapping(value = "/event.go", method = RequestMethod.GET)
 	public String event(Model model, HttpSession session) {
