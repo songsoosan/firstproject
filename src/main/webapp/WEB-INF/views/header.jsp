@@ -50,7 +50,7 @@
       font-size: 20px;
    }
    .contentWrap > .contentBox {
-       border: 1px solid #49c5a2;
+      border: 1px solid #49c5a2;
       background: #fff;
       margin: 0 250px;
       padding: 10px 15px;

@@ -29,6 +29,7 @@
       </style>
 </head>
 <body>
+<%@ include file="./header.jsp" %>
    <h3>최신 매거진</h3>
    게시물 갯수 : 
    <select id="pagePerNum">

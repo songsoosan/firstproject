@@ -27,6 +27,7 @@
 		INSERT INTO photo(identify_number, photo_number, ori_photo_name, photo_name,cat_id)
 			VALUES(#{identify_number},#{photo_number},#{ori_photo_name}, #{photo_name},#{cat_id})
 	</insert>
+	
 </mapper>
 
                  

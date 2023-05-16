@@ -57,7 +57,6 @@ public class CheckListController {
 	    } else {
 	        model.addAttribute("retryUrl", "/survey.do");
 	    }
-
 	    return page;
 	}
 	
@@ -108,6 +107,7 @@ public class CheckListController {
 	    // logger.info("result 값 : "+result);
 	    // logger.info("컨트롤러 파람의 값 : "+params.toString());
 	    model.addAttribute("result", result);
+	    service.profilego(params);
 	    return "surveyResult";
 	}
 	

@@ -34,13 +34,6 @@ public class RecipeService {
 	
 	@Autowired RecipeDAO dao;
 
-
-	@Autowired
-	RecipeDAO recipeDAO;
-
-
-
-
 	public String write(MultipartFile rec_photo, List<MultipartFile> thumbnailFile, HashMap<String, String> params) {
 		
 		String page = "redirect:/list.do";
@@ -57,9 +50,13 @@ public class RecipeService {
 		
 		dto.setRec_title(params.get("rec_title"));
 		dto.setRec_video(params.get("rec_video"));
-		dto.setUser_id("example"); // 세션 아이디 넣게 수정할것
+		dto.setUser_id("admin"); // 세션 아이디 넣게 수정할것
+		
+		logger.info(dto.getUser_id());
+		
 		dto.setCat_id("rec");
 		dto.setStep_id(1);
+		logger.info(Integer.toString(dto.getStep_id()));
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date now = new Date();
 		dto.setRec_creatdate(format.format(now)); 
@@ -97,11 +94,43 @@ public class RecipeService {
 
 			logger.info("파일 업로드 작업");
 			fileSave(rec_id, thumbnailFile);
+			photoSave(rec_id,rec_photo);
 		
 		
 		return page;
 	}
 	
+	private void photoSave(int rec_id, MultipartFile rec_photo) {
+		int identify_number = rec_id;
+		int photo_number = 0;
+		
+		 logger.info(rec_photo.getOriginalFilename());  
+		  
+				//1-1. 원본 이름 추출
+				String ori_photo_name = rec_photo.getOriginalFilename();
+				//1-2. 확장자 추출
+				String ext = ori_photo_name.substring(ori_photo_name.lastIndexOf("."));
+				//1-3. 새이름 생성 + 확장자
+				String photo_name = System.currentTimeMillis()+ext;
+				logger.info(ori_photo_name+" => "+photo_name);		
+				String cat_id = "rec_p";
+				try {
+					byte[] bytes = rec_photo.getBytes();//1-4. 바이트 추출
+					//1-5. 추출한 바이트 저장
+					Path path = Paths.get("C:/img/upload/"+photo_name);
+					Files.write(path, bytes);
+					logger.info(photo_name+" save OK");
+					// 2. 저장 정보를 DB 에 저장
+					//2-1. 가져온 rec_id, oriFileName, newFileName insert
+					logger.info(Integer.toString(identify_number));
+					dao.fileWrite(identify_number,photo_number,ori_photo_name,photo_name,cat_id);
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		
+	}
+
 	private void fileSave(int rec_id, List<MultipartFile> thumbnailFile) {
 		// 1. 파일을 C:/img/upload/ 에 저장
 		
