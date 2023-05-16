@@ -25,23 +25,51 @@ public class ReportController {
 	@Autowired
 	ReportService service;
 
+	/*
+	 * @RequestMapping(value = "/reportWrite.go") public String
+	 * reportWrite(@RequestParam String board_id, Model model, @RequestParam String
+	 * board_title,
+	 * 
+	 * @RequestParam String cat_id, @RequestParam String user_id, @RequestParam
+	 * String reporter) { model.addAttribute("board_id", board_id);
+	 * model.addAttribute("board_title", board_title); model.addAttribute("cat_id",
+	 * cat_id); model.addAttribute("user_id", user_id);
+	 * model.addAttribute("reporter", reporter); logger.info("board_title" +
+	 * board_title + user_id + reporter);
+	 * 
+	 * 
+	 * return "reportWrite"; }
+	 */
+	
 	@RequestMapping(value = "/reportWrite.go")
-	public String reportWrite(@RequestParam String board_id, Model model, @RequestParam String board_title,
-			@RequestParam String cat_id, @RequestParam String user_id, @RequestParam String reporter) {
-		model.addAttribute("board_id", board_id);
-		model.addAttribute("board_title", board_title);
-		model.addAttribute("cat_id", cat_id);
-		model.addAttribute("user_id", user_id);
-		model.addAttribute("reporter", reporter);
-		logger.info("board_title" + board_title + user_id + reporter);
+
+	public String reportWrite(@RequestParam HashMap<String, Object> params, Model model) {
+		
+		model.addAttribute("params", params);
+	
+		logger.info("board_title" + params);
 
 
 		return "reportWrite";
 	}
+	
+	@RequestMapping(value = "/reportDetail.go")
+
+	public String reportDetailGo(@RequestParam String report_id, Model model) {
+		
+		model.addAttribute("report_id", report_id);
+	
+		logger.info("report_id" + report_id);
+
+
+		return "reportDetail";
+	}
+	
+	
 
 	@RequestMapping(value = "/reportSend.ajax")
 	@ResponseBody
-	public HashMap<String, String> letterSend(@RequestParam HashMap<String, String> params, HttpSession session,
+	public HashMap<String, String> reportSend(@RequestParam HashMap<String, String> params, HttpSession session,
 			Model model) {
 
 		logger.info("sad" + params);
@@ -63,4 +91,17 @@ public class ReportController {
 		model.addAttribute("reportList", reportList);
 		return "reportList";
 	}
+	
+	
+	@RequestMapping(value = "/reportDetail.ajax")
+	@ResponseBody
+	public ReportDTO reportDetail(Model model,@RequestParam String report_id) {
+		ReportDTO dto = service.reportDetail(report_id);
+		
+		model.addAttribute("reportDetail", dto);
+		return dto;
+	}
+	
+	
+	
 }

@@ -10,6 +10,8 @@ public interface ReportDAO {
 	int report(HashMap<String, String> params);
 
 	ArrayList<ReportDTO> reportList();
+
+	ReportDTO reportDetail(String report_id);
 	
 	
 
