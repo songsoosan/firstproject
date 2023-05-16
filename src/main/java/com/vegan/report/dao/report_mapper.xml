@@ -6,10 +6,13 @@
 
 	<insert id="report" parameterType="hashmap">
 		INSERT INTO report (
-		user_id, cat_id, identify_number, reporter, reason, content,subject
+		user_id,
+		cat_id, identify_number, reporter, reason, content,subject
 		) VALUES (
-		#{user_id}, #{cat_id}, CONCAT(#{board_id}, '-', COALESCE(#{comment_id}, 0)),
-		#{reporter}, #{reason}, #{content},#{title}
+		#{user_id}, #{cat_id}, CONCAT(#{board_id}, '-',
+		COALESCE(#{comment_id}, 0)),
+		#{reporter}, #{reason},
+		#{content},#{title}
 		)
 	</insert>
 
@@ -19,14 +22,21 @@
 		resultType="com.vegan.report.dto.ReportDTO">
 		SELECT * FROM report
 	</select>
-	
-	
+
+
 	<select id="reportDetail"
 		resultType="com.vegan.report.dto.ReportDTO">
 		SELECT * FROM report where report_id = #{param1}
 	</select>
-	
-	
+
+
+	<update id="reportStatus" parameterType="String">
+		UPDATE report
+		SET status = #{status}, admin = #{adminId}
+		WHERE report_id = #{report_id}
+	</update>
+
+
 
 
 	<!-- <select id="reportList" resultType="com.vegan.admin.dto.AdminDTO"> 
