@@ -98,8 +98,8 @@
 				</div>
 			</div>
 			<div class="fr" style="display:inline-flex;">
-			<button type="button" class="btn btn-outline-secondary" onclick="location.href='recieveletter.go'">돌아가기</button>
-		</div>
+				<button type="button" class="btn btn-outline-secondary" onclick="location.href='recieveletter.go'">돌아가기</button>
+			</div>
 	</div>
 </div>
 <!-- <table>
