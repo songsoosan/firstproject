@@ -14,13 +14,11 @@
 <script src="resources/js/jquery.twbsPagination.js"
 	type="text/javascript"></script>
 <style>
-
-	.history-table th,
-	.history-table td {
-		border: 1px solid #ccc;
-		padding: 8px;
-		font-size: 14px;
-	}
+.history-table th, .history-table td {
+	border: 1px solid #ccc;
+	padding: 8px;
+	font-size: 14px;
+}
 
 input[type="text"] {
 	width: 100%;
@@ -135,6 +133,7 @@ body {
 					if (data.success == "1") {
 						alert('완료 되었습니다.');
 						location.href = 'admin.reportList';
+
 					} else {
 						alert('실패 했습니다.\r\n 다시 시도해 주세요!');
 					}
@@ -145,3 +144,5 @@ body {
 			});
 		});
 	});
+</script>
+</html>

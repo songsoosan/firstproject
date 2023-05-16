@@ -5,55 +5,65 @@
 <mapper namespace="com.vegan.member.dao.MemberDAO">
 
 
-		<select id="overlayid" resultType="int">
-		SELECT COUNT(user_id) FROM user
-			WHERE user_id = #{param1}
-		</select>
-		
-		
-		<insert id ="join" parameterType="hashmap">
-			INSERT INTO user(user_id,user_pw,user_name,user_phone,user_sex,user_email,user_admin_chk,user_secc_chk)
-				VALUES(#{user_id},#{user_pw},#{user_name},#{user_phone},#{user_sex},#{user_email},false,false)
-		</insert>
-		
-		<insert id ="creatProfile" parameterType="String">
-			INSERT INTO profile(user_id)
-				VALUES(#{user_id})
-		</insert> 
-		
-		
-		<select id="login" resultType="String">
-		SELECT user_id FROM user 
-			WHERE user_id=#{param1} AND user_pw=#{param2} AND user_secc_chk = false
-		</select>
-		
-		<select id="getUserInfo" parameterType="hashmap" resultType="com.vegan.member.dto.MemberDTO">
-			SELECT user_id
-				 , user_pw
-				 , user_name
-				 , user_phone
-				 , user_email
-				 , user_sex
-				 , user_admin_chk
-				 , user_secc_chk
-			  FROM user
-			 WHERE user_name = #{user_name}
-			   AND user_email = #{user_email}
-		</select>
-		
-		<select id="getUserInfoPW" parameterType="hashmap" resultType="com.vegan.member.dto.MemberDTO">
-			SELECT user_id
-				 , user_pw
-				 , user_name
-				 , user_phone
-				 , user_email
-				 , user_sex
-				 , user_admin_chk
-				 , user_secc_chk
-			  FROM user
-			 WHERE user_id = #{user_id}
-			   AND user_name = #{user_name}
-			   AND user_email = #{user_email}
-		</select>
-		
+	<select id="overlayid" resultType="int">
+		SELECT COUNT(user_id) FROM
+		user
+		WHERE user_id = #{param1}
+	</select>
+
+
+	<insert id="join" parameterType="hashmap">
+		INSERT INTO
+		user(user_id,user_pw,user_name,user_phone,user_sex,user_email,user_admin_chk,user_secc_chk)
+		VALUES(#{user_id},#{user_pw},#{user_name},#{user_phone},#{user_sex},#{user_email},false,false)
+	</insert>
+
+	<insert id="creatProfile" parameterType="String">
+		INSERT INTO profile(user_id)
+		VALUES(#{user_id})
+	</insert>
+
+
+	<select id="login" resultType="String">
+		SELECT user_id FROM user
+		WHERE user_id=#{param1} AND user_pw=#{param2} AND user_secc_chk = false
+	</select>
+
+	<select id="getUserInfo" parameterType="hashmap"
+		resultType="com.vegan.member.dto.MemberDTO">
+		SELECT user_id
+		, user_pw
+		, user_name
+		, user_phone
+		, user_email
+		, user_sex
+		, user_admin_chk
+		, user_secc_chk
+		FROM user
+		WHERE user_name = #{user_name}
+		AND user_email = #{user_email}
+	</select>
+
+	<select id="getUserInfoPW" parameterType="hashmap"
+		resultType="com.vegan.member.dto.MemberDTO">
+		SELECT user_id
+		, user_pw
+		, user_name
+		, user_phone
+		, user_email
+		, user_sex
+		, user_admin_chk
+		, user_secc_chk
+		FROM user
+		WHERE user_id = #{user_id}
+		AND user_name = #{user_name}
+		AND user_email = #{user_email}
+	</select>
+
+
+	<select id="adminChk" resultType="int">
+		SELECT user_admin_chk FROM user
+		WHERE user_id=#{param1}
+	</select>
+
 </mapper>

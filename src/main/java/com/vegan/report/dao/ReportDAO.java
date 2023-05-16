@@ -21,6 +21,8 @@ public interface ReportDAO {
 	int userDisposal(HashMap<String, String> param);
 
 	ArrayList<ReportDTO> history(String user_id);
+
+	 void delUser(String user_id); 
 	
 	
 

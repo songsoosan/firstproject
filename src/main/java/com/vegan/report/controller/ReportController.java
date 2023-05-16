@@ -27,32 +27,27 @@ public class ReportController {
 	@Autowired
 	ReportService service;
 
-	
 	@RequestMapping(value = "/reportWrite.go")
 
 	public String reportWrite(@RequestParam HashMap<String, Object> params, Model model) {
-		
-		model.addAttribute("params", params);
-	
-		logger.info("board_title" + params);
 
+		model.addAttribute("params", params);
+
+		logger.info("board_title" + params);
 
 		return "reportWrite";
 	}
-	
+
 	@RequestMapping(value = "/reportDetail.go")
 
 	public String reportDetailGo(@RequestParam String report_id, Model model) {
-		
-		model.addAttribute("report_id", report_id);
-	
-		logger.info("report_id" + report_id);
 
+		model.addAttribute("report_id", report_id);
+
+		logger.info("report_id" + report_id);
 
 		return "reportDetail";
 	}
-	
-	
 
 	@RequestMapping(value = "/reportSend.ajax")
 	@ResponseBody
@@ -78,54 +73,56 @@ public class ReportController {
 		model.addAttribute("reportList", reportList);
 		return "reportList";
 	}
-	
-	
+
 	@RequestMapping(value = "/reportDetail.ajax")
 	@ResponseBody
-	public ReportDTO reportDetail(Model model,@RequestParam String report_id) {
+	public ReportDTO reportDetail(Model model, @RequestParam String report_id) {
 		ReportDTO dto = service.reportDetail(report_id);
-		
+
 		model.addAttribute("reportDetail", dto);
 		return dto;
 	}
-	
+
 	@RequestMapping(value = "/reportStatus.ajax")
 	@ResponseBody
-	public HashMap<String, String> reportStatus(Model model,@RequestParam String report_id,@RequestParam String status,@RequestParam String adminId) {
-		logger.info("params:"+report_id+status+adminId);
+	public HashMap<String, String> reportStatus(Model model, @RequestParam String report_id,
+			@RequestParam String status, @RequestParam String adminId) {
+		logger.info("params:" + report_id + status + adminId);
 		HashMap<String, String> data = new HashMap();
-		int row = service.reportStatus(report_id,status,adminId);
+		int row = service.reportStatus(report_id, status, adminId);
 		if (row == 1) {
 			data.put("success", "1");
 			model.addAttribute("msg", "상태변경이 완료되었습니다.");
 		} else {
 			data.put("success", "0");
 		}
-		
+
 		return data;
 
 	}
-	
+
 	@RequestMapping(value = "/userActive.go")
-	public String userActive(Model model,@RequestParam String user_id,@RequestParam String report_id) {
-		logger.info("1:"+user_id);
-		logger.info("2:"+report_id);
+	public String userActive(Model model, @RequestParam String user_id, @RequestParam String report_id) {
+		logger.info("1:" + user_id);
+		logger.info("2:" + report_id);
 		ArrayList<ReportDTO> dto = service.history(user_id);
-		
+
 		model.addAttribute("history", dto);
 		model.addAttribute("user_id", user_id);
 		model.addAttribute("report_id", report_id);
 		return "userActive";
 
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/userDisposal.ajax")
 	@ResponseBody
-	public HashMap<String, String> userDisposal(Model model,@RequestParam HashMap<String, String> param) {
-		logger.info("1:"+param);
-		
+	public HashMap<String, String> userDisposal(Model model, @RequestParam HashMap<String, String> param) {
+		logger.info("1:" + param);
+
+		if (param.get("disposal").equals("탈퇴")) {
+			service.delUser(param.get("user_id"));
+		}
+
 		HashMap<String, String> data = new HashMap();
 		int row = service.userDisposal(param);
 		if (row == 1) {
@@ -134,17 +131,9 @@ public class ReportController {
 		} else {
 			data.put("success", "0");
 		}
-		
+
 		return data;
 
 	}
-	
 
-	
-
-	
-	
-	
-	
-	
 }

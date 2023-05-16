@@ -29,9 +29,22 @@ public class MemberController {
 		 */
 	@RequestMapping(value = {"/","/main.go"}, method = RequestMethod.GET)
 	public String main(Model model, HttpSession session) {
-		String loginId = (String) session.getAttribute("loginId");
-		
-		model.addAttribute("loginChk",loginId);
+		if (session.getAttribute("loginId") != null) {
+	         String loginId = String.valueOf(session.getAttribute("loginId"));
+	         int admin = (int) service.adminChk(loginId);
+	         logger.info("admin" + admin);
+	         if (admin == 1) {
+	            model.addAttribute("adminChk", admin);
+	         }
+	      }
+
+		/*
+		 * if (result == null) { // 처리 방법 선택: // 1. 특정 값을 반환하도록 수정 return 0; // 예: 0을
+		 * 관리자가 아님을 의미하는 값으로 대체
+		 * 
+		 * // 2. 예외를 throw하도록 수정 throw new SomeException("adminChk 결과가 null입니다."); // 예:
+		 * 적절한 예외 클래스와 메시지 사용 }
+		 */
 		
 		
 			return "main";
