@@ -30,7 +30,7 @@
 		<div class="input-group mb-3 mt-3">
             <label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
             <div class="col-sm-9">
-               <textarea class="form-control" name="board_content">${dto.board_content}</textarea>
+               <textarea class="form-control" rows="35" name="board_content">${dto.board_content}</textarea>
             </div>
          </div>  
 		 <div class="row">
@@ -96,6 +96,9 @@
 	
 </body>
 <script>
+var loginId = '<%=(String)session.getAttribute("loginId")%>';
+$("input[name=user_id]").val(loginId);
+
 function delphoto() {
 	   document.getElementById("filename").remove();    
 	   document.getElementById("deletePhotoInput").value = "true";
