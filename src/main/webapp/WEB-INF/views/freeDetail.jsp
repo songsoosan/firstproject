@@ -28,6 +28,7 @@
          <button type="button" class="btn btn-outline-secondary" onclick="location.href='freeList.do'">리스트</button>
            <button type="button" class="mx-1 btn btn-outline-primary" onclick="location.href='./freeUpdate.go?board_id=${dto.board_id}'" >수정</button>
            <button type="button" class="btn btn-outline-danger" onclick="location.href='./freeDelete.go?board_id=${dto.board_id}'" >삭제</button>
+           <button type="button" class="btn btn-outline-danger" onclick="location.href='./reportWrite.go?board_id=${dto.board_id}&subject=${dto.board_title}&cat_id=${dto.cat_id}&user_id=${dto.user_id}&reporter=${sessionScope.loginId}'" >신고</button>
       </div>
 	
 	  <input type="hidden" name = "board_id" value="${dto.board_id}">
@@ -85,7 +86,7 @@
                   <button type="button" class="editMode none btn btn-outline-danger" onclick="readMode(${status.index});">취소</button>
                </c:if>
                <c:if test="${commentList.user_id ne loginId}">
-                  <button type="button" class="btn btn-outline-danger"">신고</button>
+                  <button type="button" class="btn btn-outline-danger" onclick="location.href='./reportWrite.go?comment_id=${commentList.comment_id}&board_id=${dto.board_id}&subject=${commentList.comment_content}&cat_id=${commentList.cat_id}&user_id=${commentList.user_id}&reporter=${sessionScope.loginId}'">신고</button>
                </c:if>                    
                </td>
             </tr>
