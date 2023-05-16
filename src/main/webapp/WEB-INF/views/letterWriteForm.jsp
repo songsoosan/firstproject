@@ -4,10 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
-		<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 <style>
    #id{
       width: 69%;
@@ -17,41 +13,20 @@
       height:150px;
       resize:none;
    }
-   table,th,td{
-  	 border : 1px solid black;
-   	border-collapse : collapse;
-   	padding : 5px 10px;
+	table, th, td{
+		border : 1px solid black !important	;
+		border-collapse : collapse;
+		padding : 5px 10px;
 	}
-
-
-
-}
-table,th,td{
-	border : 1px solid black;
-	border-collapse : collapse;
-	padding : 5px 10px;
-
-}
-textarea{
-		width : 100%;
-		height:150px;
-		resize:none;
-	}
-#login{
-	margin-bottom:20px;
-}
 	div {
-	   margin:0 auto; 
+	   margin: 0 auto; 
 	   text-align:center;
 	}
-
 	table {
 		width: 60%;
-		border: 1px solid black;
-		margin: 0 auto;
+		margin: 15 auto;
 	}
 	th, td {
-		border: 1px solid black;
 		padding: 10px;
 	}
 	.ul {
@@ -60,115 +35,54 @@ textarea{
 		display:inline-block;
 		width: 100%;
 	}
-	.li {
-		float: left;
-		width: 16%;
+	.head{
+		margin-top: 10px;
+		margin-left: 10px;
 	}
-	.li > a {
-		text-decoration-line: none;
-		font-size: 25px;
+	#paging {
+    	text-align: center;
 	}
-	.menu{
-	margin-top: 30px;
-	border-bottom: 1px solid #ccc;
+	#ne {
+	   float: right;
+	   background-color:#0d6efd;
+	   border-color: white;
+	   color: white;
 	}
-	.divImages{
-	margin-top: 100px;
-	}
-	.img{
-		width: 20%;
-		height: 30%;
-		vertical-align: middle;
-		display:inline-block;
-	}
-	.logout-button {
- 		float: right;
-	}
-	
-<<<<<<< HEAD
-	
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 40969de6214ea27ed13f2b8c51d8281dceb9c137
-=======
-=======
-
->>>>>>> origin/master
->>>>>>> origin/master
-=======
->>>>>>> origin/master
 </style>
-
 </head>
 <body>
-	
-	<div>
-		<a href="main.go">
-			<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
-		</a>
-		<input type ="text" placeholder="검색"/>
-		<a href="profile.do">
-			<img src="resources/img/user.png" alt="유저" width="70px" height="70px"/>
-		</a> 
-		<a href="write.go">
-			<img src="resources/img/write.png" alt="글쓰기" width="70px" height="70px"/>
-		</a>
-		<a href="recieveletter.go">
-			<img src="resources/img/letter.png" alt="쪽지" width="70px" height="70px"/>
-		</a>
-	</div>
-	<c:if test="${sessionScope.loginId eq null}">
-		<button class="logout-button" onclick="location.href='/login.go'">로그인</button>	
-	</c:if>
-	<c:if test="${sessionScope.loginId ne null}">
-		<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
-	</c:if>	
-
-	<div class ="menu">
-		<ul class="ul">
-			<li class="li"><a href="recipe.go">레시피</a></li>
-			<li class="li"><a href="ranking.go">랭킹</a></li>
-			<li class="li"><a href="classes.go">클래스</a></li>
-			<li class="li"><a href="magazine.go">매거진</a></li>
-			<li class="li"><a href="board.go">게시판</a></li>
-			<li class="li"><a href="event.go">이벤트</a></li>
-		</ul>
-	</div>
-   <h3>쪽지 작성하기</h3>
-      
-         <table>
-            <tr>
-               <th>제목</th>
-               <td>
-                  <input type="text" id="subject"/>
-               </td>
-            </tr>
-            <tr>
-               <th>받는 사람</th>
-               <td><input type="text" id="receiver" value=""/>
-               <button id="toAdmin">관리자에게 보내기</button>
-               </td> 
-            </tr>
-            <tr>
-               <th>내용</th>
-               <td>
-                  <div class="form-floating">
-  					<textarea class="form-control" placeholder="Leave a comment here" id="content" style="height: 100px"></textarea>				 
+<%@ include file="./header.jsp" %>
+<h3 class="head">쪽지 작성하기</h3>
+	<table>
+		<tr>
+			<th>제목</th>
+			<td>
+				<input type="text" id="subject"/>
+			</td>
+		</tr>
+		<tr>
+			<th>받는 사람</th>
+			<td><input type="text" id="receiver" value=""/>
+				<button id="toAdmin">관리자에게 보내기</button>
+			</td> 
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td>
+				<div class="form-floating">
+					<textarea class="form-control" placeholder="Leave a comment here" id="content" style="height: 100px"></textarea>				 
 				</div>
-               </td>
-            </tr>
-            <tr>
-               <th colspan="2">
-               	<div class="col text-center">
-                  <button type="button" class="btn btn-success" onclick="letterSend()">확인</button>
-                  <button type="button" class="btn btn-success" onclick="location.href='recieveletter.go'">돌아가기</button>
-               </div>
-               </th>
-            </tr>
-         </table>
-      
+			</td>
+		</tr>
+		<tr>
+			<th colspan="2">
+				<div class="col text-center">
+					<button type="button" class="btn btn-success" onclick="letterSend()">확인</button>
+					<button type="button" class="btn btn-success" onclick="location.href='recieveletter.go'">돌아가기</button>
+				</div>
+			</th>
+		</tr>
+	</table>
 </body>
 <script>
 
