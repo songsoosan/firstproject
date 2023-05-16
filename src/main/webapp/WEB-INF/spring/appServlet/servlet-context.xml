@@ -49,11 +49,6 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-	
-
-<!-- 	<beans:bean id="uploadTempDir" class="org.springframework.core.io.FileSystemResource">
-	        <beans:constructor-arg value="c:/temp/"/>
-	</beans:bean> -->
 
 	
 	<!-- matbatis area -->

@@ -128,11 +128,11 @@ textarea{
 		<tr>
 			<td colspan="2">${user.introduction}</td>		
 		</tr>
-		<tr>
+		<%-- <tr>
 			<th colspan = "2">
 				<input type="button" value="돌아가기" onclick="location.href='classDetail.do?cl_id=${cl_id}'"/>
 			</th>
-		</tr>
+		</tr> --%>
 	</table>
 		
 

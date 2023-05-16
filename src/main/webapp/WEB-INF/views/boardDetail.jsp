@@ -83,7 +83,7 @@
                   <button type="button" class="editMode none btn btn-outline-danger" onclick="readMode(${status.index});">취소</button>
                </c:if>
                <c:if test="${commentList.user_id ne loginId}">
-                  <button type="button" class="btn btn-outline-danger"">신고</button>
+                  <button type="button" class="btn btn-outline-danger" onclick="location.href='./reportWrite.go'">신고</button>
                </c:if>                    
                </td>
             </tr>

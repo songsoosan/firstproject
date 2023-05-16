@@ -159,5 +159,10 @@ public class CheckListService {
 		int row = dao.surveyReset(user_id);
 		logger.info("재 설문조사를 위한 삭제 완료 여부 : "+row);
 	}
+
+	public void profilego(HashMap<String, String> params) {
+		int row = dao.profilego(params);
+		logger.info("프로필에 비건단계 업데이트 확인 : "+row);
+	}
 	
 }

@@ -16,8 +16,9 @@
 				<th>신고대상 아이디</th>
 				<th>작성자 아이디</th>
 				<th>신고 날짜</th>
+				<th>신고 사유</th>
 				<th>처리 상태</th>
-				<th>처리 날짜</th>
+				<th>처리 관리자</th>
 			</tr>
 		</thead>		
 		<tbody>
@@ -28,18 +29,19 @@
 			</c:if>
 			<c:forEach items="${reportList}" var="report">
 				<tr>
-					<td>${report.report_admin}<a href="class.detail.do?cl_id=${report.report_id}">${report.report_id}</a></td>
+					<td><a href="reportDetail.go?report_id=${report.report_id}">${report.report_id}</a></td> 
 					<td>${report.user_id}</td>
-					<td>${report.user_id2}</td>
-					<td>${report.report_date}</td>
-					<td>${report.report_result}</td>
-					<td>${report.result_date}</td>
+					<td>${report.reporter}</td>
+					<td>${report.date}</td>
+					<td>${report.reason}</td>
+					<td>${report.status}</td>
+					<td>${report.admin}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 </body>
 <script>
-
+	
 </script>
 </html>

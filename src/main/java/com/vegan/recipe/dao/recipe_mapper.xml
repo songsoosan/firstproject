@@ -6,17 +6,28 @@
 
 	<insert 
 		useGeneratedKeys="true"
-		keyColumn="idx"
-		keyProperty="idx"
+		keyColumn="rec_id"
+		keyProperty="rec_id"
 		id="write" parameterType="com.vegan.recipe.dto.RecipeDTO">
-		INSERT INTO recipe(user_id, step_id, rec_title, rec_video, rec_view, rec_creatdate, rec_modify, rec_del_chk, rec_blind_chk, cat_id)
-			VALUES(#{user_id}, #{step_id}, #{rec_title}, #{rec_video}, #{rec_view}, now(), #{rec_modify}, #{rec_del_chk}, #{rec_blind_chk}, #{cat_id})
+		INSERT INTO recipe(rec_title, rec_video, user_id, cat_id, step_id, rec_creatdate, rec_del_chk, rec_blind_chk)
+			VALUES(#{rec_title}, #{rec_video}, #{user_id}, #{cat_id}, #{step_id}, #{rec_creatdate},0,0)
 	</insert>
 	
-	<insert id="fileWrite">
-		INSERT INTO photo(cat_id, ori_photo_name, photo_name, identify_number)
-			VALUES(#{cat_id},#{ori_photo_name},#{photo_name}, #{idx})
+	<insert id="writeContent">
+		INSERT INTO recipe_content(rec_id, rec_content, rec_content_id)
+			VALUES(#{rec_id},#{rec_content},#{rec_content_id})
 	</insert>
+	
+		<insert id="writeFood">
+		INSERT INTO food(rec_id, food_name, food_quantity,food_id)
+			VALUES(#{rec_id},#{food_name},#{food_quantity},#{food_id})
+	</insert>
+
+	<insert id="fileWrite">
+		INSERT INTO photo(identify_number, photo_number, ori_photo_name, photo_name,cat_id)
+			VALUES(#{identify_number},#{photo_number},#{ori_photo_name}, #{photo_name},#{cat_id})
+	</insert>
+	
 </mapper>
 
                  

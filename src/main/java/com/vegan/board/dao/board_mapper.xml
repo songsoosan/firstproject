@@ -212,7 +212,7 @@
       INSERT INTO comment
          (user_id, cat_id, identify_number, comment_content) 
       VALUES
-         (#{user_id}, #{cat_id}, #{board_id}, #{comment_content})
+         (#{user_id}, 'free_c', #{board_id}, #{comment_content})
    </insert>
    
    <select id="freecommentList" resultType="com.vegan.board.dto.BoardDTO">
@@ -223,7 +223,7 @@
           , comment_content
           , comment_date
         FROM comment
-       WHERE cat_id = 'free' 
+       WHERE cat_id = 'free_c' 
          AND identify_number = #{board_id}
    </select>
    

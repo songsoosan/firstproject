@@ -50,7 +50,7 @@
       font-size: 20px;
    }
    .contentWrap > .contentBox {
-       border: 1px solid #49c5a2;
+      border: 1px solid #49c5a2;
       background: #fff;
       margin: 0 250px;
       padding: 10px 15px;
@@ -96,7 +96,7 @@
       <ul>
          <li><a href="recipe.go">레시피</a></li>
          <li><a href="ranking.go">랭킹</a></li>
-         <li><a href="class.go">클래스</a></li>
+         <li><a href="classList.go">클래스</a></li>
          <li><a href="magazine.go">매거진</a></li>
          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -108,7 +108,7 @@
             </ul>
          </li>
          <li><a href="event.go">이벤트</a></li>
-         <!-- <li><a href="admin.go">관리자(test)</a></li> -->
+          <li><a href="admin.go">관리자(test)</a></li> 
       </ul>
    </div>
 </body>
