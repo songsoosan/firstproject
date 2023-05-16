@@ -35,8 +35,19 @@ Logger logger = LoggerFactory.getLogger(getClass());
    
    
    @RequestMapping(value="/magazine")
-   public String main() {
-      return "magazineList";
+   public String main(Model model, HttpSession session) {
+	   String page = "magazineList";
+
+	   if(session.getAttribute("loginId") != null) {
+		   page = "magazineList";
+		   String loginId = String.valueOf(session.getAttribute("loginId"));
+		   int admin = (int)service.adminChk(loginId);
+		   logger.info("admin" + admin);
+		   if(admin == 1) {
+			   model.addAttribute("adminChk", admin);
+		   }
+	   }
+      return page;
    }
    
    @RequestMapping(value="/magazine.ajax", method = RequestMethod.POST)
@@ -48,93 +59,125 @@ Logger logger = LoggerFactory.getLogger(getClass());
    
    @RequestMapping(value="/magazineWrite.go")
    public String writeForm() {
-      logger.info("write page 이동");
-      return "magazineWriteForm";
+	   
+	   return "magazineWriteForm";
    }
    
    
-   @RequestMapping(value="/magazineWrite.do", method = RequestMethod.POST)
-   public String write(MultipartFile photo, MultipartFile[] uploadphoto, 
+   @RequestMapping(value="/magazinewrite.do", method = RequestMethod.POST)
+   public String write(HttpSession session ,MultipartFile photo, MultipartFile[] uploadphoto, 
          @RequestParam HashMap<String, String> params) {
-      logger.info("params : "+params);
-      return service.write(photo, params);
+		
+		//String loginId = String.valueOf(session.getAttribute("loginId"));
+		//logger.info("loginid : "+loginId);
+		 
+	   //params.put("user_id", loginId);
+       logger.info("params : "+params);
+       //logger.info("cat_id : "+ cat_id);
+       return service.magazinewrite(photo, params);
    }
    
    
     @RequestMapping(value="/magazineDetail.do", method = RequestMethod.GET)
-      public String detail(Model model, @RequestParam String board_id, HttpSession session) {
+      public String detail(Model model, HttpSession session, @RequestParam String board_id) {
+    	String page = "magazineDetail";
          logger.info("magazineDetail : "+board_id);
-         
-        
+      
          //String page = "redirect:/magazine.do";      
          MagazineDTO dto = service.detail(board_id,"detail");
-         
          model.addAttribute("dto", dto);
          
          ArrayList<MagazineDTO> magacommentlist = service.magacommentlist2(board_id);
-         
          model.addAttribute("magacommentlist", magacommentlist);
          
          logger.info("magacommentlist : "+magacommentlist);
          
          logger.info("comment list cnt : "+magacommentlist.size());
          
-         /* 
-         if(dto != null) {
-            page = "magazineDetail";
-            model.addAttribute("dto", dto);
+         // 디테일에 세션을 추가해야 관리자 로그인 아이디가 세션에 저장이 되서 로그인 했을경우 수정삭제 버튼 뜨고 관리자 아닐경우 안뜸
+         if(session.getAttribute("loginId") != null) {
+        	 page = "magazineDetail";
+        	 String loginId = String.valueOf(session.getAttribute("loginId"));
+        	 int admin = (int)service.adminChk(loginId);
+        	 logger.info("admin" + admin);
+        	 if(admin == 1) {
+        		 model.addAttribute("adminChk", admin);
+        	 }
          }
-         */            
-         return "magazineDetail";
+         
+         return page;
       }
 
    
    @RequestMapping(value="/commentWrite.do")
       public String commentdetail(
-            @RequestParam String board_id,@RequestParam String comment_content, HttpSession session) {
+    		  RedirectAttributes redirectAttributes, Model model, @RequestParam String board_id,@RequestParam String comment_content, HttpSession session) {
          logger.info("board_id param : "+ board_id);
          String page = "";
          String loginId = String.valueOf(session.getAttribute("loginId"));
-         //logger.info("content param : "+ comment_content);
+
+         
          int commwrite = service.commwrite(board_id, comment_content,loginId);
          if (commwrite == 1) {
-         page = "redirect:/magazineDetail.do?board_id="+board_id;
-         //session.setAttribute("commwrite", commwrite);
-      }
+        	 page = "redirect:/magazineDetail.do?board_id="+board_id;
+        	 //session.setAttribute("commwrite", commwrite);
+         }
          
-
+         	if(session.getAttribute("loginId") != null) {
+         	 page = "redirect:/magazineDetail.do?board_id="+board_id;
+         	 String loginId1 = String.valueOf(session.getAttribute("loginId"));
+         	 int admin = (int)service.adminChk(loginId1);
+         	 logger.info("admin" + admin);
+         	 if(admin == 1 || admin == 0) {
+         		 model.addAttribute("adminChk", admin);
+         	 }
+         	 
+         	}
+          
+         
          return page;
       }
       
    @RequestMapping(value="/commentupdate.go")
-   public String commupdateForm(Model model,@RequestParam String board_id, @RequestParam String comment_id , @RequestParam String comment_content, HttpSession session) {
+   public String commupdateForm(RedirectAttributes redirectAttributes,Model model,@RequestParam String board_id, @RequestParam String comment_id , @RequestParam String comment_content, HttpSession session) {
       logger.info("magazine comment UpdateForm Call");
-
+      
+      String page = "magazineCommupdateForm";    
       logger.info("board_id param : "+ board_id);
       logger.info("comment_id param : "+ comment_id);
       logger.info("comment_content param : "+ comment_content);
       
-      
       MagazineDTO dto = service.detail(board_id,"detail");  
-       model.addAttribute("dto", dto);
-      
+      model.addAttribute("dto", dto);
       
       ArrayList<MagazineDTO> magacommentlist2 = service.magacommentlist2(board_id);
       model.addAttribute("magacommentlist", magacommentlist2);
       
       MagazineDTO magacommentlist = service.magacommentlist(board_id, comment_id, comment_content);
       model.addAttribute("magacommentlist2",magacommentlist);
-         
       
-      return "magazineCommupdateForm";
+      
+      
+      if(session.getAttribute("loginId") != null) {
+     	 page = "magazineCommupdateForm";
+     	 String loginId = String.valueOf(session.getAttribute("loginId"));
+     	 int admin = (int)service.adminChk(loginId);
+     	 logger.info("admin" + admin);
+     	 if(admin == 1) {
+     		 model.addAttribute("adminChk", admin);
+     	 }
+      }
+
+      
+      return page;
    }
    
 
    
    @RequestMapping(value="/commentupdate.do")
-      public String commentupdate(RedirectAttributes redirectAttributes, HttpSession session, @RequestParam String board_id, @RequestParam String comment_id, @RequestParam String comment_content) {
-        String page = "";
-        String loginId = String.valueOf(session.getAttribute("loginId"));
+      public String commentupdate(HttpSession session, @RequestParam String board_id, @RequestParam String comment_id, @RequestParam String comment_content) {
+         String page = "";
+         String loginId = String.valueOf(session.getAttribute("loginId"));
                
          logger.info("comment Update Call");
          logger.info("comment_id Num :"+ comment_id);
@@ -144,7 +187,6 @@ Logger logger = LoggerFactory.getLogger(getClass());
          
          if (row != 1) {
             page = "redirect:/magazineDetail.do?board_id="+board_id;
-            redirectAttributes.addFlashAttribute("message", "작성자만 수정 가능합니다.");
          }else {
             page = "redirect:/magazineDetail.do?board_id="+board_id;
          }
@@ -161,31 +203,17 @@ Logger logger = LoggerFactory.getLogger(getClass());
 
       String page = "";
       String loginId = String.valueOf(session.getAttribute("loginId"));
-      service.commdelete(board_id,comment_id,loginId);
-      
-      page = "redirect:/magazineDetail.do?board_id="+board_id;
+      int raw = service.commdelete(board_id,comment_id,loginId);
+      logger.info("delete comm data : "+raw);
+      if (raw != 1) {
+    	  page = "redirect:/magazineDetail.do?board_id="+board_id;
+      }else {
+    	  page = "redirect:/magazineDetail.do?board_id="+board_id;
+      }
       return page;
    }
    
    
-   
-   /*
-   @RequestMapping(value="/commentupdate.do")
-   public String commupdateForm(@RequestParam String board_id,@RequestParam String comment_id,@RequestParam String comment_content, HttpSession session) {
-      logger.info("board_id param : "+ board_id);
-      
-      logger.info("comment_id param : "+ comment_id);
-      
-         String page = "";
-         String loginId = String.valueOf(session.getAttribute("loginId"));
-         //logger.info("content param : "+ comment_content);
-         int commupdate = service.commupdate(board_id, comment_id, comment_content,loginId);
-         if (commupdate == 1) {
-         page = "redirect:/magazineDetail.do?board_id="+board_id;
-       }
-      return page;
-   }
-   */
    
    @RequestMapping(value="/magazineDelete.do")
    public String delete(@RequestParam String board_id) {
@@ -204,6 +232,8 @@ Logger logger = LoggerFactory.getLogger(getClass());
       }            
       return page;
    }
+   
+   
    
    @RequestMapping(value="/magazineUpdate.do", method = RequestMethod.POST)
    public String update(MultipartFile photo, 
@@ -224,7 +254,6 @@ Logger logger = LoggerFactory.getLogger(getClass());
       return "magazineList";
    }
     */
-   
-   
+
    
 }

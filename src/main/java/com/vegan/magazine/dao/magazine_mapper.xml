@@ -11,37 +11,39 @@
       FROM board ORDER BY board_id DESC
       </select>
       -->
-    <select id="list" resultType="com.vegan.magazine.dto.MagazineDTO">
+
+	<select id="list" resultType="com.vegan.magazine.dto.MagazineDTO">
        SELECT 
          board_id, user_id, board_title, board_content, board_date, board_views, cat_id
       FROM board ORDER BY board_id DESC
       LIMIT #{param1} OFFSET #{param2}
     </select>
+
     
       <select id="magacommentlist" resultType="com.vegan.magazine.dto.MagazineDTO">
        SELECT 
          *
-      FROM comment WHERE identify_id = #{param1} AND cat_id = 'mc' ORDER BY identify_id DESC
+      FROM comment WHERE identify_number = #{param1} AND cat_id = 'mc' ORDER BY identify_number DESC
       </select>
    
     <select id="magacommentlist2" resultType="com.vegan.magazine.dto.MagazineDTO">
        SELECT 
          *
-      FROM comment WHERE identify_id = #{param1} AND comment_id = #{param2} AND cat_id = 'mc'
-       ORDER BY identify_id DESC
+      FROM comment WHERE identify_number = #{param1} AND comment_id = #{param2} AND cat_id = 'mc'
+       ORDER BY identify_number DESC
       </select>
     
    
    
     <insert 
       id="commwrite" parameterType="String">
-      INSERT INTO comment(identify_id, comment_content,user_id, cat_id)
+      INSERT INTO comment(identify_number, comment_content,user_id, cat_id)
          VALUES(#{param1},#{param2},#{param3},'mc')
       </insert>
       
 
    <delete id="commdelete">
-   DELETE FROM comment WHERE identify_id = #{param1}  
+   DELETE FROM comment WHERE identify_number = #{param1}  
       AND comment_id = #{param2} AND user_id = #{param3}
    </delete>
    
@@ -71,18 +73,20 @@
    
    <insert 
       useGeneratedKeys="true"
-      keyColumn="idx"
+      keyColumn="board_id"
       keyProperty="board_id"
-      id="write" parameterType="com.vegan.magazine.dto.MagazineDTO">
+      id="magazinewrite" parameterType="com.vegan.magazine.dto.MagazineDTO">
       INSERT INTO board(board_title, user_id, board_content, cat_id)
-         VALUES(#{board_title},#{user_id},#{board_content},#{cat_id})
+         VALUES(#{board_title}, #{user_id}, #{board_content}, #{cat_id})
    </insert>
+   
    
    <insert id="fileWrite">
       INSERT INTO photo(cat_id ,ori_photo_name, photo_name, identify_number)
          VALUES(#{cat_id},#{ori_photo_name},#{photo_name}, #{board_id})
    </insert>
    
+
    <update id="up_views">
       UPDATE board SET board_views = board_views+1   
          WHERE board_id = #{board_id}
@@ -105,6 +109,16 @@
       SELECT photo_name FROM photo 
          WHERE identify_number = #{board_id}
    </select>
+   
+   <select id="adminChk"  resultType="java.lang.Byte">
+		SELECT 
+			user_admin_chk
+		FROM user Where user_id = #{param1}
+	</select>
+   
+   <delete id="photoDelete">
+      DELETE FROM photo WHERE photo_name = #{param1}
+   </delete>
    
 
 </mapper>

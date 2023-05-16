@@ -92,6 +92,7 @@
             </tr>
       </c:forEach>
       </table>
+      
       <form action="freecommentWrite.do" method="post">
          <input type="hidden" name = "board_id" value="${dto.board_id}">
          <table class="table">

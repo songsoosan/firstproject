@@ -14,6 +14,22 @@ public class ReportDTO {
 	private String content;
 	private String user_id;
 	private String subject;
+	private String status;
+	private String admin;
+	
+	
+	public String getAdmin() {
+		return admin;
+	}
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getSubject() {
 		return subject;
 	}

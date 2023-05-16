@@ -13,20 +13,31 @@ input[type="text"] {
 	width: 100%;
 }
 
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-bottom: 20px;
-}
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-bottom: 20px;
+		table-layout: fixed;
+	}
 
-th, td {
-	border: 1px solid black;
-	padding: 5px 10px;
-}
+    td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+	th, td {
+		border: 1px solid black;
+		padding: 5px 10px;
+	}
 
-button {
-	margin-top: 10px;
-}
+    .button-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .button-container button {
+        margin-left: 10px;
+    }
 
 body {
 	display: flex;
@@ -50,8 +61,13 @@ body {
 				<td id="subject"></td>
 			</tr>
 			<tr>
-				<th>글작성자</th>
-				<td id="user_id"></td>
+			    <th>글작성자</th>
+			    <td>
+			        <div class="button-container">
+			            <span id="user_id"></span>
+			            <button type="button" id="userActive" class="btn btn-primary">상태 변경</button>
+			        </div>
+			    </td>
 			</tr>
 			<tr>
 				<th>신고자</th>
@@ -74,11 +90,11 @@ body {
 				<td id="admin">${sessionScope.loginId}</td>
 			</tr>
 			<tr>
-				<th				>처리상태</th>
+				<th>처리상태</th>
 				<td>
-					<input type="radio" name="status" id="status-completed" value="completed">완료
-					<input type="radio" name="status" id="status-pending" value="pending">대기
-					<input type="radio" name="status" id="status-incomplete" value="incomplete">미완료
+					<input type="radio" name="status" id="완료" value="completed">완료
+					<input type="radio" name="status" id="대기" value="pending">대기
+					<input type="radio" name="status" id="미완료" value="incomplete">미완료
 				</td>
 			</tr>
 
@@ -93,6 +109,11 @@ body {
 	</div>
 </body>
 <script>
+	var $status = '${status}'; // 서버에서 상태 값을 가져와서 저장하도록 변경해야 합니다.
+	if ($status) {
+	  $('input[name="status"][value="' + $status + '"]').prop('checked', true);
+	}
+
 	var $report_id = $('#report_id').val();
 	$.ajax({
 		type: 'get',
@@ -109,8 +130,13 @@ body {
 			$('#reporter').html(data.reporter);
 			$('#date').html(data.date);
 			$('#reason').html(data.reason);
-			$('#content').html(data.content);
+			$('#content').html(data.content);	
 
+			var $status = data.status; // 서버에서 가져온 신고 상태 값을 저장합니다.
+		      if ($status) {
+		        $('input[name="status"][value="' + $status + '"]').prop('checked', true);
+		      }
+			
 		},
 		error: function (e) {
 			console.log(e);
@@ -143,6 +169,32 @@ body {
 			}
 		});
 	});
+	
+
+	var userActiveButton = document.getElementById("userActive");
+	var userIdData = document.getElementById("user_id");
+
+	var buttonContainer = document.createElement("div");
+	buttonContainer.classList.add("button-container");
+
+	// userIdData 노드를 buttonContainer 안으로 이동
+	buttonContainer.appendChild(userIdData.cloneNode(true));
+
+	// userIdData 노드를 대체하기 위해 buttonContainer를 userIdData의 부모 노드에 삽입
+	userIdData.parentNode.replaceChild(buttonContainer, userIdData);
+
+	// 버튼을 buttonContainer의 자식 요소로 추가
+	buttonContainer.appendChild(userActiveButton);
+
+	// userActive 버튼 클릭 이벤트 처리
+		$('#userActive').on('click', function() {
+		  var userId = $('#user_id').text();
+		
+		  // userActive.go로 페이지를 변경
+		  window.location.href = 'userActive.go?user_id=' + userId;
+		});
+
+
 </script>
 </html>
 				

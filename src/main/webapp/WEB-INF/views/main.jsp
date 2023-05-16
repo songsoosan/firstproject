@@ -19,6 +19,7 @@
 </style>
 </head>
 <body>
+
 <%@ include file="./header.jsp" %>
 <a href="survey.do">설문조사</a>
 <!-- <div class ="divImages">

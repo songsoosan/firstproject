@@ -30,8 +30,19 @@ Logger logger = LoggerFactory.getLogger(getClass());
 	
 	
 	@RequestMapping(value="/event")
-	public String main() {
-		return "eventList";
+	public String main(Model model, HttpSession session) {
+		String page = "eventList";
+		
+		if(session.getAttribute("loginId") != null) {
+			   page = "eventList";
+			   String loginId = String.valueOf(session.getAttribute("loginId"));
+			   int admin = (int)service.adminChk(loginId);
+			   logger.info("admin" + admin);
+			   if(admin == 1) {
+				   model.addAttribute("adminChk", admin);
+			   }
+		   }
+		return page;
 	}
 	
 	@RequestMapping(value="/event.ajax", method = RequestMethod.POST)
@@ -54,7 +65,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
 	public String write(MultipartFile photo,HttpSession session, 
 			@RequestParam HashMap<String, String> params) {
 		logger.info("params : "+params);
-		return service.write(photo, params);
+		return service.eventwrite(photo, params);
 	}
 	
 	
@@ -63,15 +74,28 @@ Logger logger = LoggerFactory.getLogger(getClass());
 	      logger.info("eventDetail : "+event_id);
 	      
 	     
-	      String page = "redirect:/event.do";      
+	      //String page = "redirect:/event.do"; 
+	      String page = "eventDetail";
 	      EventDTO dto = service.detail(event_id);
 	      
 	      model.addAttribute("dto", dto);
+	      
+	      if(session.getAttribute("loginId") != null) {
+	        	 page = "eventDetail";
+	        	 String loginId = String.valueOf(session.getAttribute("loginId"));
+	        	 int admin = (int)service.adminChk(loginId);
+	        	 logger.info("admin" + admin);
+	        	 if(admin == 1) {
+	        		 model.addAttribute("adminChk", admin);
+	        	 }
+	         }
  
 	      if(dto != null) {
 	         page = "eventDetail";
 	         model.addAttribute("dto", dto);
 	      }
+	      
+	      
 	                
 	      return page;
 	   }

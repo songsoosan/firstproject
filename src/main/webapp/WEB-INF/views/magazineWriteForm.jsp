@@ -4,94 +4,70 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<link rel="stylesheet" href="resources/css/commons.css" type="text/css">
 <style>
-table{
-	width: 100%;
-}
 
-table, th, td{
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding : 5px 10px;	
-}
-
-button{
-	margin: 5px;
-}
-
-input[type="text"]{
-	width: 100%;
-}
-
-textarea{
-	width: 100%;
-	height: 150px;
-	resize: none;
-}
 </style>
 </head>
 <body>
-	<form action="magazineWrite.do" method="post" enctype="multipart/form-data">
-<style>
-	table{
-		width: 100%
-	}
-	table, th, td{
-		border: 2px solid green;
-		border-collapse: collapse;
-		padding: 5px 10pxl
-	}
-	button{
-		margin: 5px;
-	}
-	input[type="text"]{
-		width: 100%
-	}
-	textarea{
-		heigt: 50%;
-		resize: none;
-		width: 100%
+<%@ include file="./header.jsp" %>
+<div class="contentWrap mt-5">
+   <div class="contentBox">
+      <div class="text-center">
+	<hr/>
+	<form action="magazinewrite.do" method="post" enctype="multipart/form-data">
+	<input type="hidden" name = "cat_id" value = "m"/> 
+		<div class="input-group mb-3 mt-3">
+            <label class="col-sm-2 offset-sm-1 col-form-label">제목</label>
+            <div class="col-sm-9">
+               <input type="text" class="form-control" name="board_title"/>
+            </div>
+        </div>
+        <div class="input-group mb-3 mt-3">
+            <label class="col-sm-2 offset-sm-1 col-form-label">작성자</label>
+            <div class="col-sm-9">
+               <input type="text" class="form-control" name="user_id" value="user_id" readonly>
+            </div>
+         </div>
+		<div class="input-group mb-3 mt-3">
+            <label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
+            <div class="col-sm-9">
+               <textarea class="form-control" name="board_content"></textarea>
+            </div>
+         </div>
+           <div class="row">
+            <div class="input-group">
+               <label for= magazine_photo class="col-sm-2 offset-sm-1 col-form-label">사진</label>
+               <input type="file" class="form-control w-auto" name="photo">
+            </div>
+         </div> 
+		<div class="text-center mt-3">
+            <button type="button" class="btn btn-outline-secondary" onclick="location.href='./magazine.do'">리스트</button>
+            <button class="btn btn-outline-primary">저장</button>
+         </div>
+      </form>
+   </div>
+   </div>
+</div>
 		
-	}
-</style>
-</head>
-<body>
-	<form action="wirte.do" method="post" enctype="multipart/form-data">
-		<table>
-			<tr>
-				<th>제목</th>
-				<td><input type="text" name="board_title"/></td>
-			</tr>
-			<tr>
-				<th>작성자</th>
-				<td><input type="text" name="user_id"/></td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td><textarea name="board_content"></textarea></td>
-			</tr>
-			<tr>
-				<th>대표사진</th>
-				<td>
-					<input type="file" name="photo"/>
-				</td>
-			</tr>
-			<tr>
-				<th>링크</th>
-				<td><a href="https://www.naver.com" target="_blank">링크 3</a></td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<input type="button" onclick="location.href='./magazine.do'" value="리스트"/>
-					<button>저장</button>
-				</th>
-			</tr>
-		</table>	
-	</form>
+
 </body>
-<script></script>
+<script>
+var loginId = '<%=(String)session.getAttribute("loginId")%>';
+$("input[name=user_id]").val(loginId);
+
+var linkInput = document.getElementById("linkInput");
+var linkAnchor = document.getElementById("linkAnchor");
+
+linkInput.addEventListener('input', function() {
+    var link = linkInput.value.trim();
+    if (link !== "") {
+        linkAnchor.href = link;
+        linkAnchor.innerText = link;
+    } else {
+        linkAnchor.href = "";
+        linkAnchor.innerText = "";
+    }
+});
+
+</script>
 </html>

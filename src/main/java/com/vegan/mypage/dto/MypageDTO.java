@@ -10,7 +10,14 @@ public class MypageDTO {
 	private String user_email;
 	private String introduction;
 	private String photo_name;
+	private String vegan_step;
 	
+	public String getVegan_step() {
+		return vegan_step;
+	}
+	public void setVegan_step(String vegan_step) {
+		this.vegan_step = vegan_step;
+	}
 	public String getPhoto_name() {
 		return photo_name;
 	}
