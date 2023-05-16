@@ -78,9 +78,9 @@
    </select>
    
    <update id="update" parameterType="hashmap">
-      UPDATE board SET board_title = #{subject}
-      ,user_id = #{user_name}
-      ,board_content = #{content}
+      UPDATE board SET board_title = #{board_title}
+      ,user_id = #{user_id}
+      ,board_content = #{board_content}
       ,cat_id = #{cat_id}
       WHERE board_id = #{board_id}
    </update>
@@ -121,7 +121,7 @@
    </select>
    
    <delete id="noticecommentDelete">
-      DELETE FROM comment WHERE comment_id = #{comment_id}
+      DELETE FROM comment WHERE comment_id = #{comment_id} and cat_id = 'not'
    </delete>
    
    <update id="noticecommentUpdate">
@@ -183,9 +183,9 @@
    </update>
    
    <update id="freeupdate" parameterType="hashmap">
-      UPDATE board SET board_title = #{subject}
-      ,user_id = #{user_name}
-      ,board_content = #{content}
+      UPDATE board SET board_title = #{board_title}
+      ,user_id = #{user_id}
+      ,board_content = #{board_content}
       ,cat_id = #{cat_id}
       WHERE board_id = #{board_id}
    </update>
@@ -227,5 +227,8 @@
          AND identify_number = #{board_id}
    </select>
    
+   <delete id="freeCommentDelete">
+      DELETE FROM comment WHERE comment_id = #{comment_id} and cat_id = 'free'
+   </delete>
    
 </mapper>

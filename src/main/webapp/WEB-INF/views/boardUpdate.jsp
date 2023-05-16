@@ -1,70 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script src = "https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<link rel="stylesheet" href="resources/css/commons.css" />
-<style>
-   table{
-      width: 100%
-   }
-   table, th, td{
-      border: 2px solid green;
-      border-collapse: collapse;
-      padding: 5px 10pxl
-   }
-   button{
-      margin: 5px;
-   }
-   input[type="text"]{
-      width: 100%
-   }
-   textarea{
-      heigt: 50%;
-      resize: none;
-      width: 100%
-      
-   }
-</style>
+<title>공지사항 수정</title>
+<style></style>
 </head>
 <body>
-	<form action="boardUpdate.do"method="post" enctype="multipart/form-data">
-	<input type="hidden" name="board_id" value="${dto.board_id}"/>
-	<input type="hidden" name="cat_id" value="${dto.cat_id}"/>
-		<table>
-			<tr>
-				<th>제목</th>
-				<td><input type="text" name="subject" value="${dto.board_title}"/></td>
-			</tr>
-			<tr>
-				<th>작성자</th>
-				<td><input type="text" name="user_name" value="${dto.user_id}" readonly/></td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td><textarea name="content">${dto.board_content}</textarea></td>
-			</tr>
-			<tr>
-				<th>사진</th>
-				<td>
-					<c:if test="${dto.photo_name ne null}">
-						<input type="file" name="photo"/>
-					</c:if>
+<%@ include file="./header.jsp" %>
+<div class="contentWrap mt-5">
+	<div class="contentBox">
+		<div class="text-center">
+			<h2>공지사항 수정</h2>
+		</div>
+		<hr/>
+		<form action="boardUpdate.do" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="board_id" value="${dto.board_id}"/>
+			<input type="hidden" name="cat_id" value="${dto.cat_id}"/>
+			<input type="hidden" name="photo_id" value="${dto.photo_id}"/>
+			<div class="input-group mb-3 mt-3">
+				<label class="col-sm-2 offset-sm-1 col-form-label">제목</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" name="board_title" value="${dto.board_title}"/>
+				</div>
+			</div>
+			<div class="input-group mb-3 mt-3">
+				<label class="col-sm-2 offset-sm-1 col-form-label">작성자</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" name="user_id" value="${dto.user_id}" readonly>
+				</div>
+			</div>
+			<div class="input-group mb-3 mt-3">
+				<label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
+				<div class="col-sm-9">
+					<textarea class="form-control" name="board_content">${dto.board_content}</textarea>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-group">
+					<label for="board_photo" class="col-sm-2 offset-sm-1 col-form-label">사진</label>
+					<input type="file" class="form-control w-auto" id="board_photo" name="board_photo">
+				</div>
+			</div>
+			<div class="offset-sm-3">
 				<c:if test="${dto.photo_name ne null}">
-						<img width="500" src="/photo/${dto.photo_name}"/>	
+					<img max-width="300" max-height="300" src="/photo/${dto.photo_name}"/>
 				</c:if>
-				</td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<input type="button" onclick="location.href='./boardList.do'" value="리스트"/>
-					<button>저장</button>
-				</th>
-			</tr>
-		</table>
-	</form>
+			</div>
+			<div class="text-center mt-3">
+				<button type="button" class="btn btn-outline-secondary" onclick="location.href='./boardList.do'">리스트</button>
+				<button class="btn btn-outline-primary">저장</button>
+			</div>
+		</form>
+	</div>
+</div>
 </body>
 <script></script>
 </html>

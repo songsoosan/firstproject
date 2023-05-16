@@ -64,11 +64,6 @@ html, body {
 	list-style: none;
 }
 
-.nav-item>ul>li>a {
-	text-decoration-line: none;
-	font-size: 20px;
-}
-
 .contentWrap>.contentBox {
 	border: 1px solid #49c5a2;
 	background: #fff;
@@ -149,5 +144,6 @@ html, body {
 			<li><a href="event.go">이벤트</a></li>
 		</ul>
 	</div>
+
 </body>
 </html>
