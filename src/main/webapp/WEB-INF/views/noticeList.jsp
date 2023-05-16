@@ -33,8 +33,8 @@
          <h2>공지사항</h2>
       </div>
       <hr/>
-      <div>
-         <div class="d-flex" style="float: left;">
+      <div class="row mb-3">
+         <div class="col-sm-6 d-flex">
             <span class="mt-1">게시물 갯수&nbsp;:&nbsp;</span>
             <select id="pagePerNum" class="form-select w-auto">
                <option value="5">5</option>
@@ -43,12 +43,11 @@
                <option value="20">20</option>
             </select>
          </div>
-         <div style="float: right;" class="d-flex">
-            <button class="none adminArea btn btn-outline-primary float-right" onclick="location.href='write.go'">글쓰기</button>
-            <button class="none adminArea btn btn-outline-danger float-right mx-1" onclick="hide()">숨기기</button>
-         </div>         
+         <div class="col-sm-6">
+            <button class="none adminArea btn btn-outline-danger float-end" onclick="hide()">숨기기</button>
+            <button class="none adminArea btn btn-outline-primary float-end mx-1" onclick="location.href='write.go'">글쓰기</button>
+         </div>
       </div>
-      <div style="margin-top: 70px;">
       <table class="table table-striped table-bordered">
          <thead>
             <tr>
@@ -63,9 +62,8 @@
          <tbody id="list">
          </tbody>
       </table>
-      </div>
       <div id="paging">
-         <nav aria-label = "Page navigation">
+         <nav aria-label="Page navigation">
             <ul class="pagination" id="pagination"></ul>
          </nav>
       </div>

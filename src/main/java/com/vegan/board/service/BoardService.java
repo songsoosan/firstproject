@@ -281,8 +281,9 @@ public class BoardService {
 	      
 	      // 2. photo 에 파일명이 존재 한다면?
 	      
-	      if(photo != null && !photo.getOriginalFilename().equals("")  ) {
-	         fileSave(cat_id, board_id, photo, photo_id);         
+	      if(!photo.getOriginalFilename().equals("")  ) {
+	    	  
+	         fileSave(cat_id, board_id, photo, photo_id.equals("0") ? "" : photo_id);         
 	      }
 	      
 	      String page= row >0 ? "redirect:/freeDetail.do?board_id="+board_id : "redirect:/freeList";
@@ -322,4 +323,9 @@ public class BoardService {
    public ArrayList<BoardDTO>freecommentList(String board_id){
 	      return dao.freecommentList(board_id);
 	   }
+   
+   public void freeCommentDelete(int comment_id) {
+      dao.freeCommentDelete(comment_id);
+   }
+   
 }

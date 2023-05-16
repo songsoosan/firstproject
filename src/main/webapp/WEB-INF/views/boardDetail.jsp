@@ -27,7 +27,7 @@
       <div class="fr" style="display:inline-flex;">
          <button type="button" class="btn btn-outline-secondary" onclick="location.href='./boardList.do'">리스트</button>
            <button type="button" class="mx-1 none adminArea btn btn-outline-primary" onclick="location.href='./boardUpdate.go?board_id=${dto.board_id}'" >수정</button>
-           <button type="button" class="none adminArea btn btn-outline-danger" onclick="location.href='./boardDelete.go?board_id=${dto.board_id}'" >삭제</button>
+           <button type="button" class="btnCtrl guest btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#boarddelete">삭제</button>
       </div>
       <input type="hidden" name = "board_id" value="${dto.board_id}">
       <div class="input-group borderBottom mb-3 mt-3">
@@ -107,6 +107,25 @@
          </table>
       </form>
    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="boarddelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">삭제</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	공지사항 삭제 하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='./boardDelete.go?board_id=${dto.board_id}'">삭제</button>
+      </div>
+    </div>
+  </div>
 </div>
 </body>
 <script>

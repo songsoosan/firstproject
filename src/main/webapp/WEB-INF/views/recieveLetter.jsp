@@ -47,7 +47,6 @@
 	   border-color: white;
 	   color: white;
 	}
-	
 </style>
 </head>
 <body>
@@ -70,10 +69,10 @@
 					<option value="20">20</option>
 				</select>
 			</div>
-		<div class="col-sm-6">
-			<button class="none adminArea btn btn-outline-primary float-end mx-1" onclick="location.href='letterWrite.go'">글쓰기</button>
+			<div class="col-sm-6">
+				<button class="none adminArea btn btn-outline-primary float-end mx-1" onclick="location.href='letterWrite.go'">글쓰기</button>
+			</div>
 		</div>
-	</div>
 	<table class="table table-striped table-bordered">
 		<thead>
 			<tr>
@@ -87,11 +86,11 @@
 		<tbody id="list">
 		</tbody>
 	</table>
-	<div id="paging">
-         <nav aria-label="Page navigation">
-            <ul class="pagination" id="pagination"></ul>
-         </nav>
-	</div>
+		<div id="paging">
+         	<nav aria-label="Page navigation">
+            	<ul class="pagination" id="pagination"></ul>
+         	</nav>
+		</div>
 	</div>
 </div>
 	<!-- <button type="button" class="btn btn-primary" onclick = "location.href='recieveletter.go'">받은 쪽지함</button>
