@@ -63,7 +63,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
 	}
 	
 	
-	public String write(MultipartFile photo, HashMap<String, String> params) {
+	public String eventwrite(MultipartFile photo, HashMap<String, String> params) {
 		
 		String page = "redirect:/event";
 		
@@ -72,7 +72,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		// 조건 1. 파라메터를 dto 로 보내야 한다.
 		EventDTO dto = new EventDTO();
 		//receipeDTO.setCat_id("recipe");
-		dto.setCat_id("e");
+		dto.setCat_id(params.get("cat_id"));
 		dto.setEvent_title(params.get("event_title"));
 		dto.setEvent_content(params.get("event_content"));
 		dto.setUser_id(params.get("user_id"));
@@ -92,27 +92,26 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		    dto.setEvent_start_date(eventStartDate);
 		    dto.setEvent_end_date(eventEndDate);
 		} catch (ParseException e) {
-		    // 예외 처리
 		    e.printStackTrace();
 		}
 		
 		
-		int row = dao.write(dto);
+		int row = dao.eventwrite(dto);
 		logger.info("update row : "+row);
 		
 
 		// 조건 3. 받아온 키는 파라메터 dto 에서 뺀다.
-		int idx = dto.getEvent_id();
+		int event_id = dto.getEvent_id();
 		String cat_id = dto.getCat_id();
-		logger.info("방금 insert 한 event_id : "+idx);
+		logger.info("방금 insert 한 event_id : "+event_id);
 		
-		page = "redirect:/eventDetail.do?event_id="+idx;
+		page = "redirect:/eventDetail.do?event_id="+event_id;
 		
 		// 2. 파일도 업로드 한 경우
 		if(!photo.getOriginalFilename().equals("")) {
 			logger.info("파일 업로드 작업");
 			
-			fileSave(cat_id,idx,photo);
+			fileSave(cat_id,event_id,photo);
 		}
 		return page;
 	}
@@ -174,17 +173,42 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		logger.info("idx : " + params.get("event_id"));
 		int idx = Integer.parseInt(params.get("event_id"));
 		int row = dao.update(params);
-		logger.info("row:"+row);
+		boolean deletePhoto = "true".equals(params.get("deletePhoto"));
+		String page = "redirect:/eventDetail.do?event_id="+idx;
+		logger.info("event update row:"+row);
+		
+		
+		if (deletePhoto) {
+	          String photo_name = params.get("photo_name");
+	          logger.info("event 사진 삭제");
+	          logger.info("del serPhotoname: " +photo_name);
+	          int rowphoto = dao.photoDelete(photo_name);
+	          if(rowphoto == 1) {
+	             logger.info("사진 삭제 처리 완료");
+	             page = row>0 ? "redirect:/eventDetail.do?event_id="+idx : "redirect:/event";
+	             logger.info("update => "+page);
+	          }
+		}
+	       if(row == 1) {
+	    	   logger.info("사진 삭제 완료");
+	       
+	      
+	      
 		
 		// 2. photo 에 파일명이 존재 한다면?
 		if(photo != null && !photo.getOriginalFilename().equals("")) {
-			fileSave(null, idx, photo);
+			String cat_id = params.get("cat_id");
+			fileSave(cat_id, idx, photo);
 		}
-		
-		String page = row>0 ? "redirect:/eventDetail.do?event_id="+idx : "redirect:/event";
-		logger.info("update => "+page);
+	   }
 		
 		return page;
+	}
+
+
+	public byte adminChk(String loginId) {
+		
+		return dao.adminChk(loginId);
 	}
 
 	

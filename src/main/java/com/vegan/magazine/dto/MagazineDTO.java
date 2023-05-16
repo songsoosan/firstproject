@@ -14,7 +14,10 @@ public class MagazineDTO {
    private int board_views;
    private int photo_id;
    private String photo_name;
+   private String ori_photo_name;
+   private String identify_number;
    private String cat_id;
+   
    
    // comment dto
    private int comment_id;
@@ -24,82 +27,99 @@ public class MagazineDTO {
    
    
    
-   public String getComment_content() {
-      return comment_content;
-   }
-   public void setComment_content(String comment_content) {
-      this.comment_content = comment_content;
-   }
-   public int getComment_id() {
-      return comment_id;
-   }
-   public void setComment_id(int comment_id) {
-      this.comment_id = comment_id;
-   }
-   public Date getComment_date() {
-      return comment_date;
-   }
-   public void setComment_date(Date comment_date) {
-      this.comment_date = comment_date;
-   }
-
-   public String getUser_id() {
-      return user_id;
-   }
-   public void setUser_id(String user_id) {
-      this.user_id = user_id;
-   }
-   public String getCat_id() {
-      return cat_id;
-   }
-   public void setCat_id(String cat_id) {
-      this.cat_id = cat_id;
-   }
-   public int getPhoto_id() {
-      return photo_id;
-   }
-   public void setPhoto_id(int photo_id) {
-      this.photo_id = photo_id;
-   }
-   public String getPhoto_name() {
-      return photo_name;
-   }
-   public void setPhoto_name(String photo_name) {
-      this.photo_name = photo_name;
-   }
-   public int getBoard_id() {
-      return board_id;
-   }
-   public void setBoard_id(int board_id) {
-      this.board_id = board_id;
-   }
-   
-   public String getBoard_title() {
-      return board_title;
-   }
-   public void setBoard_title(String board_title) {
-      this.board_title = board_title;
-   }
-   public String getBoard_content() {
-      return board_content;
-   }
-   public void setBoard_content(String board_content) {
-      this.board_content = board_content;
-   }
-   public Date getBoard_date() {
-      return board_date;
-   }
-   public void setBoard_date(Date board_date) {
-      this.board_date = board_date;
-   }
-   public int getBoard_views() {
-      return board_views;
-   }
-   public void setBoard_views(int board_views) {
-      this.board_views = board_views;
-   }
-
+public String getOri_photo_name() {
+	return ori_photo_name;
 }
+public void setOri_photo_name(String ori_photo_name) {
+	this.ori_photo_name = ori_photo_name;
+}
+public String getIdentify_number() {
+	return identify_number;
+}
+public void setIdentify_number(String identify_number) {
+	this.identify_number = identify_number;
+}
+public int getBoard_id() {
+	return board_id;
+}
+public void setBoard_id(int board_id) {
+	this.board_id = board_id;
+}
+public String getUser_id() {
+	return user_id;
+}
+public void setUser_id(String user_id) {
+	this.user_id = user_id;
+}
+public String getBoard_title() {
+	return board_title;
+}
+public void setBoard_title(String board_title) {
+	this.board_title = board_title;
+}
+public String getBoard_content() {
+	return board_content;
+}
+public void setBoard_content(String board_content) {
+	this.board_content = board_content;
+}
+public Date getBoard_date() {
+	return board_date;
+}
+public void setBoard_date(Date board_date) {
+	this.board_date = board_date;
+}
+public int getBoard_views() {
+	return board_views;
+}
+public void setBoard_views(int board_views) {
+	this.board_views = board_views;
+}
+public int getPhoto_id() {
+	return photo_id;
+}
+public void setPhoto_id(int photo_id) {
+	this.photo_id = photo_id;
+}
+public String getPhoto_name() {
+	return photo_name;
+}
+public void setPhoto_name(String photo_name) {
+	this.photo_name = photo_name;
+}
+public String getCat_id() {
+	return cat_id;
+}
+public void setCat_id(String cat_id) {
+	this.cat_id = cat_id;
+}
+public int getComment_id() {
+	return comment_id;
+}
+public void setComment_id(int comment_id) {
+	this.comment_id = comment_id;
+}
+public Date getComment_date() {
+	return comment_date;
+}
+public void setComment_date(Date comment_date) {
+	this.comment_date = comment_date;
+}
+public String getComment_content() {
+	return comment_content;
+}
+public void setComment_content(String comment_content) {
+	this.comment_content = comment_content;
+}
+   
+   
+   
+   
+}
+
+   
+   
+
 
    
    

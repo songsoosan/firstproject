@@ -12,13 +12,17 @@
 	   </select>
 	   -->
 	   
-	 <select id="list" resultType="com.vegan.event.dto.EventDTO">
-    SELECT 
-        event_id, user_id, event_title, event_content, event_start_date, event_end_date, cat_id, event_status
-    FROM event
-    ORDER BY event_id DESC
-    LIMIT #{param1} OFFSET #{param2}
-</select>
+	<select id="list" resultType="com.vegan.event.dto.EventDTO">
+	     SELECT 
+	    event_id, user_id, event_title, event_content, event_start_date, event_end_date, cat_id,
+	    CASE
+	    	WHEN event_end_date &lt; CURDATE() OR event_start_date &gt; CURDATE() THEN 0
+        ELSE 1
+	    END AS event_status
+	FROM event
+	ORDER BY event_id DESC
+	LIMIT #{param1} OFFSET #{param2}
+	</select>
 
 	
 	
@@ -28,9 +32,9 @@
 			,user_id = #{user_id}
 			,event_content = #{event_content}
 			,event_start_date = #{event_start_date}
-			,event_end_date = #{evemt_end_date}
+			,event_end_date = #{event_end_date}
+			WHERE event_id = #{event_id}
 			
-		WHERE event_id = #{event_id} and cat_id = 'e'
 	</update>
 	   
 	 <select id="totalCount" resultType="int">
@@ -47,9 +51,9 @@
 	
 	<insert 
 		useGeneratedKeys="true"
-		keyColumn="idx"
+		keyColumn="event_id"
 		keyProperty="event_id"
-		id="write" parameterType="com.vegan.event.dto.EventDTO">
+		id="eventwrite" parameterType="com.vegan.event.dto.EventDTO">
 		INSERT INTO event(event_title, user_id, event_content, cat_id, event_start_date, event_end_date, event_status)
 			VALUES(#{event_title},#{user_id},#{event_content},#{cat_id},#{event_start_date},#{event_end_date}, #{event_status})
 	</insert>
@@ -77,4 +81,15 @@
 		SELECT photo_name FROM photo 
 			WHERE identify_number = #{event_id}
 	</select>
+	
+	<select id="adminChk"  resultType="java.lang.Byte">
+		SELECT 
+			user_admin_chk
+		FROM user Where user_id = #{param1}
+	</select>
+	
+	
+	<delete id="photoDelete">
+      DELETE FROM photo WHERE photo_name = #{param1}
+   </delete>
 </mapper>

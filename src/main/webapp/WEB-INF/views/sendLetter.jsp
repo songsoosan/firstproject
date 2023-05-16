@@ -84,9 +84,9 @@
 		</table>
 		<div id="paging">
 			<nav aria-label="Page navigation">
-            <ul class="pagination" id="pagination"></ul>
-         </nav>
-	</div>
+            	<ul class="pagination" id="pagination"></ul>
+        	</nav>
+		</div>
 	</div>
 </div>
 <!-- <h3 class="head">보낸 쪽지</h3>
