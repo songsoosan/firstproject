@@ -42,11 +42,17 @@
 		#{report_id}, #{admin_id},#{disposal}, #{reason},#{user_id}
 		)
 	</insert>
-	
-	<select id="history"
-		resultType="com.vegan.report.dto.ReportDTO">
-		SELECT * FROM history WHERE user_id = #{param1}
+
+	<select id="history" resultType="com.vegan.report.dto.ReportDTO">
+		SELECT * FROM history WHERE
+		user_id = #{param1}
 	</select>
+
+	<update id="delUser" parameterType="String">
+		UPDATE user SET user_secc_chk
+		= "1"
+		WHERE user_id = #{param1}
+	</update>
 
 
 </mapper>
