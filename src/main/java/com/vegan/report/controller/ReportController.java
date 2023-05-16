@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,21 +26,6 @@ public class ReportController {
 	@Autowired
 	ReportService service;
 
-	/*
-	 * @RequestMapping(value = "/reportWrite.go") public String
-	 * reportWrite(@RequestParam String board_id, Model model, @RequestParam String
-	 * board_title,
-	 * 
-	 * @RequestParam String cat_id, @RequestParam String user_id, @RequestParam
-	 * String reporter) { model.addAttribute("board_id", board_id);
-	 * model.addAttribute("board_title", board_title); model.addAttribute("cat_id",
-	 * cat_id); model.addAttribute("user_id", user_id);
-	 * model.addAttribute("reporter", reporter); logger.info("board_title" +
-	 * board_title + user_id + reporter);
-	 * 
-	 * 
-	 * return "reportWrite"; }
-	 */
 	
 	@RequestMapping(value = "/reportWrite.go")
 
@@ -116,9 +102,24 @@ public class ReportController {
 		}
 		
 		return data;
-		
-		
+
 	}
+	
+	@RequestMapping(value = "/userActive.go")
+	public String userActive(Model model,@RequestParam String user_id) {
+		logger.info("params:"+user_id);
+		/*
+		 * HashMap<String, String> data = new HashMap(); int row =
+		 * service.reportStatus(report_id,status,adminId); if (row == 1) {
+		 * data.put("success", "1"); model.addAttribute("msg", "상태변경이 완료되었습니다."); } else
+		 * { data.put("success", "0"); }
+		 */
+		model.addAttribute("user_id", user_id);
+		return "userActive";
+
+	}
+	
+
 	
 	
 	

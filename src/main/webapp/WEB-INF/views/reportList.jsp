@@ -17,7 +17,8 @@
 				<th>작성자 아이디</th>
 				<th>신고 날짜</th>
 				<th>신고 사유</th>
-				<th>신고 내용</th>
+				<th>처리 상태</th>
+				<th>처리 관리자</th>
 			</tr>
 		</thead>		
 		<tbody>
@@ -33,7 +34,8 @@
 					<td>${report.reporter}</td>
 					<td>${report.date}</td>
 					<td>${report.reason}</td>
-					<td>${report.content}</td>
+					<td>${report.status}</td>
+					<td>${report.admin}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

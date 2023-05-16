@@ -48,6 +48,22 @@
 	   border-color: white;
 	   color: white;
 	}
+<<<<<<< HEAD
+	.divImages{
+	margin-top: 100px;
+	}
+	.img{
+		width: 20%;
+		height: 30%;
+		vertical-align: middle;
+		display:inline-block;
+	}
+	.logout-button {
+ 		float: right;
+	}
+	
+=======
+>>>>>>> origin/master
 </style>
 </head>
 <body>
