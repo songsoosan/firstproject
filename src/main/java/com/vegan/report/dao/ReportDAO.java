@@ -17,6 +17,10 @@ public interface ReportDAO {
 
 
 	int reportStatus(@Param("report_id")String report_id, @Param("status")String status,@Param("adminId") String adminId);
+
+	int userDisposal(HashMap<String, String> param);
+
+	ArrayList<ReportDTO> history(String user_id);
 	
 	
 

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,18 +107,39 @@ public class ReportController {
 	}
 	
 	@RequestMapping(value = "/userActive.go")
-	public String userActive(Model model,@RequestParam String user_id) {
-		logger.info("params:"+user_id);
-		/*
-		 * HashMap<String, String> data = new HashMap(); int row =
-		 * service.reportStatus(report_id,status,adminId); if (row == 1) {
-		 * data.put("success", "1"); model.addAttribute("msg", "상태변경이 완료되었습니다."); } else
-		 * { data.put("success", "0"); }
-		 */
+	public String userActive(Model model,@RequestParam String user_id,@RequestParam String report_id) {
+		logger.info("1:"+user_id);
+		logger.info("2:"+report_id);
+		ArrayList<ReportDTO> dto = service.history(user_id);
+		
+		model.addAttribute("history", dto);
 		model.addAttribute("user_id", user_id);
+		model.addAttribute("report_id", report_id);
 		return "userActive";
 
 	}
+	
+	
+	
+	@RequestMapping(value = "/userDisposal.ajax")
+	@ResponseBody
+	public HashMap<String, String> userDisposal(Model model,@RequestParam HashMap<String, String> param) {
+		logger.info("1:"+param);
+		
+		HashMap<String, String> data = new HashMap();
+		int row = service.userDisposal(param);
+		if (row == 1) {
+			data.put("success", "1");
+			model.addAttribute("msg", "상태변경이 완료되었습니다.");
+		} else {
+			data.put("success", "0");
+		}
+		
+		return data;
+
+	}
+	
+
 	
 
 	

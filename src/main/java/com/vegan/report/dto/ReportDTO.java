@@ -16,8 +16,37 @@ public class ReportDTO {
 	private String subject;
 	private String status;
 	private String admin;
+	private String report_admin;
+	private String report_result;
+	private String report_reason;
+	private String result_date;
 	
 	
+	
+	public String getReport_admin() {
+		return report_admin;
+	}
+	public void setReport_admin(String report_admin) {
+		this.report_admin = report_admin;
+	}
+	public String getReport_result() {
+		return report_result;
+	}
+	public void setReport_result(String report_result) {
+		this.report_result = report_result;
+	}
+	public String getReport_reason() {
+		return report_reason;
+	}
+	public void setReport_reason(String report_reason) {
+		this.report_reason = report_reason;
+	}
+	public String getResult_date() {
+		return result_date;
+	}
+	public void setResult_date(String result_date) {
+		this.result_date = result_date;
+	}
 	public String getAdmin() {
 		return admin;
 	}

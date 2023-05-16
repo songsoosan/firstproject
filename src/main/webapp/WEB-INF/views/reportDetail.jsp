@@ -92,9 +92,9 @@ body {
 			<tr>
 				<th>처리상태</th>
 				<td>
-					<input type="radio" name="status" id="완료" value="completed">완료
-					<input type="radio" name="status" id="대기" value="pending">대기
-					<input type="radio" name="status" id="미완료" value="incomplete">미완료
+					<input type="radio" name="status" id="완료" value="완료">완료
+					<input type="radio" name="status" id="대기" value="대기">대기
+					<input type="radio" name="status" id="미완료" value="미완료">미완료
 				</td>
 			</tr>
 
@@ -191,7 +191,7 @@ body {
 		  var userId = $('#user_id').text();
 		
 		  // userActive.go로 페이지를 변경
-		  window.location.href = 'userActive.go?user_id=' + userId;
+		  window.location.href = 'userActive.go?user_id=' + userId+'&report_id='+$report_id;
 		});
 
 

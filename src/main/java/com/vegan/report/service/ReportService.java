@@ -37,4 +37,16 @@ public class ReportService {
 		return dao.reportStatus(report_id,status,adminId);
 	}
 
+
+	public int userDisposal(HashMap<String, String> param) {
+		// TODO Auto-generated method stub
+		return dao.userDisposal(param);
+	}
+
+
+	public ArrayList<ReportDTO> history(String user_id) {
+		// TODO Auto-generated method stub
+		return dao.history(user_id);
+	}
+
 }
