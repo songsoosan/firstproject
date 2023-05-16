@@ -87,6 +87,26 @@ public class ReportController {
 		return dto;
 	}
 	
+	@RequestMapping(value = "/reportStatus.ajax")
+	@ResponseBody
+	public HashMap<String, String> reportStatus(Model model,@RequestParam String report_id,@RequestParam String status,@RequestParam String adminId) {
+		logger.info("params:"+report_id+status+adminId);
+		HashMap<String, String> data = new HashMap();
+		int row = service.reportStatus(report_id,status,adminId);
+		if (row == 1) {
+			data.put("success", "1");
+			model.addAttribute("msg", "상태변경이 완료되었습니다.");
+		} else {
+			data.put("success", "0");
+		}
+		
+		return data;
+		
+		
+	}
+	
+	
+	
 	
 	
 }
