@@ -76,9 +76,9 @@ body {
 			<tr>
 				<th				>처리상태</th>
 				<td>
-					<input type="radio" name="status" id="status-completed" value="completed">완료
-					<input type="radio" name="status" id="status-pending" value="pending">대기
-					<input type="radio" name="status" id="status-incomplete" value="incomplete">미완료
+					<input type="radio" name="status" id="완료" value="completed">완료
+					<input type="radio" name="status" id="대기" value="pending">대기
+					<input type="radio" name="status" id="미완료" value="incomplete">미완료
 				</td>
 			</tr>
 
