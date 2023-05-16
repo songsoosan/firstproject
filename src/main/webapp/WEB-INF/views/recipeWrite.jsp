@@ -26,23 +26,41 @@ $(document).ready(function(){
 	document.getElementById("food_id").value = y;
 	x++;
 	y++;
+	
+	if (x <= 2) {
+        $('button#removeButton').hide();
+    }
+	
 });
 
 $(document).on('click','#addButton',function(){
-	var html = '<div class="group">'
+	var html = '<div class="content'+x+'">'
 					+'내용 '+x+' <input type = "text" name="rec_content'+x+'">'
 					+'<input type = "file" name="thumbnailFile" id="thumbnailFile'+x+'" accept="image/*" onchange="setThumbnail3(event);">'
-					+'</div>'
 					+'<div id="thumbnailFile'+x+'"></div>';
+					+'</div>'
 					document.getElementById("rec_content_id").value = x;
 					x++;
-					
-	$('#recipeContents').append(html);
+					if(x == 3){
+						$('#removeButton').show();
+					}
+					$('#recipeContents').append(html);
+});
+
+
+
+$(document).on('click','#removeButton',function(){
+	$('div.content'+(x-1)).remove();
+	x--;
+	if(x <= 2){
+		$('#removeButton').hide();
+	}
+	document.getElementById("rec_content_id").value = x;
 });
 
 
 $(document).on('click','#addFoods',function(){
-	var html = '<div class="group">'
+	var html = '<div class="food">'
 					+'재료 '+y+' <input type = "text" name="food_name'+y+'">'
 					+'<input type = "text" name="food_quantity'+y+'">'
 					+'</div>';
@@ -51,6 +69,7 @@ $(document).on('click','#addFoods',function(){
 					
 	$('#recipeFoods').append(html);
 });
+
 
 function setThumbnail(event) {
     var reader = new FileReader();
@@ -98,6 +117,11 @@ $(document).on('click','#submit',function(){
 	
 	console.log(x);
 });
+
+
+
+
+
 	
 </script>
 
@@ -105,7 +129,7 @@ $(document).on('click','#submit',function(){
 <form action="recipe.write.do" method="POST" enctype="multipart/form-data">
 	<div class="main">
 	<h3>레시피 등록</h3>
-		<input type="hidden"  name="rec_content_id" id="rec_content_id">
+		<input type="hidden"  name="rec_content_id" id="rec_content_id" >
 		<input type="hidden"  name="food_id" id="food_id">
 			<div>
 				레시피 제목 <input type = "text" name = "rec_title" id="rec_title">
@@ -118,13 +142,14 @@ $(document).on('click','#submit',function(){
 			</div>
 			<div id="image_container_main"></div>
 			<div class="contents" id="recipeFoods">
-				<div class="group">
+				<div class="food">
 						재료 1 <input type = "text" name="food_name1"> <input type = "text" name="food_quantity1">
 				</div>
 			</div>
 			<button type = "button" id="addFoods">추가</button>
+			<button type = "button" id="removeFoods">삭제</button>
 			<div class="contents" id="recipeContents">
-				<div class="group">
+				<div class="content">
 					내용 1 <input type = "text" name="rec_content1">
 						<input type="file" name="thumbnailFile" accept="image/*" onchange="setThumbnail2(event);"/>
 						<div id="image_container"></div>
@@ -132,6 +157,7 @@ $(document).on('click','#submit',function(){
 			</div>
 			<div class="contents">
 				<button type = "button" id="addButton">추가</button>
+				<button type = "button" id="removeButton">삭제</button>
 				<div class="tags">
 					<input type="checkbox" value="1"/>
 					<input type="checkbox" value="2"/>
