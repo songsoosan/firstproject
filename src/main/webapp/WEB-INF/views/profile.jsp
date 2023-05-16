@@ -78,6 +78,21 @@ th, td {
 .logout-button {
 	float: right;
 }
+
+/* .profile-table {
+	width: 80%;
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+.profile-table th, .profile-table td {
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.profile-photo {
+	width: 40%;
+} */
 </style>
 
 </head>
@@ -95,7 +110,7 @@ th, td {
 			alt="쪽지" width="70px" height="70px" />
 		</a>
 	</div>
-	<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
+	<button class="logout-button" onclick="location.href='logout.do'">로그아웃</button>
 	<div class="menu">
 		<ul class="ul">
 			<li class="li"><a href="recipe.go">레시피</a></li>
@@ -106,60 +121,75 @@ th, td {
 			<li class="li"><a href="event.go">이벤트</a></li>
 		</ul>
 	</div>
-	<table>
+	<table class="profile-table">
+		<colgroup>
+			<col style="width: 40%;">
+			<col style="width: 20%;">
+			<col style="width: 40%;">
+		</colgroup>
 		<tr>
-			<td rowspan="4"><c:if test="${user.photo_name eq null}">
+			<td rowspan="4" class="profile-photo"><c:if
+					test="${user.photo_name eq null}">
 					<form action="profilePhoto.do" method="post"
 						enctype="multipart/form-data">
 						<input type="file" name="photo" />
 						<button>등록</button>
 					</form>
-				</c:if> <c:if test="${user.photo_name ne null }">
-					<img width="300" src="/photo/${user.photo_name}" />
+				</c:if> <c:if test="${user.photo_name ne null}">
+					<img width="200" src="/photo/${user.photo_name}" alt="프로필 사진" />
 					<form action="profilePhoto.do" method="post"
 						enctype="multipart/form-data">
 						<input type="file" name="photo" />
 						<button>등록</button>
 					</form>
 				</c:if></td>
+			<th>ID</th>
 			<td>${user.user_id }</td>
 		</tr>
 		<tr>
+			<th>NAME</th>
 			<td>${user.user_name }</td>
 		</tr>
 		<tr>
+			<th>E-MAIL</th>
 			<td>${user.user_email }</td>
 		</tr>
 		<tr>
+			<th>PHONE</th>
 			<td>${user.user_phone }</td>
 		</tr>
 		<c:if test="${not empty user.vegan_step}">
-			<td colspan="2">${user.vegan_step}</td>
+			<tr>
+				<th colspan="3">${user.vegan_step}</th>
+			</tr>
 		</c:if>
 		<c:if test="${empty user.vegan_step}">
-			<td colspan="2"><a href="survey.do">비건단계 질문지로 이동</a></td>
+			<tr>
+				<td colspan="3"><a href="survey.do">비건단계 질문지로 이동</a></td>
+			</tr>
 		</c:if>
-		<tr>
-
-		</tr>
 		<form action="profileUpdate.do" method="post">
 			<tr>
-				<td><textarea name=introduction>${user.introduction}</textarea></td>
-				<td><input type="submit" value="확인"></td>
+				<td colspan="3" class="introduction"><textarea
+						name="introduction">${user.introduction}</textarea> <input
+					type="submit" value="확인"></td>
 			</tr>
 		</form>
 		<tr>
-			<td colspan="2"><a>내가 작성한 레시피</a></td>
+			<td colspan="3" class="profile-section"><a class="action-link"
+				href="#">내가 작성한 레시피</a></td>
 		</tr>
 		<tr>
-			<td colspan="2"><a>즐려찾기한 레시피</a></td>
+			<td colspan="3" class="profile-section"><a class="action-link"
+				href="#">즐겨찾기한 레시피</a></td>
 		</tr>
 		<tr>
-			<td colspan="2"><a href="myClassList.do">구매한 클래스</a></td>
+			<td colspan="3" class="profile-section"><a href="myClassList.do"
+				class="action-link">구매한 클래스</a></td>
 		</tr>
 		<tr>
-			<th colspan="2"><input type="button" value="개인정보"
-				onclick="location.href='profileDetail.do'" /></th>
+			<th colspan="3" class="profile-section"><input type="button"
+				value="개인정보" onclick="location.href='profileDetail.do'"></th>
 		</tr>
 	</table>
 
