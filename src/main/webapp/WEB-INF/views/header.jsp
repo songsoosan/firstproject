@@ -12,53 +12,49 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <style>
-   html, body {
-      height: 100%;
-      /* background: linear-gradient(to right, #f0fff0, #abfddf); */
-   }
-   .header {
-      /* background: linear-gradient(to right, #f0fff0, #abfddf); */
-   }
-   .body a {
-      color: inherit;
-   }
-   .menu {
-      background-color: #49c5a2;
-      margin: 0 0 0 0;
-   }
-   .menu ul {
-      margin: 0 0 0 0;
-      padding: 5px 50px;
-   }
-   .menu>ul>li {
-      width:16%;
-      float: left;
+html, body {
+   height: 100%;
+   /* background: linear-gradient(to right, #f0fff0, #abfddf); */
+}
+.header {
+   /* background: linear-gradient(to right, #f0fff0, #abfddf); */
+}
+.body a {
+   color: inherit;
+}
+.menu {
+   background-color: #49c5a2;
+   margin: 0 0 0 0;
+}
+.menu ul {
+   margin: 0 0 0 0;
+   padding: 5px 50px;
+}
+.menu>ul>li {
+   width:16%;
+   float: left;
+   text-align: center;
+   list-style: none;
+}
+.menu>ul>li>a {
+   color: white;
+   text-decoration-line: none;
+   font-size: 25px;
+}
+.nav-item {
       text-align: center;
       list-style: none;
-   }
-   .menu>ul>li>a {
-      color: white;
-      text-decoration-line: none;
-      font-size: 25px;
-   }
-   .nav-item {
-         text-align: center;
-         list-style: none;
-   }
-   .nav-item>ul>li>a {
-      text-decoration-line: none;
-      font-size: 20px;
-   }
-   .contentWrap > .contentBox {
-      border: 1px solid #49c5a2;
-      background: #fff;
-      margin: 0 250px;
-      padding: 10px 15px;
-      min-height: 650px;
-   }
-   .fr {
-      float: right;
-   }
+}
+.contentWrap > .contentBox {
+   border: 1px solid #49c5a2;
+   background: #fff;
+   margin: 0 250px;
+   padding: 10px 15px;
+   min-height: 650px;
+}
+.fr {
+   float: right;
+}
 </style>
 </head>
 <body class="body">
@@ -113,5 +109,7 @@
          <li><a href="event.go">이벤트</a></li>
       </ul>
    </div>
+
+</head>
 </body>
 </html>

@@ -60,4 +60,5 @@ public interface BoardDAO {
    
    ArrayList<BoardDTO>freecommentList(@Param("board_id") String board_id);
    
+   void freeCommentDelete(@Param("comment_id")int comment_id);
 }
