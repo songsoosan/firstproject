@@ -18,6 +18,9 @@
 		border-collapse : collapse;
 		padding : 5px 10px;
 	}
+	th{
+		vertical-align:middle;
+	}
 	div {
 	   margin: 0 auto; 
 	   text-align:center;
@@ -68,7 +71,52 @@
 </head>
 <body>
 <%@ include file="./header.jsp" %>
-<h3 class="head">쪽지 작성하기</h3>
+<div class="contentWrap mt-5">
+	<div class="contentBox">
+		<div class="text-center">
+			<h2>쪽지 쓰기</h2>
+		</div>
+		<hr/>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>제목</th>
+					<td>
+						<input type="text" id="subject"/>
+					</td>
+				</tr>
+				<tr>
+					<th>받는 사람</th>
+					<td>
+						<input type="text" id="receiver" value=""/>
+						<button id="toAdmin">관리자에게 보내기</button>
+					</td>
+				</tr>
+				<tr>
+					<th>내용</th>
+					<td>
+						<div class="form-floating">
+							<textarea class="form-control" placeholder="Leave a comment here" id="content" style="height: 100px"></textarea>				 
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th colspan="2">
+						<div class="col text-center">
+							<button type="button" class="btn btn-success" onclick="letterSend()">확인</button>
+							<button type="button" class="btn btn-success" onclick="location.href='recieveletter.go'">돌아가기</button>
+						</div>
+					</th>
+				</tr>
+			</thead>
+			<tbody id="list">
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+<!--<h3 class="head">쪽지 작성하기</h3>
 	<table>
 		<tr>
 			<th>제목</th>
@@ -98,7 +146,7 @@
 				</div>
 			</th>
 		</tr>
-	</table>
+	</table> -->
 </body>
 <script>
 

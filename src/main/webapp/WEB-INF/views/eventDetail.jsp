@@ -1,85 +1,139 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
-table{
-	width: 100%;
-}
-
-table, th, td{
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding : 5px 10px;	
-}
-
-button{
-	margin: 5px;
-}
-
-input[type="text"]{
-	width: 100%;
-}
-
-textarea{
-	width: 100%;
-	height: 150px;
-	resize: none;
-}
+   .none {
+      display: none !important;
+   }
+   .onlyAdmin {
+      display: block !important;
+   }
+   .borderBottom {
+        border-bottom: solid 1px #49c5a2;
+   }
 </style>
 </head>
 <body>
-		<table>
-			<c:forEach items="dto">
-			<tr>
-				<th>제목</th>
-				<td>${dto.event_title}</td>
-			</tr>
-			<tr>
-  				<th>시작일</th>
-  				<td><input type="date" value="${dto.event_start_date}" disabled></td>
-			</tr>
-			<tr>
-  				<th>종료일</th>
-  				<td><input type="date" value="${dto.event_end_date}" disabled></td>
-			</tr>
-			<tr>
-				<th>작성자</th>
-				<td>${dto.user_id}</td>
-			</tr>
-			<tr>
-				<th>작성일</th>
-				<td>${dto.event_date}</td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td>${dto.event_content}</td>
-			</tr>
-			<c:if test="${dto.photo_name ne null}">
-			<tr>
-				<th>대표사진</th>
-				<td><img width="500" src="/photo/${dto.photo_name}"/></td>
-			</tr>
-			</c:if>
-			<tr>
-				<th>링크</th>
-				<td><a href="https://www.naver.com" target="_blank">링크 3</a></td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<input type="button" onclick="location.href='./event.do'" value="리스트"/>
-					<input type="button" onclick="location.href='./eventUpdate.go?event_id=${dto.event_id}'" value="수정"/>
-					<input type="button" onclick="location.href='./eventDelete.do?event_id=${dto.event_id}'" value="삭제"/>
-				</th>
-			</tr>
-			</c:forEach>
-		</table>
-		
+<%@ include file="./header.jsp" %>
+<div class="contentWrap mt-5">
+   <div class="contentBox">
+      <div class="row mb-2 text-center">
+         <h2 class="text-center">이벤트 상세</h2>
+         <hr/>
+      </div>
+      <div class="fr" style="display:inline-flex;">
+		 <button type="button" class="btn btn-outline-secondary" onclick="location.href='./event.do'">리스트</button>
+		 <button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='./eventUpdate.go?event_id=${dto.event_id}'" >수정</button>
+		 <button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='./eventDelete.do?event_id=${dto.event_id}'" >삭제</button>
+		       
+		<input type="button" onclick="location.href='./reportWrite.go?evebt_id=${dto.event_id}&board_title=${dto.event_title}&cat_id=${dto.cat_id}'" value="신고"/>
+	</div>
+      <input type="hidden" name = "event_id" value="${dto.event_id}">
+      <div class="input-group borderBottom mb-3 mt-3">
+         <label class="col-sm-2 offset-sm-1 col-form-label">제목</label>
+         <div class="col-sm-9">
+            <input type="text" class="form-control-plaintext" value="${dto.event_title}">
+         </div>
+      </div>
+      <div class="input-group borderBottom mb-3 mt-3">
+         <label class="col-sm-2 offset-sm-1 col-form-label">시작일</label>
+         <div class="col-sm-9">
+            <input type="date" class="form-control-plaintext" value="${dto.event_start_date}" disabled>
+         </div>
+        </div>
+        <div class="input-group borderBottom mb-3 mt-3">
+         <label class="col-sm-2 offset-sm-1 col-form-label">종료일</label>
+         <div class="col-sm-9">
+            <input type="date" class="form-control-plaintext" value="${dto.event_end_date}" disabled>
+         </div>
+        </div>
+      <div class="input-group borderBottom mb-3 mt-3">
+         <label class="col-sm-2 offset-sm-1 col-form-label">작성자</label>
+         <div class="col-sm-9">
+            <input type="text" class="form-control-plaintext" value="${dto.user_id}">
+         </div>
+      </div>
+      <div class="input-group borderBottom mb-3 mt-3">
+         <label class="col-sm-2 offset-sm-1 col-form-label">작성일</label>
+         <div class="col-sm-9">
+            <input type="text" class="form-control-plaintext" value="${dto.event_date}">
+         </div>
+      </div>
+      <div class="input-group borderBottom mb-3 mt-3">
+         <label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
+         <div class="col-sm-9">
+            <input type="text" class="form-control-plaintext" value="${dto.event_title}">
+         </div>
+      </div>
+      <c:if test="${dto.photo_name ne null}">
+         <div class="input-group mb-3 mt-3">
+            <label class="col-sm-2 offset-sm-1 col-form-label">사진</label>
+            <div class="col-sm-9">
+               <img max-width="300" max-height="300" src="/photo/${dto.photo_name}"/>
+            </div>
+         </div>
+      </c:if>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="eventdelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">삭제</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	이벤트 삭제 하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='./eventDelete.do?event_id=${dto.event_id}'">삭제</button>
+      </div>
+    </div>
+  </div>
+</div>   
 </body>
 <script>
+loginId = '<%=(String)session.getAttribute("loginId")%>';
+buttonControl(loginId);
+
+function buttonControl(loginId) {
+	if(loginId == 'null') {
+	$(".btnCtrl").addClass("none");
+	}
+	}
+	
+function buttonControl(loginId) {
+    if (loginId === 'null') {
+        $(".btnCtrl").addClass("none");
+    } else {
+        adminCheck();
+    }
+}
+
+
+function adminCheck() {
+    if (loginId === "veganadmin") {
+        $(".btnCtrl").removeClass("none");
+    } else {
+        $(".btnCtrl").addClass("none");
+    }
+}
+
+function writeMode(idx) {
+   $("tr.reply:eq("+idx+")").find(".editMode").removeClass("none");
+   $("tr.reply:eq("+idx+")").find(".readMode").addClass("none");
+}
+
+function readMode(idx) {
+   $("tr.reply:eq("+idx+")").find(".readMode").removeClass("none");
+   $("tr.reply:eq("+idx+")").find(".editMode").addClass("none");
+}
+
 
 </script>
 </html>

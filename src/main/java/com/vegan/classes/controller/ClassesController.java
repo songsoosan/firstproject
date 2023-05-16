@@ -108,6 +108,7 @@ public class ClassesController {
       return page;
    }
 
+
    @RequestMapping(value = "/profile2.do", method = RequestMethod.GET)
    public String profile2(Model model, @RequestParam String user_id, HttpSession session) {
       String page = "login";
@@ -118,6 +119,7 @@ public class ClassesController {
          logger.info("profile2:" + dto);
          model.addAttribute("user", dto);
         // model.addAttribute("cl_id", cl_id);
+
 
          String msg = (String) session.getAttribute("msg");
          if (msg != null) {

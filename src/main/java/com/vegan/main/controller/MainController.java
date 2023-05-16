@@ -42,11 +42,12 @@ public class MainController {
 	
 	@RequestMapping(value = "/magazine.go", method = RequestMethod.GET)
 	public String magazine(Model model) {
-			return "magazineList";
-	}
+
+	      return "magazineList";
+	   }
 
 	@RequestMapping(value = "/event.go", method = RequestMethod.GET)
-	public String event(Model model) {
+	public String event(Model model, HttpSession session) {
 		return "eventList";
 	}
 	@RequestMapping(value = "/recipeWrite.go", method = RequestMethod.GET)

@@ -1,70 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>Insert title here</title>
-		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
-		<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
-		<style>
-			b{
-				color:red;
-			}
-
-			table{
-				width:100%;
-			}
-			
-			table, td, th{
-				border : 1px solid;
-				border-collapse : collapse;
-				padding: 5px;
-			}
-			
-			#paging{
-				text-align: center;
-			}
-		</style>
+<link rel= "stylesheet" href="resources/css/paging.css" type="text/css">
+<style>
+	.none {
+      display: none !important;
+   }
+   .onlyAdmin {
+      display: block !important;
+   }
+   th.onlyAdmin, td.onlyAdmin {
+      display: table-cell !important;
+   }
+   .textDeco {
+      text-decoration: line-through;
+   }
+   #list a {
+      text-decoration-line: none;
+   }
+   .pagination {
+      justify-content: center;
+   }
+</style>
 </head>
 <body>
-	<h3>최신 매거진</h3>
-	게시물 갯수 : 
-	<select id="pagePerNum">
-		<option value="5">5</option>
-		<option value="10">10</option>
-		<option value="15">15</option>
-		<option value="20">20</option>
-	</select>
-	<button onclick="location.href='magazineWrite.go'">글쓰기</button>
-	<table>
+<%@ include file="./header.jsp" %>	
+<div class="contentWrap mt-5">
+   <div class="contentBox">
+      <div class="row mb-2 text-center">
+		<h3>최신 매거진</h3>
+	  </div>
+	  <hr/>
+	   <div>
+         <div class="d-flex" style="float: left;">
+		<span class="mt-1">게시물 갯수&nbsp;:&nbsp;</span>
+		<select id="pagePerNum">
+			<option value="5">5</option>
+			<option value="10">10</option>
+			<option value="15">15</option>
+			<option value="20">20</option>
+		</select>
+		</div>
+			<div style="float: right;" class="d-flex">
+				<button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='magazineWrite.go'">글쓰기</button>
+			</div>
+	     </div>
+	     <div style="margin-top: 70px;">
+      <table class="table table-striped table-bordered">
 		<thead>
 			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>조회수</th>
-				<th>작성일</th>
+				<th class="text-center col-md-1">번호</th>
+				<th class="text-center" style="width:25%">제목</th>
+				<th class="text-center col-md-1">작성자</th>
+				<th class="text-center col-md-1">조회수</th>
+				<th class="text-center col-md-1">작성일</th>
 			</tr>
 		</thead>
 		<tbody id="list">			
 		<!-- 리스트가 출력될 영역 -->
 		</tbody>
-		<tr>
-			<td colspan="6" id="paging">	
+	</table>
+		</div>
+			<div colspan="6" id="paging">	
 				<!-- 	플러그인 사용	(twbsPagination)	-->
 				<div class="container">									
 					<nav aria-label="Page navigation" style="text-align:center">
 						<ul class="pagination" id="pagination"></ul>
 					</nav>					
-				</div>
-			</td>
-		</tr>		
-	</table>
+				</div>		
+		   </div>
+	   </div>
+	 </div>
+	
 </body>
 <script>
-
+var loginId = '<%=(String)session.getAttribute("loginId")%>';
+buttonControl(loginId);
 var showPage = 1;
 listCall(showPage);
 
@@ -94,6 +106,10 @@ function listCall(page){
 				startPage:data.currPage,	//시작페이지
 				totalPages:data.pages,//총 페이지 수
 				visiblePages:5, //보여줄 페이지 [1][2][3][4][5]
+				 next : '<span style="color: #87d1bf;">></span>', 
+	             last : '<span style="color: #87d1bf;">>></span>',
+	             first : '<span style="color: #87d1bf;"><<</span>',
+	             prev : '<span style="color: #87d1bf;"><</span>',
 				onPageClick:function(event,page){// 페이지 클릭시 동작되는 함수(콜백)
 					console.log(page, showPage);
 					if(page != showPage){
@@ -119,6 +135,11 @@ function listPrint(list){
 		content +='<tr>';
 		content +='<td>'+board.board_id+'</td>';
 		content +='<td><a href="magazineDetail.do?board_id='+board.board_id+'">'+board.board_title+'</td>';
+		
+		
+		
+	
+		
 		content +='<td>'+board.user_id+'</td>';
 		content +='<td>'+board.board_views+'</td>';
 		
@@ -134,5 +155,27 @@ function listPrint(list){
 }
 
 
+function buttonControl(loginId) {
+	if(loginId == 'null') {
+	$(".btnCtrl").addClass("none");
+	}
+	}
+	
+function buttonControl(loginId) {
+    if (loginId === 'null') {
+        $(".btnCtrl").addClass("none");
+    } else {
+        adminCheck();
+    }
+}
+
+
+function adminCheck() {
+    if (loginId === "veganadmin") {
+        $(".btnCtrl").removeClass("none");
+    } else {
+        $(".btnCtrl").addClass("none");
+    }
+}
 </script>
 </html>
