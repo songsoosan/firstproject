@@ -52,10 +52,24 @@ public class ReportController {
 
 		return "reportWrite";
 	}
+	
+	@RequestMapping(value = "/reportDetail.go")
+
+	public String reportDetailGo(@RequestParam String report_id, Model model) {
+		
+		model.addAttribute("report_id", report_id);
+	
+		logger.info("report_id" + report_id);
+
+
+		return "reportDetail";
+	}
+	
+	
 
 	@RequestMapping(value = "/reportSend.ajax")
 	@ResponseBody
-	public HashMap<String, String> letterSend(@RequestParam HashMap<String, String> params, HttpSession session,
+	public HashMap<String, String> reportSend(@RequestParam HashMap<String, String> params, HttpSession session,
 			Model model) {
 
 		logger.info("sad" + params);
@@ -77,4 +91,17 @@ public class ReportController {
 		model.addAttribute("reportList", reportList);
 		return "reportList";
 	}
+	
+	
+	@RequestMapping(value = "/reportDetail.ajax")
+	@ResponseBody
+	public ReportDTO reportDetail(Model model,@RequestParam String report_id) {
+		ReportDTO dto = service.reportDetail(report_id);
+		
+		model.addAttribute("reportDetail", dto);
+		return dto;
+	}
+	
+	
+	
 }
