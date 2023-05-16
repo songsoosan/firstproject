@@ -25,21 +25,6 @@ public class ReportController {
 	@Autowired
 	ReportService service;
 
-	/*
-	 * @RequestMapping(value = "/reportWrite.go") public String
-	 * reportWrite(@RequestParam String board_id, Model model, @RequestParam String
-	 * board_title,
-	 * 
-	 * @RequestParam String cat_id, @RequestParam String user_id, @RequestParam
-	 * String reporter) { model.addAttribute("board_id", board_id);
-	 * model.addAttribute("board_title", board_title); model.addAttribute("cat_id",
-	 * cat_id); model.addAttribute("user_id", user_id);
-	 * model.addAttribute("reporter", reporter); logger.info("board_title" +
-	 * board_title + user_id + reporter);
-	 * 
-	 * 
-	 * return "reportWrite"; }
-	 */
 	
 	@RequestMapping(value = "/reportWrite.go")
 
