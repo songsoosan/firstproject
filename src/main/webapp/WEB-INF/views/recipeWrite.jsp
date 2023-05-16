@@ -61,7 +61,7 @@ $(document).on('click','#removeButton',function(){
 
 $(document).on('click','#addFoods',function(){
 	var html = '<div class="food">'
-					+'재료 '+y+' <input type = "text" name="food_name'+y+'">'
+					+' '+y+' <input type = "text" name="food_name'+y+'">'
 					+'<input type = "text" name="food_quantity'+y+'">'
 					+'</div>';
 					document.getElementById("food_id").value = y;
@@ -126,48 +126,127 @@ $(document).on('click','#submit',function(){
 </script>
 
 <body>
+<%@ include file="./header.jsp" %>
+<div class="contentWrap mt-5">
+   <div class="contentBox">
+      <div class="text-center">
+			<h2>레시피 등록</h2>
+	</div>
+	<hr/> 
+	    
 <form action="recipe.write.do" method="POST" enctype="multipart/form-data">
 	<div class="main">
-	<h3>레시피 등록</h3>
 		<input type="hidden"  name="rec_content_id" id="rec_content_id" >
 		<input type="hidden"  name="food_id" id="food_id">
-			<div>
-				레시피 제목 <input type = "text" name = "rec_title" id="rec_title">
-			</div>
-			<div>
-				동영상 링크 <input type = "text" name = "rec_video" id="rec_video">
-			</div>
-			<div>
-				대표사진 등록 <input type = "file" name = "rec_photo" id="rec_photo" accept="image/*" onchange="setThumbnail(event);">
-			</div>
-			<div id="image_container_main"></div>
+		
+		<br/>
+		
+		<div class="input-group mb-3 mt-3">
+            <label class="col-sm-2 offset-sm-1 col-form-label">레시피 제목</label>
+            <div class="col-sm-9">
+               <input type="text" class="form-control" name = "rec_title" id="rec_title"/>
+            </div>
+        </div>
+        
+         <br/><br/>
+			<hr>
+		<br/><br/>
+        
+        <div class="input-group mb-3 mt-3">
+            <label class="col-sm-2 offset-sm-1 col-form-label">동영상 링크</label>
+            <div class="col-sm-9">
+               <input type="text" class="form-control" name = "rec_video" id="rec_video"/>
+            </div>
+        </div>
+        
+         <br/><br/>
+			<hr>
+		<br/><br/>
+        
+       <div class="row">
+            <div class="input-group">
+               <label for= recipe_photo class="col-sm-2 offset-sm-1 col-form-label">사진</label>
+               <input type="file" class="form-control w-auto" name = "rec_photo" id="rec_photo" accept="image/*" onchange="setThumbnail(event);">
+            </div>
+         </div> 
+         
+         <br/><br/>
+			<hr>
+		<br/><br/>
+         
+         
+        <div class="input-group mb-3 mt-3"> 
+         <label for= recipe class="col-sm-2 offset-sm-1 col-form-label">재료</label>
+       <div id="image_container_main"></div>
 			<div class="contents" id="recipeFoods">
 				<div class="food">
-						재료 1 <input type = "text" name="food_name1"> <input type = "text" name="food_quantity1">
+					1 <input type ="text" name="food_name1"><input type = "text" name="food_quantity1">
 				</div>
 			</div>
-			<button type = "button" id="addFoods">추가</button>
+		</div>
+			<button type = "button"  id="addFoods">추가</button>	
 			<button type = "button" id="removeFoods">삭제</button>
-			<div class="contents" id="recipeContents">
-				<div class="content">
-					내용 1 <input type = "text" name="rec_content1">
-						<input type="file" name="thumbnailFile" accept="image/*" onchange="setThumbnail2(event);"/>
-						<div id="image_container"></div>
+			
+			
+		<br/><br/>
+			<hr>
+		<br/><br/>
+			
+		<div class="input-group mb-3 mt-3"> 
+ 		<label for= recipe class="col-sm-2 offset-sm-1 col-form-label">내용</label>
+		<div class="contents" id="recipeContents">
+			<div class="content">
+				내용 1 <input type = "text" name="rec_content1">
+					<input type="file" name="thumbnailFile" accept="image/*" onchange="setThumbnail2(event);"/>
+					<div id="image_container"></div>
 				</div>
 			</div>
-			<div class="contents">
-				<button type = "button" id="addButton">추가</button>
-				<button type = "button" id="removeButton">삭제</button>
-				<div class="tags">
-					<input type="checkbox" value="1"/>
+		</div>
+		<div class="contents">
+			<button type = "button" id="addButton">추가</button>
+			<button type = "button" id="removeButton">삭제</button> 
+		</div>
+         
+        <br/><br/>
+        	<hr>
+        <br/><br/>
+        
+        <div class="input-group mb-3 mt-3">
+            <label class="col-sm-2 offset-sm-1 col-form-label">태그</label>
+            <div class="col-sm-9">
+               <input type="checkbox" value="1"/>
 					<input type="checkbox" value="2"/>
 					<input type="checkbox" value="3"/>
 					<input type="checkbox" value="4"/>
 					<input type="checkbox" value="5"/>
-				</div>
-				<input type="submit" id="submit"/>
-			</div>
-</div>
-</form>
+            </div>
+        </div>
+        
+        <br/>
+        <hr>
+        <br/>
+        
+           	 <input type="submit" id="submit"/>
+        </form>
+       </div>
+      </div>
+        
+      <br/><br/>
+         
+         
+         
+         
+			
+		
+		
+		
+		
+		
+		
+			
+		
+				
+			
+			
 </body>
 </html>
