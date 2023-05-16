@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>로그인</title>
 <style>
 </style>
 </head>
@@ -44,21 +44,14 @@
 					<input type="text" class="form-control" id="userName"/>
 				</div>
 			</div>
-			
 			<div class="input-group mb-3 mt-3">
 				<label class="col-sm-2 offset-sm-1 col-form-label">성별</label>
 				<div class="col-sm-9">
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="userGender" id="male" value="male">
-					<label class="form-check-label" for="male">남자</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="userGender" id="female" value="female">
-						<label class="form-check-label" for="female">여자</label>
-					</div>
+					<input type="radio" class="form-control" name="userGender" value="male"/>남자
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" class="form-control" name="userGender" value="female"/>여자
 				</div>
 			</div>
-
 			<div class="input-group mb-3 mt-3">
 				<label class="col-sm-2 offset-sm-1 col-form-label">연락처</label>
 				<div class="col-sm-9">

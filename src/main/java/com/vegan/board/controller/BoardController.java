@@ -1,6 +1,5 @@
 package com.vegan.board.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -71,7 +69,7 @@ public class BoardController {
 		return "write";
 	}
 
-	@RequestMapping(value = "/wirte.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/write.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public String write(MultipartFile board_photo, @RequestParam HashMap<String, String> params) {
 
 		logger.info("params : " + params);
@@ -109,9 +107,9 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/boardUpdate.do", method = RequestMethod.POST)
-	public String boardUpdateDo(MultipartFile photo, @RequestParam HashMap<String, String> params) {
+	public String boardUpdateDo(MultipartFile board_photo, @RequestParam HashMap<String, String> params) {
 		logger.info("params : " + params);
-		return service.update(photo, params);
+		return service.update(board_photo, params);
 	}
 
 	@RequestMapping(value = "/boardDelete.go", method = RequestMethod.GET)
@@ -211,9 +209,9 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/freeUpdate.do", method = RequestMethod.POST)
-	public String freeUpdateDo(MultipartFile photo, @RequestParam HashMap<String, String> params) {
+	public String freeUpdateDo(MultipartFile board_photo, @RequestParam HashMap<String, String> params) {
 		logger.info("params : " + params);
-		return service.freeupdate(photo, params);
+		return service.freeupdate(board_photo, params);
 	}
 
 	@RequestMapping(value = "/freeDelete.go", method = RequestMethod.GET)
@@ -233,5 +231,13 @@ public class BoardController {
 
 		return service.freecommentWrite(params);
 	}
-
+	
+	@RequestMapping(value = "freeCommentDelete.do", method = RequestMethod.GET)
+	public String freeCommentDelete(@RequestParam int comment_id, @RequestParam int board_id) {
+		service.freeCommentDelete(comment_id);
+		logger.info(String.valueOf(comment_id));
+		return "redirect:/freeDetail.do?board_id=" + board_id;
+		
+	}
+	
 }
