@@ -74,13 +74,16 @@
             <a href="javascript:void(0);" id="search" class="input-group-text"><i class="bi bi-search"></i></a>
          </div>
       </div>
-      <div class="col-sm-2 text-center">
-         <div class="mt-2 fs-1">
-            <a href="profile.do"><i class="bi bi-person-circle mx-2"></i></a>
-            <a href="write.go"><i class="bi bi-pencil-square mx-2"></i></a>
-            <a href="recieveletter.go"><i class="bi bi-chat-left-dots mx-2"></i></a>
-         </div>
-      </div>
+		<div class="col-sm-2 text-center">
+		   <div class="mt-2 fs-1">
+		      <div class="row justify-content-between">
+		         <div class="col-auto"><a href="profile.do"><i class="bi bi-person-circle mx-2"></i></a></div>
+		         <div class="col-auto"><a href="write.go"><i class="bi bi-pencil-square mx-2"></i></a></div>
+		         <div class="col-auto"><a href="recieveletter.go"><i class="bi bi-chat-left-dots mx-2"></i></a></div>
+		         <div class="col-auto"><a href="admin.go" class="d-flex align-items-center"><i class="bi bi-person-fill-gear"></i></a></div>
+		      </div>
+		   </div>
+		</div>
       <div class="col-sm-2 offset-sm-1 mt-5 text-left">
          <c:if test="${sessionScope.loginId eq null}">
             <button class="btn btn-outline-success" onclick="location.href='login.go'">로그인</button>
@@ -108,7 +111,6 @@
             </ul>
          </li>
          <li><a href="event.go">이벤트</a></li>
-          <li><a href="admin.go">관리자(test)</a></li> 
       </ul>
    </div>
 </body>
