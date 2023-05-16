@@ -26,8 +26,6 @@
       <div class="text-center">
          <h2>자유게시판</h2>
       </div>
-      <hr/>
-
       <div>
          <div class="d-flex" style="float: left;">
             <span class="mt-1">게시물 갯수&nbsp;:&nbsp;</span>

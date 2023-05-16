@@ -28,6 +28,8 @@ public interface CheckListDAO {
 
 	int surveyReset(String user_id);
 
+	int profilego(HashMap<String, String> params);
+
 	
 
 	

@@ -7,7 +7,7 @@
 
 
 	<select id="profile" resultType="com.vegan.mypage.dto.MypageDTO">
-		SELECT u.user_id, u.user_name, u.user_email, u.user_phone, p.introduction, IFNULL(ph.photo_name, 'default_photo.jpg') AS photo_name, IFNULL(ph.photo_id, 0) AS photo_id 
+		SELECT u.user_id, u.user_name, u.user_email, u.user_phone,p.vegan_step, p.introduction, IFNULL(ph.photo_name, 'default_photo.jpg') AS photo_name, IFNULL(ph.photo_id, 0) AS photo_id 
 		FROM user u
 		JOIN profile p ON u.user_id = p.user_id
 		LEFT JOIN photo ph ON p.user_id = ph.identify_number AND ph.photo_id = (SELECT MAX(photo_id) FROM photo WHERE identify_number = u.user_id)
