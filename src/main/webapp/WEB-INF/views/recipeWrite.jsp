@@ -19,15 +19,37 @@
 </head>
 <script>
 var x = 1;
+var y = 1;
+
+$(document).ready(function(){
+	document.getElementById("rec_content_id").value = x;
+	document.getElementById("food_id").value = y;
+	x++;
+	y++;
+});
 
 $(document).on('click','#addButton',function(){
 	var html = '<div class="group">'
-					+'내용<input type = "text" class="rec_content'+x+'">'
-					+'<input type = "file" id="thumbnailFile'+x+'" accept="image/*" onchange="setThumbnail3(event);">'
+					+'내용 '+x+' <input type = "text" name="rec_content'+x+'">'
+					+'<input type = "file" name="thumbnailFile" id="thumbnailFile'+x+'" accept="image/*" onchange="setThumbnail3(event);">'
 					+'</div>'
 					+'<div id="thumbnailFile'+x+'"></div>';
+					document.getElementById("rec_content_id").value = x;
 					x++;
+					
 	$('#recipeContents').append(html);
+});
+
+
+$(document).on('click','#addFoods',function(){
+	var html = '<div class="group">'
+					+'재료 '+y+' <input type = "text" name="food_name'+y+'">'
+					+'<input type = "text" name="food_quantity'+y+'">'
+					+'</div>';
+					document.getElementById("food_id").value = y;
+					y++;
+					
+	$('#recipeFoods').append(html);
 });
 
 function setThumbnail(event) {
@@ -73,33 +95,37 @@ function setThumbnail3(event) {
   }
 	
 $(document).on('click','#submit',function(){
-	document.getElementById("myInput").value = x;
+	
+	console.log(x);
 });
 	
 </script>
 
 <body>
+<form action="recipe.write.do" method="POST" enctype="multipart/form-data">
 	<div class="main">
 	<h3>레시피 등록</h3>
-
-		<form action="./recipe.write.do" method="get" enctype="multipart/form-data">
-		<input type="hidden" id="myInput">
+		<input type="hidden"  name="rec_content_id" id="rec_content_id">
+		<input type="hidden"  name="food_id" id="food_id">
 			<div>
-			레시피 제목 <input type = "text" name = "rec_title" id="rec_title">
+				레시피 제목 <input type = "text" name = "rec_title" id="rec_title">
 			</div>
 			<div>
-			동영상 링크 <input type = "text" name = "rec_video" id="rec_video">
+				동영상 링크 <input type = "text" name = "rec_video" id="rec_video">
 			</div>
 			<div>
-			대표사진 등록 <input type = "file" name = "rec_photo" id="rec_photo" accept="image/*" onchange="setThumbnail(event);">
+				대표사진 등록 <input type = "file" name = "rec_photo" id="rec_photo" accept="image/*" onchange="setThumbnail(event);">
 			</div>
 			<div id="image_container_main"></div>
-			
-			
-			
+			<div class="contents" id="recipeFoods">
+				<div class="group">
+						재료 1 <input type = "text" name="food_name1"> <input type = "text" name="food_quantity1">
+				</div>
+			</div>
+			<button type = "button" id="addFoods">추가</button>
 			<div class="contents" id="recipeContents">
 				<div class="group">
-					내용<input type = "text" class="rec_content">
+					내용 1 <input type = "text" name="rec_content1">
 						<input type="file" name="thumbnailFile" accept="image/*" onchange="setThumbnail2(event);"/>
 						<div id="image_container"></div>
 				</div>
@@ -115,7 +141,7 @@ $(document).on('click','#submit',function(){
 				</div>
 				<input type="submit" id="submit"/>
 			</div>
-			</form>
 </div>
+</form>
 </body>
 </html>
