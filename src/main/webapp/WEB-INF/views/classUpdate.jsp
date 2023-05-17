@@ -86,6 +86,7 @@ ${msg}
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">저장</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='classDel.do?cl_id=${dto.cl_id}'">삭제</button>
                 <a href="./classList.go" class="btn btn-secondary">리스트</a>
             </div>
         </form>

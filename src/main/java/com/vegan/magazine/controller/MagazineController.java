@@ -84,8 +84,8 @@ Logger logger = LoggerFactory.getLogger(getClass());
          logger.info("magazineDetail : "+board_id);
       
          //String page = "redirect:/magazine.do";      
-         MagazineDTO dto = service.detail(board_id,"detail");
-         model.addAttribute("dto", dto);
+         MagazineDTO dtoo = service.detail(board_id,"detail");
+         model.addAttribute("dtoo", dtoo);
          
          ArrayList<MagazineDTO> magacommentlist = service.magacommentlist2(board_id);
          model.addAttribute("magacommentlist", magacommentlist);
@@ -147,8 +147,8 @@ Logger logger = LoggerFactory.getLogger(getClass());
       logger.info("comment_id param : "+ comment_id);
       logger.info("comment_content param : "+ comment_content);
       
-      MagazineDTO dto = service.detail(board_id,"detail");  
-      model.addAttribute("dto", dto);
+      MagazineDTO dtoo = service.detail(board_id,"detail");  
+      model.addAttribute("dtoo", dtoo);
       
       ArrayList<MagazineDTO> magacommentlist2 = service.magacommentlist2(board_id);
       model.addAttribute("magacommentlist", magacommentlist2);
@@ -183,7 +183,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
          logger.info("comment_id Num :"+ comment_id);
          logger.info("comment_content :"+ comment_content);
          int row = service.commupdate(comment_id, comment_content, loginId);
-         
+         logger.info("update comment row : "+row);
          
          if (row != 1) {
             page = "redirect:/magazineDetail.do?board_id="+board_id;
@@ -225,10 +225,10 @@ Logger logger = LoggerFactory.getLogger(getClass());
    public String updateForm(Model model, @RequestParam String board_id) {
       logger.info("detail : "+board_id);
       String page = "redirect:/magazine.do";      
-      MagazineDTO dto = service.detail(board_id,"detail");
-      if(dto != null) {
+      MagazineDTO dtoo = service.detail(board_id,"detail");
+      if(dtoo != null) {
          page = "magazineUpdateForm";
-         model.addAttribute("dto", dto);
+         model.addAttribute("dtoo", dtoo);
       }            
       return page;
    }
