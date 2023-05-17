@@ -162,12 +162,28 @@ public class RecipeService {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			  
-			  
-			  
+
 			}
+
+	}
+	public RecipeDTO detail(String rec_id) {
+	
+		 return  dao.detail1(rec_id);
+	}
+
+	public List<RecipeDTO> detailContent(String rec_id) {
 		
+		return dao.detail2(rec_id);
+	}
+
+	public List<RecipeDTO> detailPhoto(String rec_id) {
 		
+		return dao.detail3(rec_id);
+	}
+
+	public List<RecipeDTO> detailFood(String rec_id) {
+	
+		return dao.detail4(rec_id);
 	}
 
 

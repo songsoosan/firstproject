@@ -2,6 +2,7 @@ package com.vegan.recipe.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.vegan.recipe.dto.RecipeDTO;
 import com.vegan.recipe.service.RecipeService;
 
 @Controller
@@ -39,7 +41,40 @@ public class RecipeController {
     }
 	
 	@RequestMapping(value="/recipe.detail.do")
-    public String detailPage(@RequestParam String rec_id) {
+    public String detailPage(Model model, @RequestParam String rec_id) {
+
+	    	
+			RecipeDTO dto = service.detail(rec_id);
+		    List<RecipeDTO> contents = service.detailContent(rec_id);
+
+		   
+		    	model.addAttribute("contents", contents);
+
+		    
+		    List<RecipeDTO> foods = service.detailFood(rec_id);
+		    	for(RecipeDTO food : foods) {
+		    		logger.info(food.getFood_name());
+		    	}
+		    	model.addAttribute("foods", foods);
+		    	
+
+		    
+		    List<RecipeDTO> photos = service.detailPhoto(rec_id);
+		    Map<String, String> pho = new HashMap<>();
+		    int x=0;
+		    for (RecipeDTO photo : photos) {
+		    	
+		    	String val = photo.getPhoto_name();
+		    	 logger.info(val);
+		    	pho.put("photo_name"+x, val);
+		    	x++;
+		    }
+		    for (String value : pho.values()) {
+		        System.out.println(value);
+		    }
+		    model.addAttribute("photo", pho);
+		    model.addAttribute("dto", dto);
+		    
         return "recipe";  
     }
 	
