@@ -5,10 +5,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<link rel="stylesheet" href="resources/css/commons.css">
 </head>
 <body>
-레시피 페이지 입니다.
+<%@ include file="./header.jsp" %>
 	<table>
 			<%-- <tr>
 				<td colspan="2"><img width="500" src="/photo/${dto.newFileName}"/></td>
@@ -40,7 +39,7 @@
 			 <c:set var="b" value="photo_name${loop.index}" />
 				<tr>
 					<th>내용 ${loop.index+1} ${content.rec_content} </th>
-					<td><img width="500" src="admin/resources/photo/${photo[b]}"/></td>
+					<td><img width="300" src="admin/resources/photo/${photo[b]}"/></td>
 				</tr>
 				
 				

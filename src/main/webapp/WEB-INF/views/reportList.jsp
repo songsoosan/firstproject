@@ -6,7 +6,11 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<style></style>
+<style>
+    .header-space {
+        margin-bottom: 20px;
+    }
+</style>
 </head>
 <body>
 <%@ include file="./header.jsp" %>
