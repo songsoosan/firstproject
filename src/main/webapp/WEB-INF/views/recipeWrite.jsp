@@ -214,23 +214,64 @@ $(document).on('click','#submit',function(){
         <br/><br/>
     
 
-        <div class="input-group mb-3 mt-3">
-            <label class="col-sm-2 offset-sm-1 col-form-label">태그</label>
-            <div class="col-sm-9">
-               		플렉시테리언 <input type="checkbox" name = "tag" value="0"/>
-					폴로 페스코 베지테리언 <input type="checkbox" name = "tag" value="1"/>
-					페스코 베지테리언 <input type="checkbox" name = "tag" value="2"/>
-					락토 오보 베지테리언 <input type="checkbox" name = "tag" value="3"/>
-					 비건 <input type="checkbox" name = "tag" value="4"/>
+<div class="input-group mb-3 mt-3">
+    <label class="col-sm-2 offset-sm-1 col-form-label">태그를 선택해 주세요</label>
+    <div class="col-sm-9">
+        <fieldset>
+            <legend>식단 유형</legend>
+            <div>
+                <input type="checkbox" name="tag" value="0" id="flexitarian">
+                <label for="flexitarian">플렉시테리언</label>
             </div>
-             <div class="col-sm-9">
-               		아무나 <input type="checkbox" name = "tag" value="5"/>
-					초급 <input type="checkbox" name = "tag" value="6"/>
-					중급 <input type="checkbox" name = "tag" value="7"/>
-					상급 <input type="checkbox" name = "tag" value="8"/>
-					전문가 <input type="checkbox" name = "tag" value="9"/>
-          </div>
-          </div>
+            <div>
+                <input type="checkbox" name="tag" value="1" id="pollo-pesco-vegetarian">
+                <label for="pollo-pesco-vegetarian">폴로 페스코 베지테리언</label>
+            </div>
+            <div>
+                <input type="checkbox" name="tag" value="2" id="pesco-vegetarian">
+                <label for="pesco-vegetarian">페스코 베지테리언</label>
+            </div>
+            <div>
+                <input type="checkbox" name="tag" value="3" id="lacto-ovo-vegetarian">
+                <label for="lacto-ovo-vegetarian">락토 오보 베지테리언</label>
+            </div>
+            <div>
+                <input type="checkbox" name="tag" value="4" id="vegan">
+                <label for="vegan">비건</label>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<div class="input-group mb-3 mt-3">
+    <div class="col-sm-2 offset-sm-1"></div>
+    <div class="col-sm-9">
+        <fieldset>
+            <legend>난이도</legend>
+            <div>
+                <input type="checkbox" name="tag" value="5" id="anyone">
+                <label for="anyone">아무나</label>
+            </div>
+            <div>
+                <input type="checkbox" name="tag" value="6" id="beginner">
+                <label for="beginner">초급</label>
+            </div>
+            <div>
+                <input type="checkbox" name="tag" value="7" id="intermediate">
+                <label for="intermediate">중급</label>
+            </div>
+            <div>
+                <input type="checkbox" name="tag" value="8" id="advanced">
+                <label for="advanced">상급</label>
+            </div>
+            <div>
+                <input type="checkbox" name="tag" value="9" id="expert">
+                <label for="expert">전문가</label>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+
         <br/>
         <hr>
         <br/>

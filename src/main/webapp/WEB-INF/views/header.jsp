@@ -39,6 +39,8 @@ html, body {
 .menu {
 	background-color: #49c5a2;
 	margin: 0 0 0 0;
+	display: flex;
+    justify-content: center;
 }
 
 .menu ul {
@@ -136,7 +138,6 @@ html, body {
 	<div class="row menu">
 		<ul>
 			<li><a href="recipe.go">레시피</a></li>
-			<li><a href="ranking.go">랭킹</a></li>
 			<li><a href="classList.go">클래스</a></li>
 			<li><a href="magazine.go">매거진</a></li>
 			<li class="nav-item dropdown"><a

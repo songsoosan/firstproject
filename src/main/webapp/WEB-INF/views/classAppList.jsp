@@ -9,34 +9,34 @@
 <style></style>
 </head>
 <body>
-<table>
-		<thead>
-			<tr>
-				<th>아이디</th>
-				<th>이름</th>
-				<th>전화번호</th>
-				<th>클래스 참여 번호</th>
-				<th>삭제</th>
-			</tr>
-		</thead>		
-		<tbody>
-			<c:if test="${appList eq null}">
-				<tr>
-					<th colspan="5">등록된 글이 없습니다.</th>
-				</tr>
-			</c:if>
-			<c:forEach items="${appList}" var="join">
-				<tr>
-					<td>${join.user_id}</td>
-					<td>${join.user_name}</td>
-					<td>${join.user_phone}</td>
-					<td>${join.cl_part_id}</td>
-					<td></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-</body>
+<%@ include file="./header.jsp" %>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>아이디</th>
+            <th>이름</th>
+            <th>전화번호</th>
+            <th>클래스 참여 번호</th>
+            <th>삭제</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:if test="${appList eq null}">
+            <tr>
+                <th colspan="5">등록된 글이 없습니다.</th>
+            </tr>
+        </c:if>
+        <c:forEach items="${appList}" var="join">
+            <tr>
+                <td>${join.user_id}</td>
+                <td>${join.user_name}</td>
+                <td>${join.user_phone}</td>
+                <td>${join.cl_part_id}</td>
+                <td></td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
 <script>
 
 </script>

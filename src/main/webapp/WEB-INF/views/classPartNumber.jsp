@@ -54,12 +54,22 @@
 
 </head>
 <body>
-<%@ include file="./header.jsp" %>
-	
-	<h3>${dto.user_name }님 해당 클래스의 접수가 완료되었습니다.</h3>
-	<h2>회원님의 해당 클래스 참여번호는 ${dto.cl_part_id }입니다!</h2>
-	<button onclick="location.href='classDetail.do?cl_id=${dto.cl_id}'">확인</button>
+    <%@ include file="./header.jsp" %>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="card-title">${dto.user_name}님 해당 클래스의 접수가 완료되었습니다.</h3>
+                        <h2 class="card-text">회원님의 해당 클래스 참여번호는 ${dto.cl_part_id}입니다!</h2>
+                        <button onclick="location.href='classDetail.do?cl_id=${dto.cl_id}'" class="btn btn-primary">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 <script>
 	var msg = "${msg}";
 	if(msg != ""){
