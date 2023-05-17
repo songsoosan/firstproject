@@ -51,7 +51,7 @@ public class ClassesController {
 				}
 			}
 		} else {
-			page = "main";
+			page = "login";
 			model.addAttribute("msg", "로그인을 해주세요");
 		}
 		logger.info("list call");
