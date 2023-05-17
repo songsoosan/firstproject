@@ -93,39 +93,7 @@
 		</div>
 	</div>
 </div>
-	<!-- <button type="button" class="btn btn-primary" onclick = "location.href='recieveletter.go'">받은 쪽지함</button>
-	<button type="button" class="btn btn-primary" onclick = "location.href='sendletter.go'">보낸 쪽지함</button>
-				쪽지 갯수 : 
-	<select id="pagePerNum">
-		<option value="5">5</option>
-		<option value="10">10</option>
-		<option value="15">15</option>
-		<option value="20">20</option>
-	</select>
-	<button type="button" class="btn btn-info" onclick = "location.href='letterWrite.go'" id = "ne">새 쪽지</button>
-	<table>
-		<thead>
-			<tr>
-				<th>읽음</th>
-				<th>보낸사람</th>
-				<th>제목</th>
-				<th>보낸시간</th>
-				<th><input type="checkbox" id="all"/><button type="button" class="btn btn-danger" onclick="del()" id = "del">삭제</button></th>
-			</tr>
-		</thead>
-		<tbody id="list">
-		</tbody>
-		<tr>
-			<td colspan="6" id="paging">	
-					플러그인 사용	(twbsPagination)	
-				<div class="container">									
-					<nav aria-label="Page navigation" style="text-align:center">
-						<ul class="pagination" id="pagination"></ul>
-					</nav>					
-				</div>
-			</td>
-		</tr>
-	</table> -->
+
 </body>
 <script>
 var showPage = 1;

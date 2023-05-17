@@ -19,8 +19,6 @@ import com.vegan.admin.dto.AdminDTO;
 import com.vegan.admin.service.AdminService;
 import com.vegan.member.dto.MemberDTO;
 
-
-
 @Controller
 public class AdminController {
 	
@@ -56,7 +54,7 @@ public class AdminController {
 	@RequestMapping(value="/admin.adminLetterList", method = RequestMethod.GET)
 	public String AdminLetterList(Model model) {
 
-		return "adminLetterList";
+		return "recieveLetter";
 	}
 	
 	@RequestMapping(value="/adminCommit.do", method = RequestMethod.GET)

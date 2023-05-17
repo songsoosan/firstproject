@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
 table,th,td{
 	border : 1px solid black;
@@ -77,78 +78,42 @@ textarea{
 
 </head>
 <body>
-	
-	<div>
-		<a href="main.go">
-			<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
-		</a>
-		<input type ="text" placeholder="검색"/>
-		<a href="profile.do">
-			<img src="resources/img/user.png" alt="유저" width="70px" height="70px"/>
-		</a> 
-		<a href="write.go">
-			<img src="resources/img/write.png" alt="글쓰기" width="70px" height="70px"/>
-		</a>
-		<a href="recieveletter.go">
-			<img src="resources/img/letter.png" alt="쪽지" width="70px" height="70px"/>
-		</a>
-	</div>
-	<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
+    <%@ include file="./header.jsp" %>
+    <div class="container mt-4">
+        <form action="userUpdate.do" method="post">
+            <table class="table table-bordered">
+                <tr>
+                    <th>ID</th>
+                    <td><input type="text" name="id" value="${detail.user_id}" readonly /></td>
+                </tr>
 
-	<div class ="menu">
-		<ul class="ul">
-			<li class="li"><a href="recipe.go">레시피</a></li>
-			<li class="li"><a href="ranking.go">랭킹</a></li>
-			<li class="li"><a href="classes.go">클래스</a></li>
-			<li class="li"><a href="magazine.go">매거진</a></li>
-			<li class="li"><a href="board.go">게시판</a></li>
-			<li class="li"><a href="event.go">이벤트</a></li>
-		</ul>
-	</div>
-	<form action="userUpdate.do" method="post">
-		<table>
-			<tr>
-				<th>ID</th>
-				<td><input type="text" name="id" value="${detail.user_id}" readonly/></td>
-			</tr>
-<%-- 			<tr>
-				<th>PW</th>
-				<td><input type="text" name="pw"  value="${detail.user_pw}"/></td>
-			</tr> --%>
-			<tr>
-				<th>NAME</th>
-				<td><input type="text" name="name" value="${detail.user_name}"/></td>
-			</tr>
-			<!-- <tr>
-				<th>GENDER</th>
-				<td>
-					<input type="radio" name="gender" value="남" 
-					<c:if test="${member.gender eq '남'}">checked</c:if>
-					/>남자 &nbsp;&nbsp;&nbsp;
-					<input type="radio" name="gender" value="여"
-					<c:if test="${member.gender eq '여'}">checked</c:if>
-					/>여자
-				</td> 
-			</tr>-->
-			<tr>
-				<th>E-MAIL</th>
-				<td><input type="text" name="email" value="${detail.user_email}"/></td>
-			</tr>
-			<tr>
-				<th>phone</th>
-				<td><input type="text" name="phone" value="${detail.user_phone}"/></td>
-			</tr>
-			<tr>
-				<th colspan="2"><input type="button" value="비밀번호변경" onclick="location.href='passwardChk.go'"/></th>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<input type="submit" value="수정"/>
-					<input type="button" value="탈퇴" onclick="location.href='delUser.do?idx=${detail.user_id}'"/>
-				</th>
-			</tr>
-		</table>
-	</form>
+                <tr>
+                    <th>NAME</th>
+                    <td><input type="text" name="name" value="${detail.user_name}" /></td>
+                </tr>
+                <tr>
+                    <th>E-MAIL</th>
+                    <td><input type="text" name="email" value="${detail.user_email}" /></td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td><input type="text" name="phone" value="${detail.user_phone}" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="button" value="비밀번호 변경" onclick="location.href='passwardChk.go'" class="btn btn-primary" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="수정" class="btn btn-success" />
+                        <input type="button" value="탈퇴" onclick="location.href='delUser.do?idx=${detail.user_id}'" class="btn btn-danger" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 </body>
 <script>
 	var msg="${msg}";
