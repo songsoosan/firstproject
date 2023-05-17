@@ -18,7 +18,7 @@
 		<hr/>
 			<div class="input-group mb-3 mt-3">
 				<label class="col-sm-2 offset-sm-1 col-form-label">아이디</label>
-				<div class="col-sm-9">
+				<div class="col-sm-6">
 					<input type="text" class="form-control" id="userID"/>
 					<button id="overlayid" class="btn btn-outline-primary">중복체크</button>
 					<span id="idmsg"></span>
@@ -26,13 +26,13 @@
 			</div>
 			<div class="input-group mb-3 mt-3">
 				<label class="col-sm-2 offset-sm-1 col-form-label">패스워드</label>
-				<div class="col-sm-9">
+				<div class="col-sm-6">
 					<input type="password" class="form-control" id="userPW"/>
 				</div>
 			</div>
 			<div class="input-group mb-3 mt-3">
 				<label class="col-sm-2 offset-sm-1 col-form-label">패스워드확인</label>
-				<div class="col-sm-9">
+				<div class="col-sm-6">
 					<input type="password" class="form-control" id ="confirm"/>
 					<span id="pwmsg"></span>
 				</div>
@@ -40,13 +40,13 @@
 			
 			<div class="input-group mb-3 mt-3">
 				<label class="col-sm-2 offset-sm-1 col-form-label">이름</label>
-				<div class="col-sm-9">
+				<div class="col-sm-6">
 					<input type="text" class="form-control" id="userName"/>
 				</div>
 			</div>
 			<div class="input-group mb-3 mt-3">
 				<label class="col-sm-2 offset-sm-1 col-form-label">성별</label>
-				<div class="col-sm-9">
+				<div class="col-sm-6">
 					<input type="radio" class="form-control" name="userGender" value="male"/>남자
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="radio" class="form-control" name="userGender" value="female"/>여자
@@ -54,13 +54,13 @@
 			</div>
 			<div class="input-group mb-3 mt-3">
 				<label class="col-sm-2 offset-sm-1 col-form-label">연락처</label>
-				<div class="col-sm-9">
+				<div class="col-sm-6">
 					<input type="text" class="form-control" id="userPhone"/>
 				</div>
 			</div>
 			<div class="input-group mb-3 mt-3">
 				<label class="col-sm-2 offset-sm-1 col-form-label">E-MAIL</label>
-				<div class="col-sm-9">
+				<div class="col-sm-6">
 					<input type="email" class="form-control" id="userEmail"/>
 				</div>
 			</div>

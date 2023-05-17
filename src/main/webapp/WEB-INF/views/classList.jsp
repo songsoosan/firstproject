@@ -65,6 +65,7 @@ div {
 </head>
 <body>
 <%@ include file="./header.jsp" %>
+<<<<<<< HEAD
 	<%-- 	<div class="d-flex align-items-center justify-content-center">
 	<a href="main.go" class="me-3">
 		<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
@@ -124,6 +125,9 @@ div {
 </div> --%>
 
 	
+=======
+		
+>>>>>>> origin/master
 	<c:if test="${adminChk ne null}">
 		<button type="button" class="btn btn-info" onclick="location.href='classWrite.go'">클래스 등록</button>
 	</c:if>
