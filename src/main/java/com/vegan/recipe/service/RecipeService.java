@@ -56,7 +56,7 @@ public class RecipeService {
 		
 		dto.setRec_title(params.get("rec_title"));
 		dto.setRec_video(params.get("rec_video"));
-		dto.setUser_id("admin"); // 세션 아이디 넣게 수정할것
+		dto.setUser_id(params.get("user_id")); // 세션 아이디 넣게 수정할것
 		
 		logger.info(dto.getUser_id());
 		
