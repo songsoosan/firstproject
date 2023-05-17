@@ -44,6 +44,12 @@
 </div>
 </body>
 <script>
+var msg = "${msg}";
+
+if (msg != "") {
+	alert(msg);
+}
+
 var loginId = '<%=(String)session.getAttribute("loginId")%>';
 $("input[name=user_id]").val(loginId);
 </script>

@@ -106,7 +106,7 @@ table.profile-table .profile-photo {
 			</form>
 			<tr>
 				<td colspan="3" class="profile-section"><a class="action-link"
-					href="#">내가 작성한 레시피</a></td>
+					href="myRecipeList.do">내가 작성한 레시피</a></td>
 			</tr>
 			<tr>
 				<td colspan="3" class="profile-section"><a class="action-link"

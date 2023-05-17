@@ -1,8 +1,11 @@
 package com.vegan.member.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.vegan.classes.dto.ClassesDTO;
 import com.vegan.member.dto.MemberDTO;
+import com.vegan.recipe.dto.RecipeDTO;
 public interface MemberDAO {
 
 	int overlayid(String user_id);
@@ -18,6 +21,12 @@ public interface MemberDAO {
 	MemberDTO getUserInfoPW(HashMap<String, String> params);
 
 	int adminChk(String loginId);
+
+	ArrayList<RecipeDTO> listPhoto();
+
+	ArrayList<RecipeDTO> rlist();
+
+	ArrayList<ClassesDTO> clist();
 
 
 }

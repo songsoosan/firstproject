@@ -10,7 +10,7 @@
 <%@ include file="./header.jsp" %>
 	<table>
 			<tr>
-				<td colspan="2"><img width="500" src="resources/photo/${main_photo}"/></td>
+				<td colspan="2"><img width="500" src="/photo/${main_photo}"/></td>
 			</tr> 
 			<tr>
 				<th>제목</th>
@@ -20,10 +20,10 @@
 				<th>작성자</th>
 				<td>${dto.user_id}</td>
 			</tr>
-			<tr>
+			<%-- <tr>
 				<th>비디오</th>
 				<td>${dto.rec_video}</td>
-			</tr>
+			</tr> --%>
 			<tr>
 			<th>작성일</th>
 				<td>${dto.rec_creatdate}</td>

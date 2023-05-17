@@ -2,6 +2,7 @@ package com.vegan.mypage.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.vegan.classes.dto.ClassesDTO;
 import com.vegan.mypage.dto.MypageDTO;
 import com.vegan.mypage.service.MypageService;
+import com.vegan.recipe.dto.RecipeDTO;
 
 
 
@@ -175,6 +177,32 @@ public class MypageController {
 				page = "main";
 				model.addAttribute("msg","로그인을 해주세요");
 			}
+			return page;
+		}
+	 
+	 @RequestMapping(value="/myRecipeList.do")
+		public String myRecipeList(Model model, HttpSession session) {
+			
+		
+				String loginId = String.valueOf(session.getAttribute("loginId"));
+				ArrayList <RecipeDTO> recipelist = service.rlist(loginId);
+				model.addAttribute("recipelist",recipelist);
+				
+				ArrayList <RecipeDTO> photos = service.listPhoto(loginId);
+				Map<String, String> pho = new HashMap<>();
+				 int x=0;
+				for (RecipeDTO photo : photos) {
+
+			    	String val = photo.getPhoto_name();
+			    	 logger.info(val);
+			    	pho.put("photo_name"+x, val);
+			    	x++;
+				}
+				 model.addAttribute("photo", pho);
+		
+				String page = "myRecipeList2";
+				
+			
 			return page;
 		}
 	 

@@ -3,68 +3,97 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
 >
 <mapper namespace="com.vegan.mypage.dao.MypageDAO">
-   
+
 
 
 	<select id="profile" resultType="com.vegan.mypage.dto.MypageDTO">
-		SELECT u.user_id, u.user_name, u.user_email, u.user_phone,p.vegan_step, p.introduction, IFNULL(ph.photo_name, 'default_photo.jpg') AS photo_name, IFNULL(ph.photo_id, 0) AS photo_id 
+		SELECT u.user_id, u.user_name,
+		u.user_email, u.user_phone,p.vegan_step, p.introduction,
+		IFNULL(ph.photo_name, 'default_photo.jpg') AS photo_name,
+		IFNULL(ph.photo_id, 0) AS photo_id
 		FROM user u
 		JOIN profile p ON u.user_id = p.user_id
-		LEFT JOIN photo ph ON p.user_id = ph.identify_number AND ph.photo_id = (SELECT MAX(photo_id) FROM photo WHERE identify_number = u.user_id)
-		WHERE u.user_id = #{param1}
+		LEFT JOIN photo ph ON
+		p.user_id = ph.identify_number AND ph.photo_id = (SELECT MAX(photo_id)
+		FROM photo WHERE identify_number = u.user_id)
+		WHERE u.user_id =
+		#{param1}
 
 	</select>
 
-	<select id="profileDetail" resultType="com.vegan.mypage.dto.MypageDTO">
-		SELECT user_id,user_pw,user_name,user_email,user_phone FROM user 
-			WHERE user_id=#{param1} 
+	<select id="profileDetail"
+		resultType="com.vegan.mypage.dto.MypageDTO">
+		SELECT user_id,user_pw,user_name,user_email,user_phone FROM
+		user
+		WHERE user_id=#{param1}
 	</select>
-	
+
 	<update id="update" parameterType="hashmap">
-		UPDATE user SET user_name = #{name},user_email=#{email},user_phone=#{phone}
-			WHERE user_id = #{id}
+		UPDATE user SET user_name =
+		#{name},user_email=#{email},user_phone=#{phone}
+		WHERE user_id = #{id}
 	</update>
-	
+
 	<update id="changePW" parameterType="String">
-		UPDATE user SET user_pw = #{param2}
-			WHERE user_id = #{param1}
+		UPDATE user SET user_pw =
+		#{param2}
+		WHERE user_id = #{param1}
 	</update>
-	
-	
+
+
 	<select id="pwChk" resultType="integer">
-		SELECT Count(user_id )FROM user 
-			WHERE user_id=#{param1} AND user_pw=#{param2}
+		SELECT Count(user_id )FROM user
+		WHERE user_id=#{param1} AND user_pw=#{param2}
 	</select>
-	
+
 	<update id="del" parameterType="String">
-		UPDATE user SET user_secc_chk = "1"
-			WHERE user_id = #{idx}
+		UPDATE user SET user_secc_chk =
+		"1"
+		WHERE user_id = #{idx}
 	</update>
-	
-	<insert id ="proUpdate" parameterType="String">
-			INSERT INTO profile(user_id,introduction) VALUES(#{param1},#{param2})
-			ON DUPLICATE KEY UPDATE introduction = #{param2}
+
+	<insert id="proUpdate" parameterType="String">
+		INSERT INTO profile(user_id,introduction) VALUES(#{param1},#{param2})
+		ON DUPLICATE KEY UPDATE introduction = #{param2}
 	</insert>
-		
+
 	<insert id="profilePhoto">
-		INSERT INTO photo(cat_id,ori_photo_name, photo_name,identify_number) 
-			VALUES('profilePhoto',#{param1},#{param2},#{param3})
-			ON DUPLICATE KEY UPDATE photo_name = #{param2}
-	</insert>	
-	
-	<select id="mclist" resultType="com.vegan.classes.dto.ClassesDTO">
-		SELECT c.cl_id,cj.user_id,c.cl_subject,c.cl_period,c.cl_deadlinePeriod,c.cl_deadline
-			,c.cl_teacher,c.cl_date,c.cl_ing_chk,c.cl_status,c.cl_content
-			,c.cl_id, cj.cl_part_id
-			FROM class c 
-			JOIN class_join cj ON c.cl_id = cj.cl_id
-			WHERE c.cl_id IN (
-			    SELECT cl_id 
-			    FROM class_join 
-   		 WHERE user_id = #{param1}
-);
+		INSERT INTO photo(cat_id,ori_photo_name,
+		photo_name,identify_number)
+		VALUES('profilePhoto',#{param1},#{param2},#{param3})
+		ON DUPLICATE KEY UPDATE photo_name = #{param2}
+	</insert>
+
+	<select id="mclist"
+		resultType="com.vegan.classes.dto.ClassesDTO">
+		SELECT
+		c.cl_id,cj.user_id,c.cl_subject,c.cl_period,c.cl_deadlinePeriod,c.cl_deadline
+		,c.cl_teacher,c.cl_date,c.cl_ing_chk,c.cl_status,c.cl_content
+		,c.cl_id, cj.cl_part_id
+		FROM class c
+		JOIN class_join cj ON c.cl_id = cj.cl_id
+		WHERE c.cl_id IN (
+		SELECT cl_id
+		FROM class_join
+		WHERE user_id = #{param1}
+		);
 	</select>
-	
+
+	<select id="rlist" resultType="com.vegan.recipe.dto.RecipeDTO">
+		SELECT
+		rec_id, user_id, rec_title, rec_view
+		FROM recipe where user_id=#{param1} ORDER BY rec_id DESC
+	</select>
+
+	<select id="listPhoto"
+		resultType="com.vegan.recipe.dto.RecipeDTO">
+		SELECT photo.photo_name
+		FROM recipe
+		JOIN photo ON recipe.rec_id = photo.identify_number
+		WHERE
+		photo_number = 0;
+	</select>
+
 
 
 </mapper>
