@@ -38,8 +38,15 @@ public class RecipeController {
 	}
 	
 	@RequestMapping(value="/recipe.write.go")
-    public String writePage() {
-        return "recipeWrite";  
+    public String writePage(HttpSession session, Model model) {
+		String page = "recipeWrite";
+		if (session.getAttribute("loginId") == null) {
+			page ="login";
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
+		}
+		
+		
+        return page;  
     }
 	
 	@RequestMapping(value="/recipe.detail.do")
