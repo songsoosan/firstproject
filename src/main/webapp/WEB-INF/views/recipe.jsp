@@ -76,15 +76,15 @@
 					<img class="img-thumbnail" src="/photo/${photo[b]}" alt="Content Photo">
 				</div>
 			</div>
-			<div>
+		</div>
+	</c:forEach>
+				<div>
 			<c:forEach items="${tags}" var="tag" varStatus="loop">
 				<tr>
 					<th>${tag.tag}</th>
 				</tr>
 			</c:forEach >
 			</div>
-		</div>
-	</c:forEach>
 	<div class="row justify-content-center">
 		<div class="col-md-12">
 			<input type="button" onclick="location.href='./recipe.go'" value="리스트" class="btn btn-primary">

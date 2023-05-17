@@ -153,7 +153,7 @@ $(document).on('click','#submit',function(){
           <hr>
           <br/><br/>
 
-          <div class="input-group mb-3 mt-3">
+          <!-- <div class="input-group mb-3 mt-3">
             <label class="col-sm-2 offset-sm-1 col-form-label">동영상 링크</label>
             <div class="col-sm-9">
               <input type="text" class="form-control" name="rec_video" id="rec_video">
@@ -162,7 +162,7 @@ $(document).on('click','#submit',function(){
 
           <br/><br/>
           <hr>
-          <br/><br/>
+          <br/><br/> -->
 
           <div class="row">
             <div class="input-group">

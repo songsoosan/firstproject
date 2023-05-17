@@ -30,7 +30,7 @@
 			<c:forEach items="${list}" var="recipe" varStatus="loop">
 			<c:set var="b" value="photo_name${loop.index}" />
 				<tr>
-					<td><img width="500" src="/resources/photo/${photo[b]}"/></td>
+					<td><img width="500" src="/photo/${photo[b]}"/></td>
 					<td>${recipe.rec_id}</td>
 					<td>${recipe.user_id}</td>
 					<td><a href="recipe.detail.do?rec_id=${recipe.rec_id}">${recipe.rec_title} </a></td>
