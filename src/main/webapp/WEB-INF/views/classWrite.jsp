@@ -15,7 +15,7 @@ ${msg}
         <form action="classWrite.do" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="user_id">아이디</label>
-                <input type="text" class="form-control" id="user_id" name="user_id">
+                <input type="text" class="form-control" id="user_id" name="user_id" value="${sessionScope.loginId }">
             </div>
             <div class="form-group">
                 <label for="cl_subject">제목</label>

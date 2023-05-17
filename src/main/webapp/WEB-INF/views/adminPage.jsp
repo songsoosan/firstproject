@@ -53,9 +53,8 @@
     <div class="btn-list">
         <a href="./admin.userList" class="btn">유저 리스트</a>
         <a href="./admin.reportList" class="btn">신고 리스트</a>
-        <a href="./admin.blindList" class="btn">블라인드 리스트</a>
         <a href="./admin.category" class="btn">카테고리</a>
-        <a href="./admin.adminLetterList" class="btn">관리자 쪽지</a>
+        <a href="./recieveletter.go" class="btn">관리자 쪽지</a>
     </div>
 </body>
 </html>

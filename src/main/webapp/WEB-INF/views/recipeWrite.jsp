@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<link rel="stylesheet" href="resources/css/commons.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <style>
 .input-file-button{
   padding: 6px 25px;
@@ -126,47 +126,48 @@ $(document).on('click','#submit',function(){
 </script>
 
 <body>
-<%@ include file="./header.jsp" %>
-<div class="contentWrap mt-5">
-   <div class="contentBox">
+  <%@ include file="./header.jsp" %>
+  <div class="contentWrap mt-5 container">
+    <div class="contentBox">
       <div class="text-center">
-			<h2>레시피 등록</h2>
-	</div>
-	<hr/> 
-	    
-<form action="recipe.write.do" method="POST" enctype="multipart/form-data">
-	<div class="main">
-		<input type="hidden"  name="rec_content_id" id="rec_content_id" >
-		<input type="hidden"  name="food_id" id="food_id">
-		
-		<br/>
-		
-		<div class="input-group mb-3 mt-3">
+        <h2>레시피 등록</h2>
+      </div>
+      <hr/>
+
+      <form action="recipe.write.do" method="POST" enctype="multipart/form-data">
+        <div class="main">
+          <input type="hidden"  name="rec_content_id" id="rec_content_id">
+          <input type="hidden"  name="food_id" id="food_id">
+
+          <br/>
+
+          <div class="input-group mb-3 mt-3">
             <label class="col-sm-2 offset-sm-1 col-form-label">레시피 제목</label>
             <div class="col-sm-9">
-               <input type="text" class="form-control" name = "rec_title" id="rec_title"/>
+              <input type="text" class="form-control" name="rec_title" id="rec_title">
             </div>
-        </div>
-        
-         <br/><br/>
-			<hr>
-		<br/><br/>
-        
-        <div class="input-group mb-3 mt-3">
+          </div>
+
+          <br/><br/>
+          <hr>
+          <br/><br/>
+
+          <div class="input-group mb-3 mt-3">
             <label class="col-sm-2 offset-sm-1 col-form-label">동영상 링크</label>
             <div class="col-sm-9">
-               <input type="text" class="form-control" name = "rec_video" id="rec_video"/>
+              <input type="text" class="form-control" name="rec_video" id="rec_video">
             </div>
-        </div>
-        
-         <br/><br/>
-			<hr>
-		<br/><br/>
-        
-       <div class="row">
+          </div>
+
+          <br/><br/>
+          <hr>
+          <br/><br/>
+
+          <div class="row">
             <div class="input-group">
-               <label for= recipe_photo class="col-sm-2 offset-sm-1 col-form-label">사진</label>
-               <input type="file" class="form-control w-auto" name = "rec_photo" id="rec_photo" accept="image/*" onchange="setThumbnail(event);">
+              <label for="recipe_photo" class="col-sm-2 offset-sm-1 col-form-label">사진</label>
+              <input type="file" class="form-control w-auto" name="rec_photo" id="rec_photo" accept="image/*" onchange="setThumbnail(event);">
+              <div id="image_container_main"></div>
             </div>
          </div> 
          
@@ -210,43 +211,34 @@ $(document).on('click','#submit',function(){
         <br/><br/>
         	<hr>
         <br/><br/>
-        
+    
+
         <div class="input-group mb-3 mt-3">
             <label class="col-sm-2 offset-sm-1 col-form-label">태그</label>
             <div class="col-sm-9">
-               <input type="checkbox" value="1"/>
-					<input type="checkbox" value="2"/>
-					<input type="checkbox" value="3"/>
-					<input type="checkbox" value="4"/>
-					<input type="checkbox" value="5"/>
+               		플렉시테리언 <input type="checkbox" name = "tag" value="0"/>
+					폴로 페스코 베지테리언 <input type="checkbox" name = "tag" value="1"/>
+					페스코 베지테리언 <input type="checkbox" name = "tag" value="2"/>
+					락토 오보 베지테리언 <input type="checkbox" name = "tag" value="3"/>
+					 비건 <input type="checkbox" name = "tag" value="4"/>
             </div>
-        </div>
-        
+             <div class="col-sm-9">
+               		아무나 <input type="checkbox" name = "tag" value="5"/>
+					초급 <input type="checkbox" name = "tag" value="6"/>
+					중급 <input type="checkbox" name = "tag" value="7"/>
+					상급 <input type="checkbox" name = "tag" value="8"/>
+					전문가 <input type="checkbox" name = "tag" value="9"/>
+          </div>
+          </div>
         <br/>
         <hr>
         <br/>
-        
-           	 <input type="submit" id="submit"/>
-        </form>
-       </div>
-      </div>
-        
-      <br/><br/>
-         
-         
-         
-         
-			
-		
-		
-		
-		
-		
-		
-			
-		
-				
-			
-			
+
+        <input type="submit" class="btn btn-primary" id="submit">
+      </form>
+    </div>
+  </div>
+
 </body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </html>

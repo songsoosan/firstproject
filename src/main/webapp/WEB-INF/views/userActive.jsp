@@ -6,67 +6,60 @@
 <meta charset="UTF-8">
 <title>회원 제재 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="resources/js/jquery.twbsPagination.js"
-	type="text/javascript"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <style>
-.history-table th, .history-table td {
-	border: 1px solid #ccc;
-	padding: 8px;
-	font-size: 14px;
-}
-
-input[type="text"] {
-	width: 100%;
-}
-
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-bottom: 20px;
-	table-layout: fixed;
-}
-
-td {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-th, td {
-	border: 1px solid black;
-	padding: 5px 10px;
-}
-
-.button-container {
+.container {
 	display: flex;
-	align-items: center;
-}
-
-.button-container button {
-	margin-left: 10px;
-}
-
-body {
-	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
+	padding: 20px; /* 수정: 내부 여백 추가 */
 }
 
-.container {
-	max-width: 600px;
+.table {
+	width: 100%;
+}
+
+.table th, .table td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.btn-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px; /* 수정: 버튼과의 간격을 위해 margin-top 추가 */
+}
+
+.history-table {
+	margin-top: 20px;
+	width: 100%;
+}
+
+.history-table th, .history-table td {
+	padding: 10px;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+.history-table th {
+	background-color: #f1f1f1;
+}
+
+.history-table tbody tr:nth-child(even) {
+	background-color: #f9f9f9;
 }
 </style>
 </head>
 <body>
-	<h3>회원 제재 페이지</h3>
+	<%@ include file="./header.jsp"%>
+
+	<h3 class="text-center mb-4">회원 제재 페이지</h3>
+
 	<div class="container">
-		<table>
+		<table class="table">
 			<input type="hidden" id="report_id" value="${report_id}" />
 			<tr>
 				<th>대상 아이디</th>
@@ -90,31 +83,37 @@ body {
 			</tr>
 			<tr>
 				<th colspan="2">
-					<div class="col text-center">
+					<div class="btn-container">
 						<button type="button" id="confirm" class="btn btn-primary">확인</button>
 					</div>
 				</th>
 			</tr>
 		</table>
 
-		<h3>History</h3>
-		<table class="history-table">
-			<tr>
-				<th>처리 관리자</th>
-				<th>처리 내용</th>
-				<th>처리 근거</th>
-				<th>처리 날짜</th>
-			</tr>
-			<c:forEach items="${history}" var="history">
+		<h3 class="text-center mt-5">History</h3>
+		<table class="table history-table">
+			<thead class="thead-dark">
 				<tr>
-					<td>${history.report_admin}</td>
-					<td>${history.report_result}</td>
-					<td>${history.report_reason}</td>
-					<td>${history.result_date}</td>
+					<th>처리 관리자</th>
+					<th>처리 내용</th>
+					<th>처리 근거</th>
+					<th>처리 날짜</th>
 				</tr>
-			</c:forEach>
+			</thead>
+			<tbody>
+				<c:forEach items="${history}" var="history">
+					<tr>
+						<td>${history.report_admin}</td>
+						<td>${history.report_result}</td>
+						<td>${history.report_reason}</td>
+						<td>${history.result_date}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
+	</div>
 </body>
+
 <script>
 	$(document).ready(function() {
 		$('#confirm').on('click', function() {

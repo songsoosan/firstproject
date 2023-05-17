@@ -33,6 +33,12 @@ public class RecipeService {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired RecipeDAO dao;
+	
+	public ArrayList<RecipeDTO> list() {
+		
+		
+		return dao.list();
+	}
 
 	public String write(MultipartFile rec_photo, List<MultipartFile> thumbnailFile, HashMap<String, String> params) {
 		
@@ -90,7 +96,6 @@ public class RecipeService {
 		
 		page = "redirect:/recipe.detail.do?rec_id="+rec_id; 
 		
-		// 2. 파일도 업로드 한 경우
 
 			logger.info("파일 업로드 작업");
 			fileSave(rec_id, thumbnailFile);
@@ -117,7 +122,7 @@ public class RecipeService {
 				try {
 					byte[] bytes = rec_photo.getBytes();//1-4. 바이트 추출
 					//1-5. 추출한 바이트 저장
-					Path path = Paths.get("C:/img/upload/"+photo_name);
+					Path path = Paths.get("/resources/photo/"+photo_name);
 					Files.write(path, bytes);
 					logger.info(photo_name+" save OK");
 					// 2. 저장 정보를 DB 에 저장
@@ -162,12 +167,40 @@ public class RecipeService {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			  
-			  
-			  
+
 			}
+
+	}
+	public RecipeDTO detail(String rec_id) {
+		dao.upRec_view(rec_id);
+	
+		 return  dao.detail1(rec_id);
+	}
+
+	public List<RecipeDTO> detailContent(String rec_id) {
 		
+		return dao.detail2(rec_id);
+	}
+
+	public List<RecipeDTO> detailPhoto(String rec_id) {
 		
+		return dao.detail3(rec_id);
+	}
+
+	public List<RecipeDTO> detailFood(String rec_id) {
+	
+		return dao.detail4(rec_id);
+	}
+
+
+	public String mainPhoto(String rec_id) {
+		
+		return dao.detail5(rec_id);
+	}
+
+	public ArrayList<RecipeDTO> listPhoto() {
+		
+		return dao.listPhoto();
 	}
 
 

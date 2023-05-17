@@ -5,109 +5,91 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <style>
-input[type="text"] {
-	width: 100%;
-}
-
-	table {
-		width: 100%;
-		border-collapse: collapse;
-		margin-bottom: 20px;
-		table-layout: fixed;
-	}
-
-    td {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    .container {
+      border: 2px solid #7CFC00;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
     }
-	th, td {
-		border: 1px solid black;
-		padding: 5px 10px;
-	}
-
-    .button-container {
-        display: flex;
-        align-items: center;
-    }
-
-    .button-container button {
-        margin-left: 10px;
-    }
-
-body {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-}
-
-.container {
-	max-width: 600px;
-}
 </style>
 </head>
 <body>
-	<h3>신고 상세보기</h3>
-	<div class="container">
-		<table>
-			<input type="hidden" id="report_id" value="${report_id}" />
-			<tr>
-				<th>신고대상글</th>
-				<td id="subject"></td>
-			</tr>
-			<tr>
-			    <th>글작성자</th>
-			    <td>
-			        <div class="button-container">
-			            <span id="user_id"></span>
-			            <button type="button" id="userActive" class="btn btn-primary">상태 변경</button>
-			        </div>
-			    </td>
-			</tr>
-			<tr>
-				<th>신고자</th>
-				<td id="reporter"></td>
-			</tr>
-			<tr>
-				<th>신고 날짜</th>
-				<td id="date"></td>
-			</tr>
-			<tr>
-				<th>신고사유</th>
-				<td id="reason"></td>
-			</tr>
-			<tr>
-				<th>신고내용</th>
-				<td id="content"></td>
-			</tr>
-			<tr>
-				<th>처리관리자</th>
-				<td id="admin">${sessionScope.loginId}</td>
-			</tr>
-			<tr>
-				<th>처리상태</th>
-				<td>
-					<input type="radio" name="status" id="완료" value="완료">완료
-					<input type="radio" name="status" id="대기" value="대기">대기
-					<input type="radio" name="status" id="미완료" value="미완료">미완료
-				</td>
-			</tr>
-
-			<tr>
-				<th colspan="2">
-					<div class="col text-center">
-						<button type="button" id="confirm" class="btn btn-primary">확인</button>
-					</div>
-				</th>
-			</tr>
-		</table>
+<%@ include file="./header.jsp" %>
+	<h3 class="text-center mb-4">신고 상세보기</h3>
+	<div class="container border rounded py-4">
+	<div class="container text-center">
+		<input type="hidden" id="report_id" value="${report_id}" />
+		<div class="form-group row">
+			<label for="subject" class="col-sm-3 col-form-label font-weight-bold">신고대상글</label>
+			<div class="col-sm-9">
+				<span id="subject" class="font-weight-bold"></span>
+			</div>
+		</div>
+			<div class="form-group row">
+	  <label for="user_id" class="col-sm-3 col-form-label font-weight-bold">글작성자</label>
+	  <div class="col-sm-9 d-flex align-items-center justify-content-center">
+	    <span id="user_id" class="font-weight-bold"></span>
+	    <button type="button" id="userActive" class="btn btn-primary ml-3">상태 변경</button>
+	  </div>
+	</div>
+		<div class="form-group row">
+			<label for="reporter" class="col-sm-3 col-form-label font-weight-bold">신고자</label>
+			<div class="col-sm-9">
+				<span id="reporter" class="font-weight-bold"></span>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="date" class="col-sm-3 col-form-label font-weight-bold">신고 날짜</label>
+			<div class="col-sm-9">
+				<span id="date" class="font-weight-bold"></span>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="reason" class="col-sm-3 col-form-label font-weight-bold">신고사유</label>
+			<div class="col-sm-9">
+				<span id="reason" class="font-weight-bold"></span>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="content" class="col-sm-3 col-form-label font-weight-bold">신고내용</label>
+			<div class="col-sm-9">
+				<span id="content" class="font-weight-bold"></span>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="admin" class="col-sm-3 col-form-label font-weight-bold">처리관리자</label>
+			<div class="col-sm-9">
+				<span id="admin" class="font-weight-bold">${sessionScope.loginId}</span>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-3 col-form-label font-weight-bold">처리상태</label>
+			<div class="col-sm-9">
+				<div class="form-check form-check-inline">
+					<input type="radio" name="status" id="완료" value="완료" class="form-check-input">
+					<label for="완료" class="form-check-label">완료</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input type="radio" name="status" id="대기" value="대기" class="form-check-input">
+					<label for="대기" class="form-check-label">대기</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input type="radio" name="status" id="미완료" value="미완료" class="form-check-input">
+					<label for="미완료" class="form-check-label">미완료</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-9 offset-sm-3">
+				<button type="button" id="confirm" class="btn btn-primary">확인</button>
+			</div>
+		</div>
+	</div>
 	</div>
 </body>
+
 <script>
 	var $status = '${status}'; // 서버에서 상태 값을 가져와서 저장하도록 변경해야 합니다.
 	if ($status) {

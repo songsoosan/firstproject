@@ -105,7 +105,13 @@ html, body {
 						<a href="recieveletter.go"><i
 							class="bi bi-chat-left-dots mx-2"></i></a>
 					</div>
-					<c:if test="${adminChk ne null}">
+					<%-- <c:if test="${adminChk ne null}">
+						<div class="col-auto">
+							<a href="admin.go" class="d-flex align-items-center"><i
+								class="bi bi-person-fill-gear"></i></a>
+						</div>
+					</c:if> --%>
+					<c:if test="${sessionScope.loginId eq 'admin'}">
 						<div class="col-auto">
 							<a href="admin.go" class="d-flex align-items-center"><i
 								class="bi bi-person-fill-gear"></i></a>
