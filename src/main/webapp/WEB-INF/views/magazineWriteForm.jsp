@@ -55,19 +55,29 @@
 var loginId = '<%=(String)session.getAttribute("loginId")%>';
 $("input[name=user_id]").val(loginId);
 
-var linkInput = document.getElementById("linkInput");
-var linkAnchor = document.getElementById("linkAnchor");
-
-linkInput.addEventListener('input', function() {
-    var link = linkInput.value.trim();
-    if (link !== "") {
-        linkAnchor.href = link;
-        linkAnchor.innerText = link;
+function buttonControl(loginId) {
+	if(loginId == 'null') {
+	$(".btnCtrl").addClass("none");
+	}
+	}
+	
+function buttonControl(loginId) {
+    if (loginId === 'null') {
+        $(".btnCtrl").addClass("none");
     } else {
-        linkAnchor.href = "";
-        linkAnchor.innerText = "";
+        adminCheck();
     }
-});
+}
+
+
+function adminCheck() {
+    if (loginId === "admin") {
+        $(".btnCtrl").removeClass("none");
+    } else {
+        $(".btnCtrl").addClass("none");
+    }
+}
+
 
 </script>
 </html>

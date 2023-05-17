@@ -77,22 +77,22 @@ Logger logger = LoggerFactory.getLogger(getClass());
       // 1. 게시글만 작성한 경우
       // 빙금 insert 한 값의 key 를 반환 받는 방법
       // 조건 1. 파라메터를 dto 로 보내야 한다.
-      MagazineDTO dto = new MagazineDTO();
+      MagazineDTO dtoo = new MagazineDTO();
       //receipeDTO.setCat_id("recipe");
       // dto.setCat_id("mpd");
       //logger.info("loginId :"+loginId);
     
-      dto.setCat_id(params.get("cat_id"));
-      dto.setBoard_title(params.get("board_title"));
-      dto.setUser_id(params.get("user_id"));
-      dto.setBoard_content(params.get("board_content"));
-      logger.info("cat_id : " + dto.getCat_id());
-      int row = dao.magazinewrite(dto);
+      dtoo.setCat_id(params.get("cat_id"));
+      dtoo.setBoard_title(params.get("board_title"));
+      dtoo.setUser_id(params.get("user_id"));
+      dtoo.setBoard_content(params.get("board_content"));
+      logger.info("cat_id : " + dtoo.getCat_id());
+      int row = dao.magazinewrite(dtoo);
       logger.info("update row : "+row);
       
       // 조건 3. 받아온 키는 파라메터 dto 에서 뺀다.
-      int board_id = dto.getBoard_id();
-      String cat_id = dto.getCat_id();
+      int board_id = dtoo.getBoard_id();
+      String cat_id = dtoo.getCat_id();
       logger.info("방금 insert 한 board_id : "+board_id);
       
       page = "redirect:/magazineDetail.do?board_id="+board_id;

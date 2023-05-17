@@ -62,7 +62,7 @@ public interface MagazineDAO {
 
 
 
-int magazinewrite(MagazineDTO dto);
+int magazinewrite(MagazineDTO dtoo);
 
 int photoDelete(String photo_name);
 

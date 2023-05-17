@@ -5,8 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자 페이지</title>
-    <link rel="stylesheet" href="resources/css/commons.css">
+
     <style>
+    .none {
+      display: none !important;
+   }
+   .onlyAdmin {
+      display: block !important;
+   }
+   .borderBottom {
+        border-bottom: solid 1px #49c5a2;
+   }
+   
         .btn-list {
             display: flex;
             flex-wrap: wrap;
@@ -34,6 +44,12 @@
     </style>
 </head>
 <body>
+<%@ include file="./header.jsp" %>
+<div class="contentWrap mt-5">
+   <div class="contentBox">
+      <div class="row mb-2 text-center">
+      
+      
     <div class="btn-list">
         <a href="./admin.userList" class="btn">유저 리스트</a>
         <a href="./admin.reportList" class="btn">신고 리스트</a>
