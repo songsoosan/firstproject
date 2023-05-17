@@ -21,12 +21,14 @@
    <div class="contentBox">
       <div class="row mb-2 text-center">
          <h2 class="text-center">이벤트 상세</h2>
+         
          <hr/>
+         
       </div>
       <div class="fr" style="display:inline-flex;">
 		 <button type="button" class="btn btn-outline-secondary" onclick="location.href='./event.do'">리스트</button>
 		 <button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='./eventUpdate.go?event_id=${dto.event_id}'" >수정</button>
-		 <button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='./eventDelete.do?event_id=${dto.event_id}'" >삭제</button>
+		 <button class="btnCtrl btn btn-outline-primary float-right" onclick="confirmDelete('${dto.event_id}')" >삭제</button>
 		       
 		<input type="button" onclick="location.href='./reportWrite.go?evebt_id=${dto.event_id}&board_title=${dto.event_title}&cat_id=${dto.cat_id}'" value="신고"/>
 	</div>
@@ -61,12 +63,6 @@
             <input type="text" class="form-control-plaintext" value="${dto.event_date}" readonly>
          </div>
       </div>
-      <div class="input-group borderBottom mb-3 mt-3">
-         <label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
-         <div class="col-sm-9">
-             <textarea class="form-control" rows="50" readonly>${dto.event_content}</textarea>
-         </div>
-      </div>
       <c:if test="${dto.photo_name ne null}">
          <div class="input-group mb-3 mt-3">
             <label class="col-sm-2 offset-sm-1 col-form-label">사진</label>
@@ -75,8 +71,18 @@
             </div>
          </div>
       </c:if>
+      <hr/>
+      
+      <div class="input-group borderBottom mb-3 mt-3">
+         <label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
+         <div class="col-sm-9">
+             <textarea class="form-control" rows="50" readonly>${dto.event_content}</textarea>
+         </div>
+      </div>
+      
   </div>
 </div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="eventdelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -134,6 +140,15 @@ function readMode(idx) {
    $("tr.reply:eq("+idx+")").find(".editMode").addClass("none");
 }
 
+function confirmDelete(event_id) {
+	   // 확인창 띄우기
+	   var result = confirm("이밴트 삭제 하시겠습니까?");
+
+	   // 확인 버튼 클릭 시 링크 실행
+	   if (result) {
+	      location.href = "./eventDelete.do?event_id=" + event_id;
+	   }
+	}
 
 </script>
 </html>

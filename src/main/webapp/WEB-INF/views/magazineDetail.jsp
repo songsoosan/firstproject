@@ -20,9 +20,17 @@
 <%@ include file="./header.jsp" %>
 <div class="contentWrap mt-5">
    <div class="contentBox">
-      <div class="row mb-2 text-center">
-		<% String userId = (String) session.getAttribute("loginId"); %>
-			<c:forEach items="dto">
+      <h2 class="text-center">매거진 상세</h2>
+		
+			<div class="fr" style="display:inline-flex;">
+		         <button type="button" class="btn btn-outline-secondary" onclick="location.href='./magazine.do'">리스트</button>
+		         <button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='./magazineUpdate.go?board_id=${dtoo.board_id}'" >수정</button>
+		          <button class="btnCtrl btn btn-outline-primary float-right" onclick="confirmDelete('${dtoo.board_id}')" >삭제</button>
+		       
+				<input type="button" onclick="location.href='./reportWrite.go?board_id=${dtoo.board_id}&board_title=${dtoo.board_title}&cat_id=${dtoo.cat_id}'" value="신고"/>
+		     </div>
+		     
+			<input type="hidden" name = "event_id" value="${dtoo.board_id}">
 			<div class="input-group borderBottom mb-3 mt-3">
 				<label class="col-sm-2 offset-sm-1 col-form-label">제목</label>
 				<div class="col-sm-9">
@@ -41,31 +49,25 @@
             <input type="text" class="form-control-plaintext" value="${dtoo.board_date}" readonly>
          </div>
       </div>
+      
+      <c:if test="${dtoo.photo_name ne null}">
+         <div class="input-group mb-3 mt-3">
+            <label class="col-sm-2 offset-sm-1 col-form-label">사진</label>
+            <div class="col-sm-9">
+               <img max-width="300" max-height="300" src="/photo/${dtoo.photo_name}"/>
+            </div>
+         </div>
+      </c:if>
+      <hr/>
+      
 		<div class="input-group borderBottom mb-3 mt-3">
          <label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
          <div class="col-sm-9">
              <textarea class="form-control" rows="25" readonly>${dtoo.board_content}</textarea>
          </div>
       </div>
-      
       </div>
-		<c:if test="${dtoo.photo_name ne null}">
-			<div class="input-group mb-3 mt-3">
-				<label class="col-sm-2 offset-sm-1 col-form-label">사진</label>
-				<div class="col-sm-9">
-					<img max-width="300" max-height="300" src="/photo/${dtoo.photo_name}"/>
-				</div>
-        	 </div>
-		</c:if>
-			<div class="fr" style="display:inline-flex;">
-		         <button type="button" class="btn btn-outline-secondary" onclick="location.href='./magazine.do'">리스트</button>
-		         	<button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='./magazineUpdate.go?board_id=${dtoo.board_id}'" >수정</button>
-		          	<button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='./magazineDelete.do?board_id=${dtoo.board_id}'" >삭제</button>
-		       
-				<input type="button" onclick="location.href='./reportWrite.go?board_id=${dtoo.board_id}&board_title=${dtoo.board_title}&cat_id=${dtoo.cat_id}'" value="신고"/>
-		     </div>
-		</c:forEach>
-	
+
 		
 		<br/><br/>
 		
@@ -86,7 +88,7 @@
             <td class="col-sm-2">
                <c:if test="${comment.user_id eq sessionScope.loginId}">
                   <button type="button" class="readMode btn btn-outline-primary" onclick='location.href="commentupdate.go?comment_id=${comment.comment_id}&board_id=${dtoo.board_id}&comment_content=${comment.comment_content}"'>수정</button>
-                  <button type="button" class="readMode btn btn-outline-danger" onclick='location.href="commentdel.do?comment_id=${comment.comment_id}&board_id=${dtoo.board_id}"'>삭제</button>
+                  <button type="button" class="readMode btn btn-outline-danger"  onclick="confirmDeleteComment('${comment.comment_id}', '${dtoo.board_id}')">삭제</button>
                </c:if>
                <c:if test="${comment.user_id ne sessionScope.loginId}">
                   <button type="button" class="btn btn-outline-danger" onclick="location.href='./reportWrite.go?board_id=${dtoo.board_id}&board_title=${dtoo.board_title}&cat_id=${dtoo.cat_id}'">신고</button>
@@ -123,14 +125,18 @@
          </table>
       </form>
    </div>
-</div>
-     		
+   <br/>
+   <br/>
+
+
      		
 		
 </body>
 <script>
 loginId = '<%=(String)session.getAttribute("loginId")%>';
 buttonControl(loginId);
+
+
 
 function buttonControl(loginId) {
 	if(loginId == 'null') {
@@ -166,7 +172,25 @@ function adminCheck() {
 		$("tr.reply:eq(" + idx + ")").find(".editMode").addClass("none");
 	}
 
+	function confirmDelete(board_id) {
+		   // 확인창 띄우기
+		   var result = confirm("매거진 삭제 하시겠습니까?");
 
+		   // 확인 버튼 클릭 시 링크 실행
+		   if (result) {
+		      location.href = "./magazineDelete.do?board_id=" + board_id;
+		   }
+		}
+	
+	function confirmDeleteComment(comment_id, board_id) {
+		   // 확인창 띄우기
+		   var result = confirm("댓글 삭제 하시겠습니까?");
+
+		   // 확인 버튼 클릭 시 링크 실행
+		   if (result) {
+		      location.href = "commentdel.do?comment_id=" + comment_id + "&board_id=" + board_id;
+		   }
+		}
 
 
 </script>

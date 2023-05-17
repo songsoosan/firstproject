@@ -9,7 +9,7 @@
 		cat_id FROM board ORDER BY board_id DESC </select> -->
 
 
-	<select id="listt"
+	<select id="list"
 		resultType="com.vegan.magazine.dto.MagazineDTO">
 		SELECT
 		board_id, user_id, board_title, board_content,
