@@ -74,6 +74,7 @@
 	 </div>
 	
 </body>
+
 <script>
 var loginId = '<%=(String)session.getAttribute("loginId")%>';
 buttonControl(loginId);
@@ -177,5 +178,8 @@ function adminCheck() {
         $(".btnCtrl").addClass("none");
     }
 }
+
+
+
 </script>
 </html>

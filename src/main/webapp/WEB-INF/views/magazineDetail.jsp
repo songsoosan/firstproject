@@ -26,25 +26,25 @@
 			<div class="input-group borderBottom mb-3 mt-3">
 				<label class="col-sm-2 offset-sm-1 col-form-label">제목</label>
 				<div class="col-sm-9">
-            <input type="text" class="form-control-plaintext" value="${dto.board_title}">
+            <input type="text" class="form-control-plaintext" value="${dto.board_title}" readonly>
          </div>
       </div>	
        <div class="input-group borderBottom mb-3 mt-3">
          <label class="col-sm-2 offset-sm-1 col-form-label">작성자</label>
          <div class="col-sm-9">
-            <input type="text" class="form-control-plaintext" value="${dto.user_id}">
+            <input type="text" class="form-control-plaintext" value="${dto.user_id}" readonly>
          </div>
       </div>
        <div class="input-group borderBottom mb-3 mt-3">
          <label class="col-sm-2 offset-sm-1 col-form-label">작성일</label>
          <div class="col-sm-9">
-            <input type="text" class="form-control-plaintext" value="${dto.board_date}">
+            <input type="text" class="form-control-plaintext" value="${dto.board_date}" readonly>
          </div>
       </div>
 		<div class="input-group borderBottom mb-3 mt-3">
          <label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
          <div class="col-sm-9">
-            <input type="text" class="form-control-plaintext" value="${dto.board_content}">
+             <textarea class="form-control" rows="50" readonly>${dto.board_content}</textarea>
          </div>
       </div>
       

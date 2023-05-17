@@ -24,6 +24,27 @@
    .pagination {
       justify-content: center;
    }
+   .eventStatus {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.preparing {
+    background-color: khaki;
+    color: white;
+}
+
+.ongoing {
+    background-color: darkseagreen;
+    color: white;
+}
+
+.expired {
+    background-color: gray;
+    color: white;
+}
+</style>
 </style>
 </head>
 <body>
@@ -152,11 +173,11 @@ function listPrint(list) {
         var eventStatusText = '';
 
         if (event_start_date > currentDate) {
-            eventStatusText = '준비중';
+            eventStatusText = '<span class="eventStatus preparing">준비중</span>';
         } else if (event_end_date < currentDate) {
-            eventStatusText = '마감';
+            eventStatusText = '<span class="eventStatus expired">마감</span>';
         } else {
-            eventStatusText = '진행중';
+            eventStatusText = '<span class="eventStatus ongoing">진행중</span>';
         }
         
         content += '<td>' + eventStatusText + '</td>';
