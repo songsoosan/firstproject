@@ -33,7 +33,7 @@ public interface MagazineDAO {
 
    int totalCount();
 
-   ArrayList<MagazineDTO> list(int cnt, int offset);
+   ArrayList<MagazineDTO> listt(int cnt, int offset);
 
    ArrayList<MagazineDTO> magacommentlist(String board_id);
 
