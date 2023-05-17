@@ -10,7 +10,8 @@
 </head>
 <body>
 <%@ include file="./header.jsp" %>
-<div class="contentWrap mt-5">
+<div class="contentWrap mt-5" style="display: flex; justify-content: center;">
+	<div class="logincontentBox" style="background-color: #f2f2f2; padding: 20px; border-radius: 10px; max-width: 400px;">
 	<div class=logincontentBox>
 		<div class="text-center">
 			<h2>로그인</h2>
@@ -38,6 +39,7 @@
 				<button type="button" class="btn btn-outline-secondary" onclick="location.href='findPW.go'">비밀번호 찾기</button>
 			</div>
 		</form>
+	</div>
 	</div>
 </div>
 </body>

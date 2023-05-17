@@ -122,7 +122,7 @@ public class RecipeService {
 				try {
 					byte[] bytes = rec_photo.getBytes();//1-4. 바이트 추출
 					//1-5. 추출한 바이트 저장
-					Path path = Paths.get("C:/img/upload/"+photo_name);
+					Path path = Paths.get("/resources/photo/"+photo_name);
 					Files.write(path, bytes);
 					logger.info(photo_name+" save OK");
 					// 2. 저장 정보를 DB 에 저장
