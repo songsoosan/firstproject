@@ -62,7 +62,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
       map.put("currPage", page);
       map.put("pages", range);
       
-      ArrayList<MagazineDTO> list = dao.listt(cnt, offset);
+      ArrayList<MagazineDTO> list = dao.list(cnt, offset);
       map.put("list", list);
       logger.info("list : "+list);
       logger.info("map : "+map);

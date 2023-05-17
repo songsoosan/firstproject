@@ -30,7 +30,7 @@
    <div class="contentBox">
       <div class="row mb-2 text-center">
 		<h3>최신 매거진</h3>
-	  </div>
+		</div>
 	  <hr/>
 	   <div>
          <div class="d-flex" style="float: left;">
@@ -72,6 +72,7 @@
 		   </div>
 	   </div>
 	 </div>
+	 	  
 	
 </body>
 

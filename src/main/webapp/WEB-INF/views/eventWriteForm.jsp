@@ -6,8 +6,6 @@
 <title>Insert title here</title>
 
 </head>
-<link rel="stylesheet" href="resources/css/commons.css" type="text/css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
 
 </style>
@@ -18,12 +16,12 @@
    <div class="contentBox">
       <div class="text-center">
 	
-	<form action="eventWrite.do" method="post" enctype="multipart/form-data">
+	<form action="eventWrite.do" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 		<input type="hidden" name = "cat_id" value = "e"/> 
 			<div class="input-group mb-3 mt-3">
 	            <label class="col-sm-2 offset-sm-1 col-form-label">제목</label>
 	            <div class="col-sm-9">
-	               <input type="text" class="form-control" name="event_title"/>
+	               <input type="text" class="form-control" name="event_title" id="event_title"/>
 	            </div>
 	        </div>
 	         <div class="input-group mb-3 mt-3">
@@ -47,13 +45,13 @@
 	         	<div class="input-group mb-3 mt-3">
 	            <label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
 	            <div class="col-sm-9">
-	               <textarea class="form-control" rows="35" name="event_content"></textarea>
+	               <textarea class="form-control" rows="35" name="event_content" id="event_content"></textarea>
 	            </div>
 	         </div>
            <div class="row">
 	            <div class="input-group">
-	               <label for= event_photo class="col-sm-2 offset-sm-1 col-form-label">사진</label>
-	               <input type="file" class="form-control w-auto" name="photo">
+	               <label for="event_photo" class="col-sm-2 offset-sm-1 col-form-label">사진</label>
+	               <input type="file" class="form-control w-auto" name="photo" id="event_photo">
 	            </div>
 	         </div> 
 			<div class="text-center mt-3">
@@ -64,51 +62,31 @@
       	</form>
    	</div>
    </div>
-
-	         
+</div>
 	        
-	        
-	        
-			
-</body>
 <script>
+function validateForm() {
+   var eventTitle = document.getElementById("event_title").value;
+   var eventStartDate = document.getElementById("event_start_date").value;
+   var eventEndDate = document.getElementById("event_end_date").value;
+   var eventContent = document.getElementById("event_content").value;
 
-var loginId = '<%=(String)session.getAttribute("loginId")%>';
-$("input[name=user_id]").val(loginId);
-
-function buttonControl(loginId) {
-	if(loginId == 'null') {
-	$(".btnCtrl").addClass("none");
-	}
-	}
-	
-function buttonControl(loginId) {
-    if (loginId === 'null') {
-        $(".btnCtrl").addClass("none");
-    } else {
-        adminCheck();
-    }
+   if (eventTitle === "" || eventStartDate === "" || eventEndDate === "" || eventContent === "") {
+      alert("모든 항목을 입력해주세요.");
+      return false;
+   }
+   return true;
 }
-
-
-function adminCheck() {
-    if (loginId === "admin") {
-        $(".btnCtrl").removeClass("none");
-    } else {
-        $(".btnCtrl").addClass("none");
-    }
-}
-
 
 $(document).ready(function() {
-	  $("#event_start_date").datepicker({
-	    dateFormat: "yy-mm-dd" //날짜형식설정
-	  });
-	  
-	  $("#event_end_date").datepicker({
-	    dateFormat: "yy-mm-dd" 
-	  });
-	});
+   $("#event_start_date").datepicker({
+      dateFormat: "yy-mm-dd" //날짜형식설정
+   });
 
+   $("#event_end_date").datepicker({
+      dateFormat: "yy-mm-dd"
+   });
+});
 </script>
+</body>
 </html>
