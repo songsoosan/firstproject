@@ -146,17 +146,22 @@ public class MypageController {
 		}
 	 
 	 @RequestMapping(value = "/changePW.do")
-		public String newPW( Model model, HttpSession session,@RequestParam String newPW ) {
+		public String newPW( Model model, HttpSession session,@RequestParam String newPW,@RequestParam String confirm ) {
 		 //logger.info("del idx:"+idx);
+		 String page ="";
 		 String loginId = (String) session.getAttribute("loginId");
-		 if (session.getAttribute("loginId") != null) {
+		 if (session.getAttribute("loginId") != null && newPW.equals(confirm)) {
 			 if (service.changePW(loginId,newPW)==1) {
 				String msg="비밀번호가 변경되었습니다.";
 				 session.setAttribute("msg", msg);
+				 page = "redirect:/profileDetail.do";
 			}
+		 }else {
+			 model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			 page = "changePW";
 		 }
 		 
-			return "redirect:/profileDetail.do";
+			return page;
 		}
 	 
 	 
