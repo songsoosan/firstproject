@@ -54,10 +54,11 @@
 				<tr>
 					<td class="text-center">${recipe.rec_id}</td>
 					<td class="text-center"><img width="300" src="/resources/photo/${photo[b]}"/></td>
-					<td class="text-center">${recipe.rec_title}</td>
+					<td class="text-center" style="width:25%"><a href="recipe.detail.do?rec_id=${recipe.rec_id}">${recipe.rec_title} </a></td>
 					<td class="text-center">${recipe.user_id}</td>
 					<td class="text-center">${recipe.rec_view}</td>
-				
+
+
 				</tr>
 			</c:forEach>
 		</tbody>
