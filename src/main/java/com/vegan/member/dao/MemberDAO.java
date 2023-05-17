@@ -16,4 +16,8 @@ public interface MemberDAO {
 	MemberDTO getUserInfo(HashMap<String, String> params);
 	
 	MemberDTO getUserInfoPW(HashMap<String, String> params);
+
+	int adminChk(String loginId);
+
+
 }

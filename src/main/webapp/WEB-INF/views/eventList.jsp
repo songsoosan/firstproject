@@ -2,50 +2,82 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-<meta charset="UTF-8">
-	<title>Insert title here</title>
-		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
-		<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
-		<style>
-			b{
-				color:red;
-			}
+<meta charset="UTF-8">   
+<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
+<link rel= "stylesheet" href="resources/css/paging.css" type="text/css">
+<style>
+	 .none {
+      display: none !important;
+   }
+   .onlyAdmin {
+      display: block !important;
+   }
+   th.onlyAdmin, td.onlyAdmin {
+      display: table-cell !important;
+   }
+   .textDeco {
+      text-decoration: line-through;
+   }
+   #list a {
+      text-decoration-line: none;
+   }
+   .pagination {
+      justify-content: center;
+   }
+   .eventStatus {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
 
-			table{
-				width:100%;
-			}
-			
-			table, td, th{
-				border : 1px solid;
-				border-collapse : collapse;
-				padding: 5px;
-			}
-			
-			#paging{
-				text-align: center;
-			}
-		</style>
+.preparing {
+    background-color: khaki;
+    color: white;
+}
+
+.ongoing {
+    background-color: darkseagreen;
+    color: white;
+}
+
+.expired {
+    background-color: gray;
+    color: white;
+}
+</style>
+</style>
 </head>
 <body>
-	<h3>최신 이벤트</h3>
-	게시물 갯수 : 
-	<select id="pagePerNum">
-		<option value="5">5</option>
-		<option value="10">10</option>
-		<option value="15">15</option>
-		<option value="20">20</option>
-	</select>
-	<button onclick="location.href='eventWrite.go'">글쓰기</button>
-	<table>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>모집기간</th>
-				<th>작성자</th>
-				<th>이벤트 상태</th>
+<%@ include file="./header.jsp" %>
+<div class="contentWrap mt-5">
+   <div class="contentBox">
+      <div class="text-center">
+		<h3>최신 이벤트</h3>
+	</div>
+      <hr/>
+      <div>
+         <div class="d-flex" style="float: left;">
+            <span class="mt-1">게시물 갯수&nbsp;:&nbsp;</span>
+            <select id="pagePerNum" class="form-select w-auto">
+               <option value="5">5</option>
+               <option value="10">10</option>
+               <option value="15">15</option>
+               <option value="20">20</option>
+            </select>
+             </div>
+        	 <div style="float: right;" class="d-flex">
+            	<button class="btnCtrl btn btn-outline-primary float-right"  onclick="location.href='eventWrite.go'">글쓰기</button>
+            </div>         
+	      </div>
+	      <div style="margin-top: 70px;">
+	      <table class="table table-striped table-bordered">
+	         <thead>
+	            <tr>
+	               <th class="text-center col-md-1">번호</th>
+	               <th class="text-center" style="width:25%">제목</th>
+	               <th class="text-center col-md-1">모집기간</th>
+	               <th class="text-center col-md-1">작성자</th>
+	               <th class="text-center col-md-1">이벤트 상태</th>
 			</tr>
 		</thead>
 		<tbody id="list">			
@@ -60,11 +92,15 @@
 					</nav>					
 				</div>
 			</td>
-		</tr>		
+		</tr>
 	</table>
+	</div>
+	</div>
+	</div>
 </body>
 <script>
-
+var loginId = '<%=(String)session.getAttribute("loginId")%>';
+buttonControl(loginId);
 var showPage = 1;
 listCall(showPage);
 
@@ -93,6 +129,10 @@ function listCall(page){
                 startPage: data.page, // 시작페이지
                 totalPages: data.pages, // 총 페이지 수
                 visiblePages: 5, // 보여줄 페이지 [1][2][3][4][5]
+                next : '<span style="color: #87d1bf;">></span>', 
+                last : '<span style="color: #87d1bf;">>></span>',
+                first : '<span style="color: #87d1bf;"><<</span>',
+               prev : '<span style="color: #87d1bf;"><</span>',
                 onPageClick: function(event, page){ // 페이지 클릭시 동작되는 함수(콜백)
                     console.log(page, showPage);
                     if(page !== showPage){
@@ -119,22 +159,29 @@ function listPrint(list) {
         var event_start_date = new Date(event.event_start_date);
         var event_end_date = new Date(event.event_end_date);
 
-        // 날짜 형식 설정
+        // 날짜형식설정
         var startDateFormatted = event_start_date.toISOString().substring(0, 10);
         var endDateFormatted = event_end_date.toISOString().substring(0, 10);
 
         content += '<td>' + startDateFormatted + ' ~ ' + endDateFormatted + '</td>';
-
         content += '<td>' + event.user_id + '</td>';
         
+		
+        
+        // 준비중,마감,진행중
+        var currentDate = new Date();
+        var eventStatusText = '';
 
-        var status = event.event_status;
-        if (new Date() > event_end_date) {
-            status = false;
+        if (event_start_date > currentDate) {
+            eventStatusText = '<span class="eventStatus preparing">준비중</span>';
+        } else if (event_end_date < currentDate) {
+            eventStatusText = '<span class="eventStatus expired">마감</span>';
+        } else {
+            eventStatusText = '<span class="eventStatus ongoing">진행중</span>';
         }
         
+        content += '<td>' + eventStatusText + '</td>';
         
-        content += '<td>' + status + '</td>';
         content += '</tr>';
         
     });
@@ -145,6 +192,28 @@ function listPrint(list) {
 }
 
 
+function buttonControl(loginId) {
+	if(loginId == 'null') {
+	$(".btnCtrl").addClass("none");
+	}
+	}
+	
+function buttonControl(loginId) {
+    if (loginId === 'null') {
+        $(".btnCtrl").addClass("none");
+    } else {
+        adminCheck();
+    }
+}
 
+
+
+function adminCheck() {
+    if (loginId === "veganadmin") {
+        $(".btnCtrl").removeClass("none");
+    } else {
+        $(".btnCtrl").addClass("none");
+    }
+}
 </script>
 </html>

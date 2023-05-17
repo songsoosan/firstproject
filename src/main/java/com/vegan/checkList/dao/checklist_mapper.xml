@@ -24,11 +24,6 @@
     		VALUES (#{user_id,jdbcType=VARCHAR}, #{total_score,jdbcType=INTEGER}, NOW(), 1, #{step,jdbcType=VARCHAR});
 	</insert>
 	
-	<!--  <insert id="resultsave" parameterType="hashmap">
-    	INSERT INTO question_result (user_id, total_score, create_date, list_check, step)
-    	VALUES (#{user_id,jdbcType=VARCHAR}, #{total_score,jdbcType=INTEGER}, NOW(), 1, #{step,jdbcType=VARCHAR})
-	</insert> -->
-	
 	<select id="getresult" resultType="com.vegan.checkList.dto.CheckListDTO">
     	SELECT user_id, total_score
     	FROM question_result
@@ -57,10 +52,10 @@
 		DELETE from question_result WHERE user_id = #{user_id}
 	</delete>
 	
-	<!--<update id="surveyReset" parameterType="com.vegan.checkList.dto.CheckListDTO">
-		UPDATE question_result
-   		SET step = #{step}
-    	WHERE user_id = #{user_id}
-	</update> -->
+	<update id="profilego" parameterType="com.vegan.checkList.dto.CheckListDTO">
+		UPDATE profile
+		SET vegan_step = #{step}
+		WHERE user_id = #{user_id}
+	</update>
 	
 </mapper>

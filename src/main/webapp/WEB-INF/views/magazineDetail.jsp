@@ -3,119 +3,173 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-
 <style>
-table{
-	width: 100%;
-}
-
-table, th, td{
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding : 5px 10px;	
-}
-
-button{
-	margin: 5px;
-}
-
-input[type="text"]{
-	width: 100%;
-}
-
-textarea{
-	width: 100%;
-	height: 150px;
-	resize: none;
+.none {
+      display: none !important;
+   }
+   .onlyAdmin {
+      display: block !important;
+   }
+   .borderBottom {
+        border-bottom: solid 1px #49c5a2;
+   }
 
 </style>
 </head>
 <body>
-		<table>
+<%@ include file="./header.jsp" %>
+<div class="contentWrap mt-5">
+   <div class="contentBox">
+      <div class="row mb-2 text-center">
+		<% String userId = (String) session.getAttribute("loginId"); %>
 			<c:forEach items="dto">
-			<tr>
-				<th>제목</th>
-				<td>${dto.board_title}</td>
-			</tr>
-			<tr>
-				<th>작성자</th>
-				<td>${dto.user_id}</td>
-			</tr>
-			<tr>
-				<th>작성일</th>
-				<td>${dto.board_date}</td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td>${dto.board_content}</td>
-			</tr>
-			<c:if test="${dto.photo_name ne null}">
-			<tr>
-				<th>대표사진</th>
-				<td><img width="500" src="/photo/${dto.photo_name}"/></td>
-			</tr>
-			</c:if>
-			<tr>
-				<th>링크</th>
-				<td><a href="https://www.naver.com" target="_blank">링크 3</a></td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<input type="button" onclick="location.href='./magazine.do'" value="리스트"/>
-					<input type="button" onclick="location.href='./magazineUpdate.go?board_id=${dto.board_id}'" value="수정"/>
-					<input type="button" onclick="location.href='./magazineDelete.do?board_id=${dto.board_id}'" value="삭제"/>
-					<input type="button" onclick="location.href='./reportWrite.go?board_id=${dto.board_id}&board_title=${dto.board_title}&cat_id=${dto.cat_id}'" value="신고"/>
-
-				</th>
-			</tr>
-			</c:forEach>
-		</table>
+			<div class="input-group borderBottom mb-3 mt-3">
+				<label class="col-sm-2 offset-sm-1 col-form-label">제목</label>
+				<div class="col-sm-9">
+            <input type="text" class="form-control-plaintext" value="${dto.board_title}" readonly>
+         </div>
+      </div>	
+       <div class="input-group borderBottom mb-3 mt-3">
+         <label class="col-sm-2 offset-sm-1 col-form-label">작성자</label>
+         <div class="col-sm-9">
+            <input type="text" class="form-control-plaintext" value="${dto.user_id}" readonly>
+         </div>
+      </div>
+       <div class="input-group borderBottom mb-3 mt-3">
+         <label class="col-sm-2 offset-sm-1 col-form-label">작성일</label>
+         <div class="col-sm-9">
+            <input type="text" class="form-control-plaintext" value="${dto.board_date}" readonly>
+         </div>
+      </div>
+		<div class="input-group borderBottom mb-3 mt-3">
+         <label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
+         <div class="col-sm-9">
+             <textarea class="form-control" rows="50" readonly>${dto.board_content}</textarea>
+         </div>
+      </div>
+      
+      </div>
+		<c:if test="${dto.photo_name ne null}">
+			<div class="input-group mb-3 mt-3">
+				<label class="col-sm-2 offset-sm-1 col-form-label">사진</label>
+				<div class="col-sm-9">
+					<img max-width="300" max-height="300" src="/photo/${dto.photo_name}"/>
+				</div>
+        	 </div>
+		</c:if>
+			<div class="fr" style="display:inline-flex;">
+		         <button type="button" class="btn btn-outline-secondary" onclick="location.href='./magazine.do'">리스트</button>
+		         	<button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='./magazineUpdate.go?board_id=${dto.board_id}'" >수정</button>
+		          	<button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='./magazineDelete.do?board_id=${dto.board_id}'" >삭제</button>
+		       
+				<input type="button" onclick="location.href='./reportWrite.go?board_id=${dto.board_id}&board_title=${dto.board_title}&cat_id=${dto.cat_id}'" value="신고"/>
+		     </div>
+		</c:forEach>
+	
 		
 		<br/><br/>
 		
-		<!-- 문의글 댓글 리스트 가져오기-->
-		<c:if test="${commentlist.size() eq 0}">
-			<tr><th colspan="10">등록된 답변이 없습니다.</th></tr>
-		</c:if>
-		
-		<c:forEach items="${magacommentlist}" var="comment">
-			<div class="comment">
-				${comment.comment_id}
-				${comment.user_id} / ${comment.comment_date}
-				<input type ="button" onclick='location.href="commentdel.do?comment_id=${comment.comment_id}&board_id=${dto.board_id}"' value="삭제"/>
-				<input type ="button" onclick='location.href="commentupdate.go?comment_id=${comment.comment_id}&board_id=${dto.board_id}&comment_content=${comment.comment_content}"' value="수정"/>
-				<p>${comment.comment_content}</p>
-			</div>
-		</c:forEach>
-		
-		<!-- 댓글 작성 -->
-	    <form method="post" action="commentWrite.do">
-	    	<input type="hidden" name="board_id" value="${dto.board_id}">
-	    	<input type="text" name="comment_id" value="${eventcommentlist2.comment_id}">
-				<table>	
-						<tr>
-							<th>내용</th>
-							<td><textarea name="comment_content"></textarea></td>
-						</tr>
-						<tr>
-							<th colspan="2">
-								<button type="submit">등록</button>
-							</th>
-						</tr>
-	    		</table>
-	    </form>
-		<!--  댓글 끝 -->
+		<!-- 매거진 댓글 리스트 가져오기-->
+		<div>
+         <b style="margin-left:45px;">댓글</b>${fn:length(magacommentlist)}<b>개</b>
+      </div>
+      <hr/>
+      <table class="table">
+      <c:forEach items="${magacommentlist}" var="comment" varStatus="status">
+      <tr class="reply">
+            <th class="col-sm-2 px-5">${comment.user_id} </th>
+            <td class="col-sm-6">
+            <p class="readMode">${comment.comment_content}</p>
+               <textarea rows="3" name="comment_content" class="editMode none form-control">${comment.comment_content}</textarea>
+     		</td>
+     		<td class="col-sm-2 text-center">${comment.comment_date}</td>
+            <td class="col-sm-2">
+               <c:if test="${comment.user_id eq sessionScope.loginId}">
+                  <button type="button" class="readMode btn btn-outline-primary" onclick='location.href="commentupdate.go?comment_id=${comment.comment_id}&board_id=${dto.board_id}&comment_content=${comment.comment_content}"'>수정</button>
+                  <button type="button" class="readMode btn btn-outline-danger" onclick='location.href="commentdel.do?comment_id=${comment.comment_id}&board_id=${dto.board_id}"'>삭제</button>
+                  <button type="button" class="editMode none btn btn-outline-primary" onclick="commentUpdate(${status.index}, '${comment.comment_id}', ${dto.board_id});">확인</button>
+                  <button type="button" class="editMode none btn btn-outline-danger" onclick="readMode(${status.index});">취소</button>
+               </c:if>
+               <c:if test="${comment.user_id ne sessionScope.loginId}">
+                  <button type="button" class="btn btn-outline-danger"">신고</button>
+               </c:if>                    
+               </td>
+            </tr>
+      </c:forEach>
+     </table>
+      <form action="commentWrite.do" method="post">
+         <input type="hidden" name="board_id" value="${dto.board_id}">
+	    <input type="hidden" name="comment_id" value="${eventcommentlist2.comment_id}">
+         <table class="table">
+            <c:if test="${loginId ne null}">
+            <tr>
+               <th class="col-sm-2 px-5">
+                  <input type="hidden" name="user_id" value="<%=(String)session.getAttribute("loginId")%>"/>
+                  <b><%=(String)session.getAttribute("loginId")%></b>
+               </th>
+               <th class="col-sm-8">
+                  <textarea class="form-control" name="comment_content"></textarea>
+               </th>
+               <th class="col-sm-2">
+                  <button class="btn btn-outline-primary">작성</button>
+               </th>
+            </tr>
+            </c:if>
+            <c:if test="${loginId eq null}">
+				<tr>
+					<th class="col-sm-8">
+                  <textarea class="form-control" name="comment_content" readonly>회원만 작성 가능합니다.</textarea>
+               </th>
+				</tr>
+			</c:if>
+         </table>
+      </form>
+   </div>
+</div>
+     		
+     		
 		
 </body>
-<c:if test="${not empty message}">
 <script>
+loginId = '<%=(String)session.getAttribute("loginId")%>';
+buttonControl(loginId);
 
-alert("${message}");
+function buttonControl(loginId) {
+	if(loginId == 'null') {
+	$(".btnCtrl").addClass("none");
+	}
+	}
+	
+function buttonControl(loginId) {
+    if (loginId === 'null') {
+        $(".btnCtrl").addClass("none");
+    } else {
+        adminCheck();
+    }
+}
+
+
+function adminCheck() {
+    if (loginId === "veganadmin") {
+        $(".btnCtrl").removeClass("none");
+    } else {
+        $(".btnCtrl").addClass("none");
+    }
+}
+
+
+	function writeMode(idx) {
+		$("tr.reply:eq(" + idx + ")").find(".editMode").removeClass("none");
+		$("tr.reply:eq(" + idx + ")").find(".readMode").addClass("none");
+	}
+
+	function readMode(idx) {
+		$("tr.reply:eq(" + idx + ")").find(".readMode").removeClass("none");
+		$("tr.reply:eq(" + idx + ")").find(".editMode").addClass("none");
+	}
+
+
+
 
 </script>
-</c:if>
-
-
 </html>

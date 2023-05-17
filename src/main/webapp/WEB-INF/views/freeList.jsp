@@ -6,7 +6,7 @@
 <title>Insert title here</title>   
 <style>
    .none {
-      display: none;
+      display: none !important;
    }
    .textDeco {
       text-decoration: line-through;
@@ -26,8 +26,6 @@
       <div class="text-center">
          <h2>자유게시판</h2>
       </div>
-      <hr/>
-
       <div>
          <div class="d-flex" style="float: left;">
             <span class="mt-1">게시물 갯수&nbsp;:&nbsp;</span>
@@ -39,7 +37,7 @@
             </select>
          </div>
          <div style="float: right;" class="d-flex">
-            <button class="btn btn-outline-primary float-right" onclick="location.href='freewrite.go'">글쓰기</button>
+            <button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='freewrite.go'">글쓰기</button>
          </div>         
       </div>
 	  <div style="margin-top: 70px;">
@@ -68,6 +66,7 @@
 <script>
 var loginId = '<%=(String)session.getAttribute("loginId")%>';
 var showPage= 1;
+buttonControl(loginId);
 listCall(showPage);
 
 $('#pagePerNum').change(function(){
@@ -88,57 +87,64 @@ $("#search").click(function (key) {
 });
 
 function listCall(page){
-   $.ajax({
-      type: 'post',
-      url: 'freeList.ajax',
-      data: {
-         'searchText' : $("#searchText").val(),
-         'page': page,
-         'cnt' : $('#pagePerNum').val(),
-         'loginId': loginId
-      },
-      dataType: 'json',
-      success: function(data){
-         listPrint(data.list);
-         
-         //paging plugin
-         $('#pagination').twbsPagination({
-            startPage: data.currPage,
-            totalPages: data.pages,
-            visiblePages: $("#pagePerNum").val(),
-            onPageClick: function(event,page){
-               if(page != showPage){
-                  showPage=page;
-                  listCall(page);
-               }
-            }
-         });
-      },
-      error: function(e){
-         console.log(e);
-      }
-   });
+	$.ajax({
+		type: 'post',
+		url: 'freeList.ajax',
+		data: {
+			'searchText' : $("#searchText").val(),
+			'page': page,
+			'cnt' : $('#pagePerNum').val(),
+			'loginId': loginId
+		},
+		dataType: 'json',
+		success: function(data){
+			listPrint(data);
+		},
+		error: function(e){
+			console.log(e);
+		}
+	});
 }
 
-function listPrint(list){
-   console.log("listPrint!");
-   var content="";
-   
-   //java.sql.Date 는 js에서 읽지 못해 밀리세컨드로 반환한다.
-      // 해결방법 1. DTO에서 Date를 String으로 반환
-      // 해결방법 2. js 에서 변환
-      list.forEach(function(board,board_id){
-         content +='<tr>';
-         content +='<td class="text-center col-md-1">'+board.board_id+'</td>';
-         content +='<td class="text-center" style="width:25%"><a href ="freeDetail.do?board_id='+board.board_id+'">'+board.board_title+'</td>';
-         content +='<td class="text-center col-md-1">'+board.user_id+'</td>';
-         content +='<td class="text-center col-md-1">'+board.board_date+'</td>';
-         content +='<td class="text-center col-md-1">'+board.board_views+'</td>';
-         content +='</tr>';
-      });
-      $('#list').empty();
-      $('#list').append(content);
+function listPrint(data){
+	console.log("listPrint!");
+	var content="";
+  	
+	if(data.list.length > 0) {
+		data.list.forEach(function(board,board_id){
+			content +='<tr>';
+			content +='<td class="text-center col-md-1">'+board.board_id+'</td>';
+			content +='<td class="text-center" style="width:25%"><a href ="freeDetail.do?board_id='+board.board_id+'">'+board.board_title+'</td>';
+			content +='<td class="text-center col-md-1">'+board.user_id+'</td>';
+			content +='<td class="text-center col-md-1">'+board.board_date+'</td>';
+			content +='<td class="text-center col-md-1">'+board.board_views+'</td>';
+			content +='</tr>';
+		});
+		//paging plugin
+        $('#pagination').twbsPagination({
+			startPage: data.currPage,
+			totalPages: data.pages,
+			visiblePages: $("#pagePerNum").val(),
+			onPageClick: function(event,page){
+				if(page != showPage){
+					showPage=page;
+					listCall(page);
+				}
+			}
+		});
+	} else {
+		content +='<tr>';
+		content +='<td colspan="5" class="text-center">데이터가 없습니다.</td>';
+		content +='</tr>';
+	}
+	$('#list').empty();
+	$('#list').append(content);
 }
 
+function buttonControl(loginId) {
+	if(loginId == 'null') {
+		$(".btnCtrl").addClass("none");
+	}
+}
 </script>
 </html>

@@ -141,6 +141,12 @@ public class MemberService {
 		
 		return resMap;
 	}
+
+	public int adminChk(String loginId) {
+		// TODO Auto-generated method stub
+		return dao.adminChk(loginId);
+	}
+
 	
 	
 }

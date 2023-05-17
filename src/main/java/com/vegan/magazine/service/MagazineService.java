@@ -3,6 +3,7 @@ package com.vegan.magazine.service;
 import java.io.File;
 
 
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -63,11 +64,13 @@ Logger logger = LoggerFactory.getLogger(getClass());
       
       ArrayList<MagazineDTO> list = dao.list(cnt, offset);
       map.put("list", list);
+      logger.info("list : "+list);
+      logger.info("map : "+map);
       return map;
    }
    
    
-   public String write(MultipartFile photo, HashMap<String, String> params) {
+   public String magazinewrite(MultipartFile photo, HashMap<String, String> params) {
       
       String page = "redirect:/magazine";
       
@@ -77,28 +80,33 @@ Logger logger = LoggerFactory.getLogger(getClass());
       MagazineDTO dto = new MagazineDTO();
       //receipeDTO.setCat_id("recipe");
       // dto.setCat_id("mpd");
-      dto.setCat_id("m");
+      //logger.info("loginId :"+loginId);
+    
+      dto.setCat_id(params.get("cat_id"));
       dto.setBoard_title(params.get("board_title"));
       dto.setUser_id(params.get("user_id"));
       dto.setBoard_content(params.get("board_content"));
-      int row = dao.write(dto);
+      logger.info("cat_id : " + dto.getCat_id());
+      int row = dao.magazinewrite(dto);
       logger.info("update row : "+row);
       
       // 조건 3. 받아온 키는 파라메터 dto 에서 뺀다.
-      int idx = dto.getBoard_id();
+      int board_id = dto.getBoard_id();
       String cat_id = dto.getCat_id();
-      logger.info("방금 insert 한 board_id : "+idx);
+      logger.info("방금 insert 한 board_id : "+board_id);
       
-      page = "redirect:/magazineDetail.do?board_id="+idx;
+      page = "redirect:/magazineDetail.do?board_id="+board_id;
       
       // 2. 파일도 업로드 한 경우
       if(!photo.getOriginalFilename().equals("")) {
          logger.info("파일 업로드 작업");
          
-         fileSave(cat_id,idx,photo);
+         fileSave(cat_id,board_id,photo);
       }
       return page;
    }
+   
+   
 
    private void fileSave(String cat_id, int board_id, MultipartFile file) {
       // 1. 파일을 C:/img/upload/ 에 저장
@@ -131,8 +139,6 @@ Logger logger = LoggerFactory.getLogger(getClass());
       if(flag.equals("detail")) {
          dao.up_views(board_id);
       }
-      
-      
       return dao.detail(board_id);
    }
    
@@ -151,8 +157,6 @@ Logger logger = LoggerFactory.getLogger(getClass());
             file.delete();
          }
       }
-      
-      
    }
 
    public String update(MultipartFile photo, HashMap<String, String> params) {
@@ -160,17 +164,41 @@ Logger logger = LoggerFactory.getLogger(getClass());
       logger.info("idx : " + params.get("board_id"));
       int idx = Integer.parseInt(params.get("board_id"));
       int row = dao.update(params);
+      // 아래 코드 한줄 대로 하면 false 일떄 true 로 바로 바꿔주기 때문에 삭제 버튼 눌렀을 때만 true 로 바껴야 하는데 
+      // 그래서 그 바로 아래 코드로 수정함 그러면 삭제 버튼 눌렀을때만 수정되고 나머지는 다 false
+      //boolean deletePhoto = params.get("deletePhoto") != null;
+      boolean deletePhoto = "true".equals(params.get("deletePhoto"));
+      logger.info("delete photo : "+ deletePhoto);
+      String page = "redirect:/magazineDetail.do?board_id="+idx;
       logger.info("row:"+row);
       
-      // 2. photo 에 파일명이 존재 한다면?
-      if(photo != null && !photo.getOriginalFilename().equals("")) {
-         fileSave(null, idx, photo);
+      if (deletePhoto) {
+          String photo_name = params.get("photo_name");
+          logger.info("사진 삭제");
+          logger.info("del serPhotoname: " +photo_name);
+          int rowphoto = dao.photoDelete(photo_name);
+          if(rowphoto == 1) {
+             logger.info("사진 삭제 처리 완료");
+             page = rowphoto > 0 ? "redirect:/magazineDetail.do?board_id="+idx : "redirect:/magazine";
+             logger.info("update => "+page);
+          }
+      
       }
       
-      String page = row>0 ? "redirect:/magazineDetail.do?board_id="+idx : "redirect:/magazine";
-      logger.info("update => "+page);
-      
+      if(row == 1) {
+  
+          logger.info("매거진 사진 수정 완료");
+          
+
+      // 2. photo 에 파일명이 존재 한다면?
+      if(photo != null && !photo.getOriginalFilename().equals("")) {
+    	 String cat_id = params.get("cat_id");
+         fileSave(cat_id,idx, photo);
+      }
+     }
+
       return page;
+      
    }
 
 
@@ -203,9 +231,10 @@ Logger logger = LoggerFactory.getLogger(getClass());
    
 
 
-   public void commdelete(String board_id, String comment_id, String loginId) {
-      int row = dao.commdelete(board_id,comment_id,loginId);
-      logger.info("delete comm data : "+row);
+   public int commdelete(String board_id, String comment_id, String loginId) {
+     
+  
+	return dao.commdelete(board_id,comment_id,loginId);
       
    }
 
@@ -229,9 +258,15 @@ Logger logger = LoggerFactory.getLogger(getClass());
    
    
    public int commupdate(String comment_id, String comment_content, String loginId) {
-      // TODO Auto-generated method stub
+      
       return dao.commupdate(comment_id,comment_content, loginId);
    }
+
+
+	public byte adminChk(String loginId) {
+		
+		return dao.adminChk(loginId);
+	}
    
 
 
