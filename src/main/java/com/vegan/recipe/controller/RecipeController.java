@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +38,15 @@ public class RecipeController {
 	}
 	
 	@RequestMapping(value="/recipe.write.go")
-    public String writePage() {
-        return "recipeWrite";  
+    public String writePage(HttpSession session, Model model) {
+		String page = "recipeWrite";
+		if (session.getAttribute("loginId") == null) {
+			page ="login";
+			model.addAttribute("msg", "로그인이 필요한 페이지입니다");
+		}
+		
+		
+        return page;  
     }
 	
 	@RequestMapping(value="/recipe.detail.do")
@@ -79,12 +88,16 @@ public class RecipeController {
 		    model.addAttribute("photo", pho);
 		    model.addAttribute("dto", dto);
 		    
+		    List<RecipeDTO> tags = service.detailTag(rec_id);
+		    
+		    model.addAttribute("tags",tags);
+		    
         return "recipe";  
     }
 	
 	@RequestMapping(value="/recipe.write.do" , method = {RequestMethod.GET,RequestMethod.POST})
     public String write(@RequestParam MultipartFile rec_photo, @RequestParam  List<MultipartFile> thumbnailFile,
-			@RequestParam HashMap<String, String> params) {
+			@RequestParam HashMap<String, String> params, @RequestParam ArrayList<String> tag) {
 		
 		logger.info("hello");
 		
@@ -95,11 +108,12 @@ public class RecipeController {
 			System.out.println(" value = " + params.get(key));
 		}
 		
+		
 		for (MultipartFile file : thumbnailFile) {
 		  logger.info(file.getOriginalFilename());  
 		}
 
-        return service.write(rec_photo,thumbnailFile, params);  
+        return service.write(rec_photo,thumbnailFile, params, tag);  
     }
 	
 	

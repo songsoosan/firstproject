@@ -40,7 +40,8 @@ public class RecipeService {
 		return dao.list();
 	}
 
-	public String write(MultipartFile rec_photo, List<MultipartFile> thumbnailFile, HashMap<String, String> params) {
+	public String write(MultipartFile rec_photo, List<MultipartFile> thumbnailFile, 
+			HashMap<String, String> params, ArrayList<String> tag) {
 		
 		String page = "redirect:/list.do";
 		
@@ -50,13 +51,14 @@ public class RecipeService {
 		RecipeDTO dto = new RecipeDTO();
 		RecipeDTO dtoContent = new RecipeDTO();
 		RecipeDTO dtoFood = new RecipeDTO();
+		RecipeDTO dtoTag = new RecipeDTO();
 		
 		int rec_content_id = Integer.parseInt(params.get("rec_content_id"));
 		int food_id = Integer.parseInt(params.get("food_id"));
 		
 		dto.setRec_title(params.get("rec_title"));
 		dto.setRec_video(params.get("rec_video"));
-		dto.setUser_id("admin"); // 세션 아이디 넣게 수정할것
+		dto.setUser_id(params.get("user_id")); // 세션 아이디 넣게 수정할것
 		
 		logger.info(dto.getUser_id());
 		
@@ -100,6 +102,12 @@ public class RecipeService {
 			logger.info("파일 업로드 작업");
 			fileSave(rec_id, thumbnailFile);
 			photoSave(rec_id,rec_photo);
+			
+			dtoTag.setRec_id(rec_id);
+			for (String string : tag) {
+				dtoTag.setTag_id(string);
+				dao.writeTag(dtoTag);
+			}
 		
 		
 		return page;
@@ -201,6 +209,11 @@ public class RecipeService {
 	public ArrayList<RecipeDTO> listPhoto() {
 		
 		return dao.listPhoto();
+	}
+
+	public List<RecipeDTO> detailTag(String rec_id) {
+		
+		return dao.detailTag(rec_id);
 	}
 
 

@@ -138,6 +138,7 @@ $(document).on('click','#submit',function(){
         <div class="main">
           <input type="hidden"  name="rec_content_id" id="rec_content_id">
           <input type="hidden"  name="food_id" id="food_id">
+          <input type="hidden"  name="user_id" id="user_id" value="${sessionScope.loginId}">
 
           <br/>
 

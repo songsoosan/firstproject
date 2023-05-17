@@ -52,7 +52,7 @@
 		 <div class="row">
 		 <c:if test="${dto.photo_name eq null}">
 		 <div class="input-group">
-                    <label for="board_photo" class="col-sm-2 offset-sm-1 col-form-label">사진</label>
+                    <label for="event_photo" class="col-sm-2 offset-sm-1 col-form-label">사진</label>
                     <input type="file" class="form-control w-auto" name="photo">
                 </div>
             </div>

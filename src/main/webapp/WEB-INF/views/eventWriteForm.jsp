@@ -76,6 +76,29 @@
 var loginId = '<%=(String)session.getAttribute("loginId")%>';
 $("input[name=user_id]").val(loginId);
 
+function buttonControl(loginId) {
+	if(loginId == 'null') {
+	$(".btnCtrl").addClass("none");
+	}
+	}
+	
+function buttonControl(loginId) {
+    if (loginId === 'null') {
+        $(".btnCtrl").addClass("none");
+    } else {
+        adminCheck();
+    }
+}
+
+
+function adminCheck() {
+    if (loginId === "admin") {
+        $(".btnCtrl").removeClass("none");
+    } else {
+        $(".btnCtrl").addClass("none");
+    }
+}
+
 
 $(document).ready(function() {
 	  $("#event_start_date").datepicker({

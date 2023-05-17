@@ -34,8 +34,6 @@
 				<p>${dto.rec_title}</p>
 				<h5>작성자</h5>
 				<p>${dto.user_id}</p>
-				<h5>비디오</h5>
-				<p>${dto.rec_video}</p>
 				<h5>작성일</h5>
 				<p>${dto.rec_creatdate}</p>
 			</div>
@@ -78,6 +76,13 @@
 					<img class="img-thumbnail" src="/photo/${photo[b]}" alt="Content Photo">
 				</div>
 			</div>
+			<div>
+			<c:forEach items="${tags}" var="tag" varStatus="loop">
+				<tr>
+					<th>${tag.tag}</th>
+				</tr>
+			</c:forEach >
+			</div>
 		</div>
 	</c:forEach>
 	<div class="row justify-content-center">
@@ -85,7 +90,8 @@
 			<input type="button" onclick="location.href='./recipe.go'" value="리스트" class="btn btn-primary">
 		</div>
 	</div>
-</div>
+</div>				
+			
 </body>
 
 </html>

@@ -28,6 +28,8 @@ public class RecipeDTO {
 	private String food_name;
 	private String food_quantity;
 	private int food_id;
+	private String tag_id;
+	private String tag;
 	
 	
 	public int getRec_id() {
@@ -155,6 +157,18 @@ public class RecipeDTO {
 	}
 	public void setStep_id(int step_id) {
 		this.step_id = step_id;
+	}
+	public String getTag_id() {
+		return tag_id;
+	}
+	public void setTag_id(String tag_id) {
+		this.tag_id = tag_id;
+	}
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 	
 }

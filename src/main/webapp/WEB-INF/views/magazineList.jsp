@@ -172,7 +172,7 @@ function buttonControl(loginId) {
 
 
 function adminCheck() {
-    if (loginId === "veganadmin") {
+    if (loginId === "admin") {
         $(".btnCtrl").removeClass("none");
     } else {
         $(".btnCtrl").addClass("none");

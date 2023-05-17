@@ -26,43 +26,43 @@
 			<div class="input-group borderBottom mb-3 mt-3">
 				<label class="col-sm-2 offset-sm-1 col-form-label">제목</label>
 				<div class="col-sm-9">
-            <input type="text" class="form-control-plaintext" value="${dto.board_title}" readonly>
+            <input type="text" class="form-control-plaintext" value="${dtoo.board_title}" readonly>
          </div>
       </div>	
        <div class="input-group borderBottom mb-3 mt-3">
          <label class="col-sm-2 offset-sm-1 col-form-label">작성자</label>
          <div class="col-sm-9">
-            <input type="text" class="form-control-plaintext" value="${dto.user_id}" readonly>
+            <input type="text" class="form-control-plaintext" value="${dtoo.user_id}" readonly>
          </div>
       </div>
        <div class="input-group borderBottom mb-3 mt-3">
          <label class="col-sm-2 offset-sm-1 col-form-label">작성일</label>
          <div class="col-sm-9">
-            <input type="text" class="form-control-plaintext" value="${dto.board_date}" readonly>
+            <input type="text" class="form-control-plaintext" value="${dtoo.board_date}" readonly>
          </div>
       </div>
 		<div class="input-group borderBottom mb-3 mt-3">
          <label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
          <div class="col-sm-9">
-             <textarea class="form-control" rows="50" readonly>${dto.board_content}</textarea>
+             <textarea class="form-control" rows="25" readonly>${dtoo.board_content}</textarea>
          </div>
       </div>
       
       </div>
-		<c:if test="${dto.photo_name ne null}">
+		<c:if test="${dtoo.photo_name ne null}">
 			<div class="input-group mb-3 mt-3">
 				<label class="col-sm-2 offset-sm-1 col-form-label">사진</label>
 				<div class="col-sm-9">
-					<img max-width="300" max-height="300" src="/photo/${dto.photo_name}"/>
+					<img max-width="300" max-height="300" src="/photo/${dtoo.photo_name}"/>
 				</div>
         	 </div>
 		</c:if>
 			<div class="fr" style="display:inline-flex;">
 		         <button type="button" class="btn btn-outline-secondary" onclick="location.href='./magazine.do'">리스트</button>
-		         	<button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='./magazineUpdate.go?board_id=${dto.board_id}'" >수정</button>
-		          	<button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='./magazineDelete.do?board_id=${dto.board_id}'" >삭제</button>
+		         	<button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='./magazineUpdate.go?board_id=${dtoo.board_id}'" >수정</button>
+		          	<button class="btnCtrl btn btn-outline-primary float-right" onclick="location.href='./magazineDelete.do?board_id=${dtoo.board_id}'" >삭제</button>
 		       
-				<input type="button" onclick="location.href='./reportWrite.go?board_id=${dto.board_id}&board_title=${dto.board_title}&cat_id=${dto.cat_id}'" value="신고"/>
+				<input type="button" onclick="location.href='./reportWrite.go?board_id=${dtoo.board_id}&board_title=${dtoo.board_title}&cat_id=${dtoo.cat_id}'" value="신고"/>
 		     </div>
 		</c:forEach>
 	
@@ -85,21 +85,19 @@
      		<td class="col-sm-2 text-center">${comment.comment_date}</td>
             <td class="col-sm-2">
                <c:if test="${comment.user_id eq sessionScope.loginId}">
-                  <button type="button" class="readMode btn btn-outline-primary" onclick='location.href="commentupdate.go?comment_id=${comment.comment_id}&board_id=${dto.board_id}&comment_content=${comment.comment_content}"'>수정</button>
-                  <button type="button" class="readMode btn btn-outline-danger" onclick='location.href="commentdel.do?comment_id=${comment.comment_id}&board_id=${dto.board_id}"'>삭제</button>
-                  <button type="button" class="editMode none btn btn-outline-primary" onclick="commentUpdate(${status.index}, '${comment.comment_id}', ${dto.board_id});">확인</button>
-                  <button type="button" class="editMode none btn btn-outline-danger" onclick="readMode(${status.index});">취소</button>
+                  <button type="button" class="readMode btn btn-outline-primary" onclick='location.href="commentupdate.go?comment_id=${comment.comment_id}&board_id=${dtoo.board_id}&comment_content=${comment.comment_content}"'>수정</button>
+                  <button type="button" class="readMode btn btn-outline-danger" onclick='location.href="commentdel.do?comment_id=${comment.comment_id}&board_id=${dtoo.board_id}"'>삭제</button>
                </c:if>
                <c:if test="${comment.user_id ne sessionScope.loginId}">
-                  <button type="button" class="btn btn-outline-danger"">신고</button>
+                  <button type="button" class="btn btn-outline-danger" onclick="location.href='./reportWrite.go?board_id=${dtoo.board_id}&board_title=${dtoo.board_title}&cat_id=${dtoo.cat_id}'">신고</button>
                </c:if>                    
                </td>
             </tr>
       </c:forEach>
      </table>
       <form action="commentWrite.do" method="post">
-         <input type="hidden" name="board_id" value="${dto.board_id}">
-	    <input type="hidden" name="comment_id" value="${eventcommentlist2.comment_id}">
+         <input type="hidden" name="board_id" value="${dtoo.board_id}">
+	    <input type="hidden" name="comment_id" value="${magacommentlist2.comment_id}">
          <table class="table">
             <c:if test="${loginId ne null}">
             <tr>
@@ -150,7 +148,7 @@ function buttonControl(loginId) {
 
 
 function adminCheck() {
-    if (loginId === "veganadmin") {
+    if (loginId === "admin") {
         $(".btnCtrl").removeClass("none");
     } else {
         $(".btnCtrl").addClass("none");

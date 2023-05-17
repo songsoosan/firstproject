@@ -13,43 +13,43 @@
       <hr/>
 	<% String userId = (String) session.getAttribute("loginId"); %>
 	<form action="magazineUpdate.do" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="board_id" value="${dto.board_id}"/>
+		<input type="hidden" name="board_id" value="${dtoo.board_id}"/>
 		<input type="hidden" name = "cat_id" value = "m"/> 
 		<div class="input-group mb-3 mt-3">
             <label class="col-sm-2 offset-sm-1 col-form-label">제목</label>
             <div class="col-sm-9">
-               <input type="text" class="form-control" name="board_title" value="${dto.board_title}"/>
+               <input type="text" class="form-control" name="board_title" value="${dtoo.board_title}"/>
             </div>
          </div>
          <div class="input-group mb-3 mt-3">
             <label class="col-sm-2 offset-sm-1 col-form-label">작성자</label>
             <div class="col-sm-9">
-               <input type="text" class="form-control" name="user_id" value="${dto.user_id}" readonly>
+               <input type="text" class="form-control" name="user_id" value="${dtoo.user_id}" readonly>
             </div>
          </div>
 		<div class="input-group mb-3 mt-3">
             <label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
             <div class="col-sm-9">
-               <textarea class="form-control" rows="35" name="board_content">${dto.board_content}</textarea>
+               <textarea class="form-control" rows="35" name="board_content">${dtoo.board_content}</textarea>
             </div>
          </div>  
 		 <div class="row">
-		 <c:if test="${dto.photo_name eq null}">
+		 <c:if test="${dtoo.photo_name eq null}">
 		 <div class="input-group">
                     <label for="board_photo" class="col-sm-2 offset-sm-1 col-form-label">사진</label>
                     <input type="file" class="form-control w-auto" name="photo">
                 </div>
             </div>
         </c:if>
-        <c:if test="${dto.photo_name ne null}">
+        <c:if test="${dtoo.photo_name ne null}">
             <div class="offset-sm-3">
             	<p id="filename">
-                    	<img max-width="300" max-height="300" src="/photo/${dto.photo_name}"/>
+                    	<img max-width="300" max-height="300" src="/photo/${dtoo.photo_name}"/>
                     	<button id="deleteButton" onclick="delphoto()">삭제</button>
                 </p>
 					<input type="file" name="photo" id ="fileInput" onchange="checkExtension()"/>	
 					<input type="hidden" name="deletePhoto" value="false" id="deletePhotoInput">
-                    <input type="hidden" name="photo_name" value="${dto.photo_name}">
+                    <input type="hidden" name="photo_name" value="${dtoo.photo_name}">
             </div>
        </c:if>
             <div class="text-center mt-3">
@@ -59,7 +59,7 @@
         </form>
     </div>
 </div>
-            
+</div>            
             
                
 		
@@ -126,6 +126,29 @@ function delphoto() {
 	            return false;
 	           }    
 	  }
+	
+	function buttonControl(loginId) {
+		if(loginId == 'null') {
+		$(".btnCtrl").addClass("none");
+		}
+		}
+		
+	function buttonControl(loginId) {
+	    if (loginId === 'null') {
+	        $(".btnCtrl").addClass("none");
+	    } else {
+	        adminCheck();
+	    }
+	}
+
+
+	function adminCheck() {
+	    if (loginId === "admin") {
+	        $(".btnCtrl").removeClass("none");
+	    } else {
+	        $(".btnCtrl").addClass("none");
+	    }
+	}
 
 </script>
 </html>
