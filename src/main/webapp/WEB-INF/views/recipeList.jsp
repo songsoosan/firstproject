@@ -36,7 +36,7 @@
       <table class="table table-striped table-bordered">
 		<thead>
 			<tr>
-				<th class="text-center col-md-1">글아이디</th>
+				<th class="text-center col-md-1">번호</th>
 				<th class="text-center col-md-1">대표사진</th>
 				<th class="text-center" style="width:25%">제목</th>
 				<th class="text-center col-md-1">작성자</th>
