@@ -9,6 +9,9 @@ public class MemberDTO {
 	private int user_phone;
 	private String user_email;
 	
+
+	
+	
 	public String getUser_id() {
 		return user_id;
 	}
