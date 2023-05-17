@@ -172,4 +172,11 @@ public class ClassesService {
 		return dao.reviewDel(review_id, cl_id, loginId);
 	}
 
+	public int classDel(String cl_id) {
+		// TODO Auto-generated method stub
+		return dao.classDel(cl_id);
+	}
+
+	
+
 }

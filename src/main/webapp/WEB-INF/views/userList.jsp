@@ -45,19 +45,15 @@ button:hover {
 </style>
 </head>
 <body>
-<<<<<<< HEAD
 
-	<button onclick="location.href='main.go'">메인</button>
-=======
-<%@ include file="./header.jsp" %>
->>>>>>> origin/master
+	<%@ include file="./header.jsp"%>
+
 	<div class="button-group">
 		<button onclick="location.href='./admin.userList'">유저 리스트</button>
 		<button onclick="location.href='./admin.reportList'">신고 리스트</button>
 		<button onclick="location.href='./admin.blindList'">블라인드 리스트</button>
 		<button onclick="location.href='./admin.category'">카테고리</button>
-		<button onclick="location.href='./recieveletter.go'">관리자
-			쪽지</button>
+		<button onclick="location.href='./recieveletter.go'">관리자 쪽지</button>
 	</div>
 	<br>
 	<table>
