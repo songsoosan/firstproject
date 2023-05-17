@@ -86,7 +86,7 @@ function reportSend(){
              console.log(data);
              if(data.success == "1"){
                 alert('신고 접수가 완료 되었습니다.');
-                location.href = 'main.go';
+                location.href = 'freeList.go';
              }else{
                 alert('신고 접수가 실패 했습니다.\r\n 다시 시도해 주세요!');
              } 

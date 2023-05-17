@@ -169,58 +169,67 @@ $(document).on('click','#submit',function(){
               <input type="file" class="form-control w-auto" name="rec_photo" id="rec_photo" accept="image/*" onchange="setThumbnail(event);">
               <div id="image_container_main"></div>
             </div>
-          </div>
-
-          <br/><br/>
-          <hr>
-          <br/><br/>
-
-          <div class="input-group mb-3 mt-3">
-            <label for="recipe" class="col-sm-2 offset-sm-1 col-form-label">재료</label>
-            <div id="image_container_main"></div>
-            <div class="contents" id="recipeFoods">
-              <div class="food">
-                1 <input type="text" name="food_name1"><input type="text" name="food_quantity1">
-              </div>
-            </div>
-          </div>
-          <button type="button" class="btn btn-primary" id="addFoods">추가</button>
-          <button type="button" class="btn btn-danger" id="removeFoods">삭제</button>
-
-          <br/><br/>
-          <hr>
-          <br/><br/>
-
-          <div class="input-group mb-3 mt-3">
- 		          <label for="recipe" class="col-sm-2 offset-sm-1 col-form-label">내용</label>
-          <div class="contents" id="recipeContents">
-            <div class="content">
-              내용 1 <input type="text" name="rec_content1">
-              <input type="file" name="thumbnailFile" accept="image/*" onchange="setThumbnail2(event);">
-              <div id="image_container"></div>
-            </div>
-          </div>
-        </div>
-        <div class="contents">
-          <button type="button" class="btn btn-primary" id="addButton">추가</button>
-          <button type="button" class="btn btn-danger" id="removeButton">삭제</button>
-        </div>
-
+         </div> 
+         
+         <br/><br/>
+			<hr>
+		<br/><br/>
+         
+         
+        <div class="input-group mb-3 mt-3"> 
+         <label for= recipe class="col-sm-2 offset-sm-1 col-form-label">재료</label>
+       <div id="image_container_main"></div>
+			<div class="contents" id="recipeFoods">
+				<div class="food">
+					1 <input type ="text" name="food_name1"><input type = "text" name="food_quantity1">
+				</div>
+			</div>
+		</div>
+			<button type = "button"  id="addFoods">추가</button>	
+			<button type = "button" id="removeFoods">삭제</button>
+			
+			
+		<br/><br/>
+			<hr>
+		<br/><br/>
+			
+		<div class="input-group mb-3 mt-3"> 
+ 		<label for= recipe class="col-sm-2 offset-sm-1 col-form-label">내용</label>
+		<div class="contents" id="recipeContents">
+			<div class="content">
+				내용 1 <input type = "text" name="rec_content1">
+					<input type="file" name="thumbnailFile" accept="image/*" onchange="setThumbnail2(event);"/>
+					<div id="image_container"></div>
+				</div>
+			</div>
+		</div>
+		<div class="contents">
+			<button type = "button" id="addButton">추가</button>
+			<button type = "button" id="removeButton">삭제</button> 
+		</div>
+         
         <br/><br/>
-        <hr>
+        	<hr>
         <br/><br/>
+    
 
         <div class="input-group mb-3 mt-3">
-          <label class="col-sm-2 offset-sm-1 col-form-label">태그</label>
-          <div class="col-sm-9">
-            <input type="checkbox" value="1"/>
-            <input type="checkbox" value="2"/>
-            <input type="checkbox" value="3"/>
-            <input type="checkbox" value="4"/>
-            <input type="checkbox" value="5"/>
+            <label class="col-sm-2 offset-sm-1 col-form-label">태그</label>
+            <div class="col-sm-9">
+               		플렉시테리언 <input type="checkbox" name = "tag" value="0"/>
+					폴로 페스코 베지테리언 <input type="checkbox" name = "tag" value="1"/>
+					페스코 베지테리언 <input type="checkbox" name = "tag" value="2"/>
+					락토 오보 베지테리언 <input type="checkbox" name = "tag" value="3"/>
+					 비건 <input type="checkbox" name = "tag" value="4"/>
+            </div>
+             <div class="col-sm-9">
+               		아무나 <input type="checkbox" name = "tag" value="5"/>
+					초급 <input type="checkbox" name = "tag" value="6"/>
+					중급 <input type="checkbox" name = "tag" value="7"/>
+					상급 <input type="checkbox" name = "tag" value="8"/>
+					전문가 <input type="checkbox" name = "tag" value="9"/>
           </div>
-        </div>
-
+          </div>
         <br/>
         <hr>
         <br/>
@@ -229,9 +238,6 @@ $(document).on('click','#submit',function(){
       </form>
     </div>
   </div>
-
-</body>
-
 
 </body>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -9,8 +9,8 @@
 		keyColumn="rec_id"
 		keyProperty="rec_id"
 		id="write" parameterType="com.vegan.recipe.dto.RecipeDTO">
-		INSERT INTO recipe(rec_title, rec_video, user_id, cat_id, step_id, rec_creatdate, rec_del_chk, rec_blind_chk)
-			VALUES(#{rec_title}, #{rec_video}, #{user_id}, #{cat_id}, #{step_id}, #{rec_creatdate},0,0)
+		INSERT INTO recipe(rec_title, rec_video, user_id, cat_id, step_id, rec_creatdate, rec_del_chk, rec_blind_chk,rec_view)
+			VALUES(#{rec_title}, #{rec_video}, #{user_id}, #{cat_id}, #{step_id}, #{rec_creatdate},0,0,0)
 	</insert>
 	
 	<insert id="writeContent">
@@ -55,7 +55,33 @@
 		SELECT photo.photo_number,ori_photo_name, photo_name 
 		FROM recipe
 		JOIN photo ON recipe.rec_id = photo.identify_number
-		WHERE recipe.rec_id = #{rec_id};
+		WHERE recipe.rec_id = #{rec_id} and photo_number >= 1;
+	</select>
+	
+		<select id="detail5" 
+		resultType="String">
+		SELECT photo.photo_name 
+		FROM recipe
+		JOIN photo ON recipe.rec_id = photo.identify_number
+		WHERE recipe.rec_id = #{rec_id} and photo_number = 0;
+	</select>
+	
+		<update id="upRec_view">
+		UPDATE recipe SET rec_view = rec_view+1	
+			WHERE rec_id = #{rec_id}
+	</update>
+	
+		<select id="list" resultType="com.vegan.recipe.dto.RecipeDTO">
+		SELECT 
+			rec_id, user_id, rec_title, rec_view
+		FROM recipe ORDER BY rec_id DESC
+	</select>
+	
+	<select id="listPhoto" resultType="com.vegan.recipe.dto.RecipeDTO">
+		SELECT photo.photo_name 
+		FROM recipe
+		JOIN photo ON recipe.rec_id = photo.identify_number
+		WHERE photo_number = 0;
 	</select>
 	
 </mapper>

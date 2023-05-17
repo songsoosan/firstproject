@@ -29,11 +29,7 @@ public class MainController {
 //			return "main";
 //	}
 	
-	@RequestMapping(value = "/recipe.go", method = RequestMethod.GET)
-	public String recipe(Model model) {
-			return "recipeList";
-	}
-	
+
 	@RequestMapping(value = "/ranking.go", method = RequestMethod.GET)
 	public String ranking(Model model) {
 			return "ranking";
@@ -49,10 +45,6 @@ public class MainController {
 	@RequestMapping(value = "/event.go", method = RequestMethod.GET)
 	public String event(Model model, HttpSession session) {
 		return "eventList";
-	}
-	@RequestMapping(value = "/recipeWrite.go", method = RequestMethod.GET)
-	public String write(Model model) {
-		return "recipeWrite";
 	}
 
 	

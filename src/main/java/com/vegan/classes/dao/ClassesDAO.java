@@ -48,7 +48,11 @@ public interface ClassesDAO {
 
 	void cl_status(int cl_id);
 
-	ClassesDTO cnt(int cl_id); 
+	ClassesDTO cnt(int cl_id);
+
+	int classDel(String cl_id);
+
+	
 
 
    
