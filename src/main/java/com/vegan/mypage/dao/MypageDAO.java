@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.vegan.classes.dto.ClassesDTO;
 import com.vegan.mypage.dto.MypageDTO;
+import com.vegan.recipe.dto.RecipeDTO;
 
 public interface MypageDAO {
 
@@ -25,6 +26,10 @@ public interface MypageDAO {
 	int changePW(String loginId, String newPW);
 
 	ArrayList<ClassesDTO> mclist(String loginId);
+
+	ArrayList<RecipeDTO> listPhoto(String loginId);
+
+	ArrayList<RecipeDTO> rlist(String loginId);
 
 	
 

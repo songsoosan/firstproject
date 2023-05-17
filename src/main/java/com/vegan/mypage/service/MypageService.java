@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.vegan.classes.dto.ClassesDTO;
 import com.vegan.mypage.dao.MypageDAO;
 import com.vegan.mypage.dto.MypageDTO;
+import com.vegan.recipe.dto.RecipeDTO;
 
 @Service
 public class MypageService {
@@ -80,6 +81,14 @@ public class MypageService {
 	public ArrayList<ClassesDTO> mclist(String loginId) {
 		
 		return dao.mclist(loginId);
+	}
+	public ArrayList<RecipeDTO> listPhoto(String loginId) {
+		// TODO Auto-generated method stub
+		return dao.listPhoto(loginId);
+	}
+	public ArrayList<RecipeDTO> rlist(String loginId) {
+		// TODO Auto-generated method stub
+		return dao.rlist(loginId);
 	}
 	
 

@@ -16,7 +16,7 @@
    <div class="contentBox">
       <div class="text-center">
 	
-	<form action="eventWrite.do" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+		<form action="eventWrite.do" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 		<input type="hidden" name = "cat_id" value = "e"/> 
 			<div class="input-group mb-3 mt-3">
 	            <label class="col-sm-2 offset-sm-1 col-form-label">제목</label>
@@ -62,9 +62,12 @@
       	</form>
    	</div>
    </div>
-</div>
+
 	        
 <script>
+var loginId = '<%=(String)session.getAttribute("loginId")%>';
+$("input[name=user_id]").val(loginId);
+
 function validateForm() {
    var eventTitle = document.getElementById("event_title").value;
    var eventStartDate = document.getElementById("event_start_date").value;

@@ -80,6 +80,7 @@ html, body {
 </style>
 </head>
 <body class="body">
+<a href="survey.do">설문조사</a>
 	<header
 		class="header container-fluid border-bottom py-3 justify-content-center d-flex">
 		<div class="col-sm-1 offset-sm-3 text-center">

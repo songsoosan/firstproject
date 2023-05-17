@@ -112,6 +112,10 @@ public class RecipeController {
 		for (MultipartFile file : thumbnailFile) {
 		  logger.info(file.getOriginalFilename());  
 		}
+		
+		for (String string : tag) {
+			logger.info("tag number"+string);
+		}
 
         return service.write(rec_photo,thumbnailFile, params, tag);  
     }

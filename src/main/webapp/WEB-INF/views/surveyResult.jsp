@@ -51,7 +51,7 @@
 		<tr>
 			<th colspan="2">
 				<button onclick="location.href='main.go'">메인</button>
-    			<button onclick="location.href='${retryUrl}?retry=true'">다시하기</button>
+    			<button onclick="location.href='surveyReset.do?retry=true'">다시하기</button>
 			</th>
 		</tr>
 	</table>

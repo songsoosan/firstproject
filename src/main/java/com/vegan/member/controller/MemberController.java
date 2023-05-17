@@ -1,6 +1,8 @@
 package com.vegan.member.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.vegan.classes.dto.ClassesDTO;
 import com.vegan.member.service.MemberService;
+import com.vegan.recipe.dto.RecipeDTO;
 
 @Controller
 public class MemberController {
@@ -38,13 +42,26 @@ public class MemberController {
 	         }
 	      }
 
-		/*
-		 * if (result == null) { // 처리 방법 선택: // 1. 특정 값을 반환하도록 수정 return 0; // 예: 0을
-		 * 관리자가 아님을 의미하는 값으로 대체
-		 * 
-		 * // 2. 예외를 throw하도록 수정 throw new SomeException("adminChk 결과가 null입니다."); // 예:
-		 * 적절한 예외 클래스와 메시지 사용 }
-		 */
+		ArrayList <RecipeDTO> recipelist = service.rlist();
+		model.addAttribute("recipelist",recipelist);
+		
+		ArrayList <RecipeDTO> photos = service.listPhoto();
+		Map<String, String> pho = new HashMap<>();
+		 int x=0;
+		for (RecipeDTO photo : photos) {
+
+	    	String val = photo.getPhoto_name();
+	    	 logger.info(val);
+	    	pho.put("photo_name"+x, val);
+	    	x++;
+		}
+		 model.addAttribute("photo", pho);
+		 
+		 ArrayList<ClassesDTO> classlist = service.clist();
+			logger.info("list cnt : " + classlist.size());
+			System.out.println("list cnt " + classlist.size());
+			model.addAttribute("classlist", classlist);
+		
 		
 		
 			return "main";

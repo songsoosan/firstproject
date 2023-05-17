@@ -65,5 +65,30 @@
 		SELECT user_admin_chk FROM user
 		WHERE user_id=#{param1}
 	</select>
+	
+	<select id="rlist" resultType="com.vegan.recipe.dto.RecipeDTO">
+		SELECT 
+			rec_id, user_id, rec_title, rec_view
+		FROM recipe ORDER BY rec_id DESC
+	</select>
+	
+	<select id="listPhoto" resultType="com.vegan.recipe.dto.RecipeDTO">
+		SELECT photo.photo_name 
+		FROM recipe
+		JOIN photo ON recipe.rec_id = photo.identify_number
+		WHERE photo_number = 0;
+	</select>
+	
+	<select id="clist" resultType="com.vegan.classes.dto.ClassesDTO">
+		SELECT
+		c.cl_id, c.cl_subject, c.cl_period, c.cl_deadlinePeriod, c.cl_status,
+		IFNULL(p.photo_name, 'default_photo.jpg') AS photo_name
+		FROM
+		class c
+		LEFT JOIN
+		photo p ON p.identify_number = c.cl_id AND p.cat_id = 'cl'
+		ORDER BY
+		c.cl_id DESC;
+	</select>
 
 </mapper>

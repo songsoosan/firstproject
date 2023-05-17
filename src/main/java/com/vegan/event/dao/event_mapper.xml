@@ -67,10 +67,10 @@
 	<select id="detail" 
 		resultType="com.vegan.event.dto.EventDTO">
 		SELECT 
-			e.event_id, e.user_id, e.event_title,event_date ,e.event_content, e.event_start_date, e.event_end_date
+			e.event_id, e.user_id, e.event_title,e.event_date ,e.event_content, e.event_start_date, e.event_end_date
 			,p.photo_id, p.photo_name
 		FROM event e left JOIN photo p ON e.event_id = p.identify_number
-		WHERE e.event_id = #{param1} AND e.cat_id = 'e'
+		WHERE e.event_id = #{event_id} AND e.cat_id = 'e'
 	</select>
 	
 	<delete id="delete">

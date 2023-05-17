@@ -158,9 +158,9 @@ $(document).on('click','#submit',function(){
             <div class="col-sm-9">
               <input type="text" class="form-control" name="rec_video" id="rec_video">
             </div>
-          </div>
+          </div> -->
 
-          <br/><br/>
+          <!-- <br/><br/>
           <hr>
           <br/><br/> -->
 
