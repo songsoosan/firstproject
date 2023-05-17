@@ -14,40 +14,31 @@
     </style>
 </head>
 <body>
-    <%@ include file="./header.jsp" %>
-    <div class="container mt-4">
-        <form action="userUpdate.do" method="post">
-            <table class="table table-bordered">
-                <tr>
-                    <th>ID</th>
-                    <td><input type="text" name="id" value="${detail.user_id}" readonly /></td>
-                </tr>
-                <tr>
-                    <th>NAME</th>
-                    <td><input type="text" name="name" value="${detail.user_name}" /></td>
-                </tr>
-                <tr>
-                    <th>E-MAIL</th>
-                    <td><input type="text" name="email" value="${detail.user_email}" /></td>
-                </tr>
-                <tr>
-                    <th>phone</th>
-                    <td><input type="text" name="phone" value="${detail.user_phone}" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <div class="button-container">
-                            <input type="button" value="비밀번호변경" onclick="location.href='passwardChk.go'" class="btn btn-primary mr-2" />
-                            <input type="submit" value="수정" class="btn btn-primary mr-2" />
-                            <input type="button" value="탈퇴" onclick="location.href='delUser.do?idx=${detail.user_id}'" class="btn btn-danger" />
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
 
-    <!-- Add Bootstrap JS scripts here -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<%@ include file="./header.jsp" %>
+	<form action="changePW.do" method = "post">
+		<table>
+			<tr>
+				<th colspan="2">새로운 비밀번호를 입력해주세요.</th>
+			</tr>
+			<tr>
+				<th>새비밀번호</th>
+				<td><input type="password" id="userPW" name="newPW"/></td>
+			</tr>
+			<tr>
+				<th>비밀번호 확인</th>
+				<td>
+					<input type="password" id ="confirm" name="confirm"/></br>
+					<span id="pwmsg"></span>
+				</td>
+			</tr>
+			<tr>
+				<th colspan = "2">
+					<input type="submit" value = "입력"/>
+				</th>
+			</tr>
+		</table>
+	</form>
+
 </body>
 </html>

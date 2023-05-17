@@ -26,13 +26,14 @@ public class MemberController {
 	 Logger logger = LoggerFactory.getLogger(this.getClass());
 	 
 	 @Autowired MemberService service;
-	 
-		/*
-		 * @RequestMapping(value = "/", method = RequestMethod.GET) public String
-		 * login(Model model) { return "main"; }
-		 */
+	
 	@RequestMapping(value = {"/","/main.go"}, method = RequestMethod.GET)
 	public String main(Model model, HttpSession session) {
+		if (session.getAttribute("msg") != null) {
+			model.addAttribute("msg", session.getAttribute("msg"));
+			session.removeAttribute("msg");
+		}
+		
 		if (session.getAttribute("loginId") != null) {
 	         String loginId = String.valueOf(session.getAttribute("loginId"));
 	         int admin = (int) service.adminChk(loginId);
@@ -41,7 +42,7 @@ public class MemberController {
 	            model.addAttribute("adminChk", admin);
 	         }
 	      }
-
+		//사진 부분
 		ArrayList <RecipeDTO> recipelist = service.rlist();
 		model.addAttribute("recipelist",recipelist);
 		
@@ -99,11 +100,11 @@ public class MemberController {
 		session.removeAttribute("loginId");
 		if ((String) session.getAttribute("loginId") == null) {
 			
-			page = "main";
-			model.addAttribute("msg","로그아웃 되었습니다.");
+			page = "redirect:/main.go";
+			session.setAttribute("msg","로그아웃 되었습니다.");
 		}else {
-			page = "main";
-			model.addAttribute("msg","다시 시도해주세요!");	
+			page = "redirect:/main.go";
+			session.setAttribute("msg","다시 시도해주세요!");	
 		}
 		
 		return page;
