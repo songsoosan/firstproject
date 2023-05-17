@@ -33,6 +33,12 @@ public class RecipeService {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired RecipeDAO dao;
+	
+	public ArrayList<RecipeDTO> list() {
+		
+		
+		return dao.list();
+	}
 
 	public String write(MultipartFile rec_photo, List<MultipartFile> thumbnailFile, HashMap<String, String> params) {
 		
@@ -90,7 +96,6 @@ public class RecipeService {
 		
 		page = "redirect:/recipe.detail.do?rec_id="+rec_id; 
 		
-		// 2. 파일도 업로드 한 경우
 
 			logger.info("파일 업로드 작업");
 			fileSave(rec_id, thumbnailFile);
@@ -167,6 +172,7 @@ public class RecipeService {
 
 	}
 	public RecipeDTO detail(String rec_id) {
+		dao.upRec_view(rec_id);
 	
 		 return  dao.detail1(rec_id);
 	}
@@ -184,6 +190,17 @@ public class RecipeService {
 	public List<RecipeDTO> detailFood(String rec_id) {
 	
 		return dao.detail4(rec_id);
+	}
+
+
+	public String mainPhoto(String rec_id) {
+		
+		return dao.detail5(rec_id);
+	}
+
+	public ArrayList<RecipeDTO> listPhoto() {
+		
+		return dao.listPhoto();
 	}
 
 

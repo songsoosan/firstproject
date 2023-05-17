@@ -214,11 +214,18 @@ $(document).on('click','#submit',function(){
         <div class="input-group mb-3 mt-3">
             <label class="col-sm-2 offset-sm-1 col-form-label">태그</label>
             <div class="col-sm-9">
-               <input type="checkbox" value="1"/>
-					<input type="checkbox" value="2"/>
-					<input type="checkbox" value="3"/>
-					<input type="checkbox" value="4"/>
-					<input type="checkbox" value="5"/>
+               		플렉시테리언 <input type="checkbox" name = "tag" value="0"/>
+					폴로 페스코 베지테리언 <input type="checkbox" name = "tag" value="1"/>
+					페스코 베지테리언 <input type="checkbox" name = "tag" value="2"/>
+					락토 오보 베지테리언 <input type="checkbox" name = "tag" value="3"/>
+					 비건 <input type="checkbox" name = "tag" value="4"/>
+            </div>
+             <div class="col-sm-9">
+               		아무나 <input type="checkbox" name = "tag" value="5"/>
+					초급 <input type="checkbox" name = "tag" value="6"/>
+					중급 <input type="checkbox" name = "tag" value="7"/>
+					상급 <input type="checkbox" name = "tag" value="8"/>
+					전문가 <input type="checkbox" name = "tag" value="9"/>
             </div>
         </div>
         
@@ -232,9 +239,7 @@ $(document).on('click','#submit',function(){
       </div>
         
       <br/><br/>
-         
-         
-         
+
          
 			
 		

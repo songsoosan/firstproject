@@ -58,7 +58,11 @@ public class RecipeController {
 		    	model.addAttribute("foods", foods);
 		    	
 
+		    String main_photo = service.mainPhoto(rec_id);
+		    logger.info("main_phpto ="+main_photo);
 		    
+		    model.addAttribute("main_photo",main_photo);
+		    	
 		    List<RecipeDTO> photos = service.detailPhoto(rec_id);
 		    Map<String, String> pho = new HashMap<>();
 		    int x=0;
@@ -97,6 +101,29 @@ public class RecipeController {
 
         return service.write(rec_photo,thumbnailFile, params);  
     }
+	
+	
+	
+	@RequestMapping(value = "/recipe.go", method = RequestMethod.GET)
+	public String recipe(Model model) {
+		ArrayList <RecipeDTO> list = service.list();
+		model.addAttribute("list",list);
+		
+		ArrayList <RecipeDTO> photos = service.listPhoto();
+		Map<String, String> pho = new HashMap<>();
+		 int x=0;
+		for (RecipeDTO photo : photos) {
+
+	    	String val = photo.getPhoto_name();
+	    	 logger.info(val);
+	    	pho.put("photo_name"+x, val);
+	    	x++;
+		}
+		 model.addAttribute("photo", pho);
+		
+			return "recipeList";
+	}
+	
 
 }
 
