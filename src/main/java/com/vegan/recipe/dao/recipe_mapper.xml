@@ -9,8 +9,8 @@
 		keyColumn="rec_id"
 		keyProperty="rec_id"
 		id="write" parameterType="com.vegan.recipe.dto.RecipeDTO">
-		INSERT INTO recipe(rec_title, rec_video, user_id, cat_id, step_id, rec_creatdate, rec_del_chk, rec_blind_chk,rec_view)
-			VALUES(#{rec_title}, #{rec_video}, #{user_id}, #{cat_id}, #{step_id}, #{rec_creatdate},0,0,0)
+		INSERT INTO recipe(rec_title, user_id, cat_id, step_id, rec_creatdate, rec_del_chk, rec_blind_chk,rec_view)
+			VALUES(#{rec_title}, #{user_id}, #{cat_id}, #{step_id}, #{rec_creatdate},0,0,0)
 	</insert>
 	
 	<insert id="writeContent">

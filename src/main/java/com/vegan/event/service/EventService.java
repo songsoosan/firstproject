@@ -97,7 +97,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
 		
 		
 		int row = dao.eventwrite(dto);
-		logger.info("update row : "+row);
+		logger.info("이벤트 글쓰기  row : "+row);
 		
 
 		// 조건 3. 받아온 키는 파라메터 dto 에서 뺀다.

@@ -63,6 +63,7 @@
             <input type="text" class="form-control-plaintext" value="${dto.event_date}" readonly>
          </div>
       </div>
+      
       <c:if test="${dto.photo_name ne null}">
          <div class="input-group mb-3 mt-3">
             <label class="col-sm-2 offset-sm-1 col-form-label">사진</label>
@@ -71,7 +72,6 @@
             </div>
          </div>
       </c:if>
-      <hr/>
       
       <div class="input-group borderBottom mb-3 mt-3">
          <label class="col-sm-2 offset-sm-1 col-form-label">내용</label>
@@ -80,28 +80,13 @@
          </div>
       </div>
       
+      <hr/>
+      
   </div>
 </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="eventdelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">삭제</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      	이벤트 삭제 하시겠습니까?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='./eventDelete.do?event_id=${dto.event_id}'">삭제</button>
-      </div>
-    </div>
-  </div>
-</div>   
+
 </body>
 <script>
 loginId = '<%=(String)session.getAttribute("loginId")%>';
