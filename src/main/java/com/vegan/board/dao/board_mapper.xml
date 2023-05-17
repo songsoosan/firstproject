@@ -73,7 +73,7 @@
    <select id="detail" resultType="com.vegan.board.dto.BoardDTO">
       SELECT b.board_id, b.board_title, b.user_id, b.board_views, DATE_FORMAT(b.board_date, '%Y-%m-%d') as board_date, b.board_content, 
       b.cat_id, p.photo_id, p.photo_name
-      FROM board b left JOIN photo p ON b.board_id = p.identify_number
+      FROM board b left JOIN photo p ON b.board_id = p.identify_number AND b.cat_id = p.cat_id
       WHERE b.board_id = #{param1}
    </select>
    
@@ -173,8 +173,8 @@
    <select id="freedetail" resultType="com.vegan.board.dto.BoardDTO">
       SELECT b.board_id, b.board_title, b.user_id, b.board_views, b.board_date, b.board_content, 
       b.cat_id, p.photo_id, p.photo_name
-      FROM board b left JOIN photo p ON b.board_id = p.identify_number
-      WHERE b.board_id = #{param1}
+      FROM board b left JOIN photo p ON b.board_id = p.identify_number AND b.cat_id = p.cat_id
+      WHERE b.board_id = #{param1} 
    </select>
    
    <update id="freeupHit">
