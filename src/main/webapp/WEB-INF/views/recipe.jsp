@@ -41,17 +41,17 @@
 					<th>내용 ${loop.index+1} ${content.rec_content} </th>
 					<td><img width="300" src="admin/resources/photo/${photo[b]}"/></td>
 				</tr>
-				
-				
+
 			</c:forEach >
 				
+			<c:forEach items="${tags}" var="tag" varStatus="loop">
+				<tr>
+					<th>${tag.tag}</th>
+				</tr>
+			</c:forEach >
 			
-			 <%-- <c:if test="${dto.newFileName ne null}">
-			<tr>
-				<th>사진</th>
-				<td><img width="500" src="/photo/${dto.newFileName}"/></td>
-			</tr>
-			</c:if> --%>
+			
+			
 			<tr>
 				<th colspan="2">
 					<input type="button" onclick="location.href='./recipe.go'" value="리스트"/>

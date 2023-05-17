@@ -81,12 +81,16 @@ public class RecipeController {
 		    model.addAttribute("photo", pho);
 		    model.addAttribute("dto", dto);
 		    
+		    List<RecipeDTO> tags = service.detailTag(rec_id);
+		    
+		    model.addAttribute("tags",tags);
+		    
         return "recipe";  
     }
 	
 	@RequestMapping(value="/recipe.write.do" , method = {RequestMethod.GET,RequestMethod.POST})
     public String write(@RequestParam MultipartFile rec_photo, @RequestParam  List<MultipartFile> thumbnailFile,
-			@RequestParam HashMap<String, String> params) {
+			@RequestParam HashMap<String, String> params, @RequestParam ArrayList<String> tag) {
 		
 		logger.info("hello");
 		
@@ -97,11 +101,12 @@ public class RecipeController {
 			System.out.println(" value = " + params.get(key));
 		}
 		
+		
 		for (MultipartFile file : thumbnailFile) {
 		  logger.info(file.getOriginalFilename());  
 		}
 
-        return service.write(rec_photo,thumbnailFile, params);  
+        return service.write(rec_photo,thumbnailFile, params, tag);  
     }
 	
 	
