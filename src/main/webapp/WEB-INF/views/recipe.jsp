@@ -9,9 +9,9 @@
 <body>
 <%@ include file="./header.jsp" %>
 	<table>
-			<%-- <tr>
-				<td colspan="2"><img width="500" src="/photo/${dto.newFileName}"/></td>
-			</tr> --%>
+			<tr>
+				<td colspan="2"><img width="500" src="resources/photo/${main_photo}"/></td>
+			</tr> 
 			<tr>
 				<th>제목</th>
 				<td>${dto.rec_title}</td>
@@ -54,7 +54,7 @@
 			</c:if> --%>
 			<tr>
 				<th colspan="2">
-					<input type="button" onclick="location.href='./list.do'" value="리스트"/>
+					<input type="button" onclick="location.href='./recipe.go'" value="리스트"/>
 					 <%--<input type="button" onclick="location.href='./update.go?idx=${dto.idx}'" value="수정"/> --%>
 				</th>
 			</tr>
