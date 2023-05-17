@@ -84,6 +84,19 @@
 		WHERE photo_number = 0;
 	</select>
 	
+	<insert id="writeTag">
+		INSERT INTO tag(rec_id, tag_id)
+			VALUES(#{rec_id},#{tag_id})
+	</insert>
+
+	<select id="detailTag" resultType="com.vegan.recipe.dto.RecipeDTO">
+			select teg_list.tag 
+			from tag 
+			join teg_list on teg_list.tag_id = tag.tag_id 
+			where tag.rec_id = #{rec_id};
+	</select>
+	
+	
 </mapper>
 
                  

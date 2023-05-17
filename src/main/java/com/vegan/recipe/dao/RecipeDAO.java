@@ -34,4 +34,8 @@ public interface RecipeDAO {
 
 	String detail5(String rec_id);
 
+	void writeTag(RecipeDTO dtoTag);
+
+	List<RecipeDTO> detailTag(String rec_id);
+
 }
