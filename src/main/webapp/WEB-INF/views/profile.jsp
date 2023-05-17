@@ -97,9 +97,9 @@ th, td {
 
 </head>
 <body>
+<%@ include file="./header.jsp" %>
 
-
-	<div>
+<!-- 	<div>
 		<a href="main.go"> <img src="resources/img/logo.png" alt="푸른식탁"
 			width="70px" height="70px" />
 		</a> <input type="text" placeholder="검색" /> <a href="profile.do"> <img
@@ -120,7 +120,7 @@ th, td {
 			<li class="li"><a href="board.go">게시판</a></li>
 			<li class="li"><a href="event.go">이벤트</a></li>
 		</ul>
-	</div>
+	</div> -->
 	<table class="profile-table">
 		<colgroup>
 			<col style="width: 40%;">

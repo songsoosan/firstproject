@@ -64,7 +64,8 @@ div {
 
 </head>
 <body>
-		<div class="d-flex align-items-center justify-content-center">
+<%@ include file="./header.jsp" %>
+	<%-- 	<div class="d-flex align-items-center justify-content-center">
 	<a href="main.go" class="me-3">
 		<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
 	</a>
@@ -120,7 +121,7 @@ div {
             <a class="nav-link" href="admin.go">관리자(test)</a>
         </li>
     </ul>
-</div>
+</div> --%>
 
 	
 	<c:if test="${adminChk ne null}">

@@ -212,7 +212,8 @@
 			      <div class="card mb-3">
 			        <div class="card-body text-center">
 			          <h5 class="card-title">클래스 상태</h5>
-			          <p class="card-text">${dto.cl_status}</p>
+			          <c:if test="${dto.cl_status == 0}"><p class="card-text">진행중</p></c:if>
+			          <c:if test="${dto.cl_status == 1}"><p class="card-text">마감</p></c:if>
 			        </div>
 			      </div>
 			    </div>

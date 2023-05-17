@@ -64,6 +64,7 @@ body {
 </style>
 </head>
 <body>
+<%@ include file="./header.jsp" %>
 	<h3>회원 제재 페이지</h3>
 	<div class="container">
 		<table>
