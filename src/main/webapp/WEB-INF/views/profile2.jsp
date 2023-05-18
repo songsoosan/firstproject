@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <style>
 table,th,td{
 	border : 1px solid black;
@@ -73,69 +74,42 @@ textarea{
 
 </head>
 <body>
+<%@ include file="./header.jsp"%>
+  <div class="container mt-5">
+    <table class="table table-bordered">
+      <tr>
+        <td rowspan="4" class="align-middle">
+          <c:if test="${user.photo_name eq null}">
+            기본사진
+          </c:if>
+          <c:if test="${user.photo_name ne null}">
+            <img width="300" src="/photo/${user.photo_name}" alt="User Photo">
+          </c:if>
+        </td>
+        <td>${user.user_id }</td>
+      </tr>
+      <tr>
+        <td>${user.user_name }</td>
+      </tr>
+      <tr>
+        <td>${user.user_email }</td>
+      </tr>
+      <tr>
+        <td>${user.user_phone }</td>
+      </tr>
+      <tr>
+        <td colspan="2">비건단계</td>
+      </tr>
+      <tr>
+        <td colspan="2">${user.introduction}</td>
+      </tr>
+    </table>
+  </div>
 
-	
-	<div>
-		<a href="main.go">
-			<img src="resources/img/logo.png" alt="푸른식탁" width="70px" height="70px"/>
-		</a>
-		<input type ="text" placeholder="검색"/>
-		<a href="profile.do">
-			<img src="resources/img/user.png" alt="유저" width="70px" height="70px"/>
-		</a> 
-		<a href="write.go">
-			<img src="resources/img/write.png" alt="글쓰기" width="70px" height="70px"/>
-		</a>
-		<a href="recieveletter.go">
-			<img src="resources/img/letter.png" alt="쪽지" width="70px" height="70px"/>
-		</a>
-	</div>
-	<button class="logout-button" onclick="location.href='/logout.do'">로그아웃</button>
-	<div class ="menu">
-		<ul class="ul">
-			<li class="li"><a href="recipe.go">레시피</a></li>
-			<li class="li"><a href="ranking.go">랭킹</a></li>
-			<li class="li"><a href="classList.go">클래스</a></li>
-			<li class="li"><a href="magazine.go">매거진</a></li>
-			<li class="li"><a href="board.go">게시판</a></li>
-			<li class="li"><a href="event.go">이벤트</a></li>
-		</ul>
-	</div>
-	<table>
-		<tr>
-			<td rowspan="4">
-				<c:if test="${user.photo_name eq null}">
-					기본사진	
-				</c:if>
-				<c:if test="${user.photo_name ne null }">
-					<img width="300" src="/photo/${user.photo_name}"/>			
-				</c:if>					
-			</td>
-			<td>${user.user_id }</td>
-		</tr>
-		<tr>
-			<td>${user.user_name }</td>
-		</tr>
-		<tr>
-			<td>${user.user_email }</td>
-		</tr>
-		<tr>
-			<td>${user.user_phone }</td>
-		</tr>
-		<tr>
-			<td colspan="2">비건단계</td>
-		</tr>
-		<tr>
-			<td colspan="2">${user.introduction}</td>		
-		</tr>
-		<%-- <tr>
-			<th colspan = "2">
-				<input type="button" value="돌아가기" onclick="location.href='classDetail.do?cl_id=${cl_id}'"/>
-			</th>
-		</tr> --%>
-	</table>
-		
-
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
 <script>
 	var msg = "${msg}";

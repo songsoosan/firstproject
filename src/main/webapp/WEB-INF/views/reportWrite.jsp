@@ -30,10 +30,10 @@
 		  <label for="staticReason" class="col-sm-2 col-form-label">신고 사유</label>
 		  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id = "reason">
   			<option selected>사유를 선택해 주세요</option>
-  			<option value="unsuitable">부적절한 내용	</option>
-			<option value="abuse">비방</option>
-			<option value="advertisement">광고</option>
-			<option value="etc">기타</option>
+  			<option value="부적절한 내용">부적절한 내용	</option>
+			<option value="비방">비방</option>
+			<option value="광고">광고</option>
+			<option value="기타">기타</option>
 		</select>			
 			<div class="form-floating">
   				<textarea class="form-control" placeholder="내용을 입력해 주세요" id="content" style="height: 100px"></textarea>				 

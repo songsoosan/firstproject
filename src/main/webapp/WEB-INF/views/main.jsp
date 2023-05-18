@@ -50,7 +50,7 @@ h3{
 			<c:set var="b" value="photo_name${loop.index}" />
 				<div class="col-4 custom-col">
 					<div class="card my-4">
-						<img width="100" height="200" src="/photo/${photo}"
+						<img width="100" height="200" src="/photo/${photo[b]}"
 							class="card-img-top card-img">
 						<div class="card-body">
 							<h5 class="card-title">${recipe.rec_title}</h5>

@@ -48,6 +48,10 @@ public class CheckListController {
 	        model.addAttribute("admincheck", admincheck);
 	    } else {
 	        page = "redirect:/main.go";
+<<<<<<< HEAD
+=======
+	        
+>>>>>>> origin/master
 	        session.setAttribute("msg", "로그인 후 이용해주시기 바랍니다.");
 	    }
 

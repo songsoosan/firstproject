@@ -87,11 +87,11 @@
 
 	<select id="listPhoto"
 		resultType="com.vegan.recipe.dto.RecipeDTO">
-		SELECT photo.photo_name
+			SELECT photo.photo_name 
 		FROM recipe
 		JOIN photo ON recipe.rec_id = photo.identify_number
-		WHERE
-		photo_number = 0;
+		WHERE photo_number = 0 
+		ORDER BY identify_number DESC
 	</select>
 
 

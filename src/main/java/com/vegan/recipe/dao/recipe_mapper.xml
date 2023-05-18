@@ -81,7 +81,8 @@
 		SELECT photo.photo_name 
 		FROM recipe
 		JOIN photo ON recipe.rec_id = photo.identify_number
-		WHERE photo_number = 0;
+		WHERE photo_number = 0 
+		ORDER BY identify_number DESC
 	</select>
 	
 	<insert id="writeTag">
