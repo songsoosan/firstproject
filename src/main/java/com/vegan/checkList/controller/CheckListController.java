@@ -47,8 +47,8 @@ public class CheckListController {
 	        boolean admincheck = service.admincheck(user_id);
 	        model.addAttribute("admincheck", admincheck);
 	    } else {
-	        page = "main";
-	        model.addAttribute("msg", "로그인 후 이용해주시기 바랍니다.");
+	        page = "redirect:/main.go";
+	        session.setAttribute("msg", "로그인 후 이용해주시기 바랍니다.");
 	    }
 
 	    // 다시하기 버튼 클릭 시 설문조사 페이지로 이동
