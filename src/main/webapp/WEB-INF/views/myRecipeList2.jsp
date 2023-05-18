@@ -90,6 +90,7 @@ th, td {
 
 
 			<c:forEach items="${recipelist}" var="recipe" varStatus="loop">
+			<c:set var="b" value="photo_name${loop.index}" />
 				<div class="col-4">
 					<div class="card my-4">
 						<img width="100" height="200" src="/photo/${photo[b]}"

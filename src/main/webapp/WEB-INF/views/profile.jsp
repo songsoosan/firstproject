@@ -108,10 +108,10 @@ table.profile-table .profile-photo {
 				<td colspan="3" class="profile-section"><a class="action-link"
 					href="myRecipeList.do">내가 작성한 레시피</a></td>
 			</tr>
-			<tr>
+<!-- 			<tr>
 				<td colspan="3" class="profile-section"><a class="action-link"
 					href="#">즐겨찾기한 레시피</a></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<td colspan="3" class="profile-section"><a
 					href="myClassList.do" class="action-link">구매한 클래스</a></td>
